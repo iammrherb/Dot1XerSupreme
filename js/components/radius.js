@@ -12,7 +12,7 @@ Vue.component('radius', {
                 <p><strong>Primary Shared Secret:</strong> The shared secret for the primary RADIUS server.</p>
                 <p><strong>Enable Secondary Server:</strong> Add a secondary RADIUS server for redundancy.</p>
                 <p><strong>RADIUS Group Name:</strong> Name used in AAA configurations for the RADIUS servers.</p>
-                <p><strong>Enable Monitoring:</strong> Monitor the RADIUS server using a test user (e.g., probe).</p>
+                <p><strong>Enable Monitoring:</strong> Monitor the RADIUS server using a test user.</p>
             </div>
             <label class="form-label">RADIUS Type:</label>
             <select class="form-select" v-model="config.radius.type" @change="$emit('update:config', config)">

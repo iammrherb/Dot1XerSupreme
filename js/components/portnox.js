@@ -8,8 +8,8 @@ Vue.component('portnox', {
                 <p><strong>Enable Portnox:</strong> Integrate with Portnox Cloud for cloud-based RADIUS authentication.</p>
                 <p><strong>Region:</strong> Select your Portnox Cloud region (US, EU, or failover).</p>
                 <p><strong>Shared Secret:</strong> Enter the shared secret provided by Portnox.</p>
-                <p><strong>Use Same Secret for EU:</strong> If using failover, choose whether to use the same secret for both regions.</p>
-                <p><strong>EU Shared Secret:</strong> If not using the same secret, enter the EU shared secret.</p>
+                <p><strong>Use Same Secret for EU:</strong> Choose whether to use the same secret for both regions if using failover.</p>
+                <p><strong>EU Shared Secret:</strong> Enter the EU shared secret if not using the same secret.</p>
                 <p><strong>Enable RADSEC:</strong> Enable RADSEC for secure communication with Portnox.</p>
             </div>
             <label class="form-label">Enable Portnox:</label>
