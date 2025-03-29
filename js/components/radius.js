@@ -1,11 +1,21 @@
 Vue.component('radius', {
     props: ['config'],
-    template: \`
+    template: `
         <div>
             <h3>Step 4: RADIUS Servers</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p>Configure RADIUS servers for authentication. You can add a secondary server and enable monitoring.</p>
+                <p><strong>RADIUS Type:</strong> Choose between Standard RADIUS or RADSEC (RADIUS over TLS). RADSEC provides encrypted communication.</p>
+                <p><strong>Primary RADIUS Server IP:</strong> The IP address of the primary RADIUS server (e.g., 192.168.1.10). Must be reachable.</p>
+                <p><strong>Primary Auth Port:</strong> Port for authentication (default: 1812).</p>
+                <p><strong>Primary Acct Port:</strong> Port for accounting (default: 1813).</p>
+                <p><strong>Primary Shared Secret:</strong> The shared secret for the primary server (e.g., SecretKey). Must match the server configuration.</p>
+                <p><strong>Enable Secondary Server:</strong> Add a secondary RADIUS server for redundancy.</p>
+                <p><strong>RADIUS Group Name:</strong> Name of the RADIUS server group (e.g., RADIUS-SERVERS). Used in AAA configurations.</p>
+                <p><strong>Enable Monitoring:</strong> Monitor RADIUS server availability using a test user.</p>
+                <p><strong>Test Username:</strong> Username for monitoring (e.g., probe). Used to test server reachability.</p>
+                <p><strong>Idle Time:</strong> Time between monitoring probes (in minutes, default: 5).</p>
+                <p><strong>Deadtime:</strong> Time to mark a server as dead if unresponsive (in minutes, default: 15).</p>
             </div>
             <label class="form-label">RADIUS Type:</label>
             <select class="form-select" v-model="config.radius.type" @change="$emit('update:config', config)">
@@ -52,5 +62,5 @@ Vue.component('radius', {
                 <button @click="$emit('next-step')" :disabled="!config.radius.primaryIp || !config.radius.primarySecret || !config.radius.groupName">Next</button>
             </div>
         </div>
-    \`
+    `
 });

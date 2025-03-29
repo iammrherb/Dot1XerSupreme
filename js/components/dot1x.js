@@ -1,11 +1,24 @@
 Vue.component('dot1x', {
     props: ['config'],
-    template: \`
+    template: `
         <div>
             <h3>Step 6: 802.1X Settings</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p>Configure 802.1X settings for port-based authentication, including interface settings and VLAN assignments.</p>
+                <p><strong>Enable 802.1X:</strong> Enable port-based authentication using 802.1X. Required for secure access control.</p>
+                <p><strong>Critical EAPOL:</strong> Enable to handle critical EAPOL packets during server unavailability.</p>
+                <p><strong>Recovery Delay:</strong> Delay (in ms) before attempting recovery after a failure (default: 2000).</p>
+                <p><strong>Authentication Order:</strong> Order of authentication methods (dot1x, MAB). 'dot1x, mab' tries 802.1X first.</p>
+                <p><strong>Host Mode:</strong> Mode for handling multiple hosts on a port (e.g., Multi-Domain for voice and data).</p>
+                <p><strong>Enable VLAN Assignment:</strong> Assign VLANs dynamically based on authentication results.</p>
+                <p><strong>Guest VLAN:</strong> VLAN for unauthenticated users (e.g., 100).</p>
+                <p><strong>Auth-Fail VLAN:</strong> VLAN for failed authentications (e.g., 99).</p>
+                <p><strong>Critical VLAN:</strong> VLAN when the server is unavailable (e.g., 98).</p>
+                <p><strong>TX Period:</strong> Time (in seconds) between EAPOL frame transmissions (default: 10).</p>
+                <p><strong>Max Reauth Requests:</strong> Maximum number of re-authentication attempts (default: 2).</p>
+                <p><strong>Interface:</strong> The interface to apply 802.1X settings (e.g., GigabitEthernet1/0/1).</p>
+                <p><strong>VLAN:</strong> The access VLAN for the interface (e.g., 10).</p>
+                <p><strong>Reauthentication Period:</strong> Time (in seconds) between re-authentications (default: 3600).</p>
             </div>
             <label class="form-label">Enable 802.1X:</label>
             <select class="form-select" v-model="config.dot1x.enable" @change="$emit('update:config', config)">
@@ -61,5 +74,5 @@ Vue.component('dot1x', {
                 <button @click="$emit('next-step')" :disabled="config.dot1x.enable === '1' && (!config.dot1x.interface || !config.dot1x.vlan)">Next</button>
             </div>
         </div>
-    \`
+    `
 });

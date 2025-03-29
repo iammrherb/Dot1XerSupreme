@@ -1,11 +1,16 @@
 Vue.component('aaa', {
     props: ['config'],
-    template: \`
+    template: `
         <div>
             <h3>Step 3: AAA Configuration</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p>Configure AAA settings for authentication, authorization, and accounting. Choose the model and methods for each.</p>
+                <p><strong>AAA Model:</strong> Enable or disable AAA (Authentication, Authorization, Accounting). Enabling 'new-model' is required for 802.1X on most platforms.</p>
+                <p><strong>Authentication Method:</strong> Choose the method for user authentication (e.g., RADIUS, TACACS+). RADIUS is commonly used for 802.1X.</p>
+                <p><strong>Authorization Method:</strong> Select the method for user authorization. Typically matches the authentication method.</p>
+                <p><strong>Accounting Method:</strong> Choose the method for accounting. This tracks user activity.</p>
+                <p><strong>Session ID:</strong> Use a common or unique session ID for AAA processes. 'Common' is recommended for consistency.</p>
+                <p><strong>Password Encryption:</strong> Enable to encrypt passwords in the configuration for security.</p>
             </div>
             <label class="form-label">AAA Model:</label>
             <select class="form-select" v-model="config.aaa.model" @change="$emit('update:config', config)">
@@ -48,5 +53,5 @@ Vue.component('aaa', {
                 <button @click="$emit('next-step')">Next</button>
             </div>
         </div>
-    \`
+    `
 });

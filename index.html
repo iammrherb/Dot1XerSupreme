@@ -12,107 +12,79 @@
     <link rel="icon" href="assets/icons/supreme-logo.png" type="image/png">
 </head>
 <body>
-    <header>
-        <img src="assets/icons/supreme-logo.png" alt="Dot1xer Supreme Logo" class="logo">
-        <h1>Dot1xer Supreme Configurator</h1>
-        <p>Ultimate 802.1X Configuration Generator - Powered by xAI</p>
+    <header class="mb-4 text-center p-3 text-white">
+        <div class="d-flex justify-content-center align-items-center">
+            <img src="assets/icons/supreme-logo.png" alt="Dot1xer Supreme Logo" style="height: 50px; margin-right: 15px;">
+            <div>
+                <h1>Dot1xer Supreme Configurator</h1>
+                <p class="mb-0">Ultimate 802.1X Configuration Generator - Powered by xAI</p>
+            </div>
+        </div>
     </header>
     <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Architecture')">Architecture</button>
         <button class="tablinks" onclick="openTab(event, 'Configuration')">Configuration</button>
-        <button class="tablinks" onclick="openTab(event, 'NetworkDiscovery')">Network Discovery</button>
         <button class="tablinks" onclick="openTab(event, 'Help')">Help</button>
     </div>
-    <div id="Architecture" class="tabcontent">
-        <h2>Network Architecture</h2>
-        <img src="assets/icons/wizard.png" alt="Dancing Wizards" class="wizard">
-        <form id="architectureForm" onsubmit="return validateForm('architectureForm')">
-            <label for="arch_scope">Scope:</label>
-            <input type="text" id="arch_scope" name="scope" placeholder="e.g., Campus LAN" required><br><br>
-            <label for="arch_vlan">VLAN ID:</label>
-            <input type="number" id="arch_vlan" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
-            <label for="arch_radius_ip">RADIUS Server IP:</label>
-            <input type="text" id="arch_radius_ip" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
-            <label for="arch_dhcp_snooping">Enable DHCP Snooping:</label>
-            <input type="checkbox" id="arch_dhcp_snooping" name="dhcp_snooping"><br><br>
-            <label for="arch_arp_inspection">Enable ARP Inspection:</label>
-            <input type="checkbox" id="arch_arp_inspection" name="arp_inspection"><br><br>
-            <button type="button" onclick="generateArchitectureConfig()">Generate Config</button>
-            <button type="button" onclick="downloadConfig('architecture')">Download Config</button>
-        </form>
-        <pre id="architectureConfigOutput"></pre>
-    </div>
     <div id="Configuration" class="tabcontent">
-        <div id="app" class="container">
+        <div id="app" class="container-fluid">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="sidebar">
-                        <h3>Configuration Steps</h3>
-                        <div class="list-group">
-                            <a href="#platform" @click="currentStep = 'platform'" :class="['list-group-item', currentStep === 'platform' ? 'active' : '']">1. Platform Selection</a>
-                            <a href="#basic-info" @click="currentStep = 'basicInfo'" :class="['list-group-item', currentStep === 'basicInfo' ? 'active' : '']">2. Basic Settings</a>
-                            <a href="#aaa" @click="currentStep = 'aaa'" :class="['list-group-item', currentStep === 'aaa' ? 'active' : '']">3. AAA Configuration</a>
-                            <a href="#radius" @click="currentStep = 'radius'" :class="['list-group-item', currentStep === 'radius' ? 'active' : '']">4. RADIUS Servers</a>
-                            <a href="#tacacs" @click="currentStep = 'tacacs'" :class="['list-group-item', currentStep === 'tacacs' ? 'active' : '']">5. TACACS+ Servers</a>
-                            <a href="#dot1x" @click="currentStep = 'dot1x'" :class="['list-group-item', currentStep === 'dot1x' ? 'active' : '']">6. 802.1X Settings</a>
-                            <a href="#coa" @click="currentStep = 'coa'" :class="['list-group-item', currentStep === 'coa' ? 'active' : '']">7. CoA Configuration</a>
-                            <a href="#radsec" @click="currentStep = 'radsec'" :class="['list-group-item', currentStep === 'radsec' ? 'active' : '']" v-if="config.radius && config.radius.type === '2'">8. RADSEC Configuration</a>
-                            <a href="#device-tracking" @click="currentStep = 'deviceTracking'" :class="['list-group-item', currentStep === 'deviceTracking' ? 'active' : '']">9. Device Tracking</a>
-                            <a href="#ibns" @click="currentStep = 'ibns'" :class="['list-group-item', currentStep === 'ibns' ? 'active' : '']" v-if="config.platform === 'IOS-XE'">10. IBNS 2.0 Configuration</a>
-                            <a href="#portnox" @click="currentStep = 'portnox'" :class="['list-group-item', currentStep === 'portnox' ? 'active' : '']">11. Portnox Integration</a>
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">Configuration Steps</div>
+                        <div class="list-group list-group-flush">
+                            <a href="#platform" @click="currentStep = 'platform'" :class="['list-group-item list-group-item-action', currentStep === 'platform' ? 'active' : '']">1. Platform Selection</a>
+                            <a href="#basic-info" @click="currentStep = 'basicInfo'" :class="['list-group-item list-group-item-action', currentStep === 'basicInfo' ? 'active' : '']">2. Basic Settings</a>
+                            <a href="#aaa" @click="currentStep = 'aaa'" :class="['list-group-item list-group-item-action', currentStep === 'aaa' ? 'active' : '']">3. AAA Configuration</a>
+                            <a href="#radius" @click="currentStep = 'radius'" :class="['list-group-item list-group-item-action', currentStep === 'radius' ? 'active' : '']">4. RADIUS Servers</a>
+                            <a href="#tacacs" @click="currentStep = 'tacacs'" :class="['list-group-item list-group-item-action', currentStep === 'tacacs' ? 'active' : '']">5. TACACS+ Servers</a>
+                            <a href="#dot1x" @click="currentStep = 'dot1x'" :class="['list-group-item list-group-item-action', currentStep === 'dot1x' ? 'active' : '']">6. 802.1X Settings</a>
+                            <a href="#coa" @click="currentStep = 'coa'" :class="['list-group-item list-group-item-action', currentStep === 'coa' ? 'active' : '']">7. CoA Configuration</a>
+                            <a href="#radsec" @click="currentStep = 'radsec'" :class="['list-group-item list-group-item-action', currentStep === 'radsec' ? 'active' : '']" v-if="config.radius && config.radius.type === '2'">8. RADSEC Configuration</a>
+                            <a href="#device-tracking" @click="currentStep = 'deviceTracking'" :class="['list-group-item list-group-item-action', currentStep === 'deviceTracking' ? 'active' : '']">9. Device Tracking</a>
+                            <a href="#ibns" @click="currentStep = 'ibns'" :class="['list-group-item list-group-item-action', currentStep === 'ibns' ? 'active' : '']" v-if="config.platform === 'IOS-XE'">10. IBNS 2.0 Configuration</a>
+                            <a href="#portnox" @click="currentStep = 'portnox'" :class="['list-group-item list-group-item-action', currentStep === 'portnox' ? 'active' : '']">11. Portnox Integration</a>
                         </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" :style="{width: progress + '%'}"></div>
-                        </div>
-                        <button class="btn-generate" @click="generateConfig">Generate Configuration</button>
-                        <div class="btn-group">
-                            <button class="btn-save" @click="saveConfiguration">Save</button>
-                            <button class="btn-load" @click="loadConfiguration">Load</button>
-                            <button class="btn-download" @click="downloadConfiguration" :disabled="!generatedConfig">Download</button>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <div class="progress mb-3">
+                                <div class="progress-bar" :style="{width: progress + '%'}"></div>
+                            </div>
+                            <button class="btn btn-success w-100 mb-2" @click="generateConfig">Generate Configuration</button>
+                            <div class="btn-group w-100">
+                                <button class="btn btn-outline-primary" @click="saveConfiguration">Save</button>
+                                <button class="btn btn-outline-secondary" @click="loadConfiguration">Load</button>
+                                <button class="btn btn-outline-dark" @click="downloadConfiguration" :disabled="!generatedConfig">Download</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-9">
-                    <div class="content">
-                        <component :is="currentStep" :config="config" @update:config="updateConfig" @next-step="nextStep"></component>
+                    <div class="card">
+                        <div class="card-body">
+                            <component :is="currentStep" :config="config" @update:config="updateConfig" @next-step="nextStep"></component>
+                        </div>
                     </div>
-                    <div class="config-output" v-if="generatedConfig">
-                        <h3>Generated Configuration</h3>
-                        <button class="btn-copy" @click="copyToClipboard">Copy to Clipboard</button>
-                        <pre>{{ generatedConfig }}</pre>
+                    <div class="card mt-3" v-if="generatedConfig">
+                        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                            Generated Configuration
+                            <button class="btn btn-sm btn-light" @click="copyToClipboard">Copy</button>
+                        </div>
+                        <div class="card-body">
+                            <pre class="config-output">{{ generatedConfig }}</pre>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="NetworkDiscovery" class="tabcontent network-discovery">
-        <h2>Network Discovery Architecture</h2>
-        <form id="networkDiscoveryForm" onsubmit="return validateForm('networkDiscoveryForm')">
-            <label for="discovery_scope">Discovery Scope:</label>
-            <input type="text" id="discovery_scope" name="scope" placeholder="e.g., Core Network" required><br><br>
-            <label for="ip_range">IP Range:</label>
-            <input type="text" id="ip_range" name="ip_range" placeholder="e.g., 192.168.1.0/24" required><br><br>
-            <label for="protocol">Protocol:</label>
-            <select id="protocol" name="protocol">
-                <option value="snmp">SNMP</option>
-                <option value="icmp">ICMP</option>
-                <option value="lldp">LLDP</option>
-                <option value="cdp">CDP</option>
-            </select><br><br>
-            <button type="button" onclick="generateNetworkDiscovery()">Generate Diagram</button>
-            <button type="button" onclick="downloadConfig('networkdiscovery')">Download Diagram</button>
-        </form>
-        <pre id="networkDiscoveryOutput"></pre>
-    </div>
     <div id="Help" class="tabcontent">
         <h2>Help & Documentation</h2>
         <div class="help-content">
             <h3>Getting Started</h3>
-            <p>Welcome to the Dot1xer Supreme Configurator! This tool helps you generate 802.1X configurations for various network vendors and design network discovery architectures.</p>
+            <p>Welcome to the Dot1xer Supreme Configurator! This tool helps you generate 802.1X configurations for various network vendors.</p>
             <ul>
-                <li><strong>Architecture Tab:</strong> Define a high-level network architecture with VLANs, RADIUS, and security settings.</li>
-                <li><strong>Configuration Tab:</strong> Follow a step-by-step process to generate device-specific 802.1X configurations.</li>
-                <li><strong>Network Discovery Tab:</strong> Create a basic network discovery diagram using protocols like SNMP, LLDP, or CDP.</li>
+                <li><strong>Configuration Tab:</strong> Follow a step-by-step process to configure and generate device-specific 802.1X settings.</li>
             </ul>
             <h3>Vendor-Specific Notes</h3>
             <ul>
@@ -127,7 +99,6 @@
             <ul>
                 <li><strong>Config Not Applying:</strong> Verify RADIUS server reachability and shared key.</li>
                 <li><strong>Authentication Fails:</strong> Check client certificates and VLAN assignments.</li>
-                <li><strong>Network Discovery Issues:</strong> Ensure the selected protocol (e.g., SNMP) is enabled on target devices.</li>
             </ul>
             <p>For more help, contact support at <a href="mailto:support@dot1xer.com">support@dot1xer.com</a>.</p>
         </div>
@@ -152,5 +123,6 @@
     <script src="js/components/ibns.js"></script>
     <script src="js/components/portnox.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/service-worker.js"></script>
 </body>
 </html>

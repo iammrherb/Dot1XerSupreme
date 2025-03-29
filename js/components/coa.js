@@ -1,11 +1,14 @@
 Vue.component('coa', {
     props: ['config'],
-    template: \`
+    template: `
         <div>
             <h3>Step 7: Change of Authorization (CoA)</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p>Configure Change of Authorization (CoA) for dynamic policy updates from the RADIUS server.</p>
+                <p><strong>Enable CoA:</strong> Enable Change of Authorization for dynamic policy updates from the RADIUS server.</p>
+                <p><strong>Client IP:</strong> IP address of the CoA client (e.g., 192.168.1.10). Typically the RADIUS server IP.</p>
+                <p><strong>Server Key:</strong> Shared key for CoA communication (e.g., CoAKey).</p>
+                <p><strong>Port:</strong> Port for CoA communication (default: 1700).</p>
             </div>
             <label class="form-label">Enable CoA:</label>
             <select class="form-select" v-model="config.coa.enable" @change="$emit('update:config', config)">
@@ -25,5 +28,5 @@ Vue.component('coa', {
                 <button @click="$emit('next-step')" :disabled="config.coa.enable === '1' && (!config.coa.clientIp || !config.coa.serverKey)">Next</button>
             </div>
         </div>
-    \`
+    `
 });

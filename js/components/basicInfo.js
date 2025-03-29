@@ -1,11 +1,13 @@
 Vue.component('basicInfo', {
     props: ['config'],
-    template: \`
+    template: `
         <div>
             <h3>Step 2: Basic Settings</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p>Provide basic device information such as hostname, domain name, and configuration scope.</p>
+                <p><strong>Hostname:</strong> The device hostname (e.g., Switch1). This identifies the device in the network.</p>
+                <p><strong>Domain Name:</strong> The domain name for the device (e.g., example.com). Used for DNS and certificate generation.</p>
+                <p><strong>Scope:</strong> A description of the configuration scope (e.g., Campus LAN). This is for documentation purposes.</p>
             </div>
             <label class="form-label">Hostname:</label>
             <input type="text" class="form-control" v-model="config.hostname" placeholder="e.g., Switch1" @input="$emit('update:config', config)">
@@ -18,5 +20,5 @@ Vue.component('basicInfo', {
                 <button @click="$emit('next-step')" :disabled="!config.hostname || !config.domainName || !config.scope">Next</button>
             </div>
         </div>
-    \`
+    `
 });

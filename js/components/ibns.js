@@ -1,11 +1,17 @@
 Vue.component('ibns', {
     props: ['config'],
-    template: \`
+    template: `
         <div>
             <h3>Step 10: IBNS 2.0 Configuration</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p>Configure Identity-Based Networking Services (IBNS) 2.0 for advanced policy enforcement (Cisco IOS-XE only).</p>
+                <p><strong>IBNS Mode:</strong> Choose between High Security (strict policies) or Low Impact (more permissive) modes. High Security is recommended for secure environments.</p>
+                <p><strong>Policy Map Name:</strong> Name of the IBNS policy map (e.g., DOT1X_MAB_POLICY).</p>
+                <p><strong>Enable Templates:</strong> Use predefined templates for open and closed authentication modes.</p>
+                <p><strong>Open Template:</strong> Enable an open template for pre-authentication access.</p>
+                <p><strong>Open Template Name:</strong> Name of the open template (e.g., WIRED_DOT1X_OPEN).</p>
+                <p><strong>Closed Template:</strong> Enable a closed template for post-authentication access.</p>
+                <p><strong>Closed Template Name:</strong> Name of the closed template (e.g., WIRED_DOT1X_CLOSED).</p>
             </div>
             <label class="form-label">IBNS Mode:</label>
             <select class="form-select" v-model="config.ibns.mode" @change="$emit('update:config', config)">
@@ -44,5 +50,5 @@ Vue.component('ibns', {
                 <button @click="$emit('next-step')" :disabled="!config.ibns.policyMapName">Next</button>
             </div>
         </div>
-    \`
+    `
 });

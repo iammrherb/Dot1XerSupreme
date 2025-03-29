@@ -1,11 +1,19 @@
 Vue.component('tacacs', {
     props: ['config'],
-    template: \`
+    template: `
         <div>
             <h3>Step 5: TACACS+ Servers</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p>Configure TACACS+ servers for authentication and authorization. This is optional and can be skipped if not needed.</p>
+                <p><strong>Enable TACACS+:</strong> Enable TACACS+ for authentication and authorization. Optional if using RADIUS.</p>
+                <p><strong>Primary TACACS+ Server IP:</strong> IP address of the primary TACACS+ server (e.g., 192.168.1.20).</p>
+                <p><strong>Primary Port:</strong> Port for TACACS+ (default: 49).</p>
+                <p><strong>Primary Shared Secret:</strong> Shared secret for the primary server (e.g., TacacsKey).</p>
+                <p><strong>Enable Secondary Server:</strong> Add a secondary TACACS+ server for redundancy.</p>
+                <p><strong>TACACS+ Group Name:</strong> Name of the TACACS+ server group (e.g., TACACS-SERVERS).</p>
+                <p><strong>Single Connection:</strong> Use a single connection to the server for efficiency (recommended: Yes).</p>
+                <p><strong>Command Authorization:</strong> Enable command authorization for additional security.</p>
+                <p><strong>Max Privilege Level:</strong> Maximum privilege level for users (default: 15).</p>
             </div>
             <label class="form-label">Enable TACACS+:</label>
             <input type="checkbox" class="form-check-input" v-model="config.tacacs.enable" @change="$emit('update:config', config)">
@@ -46,5 +54,5 @@ Vue.component('tacacs', {
                 <button @click="$emit('next-step')" :disabled="config.tacacs.enable && (!config.tacacs.primaryIp || !config.tacacs.primarySecret || !config.tacacs.groupName)">Next</button>
             </div>
         </div>
-    \`
+    `
 });

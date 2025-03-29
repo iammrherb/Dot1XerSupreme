@@ -1,11 +1,11 @@
 Vue.component('platform', {
     props: ['config'],
-    template: \`
+    template: `
         <div>
             <h3>Step 1: Platform Selection</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p>Select the platform for which you want to generate the 802.1X configuration. This will determine the syntax and available features.</p>
+                <p><strong>Platform:</strong> Select the network vendor platform for which you want to generate the 802.1X configuration. This determines the syntax and available features. For example, Cisco IOS-XE supports IBNS 2.0, while ArubaOS uses AAA profiles.</p>
             </div>
             <label class="form-label">Platform:</label>
             <select class="form-select" v-model="config.platform" @change="$emit('update:config', config)">
@@ -22,5 +22,5 @@ Vue.component('platform', {
                 <button @click="$emit('next-step')" :disabled="!config.platform">Next</button>
             </div>
         </div>
-    \`
+    `
 });
