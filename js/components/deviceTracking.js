@@ -5,12 +5,12 @@ Vue.component('deviceTracking', {
             <h3>Step 9: Device Tracking</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p><strong>Enable Device Tracking:</strong> Enable device tracking to monitor IP-to-MAC bindings on access and trunk ports.</p>
-                <p><strong>Tracking Mode:</strong> Select 'Auto-Source' for automatic tracking or 'Manual' for manual configuration.</p>
-                <p><strong>Access Policy Name:</strong> Name for the access policy (e.g., IP-TRACKING).</p>
-                <p><strong>Address Limit:</strong> Maximum number of addresses per port (default: 4).</p>
+                <p><strong>Enable Device Tracking:</strong> Enable tracking to monitor IP-to-MAC bindings on access/trunk ports.</p>
+                <p><strong>Tracking Mode:</strong> Choose 'Auto-Source' for automatic tracking or 'Manual'.</p>
+                <p><strong>Access Policy Name:</strong> The name for the access policy (e.g., IP-TRACKING).</p>
+                <p><strong>Address Limit:</strong> Maximum addresses per port (default: 4).</p>
                 <p><strong>Lifetime:</strong> Lifetime of the binding in seconds (default: 30).</p>
-                <p><strong>Trunk Policy Name:</strong> Name for the trunk policy (e.g., DISABLE-IP-TRACKING).</p>
+                <p><strong>Trunk Policy Name:</strong> The name for the trunk policy (e.g., DISABLE-IP-TRACKING).</p>
             </div>
             <label class="form-label">Enable Device Tracking:</label>
             <select class="form-select" v-model="config.deviceTracking.enable" @change="$emit('update:config', config)">

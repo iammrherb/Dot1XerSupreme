@@ -6,18 +6,18 @@ Vue.component('dot1x', {
             <div class="help-section">
                 <h5>Help</h5>
                 <p><strong>Enable 802.1X:</strong> Enable port-based authentication for secure access control.</p>
-                <p><strong>Critical EAPOL:</strong> Enable to handle critical EAPOL packets during server outages.</p>
+                <p><strong>Critical EAPOL:</strong> Enable to handle critical EAPOL packets during outages.</p>
                 <p><strong>Recovery Delay (ms):</strong> Delay before recovery attempts (default: 2000 ms).</p>
-                <p><strong>Authentication Order:</strong> The order in which to try authentication methods (e.g., dot1x then MAB).</p>
-                <p><strong>Host Mode:</strong> Mode for handling multiple hosts (e.g., Single-Host, Multi-Auth, Multi-Domain, Multi-Host).</p>
+                <p><strong>Authentication Order:</strong> Order of authentication methods (dot1x then MAB or vice versa).</p>
+                <p><strong>Host Mode:</strong> Mode for handling multiple hosts (Single-Host, Multi-Auth, Multi-Domain, or Multi-Host).</p>
                 <p><strong>Enable VLAN Assignment:</strong> Dynamically assign VLANs based on authentication results.</p>
                 <p><strong>Guest VLAN:</strong> VLAN for unauthenticated users.</p>
                 <p><strong>Auth-Fail VLAN:</strong> VLAN for failed authentications.</p>
-                <p><strong>Critical VLAN:</strong> VLAN when the authentication server is down.</p>
+                <p><strong>Critical VLAN:</strong> VLAN when authentication fails critically.</p>
                 <p><strong>TX Period (seconds):</strong> Time between EAPOL transmissions (default: 10 seconds).</p>
-                <p><strong>Max Reauth Requests:</strong> Maximum number of reauthentication attempts (default: 2).</p>
+                <p><strong>Max Reauth Requests:</strong> Maximum reauthentication attempts (default: 2).</p>
                 <p><strong>Interface:</strong> The physical interface (e.g., GigabitEthernet1/0/1).</p>
-                <p><strong>VLAN:</strong> The access VLAN for the interface (e.g., 10).</p>
+                <p><strong>VLAN:</strong> The access VLAN (e.g., 10).</p>
                 <p><strong>Reauthentication Period (seconds):</strong> Time between reauthentications (default: 3600 seconds).</p>
             </div>
             <label class="form-label">Enable 802.1X:</label>

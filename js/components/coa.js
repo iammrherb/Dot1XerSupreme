@@ -5,8 +5,8 @@ Vue.component('coa', {
             <h3>Step 7: Change of Authorization (CoA)</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p><strong>Enable CoA:</strong> Enable CoA to allow dynamic policy updates from your RADIUS server.</p>
-                <p><strong>Client IP:</strong> The CoA client IP (typically the RADIUS server IP).</p>
+                <p><strong>Enable CoA:</strong> Enable CoA for dynamic policy updates from the RADIUS server.</p>
+                <p><strong>Client IP:</strong> The CoA client IP (usually the RADIUS server IP).</p>
                 <p><strong>Server Key:</strong> The shared key for CoA communication.</p>
                 <p><strong>Port:</strong> Port for CoA (default: 1700).</p>
             </div>

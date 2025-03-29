@@ -1,9 +1,9 @@
 function generateExtremeConfig(config) {
     let output = generateBaseConfig(config);
     output.push('! Extreme Networks Configuration');
-    output.push(`configure radius netlogin primary server ${config.radius.primaryIp || '192.168.1.10'} ${config.radius.primaryAuthPort} client-ip ${config.radius.primaryIp:-'192.168.1.10' | cut -d. -f1-3}.1 shared-secret ${config.radius.primarySecret || 'SecretKey'}`);
+    output.push(`configure radius netlogin primary server ${config.radius.primaryIp || '192.168.1.10'} ${config.radius.primaryAuthPort} client-ip 192.168.1.1 shared-secret ${config.radius.primarySecret || 'SecretKey'}`);
     if (config.radius.secondary) {
-        output.push(`configure radius netlogin secondary server ${config.radius.secondaryIp || '192.168.1.11'} ${config.radius.secondaryAuthPort} client-ip ${config.radius.secondaryIp:-'192.168.1.11' | cut -d. -f1-3}.1 shared-secret ${config.radius.secondarySecret || 'SecretKey2'}`);
+        output.push(`configure radius netlogin secondary server ${config.radius.secondaryIp || '192.168.1.11'} ${config.radius.secondaryAuthPort} client-ip 192.168.1.1 shared-secret ${config.radius.secondarySecret || 'SecretKey2'}`);
     }
     output.push('enable radius netlogin');
     if (config.dot1x.enable === '1') {

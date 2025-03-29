@@ -5,9 +5,9 @@ Vue.component('ibns', {
             <h3>Step 10: IBNS 2.0 Configuration</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p><strong>IBNS Mode:</strong> Choose between High Security (strict policies) or Low Impact (more permissive). High Security is recommended for secure environments.</p>
+                <p><strong>IBNS Mode:</strong> Choose between High Security (strict) and Low Impact (more permissive). High Security is recommended for sensitive environments.</p>
                 <p><strong>Policy Map Name:</strong> Name of the IBNS policy map (e.g., DOT1X_MAB_POLICY).</p>
-                <p><strong>Enable Templates:</strong> Use predefined templates for open and closed authentication modes.</p>
+                <p><strong>Enable Templates:</strong> Use predefined templates for open/closed authentication modes.</p>
                 <p><strong>Open Template Name:</strong> Name of the open template (e.g., WIRED_DOT1X_OPEN).</p>
                 <p><strong>Closed Template Name:</strong> Name of the closed template (e.g., WIRED_DOT1X_CLOSED).</p>
             </div>

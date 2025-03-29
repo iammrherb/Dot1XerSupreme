@@ -5,13 +5,13 @@ Vue.component('radius', {
             <h3>Step 4: RADIUS Servers</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p><strong>RADIUS Type:</strong> Choose Standard RADIUS or RADSEC (RADIUS over TLS). RADSEC offers encrypted communication.</p>
-                <p><strong>Primary RADIUS Server IP:</strong> The IP address of your primary RADIUS server (e.g., 192.168.1.10).</p>
+                <p><strong>RADIUS Type:</strong> Choose Standard RADIUS or RADSEC (encrypted TLS).</p>
+                <p><strong>Primary RADIUS Server IP:</strong> The IP address of your primary RADIUS server.</p>
                 <p><strong>Primary Auth Port:</strong> Port for authentication (default: 1812).</p>
                 <p><strong>Primary Acct Port:</strong> Port for accounting (default: 1813).</p>
-                <p><strong>Primary Shared Secret:</strong> The shared secret for the primary RADIUS server.</p>
-                <p><strong>Enable Secondary Server:</strong> Add a secondary RADIUS server for redundancy.</p>
-                <p><strong>RADIUS Group Name:</strong> Name used in AAA configurations for the RADIUS servers.</p>
+                <p><strong>Primary Shared Secret:</strong> The shared secret for the primary server.</p>
+                <p><strong>Enable Secondary Server:</strong> Add a secondary server for redundancy.</p>
+                <p><strong>RADIUS Group Name:</strong> Name used for grouping RADIUS servers in AAA configurations.</p>
                 <p><strong>Enable Monitoring:</strong> Monitor the RADIUS server using a test user.</p>
             </div>
             <label class="form-label">RADIUS Type:</label>

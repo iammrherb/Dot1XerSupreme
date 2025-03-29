@@ -5,12 +5,12 @@ Vue.component('aaa', {
             <h3>Step 3: AAA Configuration</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p><strong>AAA Model:</strong> Enable or disable AAA. Enabling 'new-model' is required for 802.1X on most platforms.</p>
-                <p><strong>Authentication Method:</strong> Choose the method for user authentication (Local, RADIUS, TACACS+, or both).</p>
+                <p><strong>AAA Model:</strong> Enable or disable AAA (new-model is recommended for 802.1X).</p>
+                <p><strong>Authentication Method:</strong> Choose the method (Local, RADIUS, TACACS+, or both).</p>
                 <p><strong>Authorization Method:</strong> Select the method for user authorization.</p>
-                <p><strong>Accounting Method:</strong> Choose the method for accounting (tracking user activity).</p>
-                <p><strong>Session ID:</strong> Use a common or unique session ID for AAA.</p>
-                <p><strong>Password Encryption:</strong> Enable to encrypt passwords in the configuration for enhanced security.</p>
+                <p><strong>Accounting Method:</strong> Choose how user activity is tracked.</p>
+                <p><strong>Session ID:</strong> Use a common or unique session ID.</p>
+                <p><strong>Password Encryption:</strong> Enable to encrypt passwords for security.</p>
             </div>
             <label class="form-label">AAA Model:</label>
             <select class="form-select" v-model="config.aaa.model" @change="$emit('update:config', config)">

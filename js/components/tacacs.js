@@ -5,15 +5,15 @@ Vue.component('tacacs', {
             <h3>Step 5: TACACS+ Servers</h3>
             <div class="help-section">
                 <h5>Help</h5>
-                <p><strong>Enable TACACS+:</strong> Enable TACACS+ if you plan to use it for authentication and authorization. This is optional if you're using RADIUS.</p>
-                <p><strong>Primary TACACS+ Server IP:</strong> The IP of your primary TACACS+ server (e.g., 192.168.1.20).</p>
+                <p><strong>Enable TACACS+:</strong> Enable TACACS+ if you plan to use it. This is optional if you are using RADIUS.</p>
+                <p><strong>Primary TACACS+ Server IP:</strong> The IP address of your primary TACACS+ server (e.g., 192.168.1.20).</p>
                 <p><strong>Primary Port:</strong> The port for TACACS+ (default: 49).</p>
-                <p><strong>Primary Shared Secret:</strong> The shared secret for the primary server.</p>
-                <p><strong>Enable Secondary Server:</strong> Optionally, add a secondary TACACS+ server for redundancy.</p>
+                <p><strong>Primary Shared Secret:</strong> The shared secret for the primary TACACS+ server.</p>
+                <p><strong>Enable Secondary Server:</strong> Optionally add a secondary TACACS+ server.</p>
                 <p><strong>TACACS+ Group Name:</strong> Name for the TACACS+ server group (e.g., TACACS-SERVERS).</p>
-                <p><strong>Single Connection:</strong> Use a single connection to the server for efficiency (recommended: Yes).</p>
-                <p><strong>Command Authorization:</strong> Enable command authorization for additional security.</p>
-                <p><strong>Max Privilege Level:</strong> Maximum privilege level for authenticated users (default: 15).</p>
+                <p><strong>Single Connection:</strong> Use a single connection (recommended).</p>
+                <p><strong>Command Authorization:</strong> Enable command authorization if needed.</p>
+                <p><strong>Max Privilege Level:</strong> Maximum privilege level (default: 15).</p>
             </div>
             <label class="form-label">Enable TACACS+:</label>
             <input type="checkbox" class="form-check-input" v-model="config.tacacs.enable" @change="$emit('update:config', config)">
