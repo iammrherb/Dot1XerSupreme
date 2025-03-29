@@ -1,18 +1,1 @@
-function renderIbns(config) {
-  return `
-    <div>
-      <h3>IBNS 2.0 Configuration</h3>
-      <label>Policy Map Name:
-        <input type="text" value="${config.ibns.policyMapName}" onchange="config.ibns.policyMapName=this.value">
-      </label><br>
-      <label>
-        <input type="checkbox" onchange="config.ibns.templates=this.checked ? '1' : '0'" ${config.ibns.templates==='1'?'checked':''}>
-        Enable Interface Templates
-      </label>
-      <div class="step-navigation">
-        <button onclick="setStep('deviceTracking')">Previous</button>
-        <button onclick="setStep('portnox')">Next</button>
-      </div>
-    </div>
-  `;
-}
+app.component('ibns',{props:['config'],template:`<div><h3>IBNS 2.0</h3><p>Configure advanced IBNS for Cisco.</p><div class='step-navigation d-flex justify-content-between'><button class='btn btn-outline-secondary' @click='goBack'>Previous</button><button class='btn btn-primary' @click='goNext'>Next</button></div></div>`,methods:{goBack(){this.$parent.currentStep='deviceTracking'},goNext(){this.$emit('next-step')}}})

@@ -1,82 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dot1Xer Supreme 2.0</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="description" content="Generate multi-vendor 802.1X configurations with detailed help and a modern UI.">
+  <meta charset="UTF-8" />
+  <title>Dot1Xer Supreme – Multi-Step</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+  />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <div id="app" class="container-fluid">
-    <header class="mb-4 text-center p-3 text-white">
+    <header class="text-center p-3 text-white mb-4">
       <div class="d-flex justify-content-center align-items-center">
-        <img src="assets/icons/supreme-logo.png" alt="Dot1Xer Supreme Logo" style="height:50px; margin-right:15px;">
+        <img src="assets/icons/supreme-logo.png" alt="Logo" style="height:50px; margin-right:15px;">
         <div>
-          <h1>Dot1Xer Supreme 2.0</h1>
-          <p>Multi-vendor 802.1X Config Generator – Detailed Help & AI Assistant</p>
+          <h1>Dot1Xer Supreme</h1>
+          <p class="mb-0">Multi-Step 802.1X Config Generator – Powered by Vue.js</p>
         </div>
       </div>
     </header>
+
     <div class="row">
+      <!-- Sidebar -->
       <div class="col-md-3">
-        <!-- Sidebar Menu -->
-        <div class="card">
+        <div class="card mb-3">
           <div class="card-header bg-primary text-white">Configuration Steps</div>
           <div class="list-group list-group-flush">
-            <a href="#platform" @click="currentStep='platform'" :class="['list-group-item', currentStep==='platform'?'active':'']">1. Platform Selection</a>
-            <a href="#basicInfo" @click="currentStep='basicInfo'" :class="['list-group-item', currentStep==='basicInfo'?'active':'']">2. Basic Settings</a>
-            <a href="#aaa" @click="currentStep='aaa'" :class="['list-group-item', currentStep==='aaa'?'active':'']">3. AAA Configuration</a>
-            <a href="#radius" @click="currentStep='radius'" :class="['list-group-item', currentStep==='radius'?'active':'']">4. RADIUS Servers</a>
-            <a href="#tacacs" @click="currentStep='tacacs'" :class="['list-group-item', currentStep==='tacacs'?'active':'']">5. TACACS+ Servers</a>
-            <!-- Conditional menus for wired vs wireless -->
-            <template v-if="config.deviceType==='switch'">
-              <a href="#dot1x" @click="currentStep='dot1x'" :class="['list-group-item', currentStep==='dot1x'?'active':'']">6. 802.1X Settings</a>
-              <a href="#coa" @click="currentStep='coa'" :class="['list-group-item', currentStep==='coa'?'active':'']">7. CoA Configuration</a>
-              <a href="#radsec" v-if="config.radius.type==='2'" @click="currentStep='radsec'" :class="['list-group-item', currentStep==='radsec'?'active':'']">8. RADSEC Configuration</a>
-              <a href="#deviceTracking" @click="currentStep='deviceTracking'" :class="['list-group-item', currentStep==='deviceTracking'?'active':'']">9. Device Tracking</a>
-              <a href="#ibns" v-if="config.ibnsOption==='yes'" @click="currentStep='ibns'" :class="['list-group-item', currentStep==='ibns'?'active':'']">10. IBNS Configuration</a>
-            </template>
-            <template v-else>
-              <a href="#ssid" @click="currentStep='ssid'" :class="['list-group-item', currentStep==='ssid'?'active':'']">6. SSID Configuration</a>
-              <a href="#security" @click="currentStep='security'" :class="['list-group-item', currentStep==='security'?'active':'']">7. Security Settings</a>
-              <a href="#advanced" @click="currentStep='advanced'" :class="['list-group-item', currentStep==='advanced'?'active':'']">8. Advanced Settings</a>
-            </template>
-            <a href="#portnox" @click="currentStep='portnox'" :class="['list-group-item', currentStep==='portnox'?'active':'']">11. Portnox Integration</a>
-            <a href="#aiAssist" @click="currentStep='aiAssist'" :class="['list-group-item', currentStep==='aiAssist'?'active':'']">12. AI Assistant</a>
+            <!-- One link per step -->
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='platform' }"
+               @click="currentStep='platform'">1. Platform Selection</a>
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='basicInfo' }"
+               @click="currentStep='basicInfo'">2. Basic Settings</a>
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='aaa' }"
+               @click="currentStep='aaa'">3. AAA Configuration</a>
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='radius' }"
+               @click="currentStep='radius'">4. RADIUS Servers</a>
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='tacacs' }"
+               @click="currentStep='tacacs'">5. TACACS+ Servers</a>
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='dot1x' }"
+               @click="currentStep='dot1x'">6. 802.1X Settings</a>
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='coa' }"
+               @click="currentStep='coa'">7. CoA Configuration</a>
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='radsec' }"
+               @click="currentStep='radsec'">8. RADSEC</a>
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='deviceTracking' }"
+               @click="currentStep='deviceTracking'">9. Device Tracking</a>
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='ibns' }"
+               @click="currentStep='ibns'">10. IBNS 2.0</a>
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='portnox' }"
+               @click="currentStep='portnox'">11. Portnox</a>
+            <a href="#" class="list-group-item list-group-item-action"
+               :class="{ active: currentStep==='aiAssist' }"
+               @click="currentStep='aiAssist'">12. AI Assist</a>
           </div>
         </div>
-        <div class="card mt-3">
+
+        <div class="card">
           <div class="card-body">
+            <!-- Progress bar -->
             <div class="progress mb-3">
-              <div class="progress-bar" :style="{width: progress+'%'}"></div>
+              <div class="progress-bar bg-success" :style="{ width: progress + '%' }"></div>
             </div>
-            <button class="btn btn-success w-100 mb-2" @click="generateConfig">Generate Config</button>
+            <!-- Generate, Save, Load, Download -->
+            <button class="btn btn-success w-100 mb-2" @click="generateConfig">
+              Generate Configuration
+            </button>
             <div class="btn-group w-100 mb-2">
-              <button class="btn btn-outline-primary" @click="saveConfiguration">Save</button>
-              <button class="btn btn-outline-secondary" @click="loadConfiguration">Load</button>
-              <button class="btn btn-outline-dark" @click="downloadConfiguration" :disabled="!generatedConfig">Download</button>
+              <button class="btn btn-outline-primary" @click="saveConfig">Save</button>
+              <button class="btn btn-outline-secondary" @click="loadConfig">Load</button>
+              <button class="btn btn-outline-dark" :disabled="!generatedConfig" @click="downloadConfig">
+                Download
+              </button>
             </div>
-            <button class="btn btn-info w-100" @click="currentStep='aiAssist'" :disabled="!generatedConfig">AI Optimize</button>
+            <button class="btn btn-info w-100" :disabled="!generatedConfig" @click="currentStep='aiAssist'">
+              AI Analysis
+            </button>
           </div>
         </div>
       </div>
+
+      <!-- Main content area -->
       <div class="col-md-9">
         <div class="card">
           <div class="card-body">
-            <component :is="currentStep" :config="config" @update:config="updateConfig" @next-step="nextStep"></component>
+            <component :is="currentStep"
+                       :config="config"
+                       @update:config="updateConfig"
+                       @next-step="goNextStep"
+            ></component>
           </div>
         </div>
+
+        <!-- Show generated config if available -->
         <div class="card mt-3" v-if="generatedConfig">
           <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
             Generated Configuration
-            <div>
-              <button class="btn btn-sm btn-light me-2" @click="copyToClipboard">Copy</button>
-              <button class="btn btn-sm btn-warning" @click="currentStep='aiAssist'">AI Enhance</button>
-            </div>
+            <button class="btn btn-sm btn-light" @click="copyToClipboard">Copy</button>
           </div>
           <div class="card-body">
             <pre class="config-output">{{ generatedConfig }}</pre>
@@ -85,8 +121,26 @@
       </div>
     </div>
   </div>
+
+  <!-- Vue + Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Components -->
+  <script src="js/components/platform.js"></script>
+  <script src="js/components/basicInfo.js"></script>
+  <script src="js/components/aaa.js"></script>
+  <script src="js/components/radius.js"></script>
+  <script src="js/components/tacacs.js"></script>
+  <script src="js/components/dot1x.js"></script>
+  <script src="js/components/coa.js"></script>
+  <script src="js/components/radsec.js"></script>
+  <script src="js/components/deviceTracking.js"></script>
+  <script src="js/components/ibns.js"></script>
+  <script src="js/components/portnox.js"></script>
+  <script src="js/components/aiAssist.js"></script>
+
+  <!-- Main App Logic -->
   <script src="js/app.js"></script>
 </body>
 </html>
