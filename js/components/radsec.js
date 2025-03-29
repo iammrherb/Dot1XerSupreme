@@ -1,24 +1,20 @@
-Vue.component('radsec', {
-    props: ['config'],
-    template: `
-        <div>
-            <h3>Step 8: RADSEC Configuration</h3>
-            <div class="help-section">
-                <h5>Help</h5>
-                <p><strong>Certificate Option:</strong> Choose to use a trustpoint or manual certificate for RADSEC.</p>
-                <p><strong>Trustpoint Name:</strong> The name of the trustpoint (e.g., PORTNOX-CA) used for TLS encryption.</p>
-            </div>
-            <label class="form-label">Certificate Option:</label>
-            <select class="form-select" v-model="config.radsec.certOption" @change="$emit('update:config', config)">
-                <option value="1">Use Trustpoint</option>
-                <option value="2">Manual Certificate</option>
-            </select>
-            <label class="form-label">Trustpoint Name:</label>
-            <input type="text" class="form-control" v-model="config.radsec.trustpoint" placeholder="e.g., PORTNOX-CA" @input="$emit('update:config', config)">
-            <div class="step-navigation">
-                <button @click="$parent.currentStep = 'coa'">Previous</button>
-                <button @click="$emit('next-step')" :disabled="!config.radsec.trustpoint">Next</button>
-            </div>
-        </div>
-    `
-});
+function renderRadsec(config) {
+  return `
+    <div>
+      <h3>RADSEC Configuration</h3>
+      <label>Certificate Option:
+        <select onchange="config.radsec.certOption=this.value">
+          <option value="1" ${config.radsec.certOption==='1'?'selected':''}>Use Trustpoint</option>
+          <option value="0" ${config.radsec.certOption==='0'?'selected':''}>Manual Configuration</option>
+        </select>
+      </label><br>
+      <label>Trustpoint Name:
+        <input type="text" value="${config.radsec.trustpoint}" onchange="config.radsec.trustpoint=this.value" placeholder="e.g., PORTNOX-CA">
+      </label>
+      <div class="step-navigation">
+        <button onclick="setStep('coa')">Previous</button>
+        <button onclick="setStep('deviceTracking')">Next</button>
+      </div>
+    </div>
+  `;
+}
