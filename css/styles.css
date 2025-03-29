@@ -2,31 +2,32 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #d3cce3 50%, #1e1e2f 100%);
-    color: #333;
+    background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 50%, #d3cce3 100%); /* Cosmic nebula gradient */
+    color: #fff;
     line-height: 1.6;
 }
 header {
     text-align: center;
     padding: 20px;
-    background: #e9ecef;
-    border-bottom: 1px solid #ccc;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid #444;
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.3);
 }
 .logo {
     max-width: 300px;
+    filter: drop-shadow(0 0 10px rgba(0, 123, 255, 0.5));
 }
 .container {
     display: flex;
 }
 .sidebar {
     width: 250px;
-    background: #e9ecef;
+    background: linear-gradient(180deg, #1e1e2f 0%, #2a2a4a 100%);
     padding: 15px;
     height: 100vh;
     position: fixed;
     transition: width 0.3s ease;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0 15px rgba(0, 123, 255, 0.3);
 }
 .sidebar.collapsed {
     width: 60px;
@@ -43,10 +44,12 @@ header {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.3s;
 }
 .menu-btn:hover {
     background: #0056b3;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
 }
 nav ul {
     list-style: none;
@@ -58,32 +61,33 @@ nav ul li {
 }
 nav ul li a {
     text-decoration: none;
-    color: #333;
+    color: #fff;
     display: block;
     padding: 12px;
     border-radius: 5px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
     position: relative;
+    overflow: hidden;
 }
 nav ul li a:hover, nav ul li a.active {
-    background: #007bff;
+    background: linear-gradient(90deg, #007bff, #00d4ff);
     color: white;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+    transform: translateX(5px);
 }
-nav ul li a[data-tooltip]:hover:after {
-    content: attr(data-tooltip);
+nav ul li a::before {
+    content: '';
     position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: 0.5s;
+}
+nav ul li a:hover::before {
     left: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #333;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 12px;
-    white-space: nowrap;
-    z-index: 10;
 }
 .main-content {
     margin-left: 250px;
@@ -101,20 +105,24 @@ nav ul li a[data-tooltip]:hover:after {
     padding: 25px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 .section.active {
-    display: block;
+    display: block !important;
 }
 .wizard {
     max-width: 150px;
     display: block;
     margin: 20px auto;
-    animation: dance 2s infinite alternate;
+    animation: dance 2s infinite alternate, glow 1.5s infinite alternate;
 }
 @keyframes dance {
-    0% { transform: translateX(-10px); }
-    100% { transform: translateX(10px); }
+    0% { transform: translateX(-10px) rotate(2deg); }
+    100% { transform: translateX(10px) rotate(-2deg); }
+}
+@keyframes glow {
+    0% { filter: drop-shadow(0 0 5px rgba(0, 123, 255, 0.5)); }
+    100% { filter: drop-shadow(0 0 15px rgba(0, 123, 255, 1)); }
 }
 form {
     max-width: 600px;
@@ -123,21 +131,7 @@ form {
 label {
     font-weight: bold;
     margin-right: 10px;
-    position: relative;
-}
-label[data-tooltip]:hover:after {
-    content: attr(data-tooltip);
-    position: absolute;
-    left: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #333;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 12px;
-    white-space: nowrap;
-    z-index: 10;
+    color: #333;
 }
 input, select {
     padding: 8px;
@@ -165,17 +159,19 @@ button {
 }
 button:hover {
     background: #45a049;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+    transform: scale(1.05);
 }
 pre {
     background: #f1f1f1;
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: auto;
     font-family: 'Courier New', monospace;
     font-size: 13px;
+    color: #333;
 }
 #NetworkDiscovery {
     background: url('assets/backgrounds/network-discovery-bg.jpg') no-repeat center center;
@@ -184,4 +180,10 @@ pre {
 h2 {
     color: #007bff;
     margin-bottom: 20px;
+}
+#platformInfo {
+    background: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
 }
