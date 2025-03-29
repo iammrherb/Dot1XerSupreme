@@ -1,128 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dot1xer Supreme Configurator</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="description" content="Generate optimized 802.1X configurations for multiple vendors with Dot1Xer Supreme">
-  <meta name="keywords" content="802.1X, Cisco, Aruba, Juniper, Extreme, Arista, RADIUS, Network Security">
-  <meta name="author" content="iammrherb">
-  <link rel="icon" href="assets/icons/supreme-logo.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dot1xer Supreme Configurator</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Generate optimized 802.1X configurations for multiple vendors with Dot1Xer Supreme">
+    <meta name="keywords" content="802.1X, Cisco, Aruba, Juniper, Extreme, Arista, RADIUS, Network Security">
+    <meta name="author" content="iammrherb">
+    <link rel="icon" href="assets/icons/supreme-logo.png" type="image/png">
 </head>
 <body>
-  <header class="mb-4 text-center p-3 text-white">
-    <div class="d-flex justify-content-center align-items-center">
-      <img src="assets/icons/supreme-logo.png" alt="Dot1xer Supreme Logo" style="height: 50px; margin-right: 15px;">
-      <div>
-        <h1>Dot1xer Supreme Configurator</h1>
-        <p class="mb-0">Ultimate 802.1X Configuration Generator - Powered by xAI</p>
-      </div>
-    </div>
-  </header>
-  <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'Configuration')">Configuration</button>
-    <button class="tablinks" onclick="openTab(event, 'Help')">Help</button>
-  </div>
-  <div id="Configuration" class="tabcontent">
-    <div id="app" class="container-fluid">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="card">
-            <div class="card-header bg-primary text-white">Configuration Steps</div>
-            <div class="list-group list-group-flush">
-              <a href="#platform" @click="currentStep = 'platform'" :class="['list-group-item list-group-item-action', currentStep === 'platform' ? 'active' : '']">1. Platform Selection</a>
-              <a href="#basic-info" @click="currentStep = 'basicInfo'" :class="['list-group-item list-group-item-action', currentStep === 'basicInfo' ? 'active' : '']">2. Basic Settings</a>
-              <a href="#aaa" @click="currentStep = 'aaa'" :class="['list-group-item list-group-item-action', currentStep === 'aaa' ? 'active' : '']">3. AAA Configuration</a>
-              <a href="#radius" @click="currentStep = 'radius'" :class="['list-group-item list-group-item-action', currentStep === 'radius' ? 'active' : '']">4. RADIUS Servers</a>
-              <a href="#tacacs" @click="currentStep = 'tacacs'" :class="['list-group-item list-group-item-action', currentStep === 'tacacs' ? 'active' : '']">5. TACACS+ Servers</a>
-              <a href="#dot1x" @click="currentStep = 'dot1x'" :class="['list-group-item list-group-item-action', currentStep === 'dot1x' ? 'active' : '']">6. 802.1X Settings</a>
-              <a href="#coa" @click="currentStep = 'coa'" :class="['list-group-item list-group-item-action', currentStep === 'coa' ? 'active' : '']">7. CoA Configuration</a>
-              <a href="#radsec" @click="currentStep = 'radsec'" :class="['list-group-item list-group-item-action', currentStep === 'radsec' ? 'active' : '']" v-if="config.radius && config.radius.type === '2'">8. RADSEC Configuration</a>
-              <a href="#deviceTracking" @click="currentStep = 'deviceTracking'" :class="['list-group-item list-group-item-action', currentStep === 'deviceTracking' ? 'active' : '']">9. Device Tracking</a>
-              <a href="#ibns" @click="currentStep = 'ibns'" :class="['list-group-item list-group-item-action', currentStep === 'ibns' ? 'active' : '']" v-if="config.platform === 'IOS-XE'">10. IBNS 2.0 Configuration</a>
-              <a href="#portnox" @click="currentStep = 'portnox'" :class="['list-group-item list-group-item-action', currentStep === 'portnox' ? 'active' : '']">11. Portnox Integration</a>
+    <header class="mb-4 text-center p-3 text-white">
+        <div class="d-flex justify-content-center align-items-center">
+            <img src="assets/icons/supreme-logo.png" alt="Dot1xer Supreme Logo" style="height: 50px; margin-right: 15px;">
+            <div>
+                <h1>Dot1xer Supreme Configurator</h1>
+                <p class="mb-0">Ultimate 802.1X Configuration Generator - Powered by xAI</p>
             </div>
-          </div>
-          <div class="card mt-3">
-            <div class="card-body">
-              <div class="progress mb-3">
-                <div class="progress-bar" :style="{width: progress + '%'}"></div>
-              </div>
-              <button class="btn btn-success w-100 mb-2" @click="generateConfig">Generate Configuration</button>
-              <div class="btn-group w-100">
-                <button class="btn btn-outline-primary" @click="saveConfiguration">Save</button>
-                <button class="btn btn-outline-secondary" @click="loadConfiguration">Load</button>
-                <button class="btn btn-outline-dark" @click="downloadConfiguration" :disabled="!generatedConfig">Download</button>
-              </div>
-            </div>
-          </div>
         </div>
-        <div class="col-md-9">
-          <div class="card">
-            <div class="card-body">
-              <component :is="currentStep" :config="config" @update:config="updateConfig" @next-step="nextStep"></component>
+    </header>
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Configuration')">Configuration</button>
+        <button class="tablinks" onclick="openTab(event, 'Help')">Help</button>
+    </div>
+    <div id="Configuration" class="tabcontent">
+        <!-- The Vue.js app will mount here -->
+        <div id="app" class="container-fluid">
+            <!-- Sidebar with step-by-step flow -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">Configuration Steps</div>
+                        <div class="list-group list-group-flush">
+                            <a href="#platform" @click="currentStep = 'platform'" :class="['list-group-item list-group-item-action', currentStep === 'platform' ? 'active' : '']">1. Platform Selection</a>
+                            <a href="#basic-info" @click="currentStep = 'basicInfo'" :class="['list-group-item list-group-item-action', currentStep === 'basicInfo' ? 'active' : '']">2. Basic Settings</a>
+                            <a href="#aaa" @click="currentStep = 'aaa'" :class="['list-group-item list-group-item-action', currentStep === 'aaa' ? 'active' : '']">3. AAA Configuration</a>
+                            <a href="#radius" @click="currentStep = 'radius'" :class="['list-group-item list-group-item-action', currentStep === 'radius' ? 'active' : '']">4. RADIUS Servers</a>
+                            <a href="#tacacs" @click="currentStep = 'tacacs'" :class="['list-group-item list-group-item-action', currentStep === 'tacacs' ? 'active' : '']">5. TACACS+ Servers</a>
+                            <a href="#dot1x" @click="currentStep = 'dot1x'" :class="['list-group-item list-group-item-action', currentStep === 'dot1x' ? 'active' : '']">6. 802.1X Settings</a>
+                            <a href="#coa" @click="currentStep = 'coa'" :class="['list-group-item list-group-item-action', currentStep === 'coa' ? 'active' : '']">7. CoA Configuration</a>
+                            <a href="#radsec" @click="currentStep = 'radsec'" :class="['list-group-item list-group-item-action', currentStep === 'radsec' ? 'active' : '']" v-if="config.radius && config.radius.type === '2'">8. RADSEC Configuration</a>
+                            <a href="#deviceTracking" @click="currentStep = 'deviceTracking'" :class="['list-group-item list-group-item-action', currentStep === 'deviceTracking' ? 'active' : '']">9. Device Tracking</a>
+                            <a href="#ibns" @click="currentStep = 'ibns'" :class="['list-group-item list-group-item-action', currentStep === 'ibns' ? 'active' : '']" v-if="config.platform === 'IOS-XE'">10. IBNS 2.0 Configuration</a>
+                            <a href="#portnox" @click="currentStep = 'portnox'" :class="['list-group-item list-group-item-action', currentStep === 'portnox' ? 'active' : '']">11. Portnox Integration</a>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <div class="progress mb-3">
+                                <div class="progress-bar" :style="{width: progress + '%'}"></div>
+                            </div>
+                            <button class="btn btn-success w-100 mb-2" @click="generateConfig">Generate Configuration</button>
+                            <div class="btn-group w-100">
+                                <button class="btn btn-outline-primary" @click="saveConfiguration">Save</button>
+                                <button class="btn btn-outline-secondary" @click="loadConfiguration">Load</button>
+                                <button class="btn btn-outline-dark" @click="downloadConfiguration" :disabled="!generatedConfig">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <component :is="currentStep" :config="config" @update:config="updateConfig" @next-step="nextStep"></component>
+                        </div>
+                    </div>
+                    <div class="card mt-3" v-if="generatedConfig">
+                        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                            Generated Configuration
+                            <button class="btn btn-sm btn-light" @click="copyToClipboard">Copy</button>
+                        </div>
+                        <div class="card-body">
+                            <pre class="config-output">{{ generatedConfig }}</pre>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="card mt-3" v-if="generatedConfig">
-            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-              Generated Configuration
-              <button class="btn btn-sm btn-light" @click="copyToClipboard">Copy</button>
-            </div>
-            <div class="card-body">
-              <pre class="config-output">{{ generatedConfig }}</pre>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div id="Help" class="tabcontent">
-    <h2>Help & Documentation</h2>
-    <div class="help-content">
-      <h3>Getting Started</h3>
-      <p>Welcome to the Dot1xer Supreme Configurator! This tool helps you generate 802.1X configurations for various network vendors.</p>
-      <ul>
-        <li><strong>Configuration Tab:</strong> Follow a step-by-step process to configure and generate device-specific 802.1X settings.</li>
-      </ul>
-      <h3>Vendor-Specific Notes</h3>
-      <ul>
-        <li><strong>Cisco IOS-XE:</strong> Ensure 'aaa new-model' is enabled before applying 802.1X settings.</li>
-        <li><strong>Cisco NX-OS:</strong> Requires 'feature dot1x' to be enabled.</li>
-        <li><strong>ArubaOS:</strong> Use AAA profiles for 802.1X authentication.</li>
-        <li><strong>Juniper:</strong> Configure 802.1X under the 'protocols dot1x' hierarchy.</li>
-        <li><strong>Extreme:</strong> Use 'configure netlogin' for 802.1X settings.</li>
-        <li><strong>Arista:</strong> Similar to Cisco IOS, but uses 'dot1x' commands directly.</li>
-      </ul>
-      <h3>Troubleshooting</h3>
-      <ul>
-        <li><strong>Config Not Applying:</strong> Verify RADIUS server reachability and shared key.</li>
-        <li><strong>Authentication Fails:</strong> Check client certificates and VLAN assignments.</li>
-      </ul>
-      <p>For more help, contact support at <a href="mailto:support@dot1xer.com">support@dot1xer.com</a>.</p>
+    <div id="Help" class="tabcontent">
+        <h2>Help & Documentation</h2>
+        <div class="help-content">
+            <h3>Getting Started</h3>
+            <p>Welcome to the Dot1xer Supreme Configurator! This tool helps you generate 802.1X configurations for various network vendors.</p>
+            <ul>
+                <li><strong>Configuration Tab:</strong> Follow a step-by-step process to configure and generate device-specific 802.1X settings.</li>
+            </ul>
+            <h3>Vendor-Specific Notes</h3>
+            <ul>
+                <li><strong>Cisco IOS-XE:</strong> Ensure 'aaa new-model' is enabled before applying 802.1X settings.</li>
+                <li><strong>Cisco NX-OS:</strong> Requires 'feature dot1x' to be enabled.</li>
+                <li><strong>ArubaOS:</strong> Use AAA profiles for 802.1X authentication.</li>
+                <li><strong>Juniper:</strong> Configure 802.1X under the 'protocols dot1x' hierarchy.</li>
+                <li><strong>Extreme:</strong> Use 'configure netlogin' for 802.1X settings.</li>
+                <li><strong>Arista:</strong> Similar to Cisco IOS, but uses 'dot1x' commands directly.</li>
+            </ul>
+            <h3>Troubleshooting</h3>
+            <ul>
+                <li><strong>Config Not Applying:</strong> Verify RADIUS server reachability and shared key.</li>
+                <li><strong>Authentication Fails:</strong> Check client certificates and VLAN assignments.</li>
+            </ul>
+            <p>For more help, contact support at <a href="mailto:support@dot1xer.com">support@dot1xer.com</a>.</p>
+        </div>
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.min.js"></script>
-  <script src="js/templates/base.js"></script>
-  <script src="js/templates/iosxe.js"></script>
-  <script src="js/templates/nxos.js"></script>
-  <script src="js/templates/arubaos.js"></script>
-  <script src="js/templates/juniper.js"></script>
-  <script src="js/templates/extreme.js"></script>
-  <script src="js/templates/arista.js"></script>
-  <script src="js/components/platform.js"></script>
-  <script src="js/components/basicInfo.js"></script>
-  <script src="js/components/aaa.js"></script>
-  <script src="js/components/radius.js"></script>
-  <script src="js/components/tacacs.js"></script>
-  <script src="js/components/dot1x.js"></script>
-  <script src="js/components/coa.js"></script>
-  <script src="js/components/radsec.js"></script>
-  <script src="js/components/deviceTracking.js"></script>
-  <script src="js/components/ibns.js"></script>
-  <script src="js/components/portnox.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/service-worker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.min.js"></script>
+    <script src="js/templates/base.js"></script>
+    <script src="js/templates/iosxe.js"></script>
+    <script src="js/templates/nxos.js"></script>
+    <script src="js/templates/arubaos.js"></script>
+    <script src="js/templates/juniper.js"></script>
+    <script src="js/templates/extreme.js"></script>
+    <script src="js/templates/arista.js"></script>
+    <script src="js/components/platform.js"></script>
+    <script src="js/components/basicInfo.js"></script>
+    <script src="js/components/aaa.js"></script>
+    <script src="js/components/radius.js"></script>
+    <script src="js/components/tacacs.js"></script>
+    <script src="js/components/dot1x.js"></script>
+    <script src="js/components/coa.js"></script>
+    <script src="js/components/radsec.js"></script>
+    <script src="js/components/deviceTracking.js"></script>
+    <script src="js/components/ibns.js"></script>
+    <script src="js/components/portnox.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/service-worker.js"></script>
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 </body>
 </html>
