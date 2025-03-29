@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dot1xer Supreme Configurator</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <img src="assets/icons/supreme-logo.png" alt="Supreme Logo" class="logo">
+        <h1>Dot1xer Supreme Configurator</h1>
+    </header>
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Architecture')">Architecture</button>
+        <button class="tablinks" onclick="openTab(event, 'IOS-XE')">IOS-XE</button>
+        <button class="tablinks" onclick="openTab(event, 'NX-OS')">NX-OS</button>
+        <button class="tablinks" onclick="openTab(event, 'ArubaOS')">ArubaOS</button>
+    </div>
+    <div id="Architecture" class="tabcontent">
+        <h2>Network Architecture</h2>
+        <img src="assets/icons/wizard.png" alt="Dancing Wizard" class="wizard">
+        <form id="architectureForm">
+            <label for="vendor">Vendor:</label>
+            <select id="vendor" name="vendor">
+                <option value="cisco">Cisco</option>
+                <option value="aruba">Aruba</option>
+                <option value="hp">HP</option>
+                <option value="juniper">Juniper</option>
+                <option value="extreme">Extreme</option>
+                <option value="arista">Arista</option>
+            </select><br><br>
+            <label for="scope">Scope:</label>
+            <input type="text" id="scope" name="scope" placeholder="e.g., Campus LAN"><br><br>
+            <button type="button" onclick="generateArchitectureConfig()">Generate Config</button>
+            <button type="button" onclick="downloadConfig()">Download Config</button>
+        </form>
+        <pre id="architectureConfigOutput"></pre>
+    </div>
+    <div id="IOS-XE" class="tabcontent">
+        <h2>IOS-XE Configuration</h2>
+        <form id="iosxeForm">
+            <label for="scope_iosxe">Scope:</label>
+            <input type="text" id="scope_iosxe" name="scope" placeholder="e.g., Access Switch"><br><br>
+            <button type="button" onclick="generateIosXeConfig()">Generate Config</button>
+            <button type="button" onclick="downloadConfig('iosxe')">Download Config</button>
+        </form>
+        <pre id="iosxeConfigOutput"></pre>
+    </div>
+    <div id="NX-OS" class="tabcontent">
+        <h2>NX-OS Configuration</h2>
+        <form id="nxosForm">
+            <label for="scope_nxos">Scope:</label>
+            <input type="text" id="scope_nxos" name="scope" placeholder="e.g., Data Center"><br><br>
+            <button type="button" onclick="generateNxOsConfig()">Generate Config</button>
+            <button type="button" onclick="downloadConfig('nxos')">Download Config</button>
+        </form>
+        <pre id="nxosConfigOutput"></pre>
+    </div>
+    <div id="ArubaOS" class="tabcontent">
+        <h2>ArubaOS Configuration</h2>
+        <form id="arubaosForm">
+            <label for="scope_arubaos">Scope:</label>
+            <input type="text" id="scope_arubaos" name="scope" placeholder="e.g., Wireless"><br><br>
+            <button type="button" onclick="generateArubaOsConfig()">Generate Config</button>
+            <button type="button" onclick="downloadConfig('arubaos')">Download Config</button>
+        </form>
+        <pre id="arubaosConfigOutput"></pre>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>

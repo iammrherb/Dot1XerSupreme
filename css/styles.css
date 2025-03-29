@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.logo {
+    max-width: 150px;
+}
+.wizard {
+    max-width: 200px;
+    display: block;
+    margin: 20px auto;
+}
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+.tab button:hover {
+    background-color: #ddd;
+}
+.tab button.active {
+    background-color: #ccc;
+}
+.tabcontent {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+form {
+    margin-top: 20px;
+}
+label {
+    margin-right: 10px;
+}
+input, select {
+    margin-bottom: 10px;
+    padding: 5px;
+}
+button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}
+pre {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border: 1px solid #ddd;
+    white-space: pre-wrap;
+}
