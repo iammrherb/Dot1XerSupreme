@@ -1,91 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dot1Xer Supreme</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" href="assets/icons/supreme-logo.png" type="image/png">
-  <link rel="manifest" href="manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dot1xer Supreme Configurator</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <div id="app" class="container-fluid">
-    <!-- Header -->
-    <header class="mb-4 text-center p-3 text-white">
-      <div class="d-flex justify-content-center align-items-center">
-        <img src="assets/icons/supreme-logo.png" alt="Dot1Xer Supreme Logo" style="height: 50px; margin-right: 15px;">
-        <div>
-          <h1>Dot1Xer Supreme</h1>
-          <p class="mb-0">Ultimate 802.1X Configuration Generator - Powered by xAI</p>
-        </div>
-      </div>
+    <header>
+        <img src="assets/icons/supreme-logo.png" alt="Dot1xer Supreme Logo" class="logo">
+        <h1>Dot1xer Supreme Configurator</h1>
     </header>
-    <!-- Main UI: Sidebar, Content, and Preview -->
-    <div class="row">
-      <div class="col-md-3">
-        <div class="card">
-          <div class="card-header bg-primary text-white">Configuration Steps</div>
-          <div class="list-group list-group-flush">
-            <a href="#platform" onclick="setStep('platform')" id="nav-platform" class="list-group-item list-group-item-action">1. Platform Selection</a>
-            <a href="#basic-info" onclick="setStep('basicInfo')" id="nav-basicInfo" class="list-group-item list-group-item-action">2. Basic Settings</a>
-            <a href="#aaa" onclick="setStep('aaa')" id="nav-aaa" class="list-group-item list-group-item-action">3. AAA Configuration</a>
-            <a href="#radius" onclick="setStep('radius')" id="nav-radius" class="list-group-item list-group-item-action">4. RADIUS Servers</a>
-            <a href="#tacacs" onclick="setStep('tacacs')" id="nav-tacacs" class="list-group-item list-group-item-action">5. TACACS+ Servers</a>
-            <a href="#dot1x" onclick="setStep('dot1x')" id="nav-dot1x" class="list-group-item list-group-item-action">6. 802.1X Settings</a>
-            <a href="#coa" onclick="setStep('coa')" id="nav-coa" class="list-group-item list-group-item-action">7. CoA Configuration</a>
-            <a href="#radsec" onclick="setStep('radsec')" id="nav-radsec" class="list-group-item list-group-item-action">8. RADSEC Configuration</a>
-            <a href="#deviceTracking" onclick="setStep('deviceTracking')" id="nav-deviceTracking" class="list-group-item list-group-item-action">9. Device Tracking</a>
-            <a href="#ibns" onclick="setStep('ibns')" id="nav-ibns" class="list-group-item list-group-item-action">10. IBNS 2.0</a>
-            <a href="#portnox" onclick="setStep('portnox')" id="nav-portnox" class="list-group-item list-group-item-action">11. Portnox Integration</a>
-          </div>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <button class="menu-btn" onclick="toggleSidebar()">? Menu</button>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showSection('Architecture')">Network Architecture</a></li>
+                    <li><a href="#" onclick="showSection('IOS-XE')">Cisco IOS-XE</a></li>
+                    <li><a href="#" onclick="showSection('NX-OS')">Cisco NX-OS</a></li>
+                    <li><a href="#" onclick="showSection('ArubaOS')">ArubaOS</a></li>
+                    <li><a href="#" onclick="showSection('Juniper')">Juniper</a></li>
+                    <li><a href="#" onclick="showSection('Extreme')">Extreme</a></li>
+                    <li><a href="#" onclick="showSection('Arista')">Arista</a></li>
+                    <li><a href="#" onclick="showSection('NetworkDiscovery')">Network Discovery</a></li>
+                    <li><a href="#" onclick="showSection('Help')">Help</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="card mt-3">
-          <div class="card-body">
-            <div class="progress mb-3">
-              <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
-            </div>
-            <button class="btn btn-success w-100 mb-2" onclick="generateConfig()">Generate Configuration</button>
-            <div class="btn-group w-100">
-              <button class="btn btn-outline-primary" onclick="saveConfiguration()">Save</button>
-              <button class="btn btn-outline-secondary" onclick="loadConfiguration()">Load</button>
-              <button class="btn btn-outline-dark" onclick="downloadConfiguration()">Download</button>
-            </div>
-          </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <section id="Architecture" class="section">
+                <h2>Network Architecture</h2>
+                <img src="assets/icons/wizard.png" alt="Dancing Wizards" class="wizard">
+                <form id="architectureForm">
+                    <label for="arch_scope">Scope:</label>
+                    <input type="text" id="arch_scope" placeholder="e.g., Campus LAN" required><br>
+                    <label for="arch_vlan">VLAN ID:</label>
+                    <input type="number" id="arch_vlan" placeholder="e.g., 10" min="1" max="4094" required><br>
+                    <label for="arch_radius_ip">RADIUS Server IP:</label>
+                    <input type="text" id="arch_radius_ip" placeholder="e.g., 192.168.1.10" required><br>
+                    <label for="arch_dhcp_snooping">Enable DHCP Snooping:</label>
+                    <input type="checkbox" id="arch_dhcp_snooping"><br>
+                    <label for="arch_arp_inspection">Enable ARP Inspection:</label>
+                    <input type="checkbox" id="arch_arp_inspection"><br>
+                    <button type="button" onclick="generateConfig('architecture')">Generate Config</button>
+                    <button type="button" onclick="downloadConfig('architecture')">Download Config</button>
+                </form>
+                <pre id="architectureOutput"></pre>
+            </section>
+
+            <section id="IOS-XE" class="section" style="display: none;">
+                <h2>Cisco IOS-XE</h2>
+                <form id="iosxeForm">
+                    <label for="iosxe_scope">Scope:</label>
+                    <input type="text" id="iosxe_scope" placeholder="e.g., Access Switch" required><br>
+                    <label for="iosxe_interface">Interface:</label>
+                    <input type="text" id="iosxe_interface" placeholder="e.g., GigabitEthernet0/1" required><br>
+                    <label for="iosxe_vlan">VLAN ID:</label>
+                    <input type="number" id="iosxe_vlan" placeholder="e.g., 10" min="1" max="4094" required><br>
+                    <label for="iosxe_radius_ip">RADIUS Server IP:</label>
+                    <input type="text" id="iosxe_radius_ip" placeholder="e.g., 192.168.1.10" required><br>
+                    <label for="iosxe_reauth">Reauth Period (s):</label>
+                    <input type="number" id="iosxe_reauth" placeholder="e.g., 3600" min="60"><br>
+                    <label for="iosxe_tx">TX Period (s):</label>
+                    <input type="number" id="iosxe_tx" placeholder="e.g., 10" min="1"><br>
+                    <button type="button" onclick="generateConfig('iosxe')">Generate Config</button>
+                    <button type="button" onclick="downloadConfig('iosxe')">Download Config</button>
+                </form>
+                <pre id="iosxeOutput"></pre>
+            </section>
+
+            <section id="NX-OS" class="section" style="display: none;">
+                <h2>Cisco NX-OS</h2>
+                <form id="nxosForm">
+                    <label for="nxos_scope">Scope:</label>
+                    <input type="text" id="nxos_scope" placeholder="e.g., Data Center" required><br>
+                    <label for="nxos_interface">Interface:</label>
+                    <input type="text" id="nxos_interface" placeholder="e.g., Ethernet1/1" required><br>
+                    <label for="nxos_vlan">VLAN ID:</label>
+                    <input type="number" id="nxos_vlan" placeholder="e.g., 10" min="1" max="4094" required><br>
+                    <label for="nxos_radius_ip">RADIUS Server IP:</label>
+                    <input type="text" id="nxos_radius_ip" placeholder="e.g., 192.168.1.10" required><br>
+                    <label for="nxos_reauth">Reauth Period (s):</label>
+                    <input type="number" id="nxos_reauth" placeholder="e.g., 3600" min="60"><br>
+                    <button type="button" onclick="generateConfig('nxos')">Generate Config</button>
+                    <button type="button" onclick="downloadConfig('nxos')">Download Config</button>
+                </form>
+                <pre id="nxosOutput"></pre>
+            </section>
+
+            <section id="ArubaOS" class="section" style="display: none;">
+                <h2>ArubaOS</h2>
+                <form id="arubaosForm">
+                    <label for="arubaos_scope">Scope:</label>
+                    <input type="text" id="arubaos_scope" placeholder="e.g., Wireless" required><br>
+                    <label for="arubaos_interface">Interface:</label>
+                    <input type="text" id="arubaos_interface" placeholder="e.g., gigabitethernet 0/0/1" required><br>
+                    <label for="arubaos_vlan">VLAN ID:</label>
+                    <input type="number" id="arubaos_vlan" placeholder="e.g., 10" min="1" max="4094" required><br>
+                    <label for="arubaos_radius_ip">RADIUS Server IP:</label>
+                    <input type="text" id="arubaos_radius_ip" placeholder="e.g., 192.168.1.10" required><br>
+                    <button type="button" onclick="generateConfig('arubaos')">Generate Config</button>
+                    <button type="button" onclick="downloadConfig('arubaos')">Download Config</button>
+                </form>
+                <pre id="arubaosOutput"></pre>
+            </section>
+
+            <section id="Juniper" class="section" style="display: none;">
+                <h2>Juniper</h2>
+                <form id="juniperForm">
+                    <label for="juniper_scope">Scope:</label>
+                    <input type="text" id="juniper_scope" placeholder="e.g., Branch Office" required><br>
+                    <label for="juniper_interface">Interface:</label>
+                    <input type="text" id="juniper_interface" placeholder="e.g., ge-0/0/1" required><br>
+                    <label for="juniper_vlan">VLAN ID:</label>
+                    <input type="number" id="juniper_vlan" placeholder="e.g., 10" min="1" max="4094" required><br>
+                    <label for="juniper_radius_ip">RADIUS Server IP:</label>
+                    <input type="text" id="juniper_radius_ip" placeholder="e.g., 192.168.1.10" required><br>
+                    <label for="juniper_reauth">Reauth Period (s):</label>
+                    <input type="number" id="juniper_reauth" placeholder="e.g., 3600" min="60"><br>
+                    <button type="button" onclick="generateConfig('juniper')">Generate Config</button>
+                    <button type="button" onclick="downloadConfig('juniper')">Download Config</button>
+                </form>
+                <pre id="juniperOutput"></pre>
+            </section>
+
+            <section id="Extreme" class="section" style="display: none;">
+                <h2>Extreme</h2>
+                <form id="extremeForm">
+                    <label for="extreme_scope">Scope:</label>
+                    <input type="text" id="extreme_scope" placeholder="e.g., Enterprise Network" required><br>
+                    <label for="extreme_interface">Interface:</label>
+                    <input type="text" id="extreme_interface" placeholder="e.g., 1:1" required><br>
+                    <label for="extreme_vlan">VLAN ID:</label>
+                    <input type="number" id="extreme_vlan" placeholder="e.g., 10" min="1" max="4094" required><br>
+                    <label for="extreme_radius_ip">RADIUS Server IP:</label>
+                    <input type="text" id="extreme_radius_ip" placeholder="e.g., 192.168.1.10" required><br>
+                    <button type="button" onclick="generateConfig('extreme')">Generate Config</button>
+                    <button type="button" onclick="downloadConfig('extreme')">Download Config</button>
+                </form>
+                <pre id="extremeOutput"></pre>
+            </section>
+
+            <section id="Arista" class="section" style="display: none;">
+                <h2>Arista</h2>
+                <form id="aristaForm">
+                    <label for="arista_scope">Scope:</label>
+                    <input type="text" id="arista_scope" placeholder="e.g., Data Center" required><br>
+                    <label for="arista_interface">Interface:</label>
+                    <input type="text" id="arista_interface" placeholder="e.g., Ethernet1" required><br>
+                    <label for="arista_vlan">VLAN ID:</label>
+                    <input type="number" id="arista_vlan" placeholder="e.g., 10" min="1" max="4094" required><br>
+                    <label for="arista_radius_ip">RADIUS Server IP:</label>
+                    <input type="text" id="arista_radius_ip" placeholder="e.g., 192.168.1.10" required><br>
+                    <button type="button" onclick="generateConfig('arista')">Generate Config</button>
+                    <button type="button" onclick="downloadConfig('arista')">Download Config</button>
+                </form>
+                <pre id="aristaOutput"></pre>
+            </section>
+
+            <section id="NetworkDiscovery" class="section" style="display: none;">
+                <h2>Network Discovery</h2>
+                <form id="networkDiscoveryForm">
+                    <label for="discovery_scope">Scope:</label>
+                    <input type="text" id="discovery_scope" placeholder="e.g., Core Network" required><br>
+                    <label for="ip_range">IP Range:</label>
+                    <input type="text" id="ip_range" placeholder="e.g., 192.168.1.0/24" required><br>
+                    <label for="protocol">Protocol:</label>
+                    <select id="protocol">
+                        <option value="snmp">SNMP</option>
+                        <option value="icmp">ICMP</option>
+                        <option value="lldp">LLDP</option>
+                        <option value="cdp">CDP</option>
+                    </select><br>
+                    <button type="button" onclick="generateConfig('networkDiscovery')">Generate Diagram</button>
+                    <button type="button" onclick="downloadConfig('networkDiscovery')">Download Diagram</button>
+                </form>
+                <pre id="networkDiscoveryOutput"></pre>
+            </section>
+
+            <section id="Help" class="section" style="display: none;">
+                <h2>Help</h2>
+                <p>Use the sidebar to navigate between sections. Fill out the forms to generate configurations for network architecture or specific vendors, then download the results. For support, contact <a href="mailto:support@dot1xer.com">support@dot1xer.com</a>.</p>
+            </section>
         </div>
-      </div>
-      <div class="col-md-9">
-        <div class="card">
-          <div class="card-body" id="step-container">
-            <!-- Dynamic step content will be injected here -->
-          </div>
-        </div>
-        <div class="card mt-3" id="config-output-card" style="display: none;">
-          <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-            Generated Configuration
-            <button class="btn btn-sm btn-light" onclick="copyToClipboard()">Copy</button>
-          </div>
-          <div class="card-body">
-            <pre id="generatedConfig"></pre>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <script src="js/app.js"></script>
-  <script src="js/templates/base.js"></script>
-  <script src="js/templates/iosxe.js"></script>
-  <script src="js/templates/nxos.js"></script>
-  <script src="js/components/platform.js"></script>
-  <script src="js/components/basicInfo.js"></script>
-  <script src="js/components/aaa.js"></script>
-  <script src="js/components/radius.js"></script>
-  <script src="js/components/tacacs.js"></script>
-  <script src="js/components/dot1x.js"></script>
-  <script src="js/components/coa.js"></script>
-  <script src="js/components/radsec.js"></script>
-  <script src="js/components/deviceTracking.js"></script>
-  <script src="js/components/ibns.js"></script>
-  <script src="js/components/portnox.js"></script>
-  <script src="js/service-worker.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,113 +1,101 @@
-// Global configuration object
-let config = {
-  platform: '',
-  hostname: '',
-  domainName: '',
-  aaa: { model: '1', authMethod: '2', authorMethod: '2', accountMethod: '2', sessionId: '1', pwdEncrypt: '1' },
-  radius: { type: '1', primaryIp: '', primaryAuthPort: '1812', primaryAcctPort: '1813', primarySecret: '', secondary: false, secondaryIp: '', secondaryAuthPort: '1812', secondaryAcctPort: '1813', secondarySecret: '', groupName: 'RADIUS-SERVERS', monitoring: '1', testUser: '', idleTime: '5', deadtime: '15' },
-  tacacs: { enable: false, primaryIp: '', primaryPort: '49', primarySecret: '', secondary: false, secondaryIp: '', secondaryPort: '49', secondarySecret: '', groupName: 'TACACS-SERVERS', singleConn: '1', cmdAuth: '1', maxPriv: '15' },
-  dot1x: { enable: '1', criticalEapol: '1', recoveryDelay: '2000', authOrder: '1', hostMode: '3', vlanAssign: '1', guestVlan: '', authFailVlan: '', criticalVlan: '', txPeriod: '10', maxReauth: '2' },
-  coa: { enable: '1', clientIp: '', serverKey: '', port: '1700' },
-  radsec: { certOption: '1', trustpoint: 'PORTNOX-CA' },
-  deviceTracking: { enable: '1', mode: '1', accessPolicy: '1', accessName: 'IP-TRACKING', addrLimit: '4', lifetime: '30', trunkPolicy: '1', trunkName: 'DISABLE-IP-TRACKING' },
-  ibns: { mode: '1', policyMapName: 'DOT1X_MAB_POLICY', templates: '1', openTemplate: '1', openTemplateName: 'WIRED_DOT1X_OPEN', closedTemplate: '1', closedTemplateName: 'WIRED_DOT1X_CLOSED' },
-  portnox: { enable: '1', region: '3', secret: '', sameSecret: '1', secondarySecret: '', radsec: '1' }
-};
-
-// Current step identifier (default to platform)
-let currentStep = 'platform';
-
-// Update navigation and progress (for simplicity, progress is computed based on hardcoded steps order)
-const stepsOrder = ['platform', 'basicInfo', 'aaa', 'radius', 'tacacs', 'dot1x', 'coa', 'radsec', 'deviceTracking', 'ibns', 'portnox'];
-function updateProgress() {
-  const index = stepsOrder.indexOf(currentStep);
-  const progress = Math.round(((index + 1) / stepsOrder.length) * 100);
-  document.getElementById('progress-bar').style.width = progress + '%';
-}
-updateProgress();
-
-// Function to load a step's HTML content (each step component is a separate JS file that injects its content)
-function setStep(step) {
-  currentStep = step;
-  updateProgress();
-  // Clear active nav links and set the active one
-  stepsOrder.forEach(function(s) {
-    const el = document.getElementById('nav-' + s);
-    if(el) el.classList.remove('active');
-  });
-  const activeNav = document.getElementById('nav-' + step);
-  if(activeNav) activeNav.classList.add('active');
-  // Load the step content (each component file should implement a render[Step] function)
-  const container = document.getElementById('step-container');
-  container.innerHTML = "";
-  if(typeof window['render' + capitalize(step)] === 'function') {
-    container.innerHTML = window['render' + capitalize(step)](config);
-  } else {
-    container.innerHTML = "<p>Component not found.</p>";
-  }
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.querySelector('.main-content');
+    sidebar.classList.toggle('collapsed');
+    mainContent.classList.toggle('expanded');
 }
 
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+function showSection(sectionId) {
+    const sections = document.getElementsByClassName('section');
+    const links = document.querySelectorAll('.sidebar nav ul li a');
+    for (let i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active');
+    }
+    for (let i = 0; i < links.length; i++) {
+        links[i].classList.remove('active');
+    }
+    document.getElementById(sectionId).classList.add('active');
+    document.querySelector(`a[onclick="showSection('${sectionId}')"]`).classList.add('active');
 }
 
-// Configuration generation using vendor-specific templates
-function generateConfig() {
-  let output = generateBaseConfig(config);
-  if (config.platform === 'IOS-XE') {
-    output += generateIosXeConfig(config);
-  } else if (config.platform === 'NX-OS') {
-    output += generateNxOsConfig(config);
-  }
-  document.getElementById('generatedConfig').innerText = output;
-  document.getElementById('config-output-card').style.display = 'block';
-  // Also, call the ChatGPT integration to get suggestions/updates
-  fetch('/api/generateConfig', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(config)
-  })
-  .then(response => response.json())
-  .then(data => {
-    // Append ChatGPT suggestions to the output
-    document.getElementById('generatedConfig').innerText += "\n\n! ChatGPT Suggestions:\n" + data.config;
-  })
-  .catch(err => console.error('ChatGPT API error:', err));
+function generateConfig(section) {
+    let config = "";
+    let outputElement = document.getElementById(section + "Output");
+
+    if (section === "architecture") {
+        let scope = document.getElementById("arch_scope").value;
+        let vlan = document.getElementById("arch_vlan").value;
+        let radiusIp = document.getElementById("arch_radius_ip").value;
+        let dhcpSnooping = document.getElementById("arch_dhcp_snooping").checked;
+        let arpInspection = document.getElementById("arch_arp_inspection").checked;
+        config = `! Network Architecture Config\n! Scope: ${scope}\nvlan ${vlan}\n name Authenticated\nradius-server host ${radiusIp} key SecretKey\n`;
+        if (dhcpSnooping) config += `ip dhcp snooping vlan ${vlan}\n`;
+        if (arpInspection) config += `ip arp inspection vlan ${vlan}\n`;
+    } else if (section === "iosxe") {
+        let scope = document.getElementById("iosxe_scope").value;
+        let intf = document.getElementById("iosxe_interface").value;
+        let vlan = document.getElementById("iosxe_vlan").value;
+        let radiusIp = document.getElementById("iosxe_radius_ip").value;
+        let reauth = document.getElementById("iosxe_reauth").value || 3600;
+        let tx = document.getElementById("iosxe_tx").value || 10;
+        config = `! Cisco IOS-XE Config\n! Scope: ${scope}\naaa new-model\ndot1x system-auth-control\nradius-server host ${radiusIp} key SecretKey\nvlan ${vlan}\n name Authenticated\ninterface ${intf}\n switchport access vlan ${vlan}\n authentication port-control auto\n dot1x pae authenticator\n authentication timer reauthenticate ${reauth}\n dot1x timeout tx-period ${tx}\n`;
+    } else if (section === "nxos") {
+        let scope = document.getElementById("nxos_scope").value;
+        let intf = document.getElementById("nxos_interface").value;
+        let vlan = document.getElementById("nxos_vlan").value;
+        let radiusIp = document.getElementById("nxos_radius_ip").value;
+        let reauth = document.getElementById("nxos_reauth").value || 3600;
+        config = `! Cisco NX-OS Config\n! Scope: ${scope}\nfeature dot1x\nradius-server host ${radiusIp} key SecretKey\nvlan ${vlan}\n name Authenticated\ninterface ${intf}\n switchport access vlan ${vlan}\n dot1x port-control auto\n dot1x reauthentication ${reauth}\n`;
+    } else if (section === "arubaos") {
+        let scope = document.getElementById("arubaos_scope").value;
+        let intf = document.getElementById("arubaos_interface").value;
+        let vlan = document.getElementById("arubaos_vlan").value;
+        let radiusIp = document.getElementById("arubaos_radius_ip").value;
+        config = `! ArubaOS Config\n! Scope: ${scope}\n aaa authentication dot1x "dot1x-profile"\nradius-server host ${radiusIp} key SecretKey\nvlan ${vlan}\n name Authenticated\ninterface ${intf}\n switchport access vlan ${vlan}\n dot1x enable\n`;
+    } else if (section === "juniper") {
+        let scope = document.getElementById("juniper_scope").value;
+        let intf = document.getElementById("juniper_interface").value;
+        let vlan = document.getElementById("juniper_vlan").value;
+        let radiusIp = document.getElementById("juniper_radius_ip").value;
+        let reauth = document.getElementById("juniper_reauth").value || 3600;
+        config = `! Juniper Config\n! Scope: ${scope}\nset system radius-server ${radiusIp} secret SecretKey\nset vlans authenticated vlan-id ${vlan}\nset protocols dot1x authenticator interface ${intf} reauthentication ${reauth}\n`;
+    } else if (section === "extreme") {
+        let scope = document.getElementById("extreme_scope").value;
+        let intf = document.getElementById("extreme_interface").value;
+        let vlan = document.getElementById("extreme_vlan").value;
+        let radiusIp = document.getElementById("extreme_radius_ip").value;
+        config = `! Extreme Config\n! Scope: ${scope}\nconfigure radius netlogin primary server ${radiusIp} 1812 client-ip 192.168.1.1 shared-secret SecretKey\nconfigure vlan ${vlan} name Authenticated\nconfigure netlogin dot1x port ${intf} authentication enable\n`;
+    } else if (section === "arista") {
+        let scope = document.getElementById("arista_scope").value;
+        let intf = document.getElementById("arista_interface").value;
+        let vlan = document.getElementById("arista_vlan").value;
+        let radiusIp = document.getElementById("arista_radius_ip").value;
+        config = `! Arista Config\n! Scope: ${scope}\nradius-server host ${radiusIp} key SecretKey\ndot1x system-auth-control\nvlan ${vlan}\n name Authenticated\ninterface ${intf}\n switchport access vlan ${vlan}\n dot1x pae authenticator\n`;
+    } else if (section === "networkDiscovery") {
+        let scope = document.getElementById("discovery_scope").value;
+        let ipRange = document.getElementById("ip_range").value;
+        let protocol = document.getElementById("protocol").value;
+        config = `! Network Discovery Diagram\n! Scope: ${scope}\n! IP Range: ${ipRange}\n! Protocol: ${protocol.toUpperCase()}\nTarget Range: ${ipRange}\nDevices: Core Switch, Access Switch, Wireless AP\n`;
+    }
+
+    outputElement.textContent = config;
 }
 
-function copyToClipboard() {
-  const text = document.getElementById('generatedConfig').innerText;
-  navigator.clipboard.writeText(text).then(() => {
-    alert('Configuration copied to clipboard!');
-  });
+function downloadConfig(section) {
+    let outputElement = document.getElementById(section + "Output");
+    let config = outputElement.textContent;
+    if (!config) {
+        alert("Please generate a config first!");
+        return;
+    }
+    let blob = new Blob([config], { type: "text/plain" });
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `dot1xer_${section}_config.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
-function downloadConfiguration() {
-  const text = document.getElementById('generatedConfig').innerText;
-  const blob = new Blob([text], { type: 'text/plain' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = (config.hostname || 'dot1x') + '-config.txt';
-  a.click();
-}
-
-function saveConfiguration() {
-  localStorage.setItem('dot1xConfig', JSON.stringify(config));
-  alert('Configuration saved.');
-}
-
-function loadConfiguration() {
-  const data = localStorage.getItem('dot1xConfig');
-  if (data) {
-    config = JSON.parse(data);
-    alert('Configuration loaded.');
-    setStep(currentStep); // refresh current step UI if needed
-  } else {
-    alert('No saved configuration found.');
-  }
-}
-
-// Initialize first step on page load
-document.addEventListener("DOMContentLoaded", function() {
-  setStep(currentStep);
-});
+// Show the first section by default
+showSection('Architecture');
