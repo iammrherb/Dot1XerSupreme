@@ -11,9 +11,9 @@ Vue.component('tacacs', {
                 <p><strong>Primary Shared Secret:</strong> The shared secret for the primary server.</p>
                 <p><strong>Enable Secondary Server:</strong> Optionally, add a secondary TACACS+ server for redundancy.</p>
                 <p><strong>TACACS+ Group Name:</strong> Name for the TACACS+ server group (e.g., TACACS-SERVERS).</p>
-                <p><strong>Single Connection:</strong> Choose whether to use a single connection (recommended: Yes).</p>
-                <p><strong>Command Authorization:</strong> Enable if you want to restrict command-level access.</p>
-                <p><strong>Max Privilege Level:</strong> The maximum privilege level for authenticated users (default: 15).</p>
+                <p><strong>Single Connection:</strong> Use a single connection to the server for efficiency (recommended: Yes).</p>
+                <p><strong>Command Authorization:</strong> Enable command authorization for additional security.</p>
+                <p><strong>Max Privilege Level:</strong> Maximum privilege level for authenticated users (default: 15).</p>
             </div>
             <label class="form-label">Enable TACACS+:</label>
             <input type="checkbox" class="form-check-input" v-model="config.tacacs.enable" @change="$emit('update:config', config)">

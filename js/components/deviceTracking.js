@@ -7,7 +7,7 @@ Vue.component('deviceTracking', {
                 <h5>Help</h5>
                 <p><strong>Enable Device Tracking:</strong> Enable device tracking to monitor IP-to-MAC bindings on access and trunk ports.</p>
                 <p><strong>Tracking Mode:</strong> Select 'Auto-Source' for automatic tracking or 'Manual' for manual configuration.</p>
-                <p><strong>Access Policy Name:</strong> Name for the policy (e.g., IP-TRACKING).</p>
+                <p><strong>Access Policy Name:</strong> Name for the access policy (e.g., IP-TRACKING).</p>
                 <p><strong>Address Limit:</strong> Maximum number of addresses per port (default: 4).</p>
                 <p><strong>Lifetime:</strong> Lifetime of the binding in seconds (default: 30).</p>
                 <p><strong>Trunk Policy Name:</strong> Name for trunk port policy (e.g., DISABLE-IP-TRACKING).</p>

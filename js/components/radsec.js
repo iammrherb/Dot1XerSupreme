@@ -6,7 +6,7 @@ Vue.component('radsec', {
             <div class="help-section">
                 <h5>Help</h5>
                 <p><strong>Certificate Option:</strong> Choose to use a trustpoint or manual certificate for RADSEC.</p>
-                <p><strong>Trustpoint Name:</strong> Enter the name of the trustpoint (e.g., PORTNOX-CA). This is used for TLS encryption.</p>
+                <p><strong>Trustpoint Name:</strong> Enter the name of the trustpoint (e.g., PORTNOX-CA) used for TLS encryption.</p>
             </div>
             <label class="form-label">Certificate Option:</label>
             <select class="form-select" v-model="config.radsec.certOption" @change="$emit('update:config', config)">

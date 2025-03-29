@@ -9,7 +9,7 @@ Vue.component('dot1x', {
                 <p><strong>Critical EAPOL:</strong> Enable to handle critical EAPOL packets during server outages.</p>
                 <p><strong>Recovery Delay (ms):</strong> Delay before recovery attempts (default: 2000 ms).</p>
                 <p><strong>Authentication Order:</strong> The order in which to try authentication methods (e.g., dot1x then MAB).</p>
-                <p><strong>Host Mode:</strong> Mode for handling multiple hosts (e.g., Single-Host, Multi-Auth, etc.).</p>
+                <p><strong>Host Mode:</strong> Mode for handling multiple hosts (e.g., Single-Host, Multi-Auth, Multi-Domain, Multi-Host).</p>
                 <p><strong>Enable VLAN Assignment:</strong> Dynamically assign VLANs based on authentication results.</p>
                 <p><strong>Guest VLAN:</strong> VLAN for unauthenticated users.</p>
                 <p><strong>Auth-Fail VLAN:</strong> VLAN for failed authentications.</p>
@@ -18,7 +18,7 @@ Vue.component('dot1x', {
                 <p><strong>Max Reauth Requests:</strong> Maximum number of reauthentication attempts (default: 2).</p>
                 <p><strong>Interface:</strong> The physical interface (e.g., GigabitEthernet1/0/1).</p>
                 <p><strong>VLAN:</strong> The access VLAN for the interface (e.g., 10).</p>
-                <p><strong>Reauthentication Period (seconds):</strong> Time interval between reauthentications (default: 3600 seconds).</p>
+                <p><strong>Reauthentication Period (seconds):</strong> Time between reauthentications (default: 3600 seconds).</p>
             </div>
             <label class="form-label">Enable 802.1X:</label>
             <select class="form-select" v-model="config.dot1x.enable" @change="$emit('update:config', config)">

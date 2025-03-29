@@ -10,7 +10,7 @@ Vue.component('portnox', {
                 <p><strong>Shared Secret:</strong> Enter the shared secret provided by Portnox.</p>
                 <p><strong>Use Same Secret for EU:</strong> If using failover, choose whether to use the same secret for both regions.</p>
                 <p><strong>EU Shared Secret:</strong> If not using the same secret, enter the EU shared secret.</p>
-                <p><strong>Enable RADSEC:</strong> Enable if you wish to use RADSEC for secure communication with Portnox.</p>
+                <p><strong>Enable RADSEC:</strong> Enable RADSEC for secure communication with Portnox.</p>
             </div>
             <label class="form-label">Enable Portnox:</label>
             <select class="form-select" v-model="config.portnox.enable" @change="$emit('update:config', config)">
