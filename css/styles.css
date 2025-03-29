@@ -1,15 +1,17 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #d3cce3 50%, #1e1e2f 100%); /* Cosmic nebula fade */
+    background: linear-gradient(135deg, #f8f9fa 0%, #d3cce3 50%, #1e1e2f 100%);
     color: #333;
+    line-height: 1.6;
 }
 header {
     text-align: center;
     padding: 20px;
     background: #e9ecef;
     border-bottom: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .logo {
     max-width: 300px;
@@ -20,10 +22,11 @@ header {
 .sidebar {
     width: 250px;
     background: #e9ecef;
-    padding: 10px;
+    padding: 15px;
     height: 100vh;
     position: fixed;
-    transition: width 0.3s;
+    transition: width 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 .sidebar.collapsed {
     width: 60px;
@@ -33,12 +36,14 @@ header {
 }
 .menu-btn {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background: #007bff;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 10px;
+    font-size: 16px;
+    transition: background 0.3s;
 }
 .menu-btn:hover {
     background: #0056b3;
@@ -46,26 +51,45 @@ header {
 nav ul {
     list-style: none;
     padding: 0;
+    margin-top: 10px;
 }
 nav ul li {
-    margin: 10px 0;
+    margin: 8px 0;
 }
 nav ul li a {
     text-decoration: none;
     color: #333;
     display: block;
-    padding: 10px;
+    padding: 12px;
     border-radius: 5px;
+    background: #fff;
+    transition: all 0.3s ease;
+    position: relative;
 }
 nav ul li a:hover, nav ul li a.active {
     background: #007bff;
     color: white;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+nav ul li a[data-tooltip]:hover:after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
 }
 .main-content {
     margin-left: 250px;
     padding: 20px;
     width: calc(100% - 250px);
-    transition: margin-left 0.3s, width 0.3s;
+    transition: margin-left 0.3s ease, width 0.3s ease;
 }
 .main-content.expanded {
     margin-left: 60px;
@@ -73,10 +97,11 @@ nav ul li a:hover, nav ul li a.active {
 }
 .section {
     display: none;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 .section.active {
     display: block;
@@ -92,42 +117,71 @@ nav ul li a:hover, nav ul li a.active {
     100% { transform: translateX(10px); }
 }
 form {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
 }
 label {
     font-weight: bold;
     margin-right: 10px;
+    position: relative;
+}
+label[data-tooltip]:hover:after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
 }
 input, select {
-    padding: 5px;
-    margin-bottom: 10px;
-    width: 200px;
+    padding: 8px;
+    margin-bottom: 15px;
+    width: 250px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 14px;
+}
+input:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 button {
     padding: 10px 20px;
     background: #4CAF50;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     margin-right: 10px;
-    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
 button:hover {
     background: #45a049;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Cosmic glow */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
 }
 pre {
     background: #f1f1f1;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #ddd;
+    border-radius: 5px;
     max-height: 300px;
     overflow-y: auto;
-    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
 }
 #NetworkDiscovery {
     background: url('assets/backgrounds/network-discovery-bg.jpg') no-repeat center center;
     background-size: cover;
+}
+h2 {
+    color: #007bff;
+    margin-bottom: 20px;
 }
