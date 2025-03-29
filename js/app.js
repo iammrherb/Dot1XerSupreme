@@ -33,13 +33,13 @@ function validateForm(formId) {
 }
 
 function generateArchitectureConfig() {
-    const vendor = document.getElementById("vendor").value;
-    const scope = document.getElementById("scope").value;
-    const vlan = document.getElementById("vlan").value;
-    const radiusIp = document.getElementById("radius_ip").value;
-    const config = `! Architecture Configuration for ${vendor.toUpperCase()}
+    const scope = document.getElementById("arch_scope").value;
+    const vlan = document.getElementById("arch_vlan").value;
+    const radiusIp = document.getElementById("arch_radius_ip").value;
+    const dhcpSnooping = document.getElementById("arch_dhcp_snooping").checked;
+    const arpInspection = document.getElementById("arch_arp_inspection").checked;
+    const config = `! Network Architecture Configuration
 ! Scope: ${scope}
-! Vendor Logo: <img src="assets/logos/${vendor}.png" alt="${vendor} logo" width="100">
 radius-server host ${radiusIp} auth-port 1812 acct-port 1813 key SecretKey
 aaa authentication dot1x default group radius
 aaa authorization network default group radius
@@ -50,9 +50,8 @@ vlan 99
 interface Vlan1
  description Management
  ip address ${radiusIp.split('.').slice(0, 3).join('.')}.1 255.255.255.0
-ip dhcp snooping vlan ${vlan}
-ip arp inspection vlan ${vlan}
-ip verify source vlan ${vlan}
+${dhcpSnooping ? `ip dhcp snooping vlan ${vlan}` : '! DHCP Snooping Disabled'}
+${arpInspection ? `ip arp inspection vlan ${vlan}` : '! ARP Inspection Disabled'}
 `;
     document.getElementById("architectureConfigOutput").innerText = config;
     return { platform: "architecture", content: config };
@@ -63,6 +62,8 @@ function generateIosXeConfig() {
     const interface = document.getElementById("interface_iosxe").value;
     const vlan = document.getElementById("vlan_iosxe").value;
     const radiusIp = document.getElementById("radius_ip_iosxe").value;
+    const reauthPeriod = document.getElementById("reauth_period_iosxe").value || 3600;
+    const txPeriod = document.getElementById("tx_period_iosxe").value || 10;
     const config = `! Cisco IOS-XE Configuration
 ! Scope: ${scope}
 aaa new-model
@@ -84,9 +85,9 @@ interface ${interface}
  authentication priority dot1x mab
  authentication port-control auto
  authentication periodic
- authentication timer reauthenticate server
+ authentication timer reauthenticate ${reauthPeriod}
  dot1x pae authenticator
- dot1x timeout tx-period 10
+ dot1x timeout tx-period ${txPeriod}
  spanning-tree portfast
  ip dhcp snooping trust
  ip arp inspection trust
@@ -103,6 +104,8 @@ function generateNxOsConfig() {
     const interface = document.getElementById("interface_nxos").value;
     const vlan = document.getElementById("vlan_nxos").value;
     const radiusIp = document.getElementById("radius_ip_nxos").value;
+    const reauthPeriod = document.getElementById("reauth_period_nxos").value || 3600;
+    const txPeriod = document.getElementById("tx_period_nxos").value || 10;
     const config = `! Cisco NX-OS Configuration
 ! Scope: ${scope}
 feature dot1x
@@ -114,8 +117,9 @@ interface ${interface}
  switchport mode access
  switchport access vlan ${vlan}
  dot1x port-control auto
- dot1x timeout tx-period 10
+ dot1x timeout tx-period ${txPeriod}
  dot1x reauthentication
+ dot1x reauth-period ${reauthPeriod}
  spanning-tree port type edge
  ip dhcp snooping trust
  ip arp inspection trust
@@ -132,6 +136,7 @@ function generateArubaOsConfig() {
     const interface = document.getElementById("interface_arubaos").value;
     const vlan = document.getElementById("vlan_arubaos").value;
     const radiusIp = document.getElementById("radius_ip_arubaos").value;
+    const role = document.getElementById("role_arubaos").value || "authenticated";
     const config = `! ArubaOS Configuration
 ! Scope: ${scope}
 aaa authentication dot1x "dot1x-profile"
@@ -148,7 +153,7 @@ interface ${interface}
 aaa profile "dot1x-profile"
  authentication-dot1x
  dot1x-server-group "radius-group"
- dot1x-default-role "authenticated"
+ dot1x-default-role "${role}"
 `;
     document.getElementById("arubaosConfigOutput").innerText = config;
     return { platform: "arubaos", content: config };
@@ -159,6 +164,7 @@ function generateJuniperConfig() {
     const interface = document.getElementById("interface_juniper").value;
     const vlan = document.getElementById("vlan_juniper").value;
     const radiusIp = document.getElementById("radius_ip_juniper").value;
+    const reauthPeriod = document.getElementById("reauth_period_juniper").value || 3600;
     const config = `! Juniper Configuration
 ! Scope: ${scope}
 set system radius-server ${radiusIp} secret SecretKey
@@ -169,7 +175,7 @@ set access profile dot1x-profile radius-server ${radiusIp}
 set vlans authenticated vlan-id ${vlan}
 set protocols dot1x authenticator authentication-profile-name dot1x-profile
 set protocols dot1x authenticator interface ${interface} supplicant multiple
-set protocols dot1x authenticator interface ${interface} reauthentication 3600
+set protocols dot1x authenticator interface ${interface} reauthentication ${reauthPeriod}
 set interfaces ${interface} unit 0 family ethernet-switching vlan members authenticated
 set ethernet-switching-options secure-access-port vlan ${vlan}
 set ethernet-switching-options secure-access-port interface ${interface} dhcp-snooping
@@ -183,6 +189,7 @@ function generateExtremeConfig() {
     const interface = document.getElementById("interface_extreme").value;
     const vlan = document.getElementById("vlan_extreme").value;
     const radiusIp = document.getElementById("radius_ip_extreme").value;
+    const reauthPeriod = document.getElementById("reauth_period_extreme").value || 3600;
     const config = `! Extreme Networks Configuration
 ! Scope: ${scope}
 configure radius netlogin primary server ${radiusIp} 1812 client-ip ${radiusIp.split('.').slice(0, 3).join('.')}.1 shared-secret SecretKey
@@ -191,7 +198,7 @@ configure vlan ${vlan} name Authenticated
 configure netlogin vlan ${vlan}
 enable netlogin dot1x
 configure netlogin dot1x port ${interface} authentication enable
-configure netlogin dot1x port ${interface} reauthentication-period 3600
+configure netlogin dot1x port ${interface} reauthentication-period ${reauthPeriod}
 configure netlogin dot1x port ${interface} authentication-mode multi-supplicant
 configure vlan ${vlan} ports ${interface} untagged
 configure ip-security dhcp-snooping vlan ${vlan} ports ${interface} enable
@@ -205,6 +212,7 @@ function generateAristaConfig() {
     const interface = document.getElementById("interface_arista").value;
     const vlan = document.getElementById("vlan_arista").value;
     const radiusIp = document.getElementById("radius_ip_arista").value;
+    const txPeriod = document.getElementById("tx_period_arista").value || 10;
     const config = `! Arista Configuration
 ! Scope: ${scope}
 radius-server host ${radiusIp} key SecretKey auth-port 1812 acct-port 1813
@@ -219,7 +227,7 @@ interface ${interface}
  dot1x pae authenticator
  dot1x authentication
  dot1x reauthentication
- dot1x timeout tx-period 10
+ dot1x timeout tx-period ${txPeriod}
  spanning-tree portfast
  description 802.1X Enabled Port
 ip dhcp snooping vlan ${vlan}

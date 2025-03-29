@@ -10,6 +10,7 @@
 <body>
     <header>
         <img src="assets/icons/supreme-logo.png" alt="Dot1xer Supreme Logo" class="logo">
+        <h1>Dot1xer Supreme Configurator</h1>
     </header>
     <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'Architecture')">Architecture</button>
@@ -26,21 +27,16 @@
         <h2>Network Architecture</h2>
         <img src="assets/icons/wizard.png" alt="Dancing Wizards" class="wizard">
         <form id="architectureForm" onsubmit="return validateForm('architectureForm')">
-            <label for="vendor">Vendor:</label>
-            <select id="vendor" name="vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba</option>
-                <option value="hp">HP</option>
-                <option value="juniper">Juniper</option>
-                <option value="extreme">Extreme</option>
-                <option value="arista">Arista</option>
-            </select><br><br>
-            <label for="scope">Scope:</label>
-            <input type="text" id="scope" name="scope" placeholder="e.g., Campus LAN" required><br><br>
-            <label for="vlan">VLAN ID:</label>
-            <input type="number" id="vlan" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
-            <label for="radius_ip">RADIUS Server IP:</label>
-            <input type="text" id="radius_ip" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
+            <label for="arch_scope">Scope:</label>
+            <input type="text" id="arch_scope" name="scope" placeholder="e.g., Campus LAN" required><br><br>
+            <label for="arch_vlan">VLAN ID:</label>
+            <input type="number" id="arch_vlan" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
+            <label for="arch_radius_ip">RADIUS Server IP:</label>
+            <input type="text" id="arch_radius_ip" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
+            <label for="arch_dhcp_snooping">Enable DHCP Snooping:</label>
+            <input type="checkbox" id="arch_dhcp_snooping" name="dhcp_snooping"><br><br>
+            <label for="arch_arp_inspection">Enable ARP Inspection:</label>
+            <input type="checkbox" id="arch_arp_inspection" name="arp_inspection"><br><br>
             <button type="button" onclick="generateArchitectureConfig()">Generate Config</button>
             <button type="button" onclick="downloadConfig('architecture')">Download Config</button>
         </form>
@@ -57,6 +53,10 @@
             <input type="number" id="vlan_iosxe" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
             <label for="radius_ip_iosxe">RADIUS Server IP:</label>
             <input type="text" id="radius_ip_iosxe" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
+            <label for="reauth_period_iosxe">Reauthentication Period (seconds):</label>
+            <input type="number" id="reauth_period_iosxe" name="reauth_period" placeholder="e.g., 3600" min="60"><br><br>
+            <label for="tx_period_iosxe">TX Period (seconds):</label>
+            <input type="number" id="tx_period_iosxe" name="tx_period" placeholder="e.g., 10" min="1"><br><br>
             <button type="button" onclick="generateIosXeConfig()">Generate Config</button>
             <button type="button" onclick="downloadConfig('iosxe')">Download Config</button>
         </form>
@@ -73,6 +73,10 @@
             <input type="number" id="vlan_nxos" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
             <label for="radius_ip_nxos">RADIUS Server IP:</label>
             <input type="text" id="radius_ip_nxos" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
+            <label for="reauth_period_nxos">Reauthentication Period (seconds):</label>
+            <input type="number" id="reauth_period_nxos" name="reauth_period" placeholder="e.g., 3600" min="60"><br><br>
+            <label for="tx_period_nxos">TX Period (seconds):</label>
+            <input type="number" id="tx_period_nxos" name="tx_period" placeholder="e.g., 10" min="1"><br><br>
             <button type="button" onclick="generateNxOsConfig()">Generate Config</button>
             <button type="button" onclick="downloadConfig('nxos')">Download Config</button>
         </form>
@@ -89,6 +93,8 @@
             <input type="number" id="vlan_arubaos" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
             <label for="radius_ip_arubaos">RADIUS Server IP:</label>
             <input type="text" id="radius_ip_arubaos" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
+            <label for="role_arubaos">Authenticated Role:</label>
+            <input type="text" id="role_arubaos" name="role" placeholder="e.g., authenticated"><br><br>
             <button type="button" onclick="generateArubaOsConfig()">Generate Config</button>
             <button type="button" onclick="downloadConfig('arubaos')">Download Config</button>
         </form>
@@ -105,6 +111,8 @@
             <input type="number" id="vlan_juniper" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
             <label for="radius_ip_juniper">RADIUS Server IP:</label>
             <input type="text" id="radius_ip_juniper" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
+            <label for="reauth_period_juniper">Reauthentication Period (seconds):</label>
+            <input type="number" id="reauth_period_juniper" name="reauth_period" placeholder="e.g., 3600" min="60"><br><br>
             <button type="button" onclick="generateJuniperConfig()">Generate Config</button>
             <button type="button" onclick="downloadConfig('juniper')">Download Config</button>
         </form>
@@ -121,6 +129,8 @@
             <input type="number" id="vlan_extreme" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
             <label for="radius_ip_extreme">RADIUS Server IP:</label>
             <input type="text" id="radius_ip_extreme" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
+            <label for="reauth_period_extreme">Reauthentication Period (seconds):</label>
+            <input type="number" id="reauth_period_extreme" name="reauth_period" placeholder="e.g., 3600" min="60"><br><br>
             <button type="button" onclick="generateExtremeConfig()">Generate Config</button>
             <button type="button" onclick="downloadConfig('extreme')">Download Config</button>
         </form>
@@ -137,6 +147,8 @@
             <input type="number" id="vlan_arista" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
             <label for="radius_ip_arista">RADIUS Server IP:</label>
             <input type="text" id="radius_ip_arista" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
+            <label for="tx_period_arista">TX Period (seconds):</label>
+            <input type="number" id="tx_period_arista" name="tx_period" placeholder="e.g., 10" min="1"><br><br>
             <button type="button" onclick="generateAristaConfig()">Generate Config</button>
             <button type="button" onclick="downloadConfig('arista')">Download Config</button>
         </form>
@@ -167,8 +179,8 @@
             <h3>Getting Started</h3>
             <p>Welcome to the Dot1xer Supreme Configurator! This tool helps you generate 802.1X configurations for various network vendors and design network discovery architectures.</p>
             <ul>
-                <li><strong>Architecture Tab:</strong> Define a high-level network architecture with VLANs and RADIUS settings.</li>
-                <li><strong>Vendor Tabs (IOS-XE, NX-OS, etc.):</strong> Generate device-specific 802.1X configurations.</li>
+                <li><strong>Architecture Tab:</strong> Define a high-level network architecture with VLANs, RADIUS, and security settings.</li>
+                <li><strong>Vendor Tabs (IOS-XE, NX-OS, etc.):</strong> Generate device-specific 802.1X configurations with customizable settings.</li>
                 <li><strong>Network Discovery Tab:</strong> Create a basic network discovery diagram using protocols like SNMP, LLDP, or CDP.</li>
             </ul>
             <h3>Vendor-Specific Notes</h3>
