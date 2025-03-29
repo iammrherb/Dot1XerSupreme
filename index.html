@@ -6,20 +6,20 @@
     <title>Dot1xer Supreme Configurator</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Generate optimized 802.1X configurations for multiple vendors with Dot1Xer Supreme">
+    <meta name="keywords" content="802.1X, Cisco, Aruba, Juniper, Extreme, Arista, RADIUS, Network Security">
+    <meta name="author" content="iammrherb">
+    <link rel="icon" href="assets/icons/supreme-logo.png" type="image/png">
 </head>
 <body>
     <header>
         <img src="assets/icons/supreme-logo.png" alt="Dot1xer Supreme Logo" class="logo">
         <h1>Dot1xer Supreme Configurator</h1>
+        <p>Ultimate 802.1X Configuration Generator - Powered by xAI</p>
     </header>
     <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'Architecture')">Architecture</button>
-        <button class="tablinks" onclick="openTab(event, 'IOS-XE')">IOS-XE</button>
-        <button class="tablinks" onclick="openTab(event, 'NX-OS')">NX-OS</button>
-        <button class="tablinks" onclick="openTab(event, 'ArubaOS')">ArubaOS</button>
-        <button class="tablinks" onclick="openTab(event, 'Juniper')">Juniper</button>
-        <button class="tablinks" onclick="openTab(event, 'Extreme')">Extreme</button>
-        <button class="tablinks" onclick="openTab(event, 'Arista')">Arista</button>
+        <button class="tablinks" onclick="openTab(event, 'Configuration')">Configuration</button>
         <button class="tablinks" onclick="openTab(event, 'NetworkDiscovery')">Network Discovery</button>
         <button class="tablinks" onclick="openTab(event, 'Help')">Help</button>
     </div>
@@ -42,117 +42,48 @@
         </form>
         <pre id="architectureConfigOutput"></pre>
     </div>
-    <div id="IOS-XE" class="tabcontent">
-        <h2>IOS-XE Configuration</h2>
-        <form id="iosxeForm" onsubmit="return validateForm('iosxeForm')">
-            <label for="scope_iosxe">Scope:</label>
-            <input type="text" id="scope_iosxe" name="scope" placeholder="e.g., Access Switch" required><br><br>
-            <label for="interface_iosxe">Interface:</label>
-            <input type="text" id="interface_iosxe" name="interface" placeholder="e.g., GigabitEthernet0/1" required><br><br>
-            <label for="vlan_iosxe">VLAN ID:</label>
-            <input type="number" id="vlan_iosxe" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
-            <label for="radius_ip_iosxe">RADIUS Server IP:</label>
-            <input type="text" id="radius_ip_iosxe" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
-            <label for="reauth_period_iosxe">Reauthentication Period (seconds):</label>
-            <input type="number" id="reauth_period_iosxe" name="reauth_period" placeholder="e.g., 3600" min="60"><br><br>
-            <label for="tx_period_iosxe">TX Period (seconds):</label>
-            <input type="number" id="tx_period_iosxe" name="tx_period" placeholder="e.g., 10" min="1"><br><br>
-            <button type="button" onclick="generateIosXeConfig()">Generate Config</button>
-            <button type="button" onclick="downloadConfig('iosxe')">Download Config</button>
-        </form>
-        <pre id="iosxeConfigOutput"></pre>
-    </div>
-    <div id="NX-OS" class="tabcontent">
-        <h2>NX-OS Configuration</h2>
-        <form id="nxosForm" onsubmit="return validateForm('nxosForm')">
-            <label for="scope_nxos">Scope:</label>
-            <input type="text" id="scope_nxos" name="scope" placeholder="e.g., Data Center" required><br><br>
-            <label for="interface_nxos">Interface:</label>
-            <input type="text" id="interface_nxos" name="interface" placeholder="e.g., Ethernet1/1" required><br><br>
-            <label for="vlan_nxos">VLAN ID:</label>
-            <input type="number" id="vlan_nxos" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
-            <label for="radius_ip_nxos">RADIUS Server IP:</label>
-            <input type="text" id="radius_ip_nxos" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
-            <label for="reauth_period_nxos">Reauthentication Period (seconds):</label>
-            <input type="number" id="reauth_period_nxos" name="reauth_period" placeholder="e.g., 3600" min="60"><br><br>
-            <label for="tx_period_nxos">TX Period (seconds):</label>
-            <input type="number" id="tx_period_nxos" name="tx_period" placeholder="e.g., 10" min="1"><br><br>
-            <button type="button" onclick="generateNxOsConfig()">Generate Config</button>
-            <button type="button" onclick="downloadConfig('nxos')">Download Config</button>
-        </form>
-        <pre id="nxosConfigOutput"></pre>
-    </div>
-    <div id="ArubaOS" class="tabcontent">
-        <h2>ArubaOS Configuration</h2>
-        <form id="arubaosForm" onsubmit="return validateForm('arubaosForm')">
-            <label for="scope_arubaos">Scope:</label>
-            <input type="text" id="scope_arubaos" name="scope" placeholder="e.g., Wireless" required><br><br>
-            <label for="interface_arubaos">Interface:</label>
-            <input type="text" id="interface_arubaos" name="interface" placeholder="e.g., gigabitethernet 0/0/1" required><br><br>
-            <label for="vlan_arubaos">VLAN ID:</label>
-            <input type="number" id="vlan_arubaos" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
-            <label for="radius_ip_arubaos">RADIUS Server IP:</label>
-            <input type="text" id="radius_ip_arubaos" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
-            <label for="role_arubaos">Authenticated Role:</label>
-            <input type="text" id="role_arubaos" name="role" placeholder="e.g., authenticated"><br><br>
-            <button type="button" onclick="generateArubaOsConfig()">Generate Config</button>
-            <button type="button" onclick="downloadConfig('arubaos')">Download Config</button>
-        </form>
-        <pre id="arubaosConfigOutput"></pre>
-    </div>
-    <div id="Juniper" class="tabcontent">
-        <h2>Juniper Configuration</h2>
-        <form id="juniperForm" onsubmit="return validateForm('juniperForm')">
-            <label for="scope_juniper">Scope:</label>
-            <input type="text" id="scope_juniper" name="scope" placeholder="e.g., Branch Office" required><br><br>
-            <label for="interface_juniper">Interface:</label>
-            <input type="text" id="interface_juniper" name="interface" placeholder="e.g., ge-0/0/1" required><br><br>
-            <label for="vlan_juniper">VLAN ID:</label>
-            <input type="number" id="vlan_juniper" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
-            <label for="radius_ip_juniper">RADIUS Server IP:</label>
-            <input type="text" id="radius_ip_juniper" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
-            <label for="reauth_period_juniper">Reauthentication Period (seconds):</label>
-            <input type="number" id="reauth_period_juniper" name="reauth_period" placeholder="e.g., 3600" min="60"><br><br>
-            <button type="button" onclick="generateJuniperConfig()">Generate Config</button>
-            <button type="button" onclick="downloadConfig('juniper')">Download Config</button>
-        </form>
-        <pre id="juniperConfigOutput"></pre>
-    </div>
-    <div id="Extreme" class="tabcontent">
-        <h2>Extreme Configuration</h2>
-        <form id="extremeForm" onsubmit="return validateForm('extremeForm')">
-            <label for="scope_extreme">Scope:</label>
-            <input type="text" id="scope_extreme" name="scope" placeholder="e.g., Enterprise Network" required><br><br>
-            <label for="interface_extreme">Interface:</label>
-            <input type="text" id="interface_extreme" name="interface" placeholder="e.g., 1:1" required><br><br>
-            <label for="vlan_extreme">VLAN ID:</label>
-            <input type="number" id="vlan_extreme" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
-            <label for="radius_ip_extreme">RADIUS Server IP:</label>
-            <input type="text" id="radius_ip_extreme" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
-            <label for="reauth_period_extreme">Reauthentication Period (seconds):</label>
-            <input type="number" id="reauth_period_extreme" name="reauth_period" placeholder="e.g., 3600" min="60"><br><br>
-            <button type="button" onclick="generateExtremeConfig()">Generate Config</button>
-            <button type="button" onclick="downloadConfig('extreme')">Download Config</button>
-        </form>
-        <pre id="extremeConfigOutput"></pre>
-    </div>
-    <div id="Arista" class="tabcontent">
-        <h2>Arista Configuration</h2>
-        <form id="aristaForm" onsubmit="return validateForm('aristaForm')">
-            <label for="scope_arista">Scope:</label>
-            <input type="text" id="scope_arista" name="scope" placeholder="e.g., Data Center" required><br><br>
-            <label for="interface_arista">Interface:</label>
-            <input type="text" id="interface_arista" name="interface" placeholder="e.g., Ethernet1" required><br><br>
-            <label for="vlan_arista">VLAN ID:</label>
-            <input type="number" id="vlan_arista" name="vlan" placeholder="e.g., 10" min="1" max="4094" required><br><br>
-            <label for="radius_ip_arista">RADIUS Server IP:</label>
-            <input type="text" id="radius_ip_arista" name="radius_ip" placeholder="e.g., 192.168.1.10" required><br><br>
-            <label for="tx_period_arista">TX Period (seconds):</label>
-            <input type="number" id="tx_period_arista" name="tx_period" placeholder="e.g., 10" min="1"><br><br>
-            <button type="button" onclick="generateAristaConfig()">Generate Config</button>
-            <button type="button" onclick="downloadConfig('arista')">Download Config</button>
-        </form>
-        <pre id="aristaConfigOutput"></pre>
+    <div id="Configuration" class="tabcontent">
+        <div id="app" class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="sidebar">
+                        <h3>Configuration Steps</h3>
+                        <div class="list-group">
+                            <a href="#platform" @click="currentStep = 'platform'" :class="['list-group-item', currentStep === 'platform' ? 'active' : '']">1. Platform Selection</a>
+                            <a href="#basic-info" @click="currentStep = 'basicInfo'" :class="['list-group-item', currentStep === 'basicInfo' ? 'active' : '']">2. Basic Settings</a>
+                            <a href="#aaa" @click="currentStep = 'aaa'" :class="['list-group-item', currentStep === 'aaa' ? 'active' : '']">3. AAA Configuration</a>
+                            <a href="#radius" @click="currentStep = 'radius'" :class="['list-group-item', currentStep === 'radius' ? 'active' : '']">4. RADIUS Servers</a>
+                            <a href="#tacacs" @click="currentStep = 'tacacs'" :class="['list-group-item', currentStep === 'tacacs' ? 'active' : '']">5. TACACS+ Servers</a>
+                            <a href="#dot1x" @click="currentStep = 'dot1x'" :class="['list-group-item', currentStep === 'dot1x' ? 'active' : '']">6. 802.1X Settings</a>
+                            <a href="#coa" @click="currentStep = 'coa'" :class="['list-group-item', currentStep === 'coa' ? 'active' : '']">7. CoA Configuration</a>
+                            <a href="#radsec" @click="currentStep = 'radsec'" :class="['list-group-item', currentStep === 'radsec' ? 'active' : '']" v-if="config.radius && config.radius.type === '2'">8. RADSEC Configuration</a>
+                            <a href="#device-tracking" @click="currentStep = 'deviceTracking'" :class="['list-group-item', currentStep === 'deviceTracking' ? 'active' : '']">9. Device Tracking</a>
+                            <a href="#ibns" @click="currentStep = 'ibns'" :class="['list-group-item', currentStep === 'ibns' ? 'active' : '']" v-if="config.platform === 'IOS-XE'">10. IBNS 2.0 Configuration</a>
+                            <a href="#portnox" @click="currentStep = 'portnox'" :class="['list-group-item', currentStep === 'portnox' ? 'active' : '']">11. Portnox Integration</a>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" :style="{width: progress + '%'}"></div>
+                        </div>
+                        <button class="btn-generate" @click="generateConfig">Generate Configuration</button>
+                        <div class="btn-group">
+                            <button class="btn-save" @click="saveConfiguration">Save</button>
+                            <button class="btn-load" @click="loadConfiguration">Load</button>
+                            <button class="btn-download" @click="downloadConfiguration" :disabled="!generatedConfig">Download</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="content">
+                        <component :is="currentStep" :config="config" @update:config="updateConfig" @next-step="nextStep"></component>
+                    </div>
+                    <div class="config-output" v-if="generatedConfig">
+                        <h3>Generated Configuration</h3>
+                        <button class="btn-copy" @click="copyToClipboard">Copy to Clipboard</button>
+                        <pre>{{ generatedConfig }}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="NetworkDiscovery" class="tabcontent network-discovery">
         <h2>Network Discovery Architecture</h2>
@@ -180,7 +111,7 @@
             <p>Welcome to the Dot1xer Supreme Configurator! This tool helps you generate 802.1X configurations for various network vendors and design network discovery architectures.</p>
             <ul>
                 <li><strong>Architecture Tab:</strong> Define a high-level network architecture with VLANs, RADIUS, and security settings.</li>
-                <li><strong>Vendor Tabs (IOS-XE, NX-OS, etc.):</strong> Generate device-specific 802.1X configurations with customizable settings.</li>
+                <li><strong>Configuration Tab:</strong> Follow a step-by-step process to generate device-specific 802.1X configurations.</li>
                 <li><strong>Network Discovery Tab:</strong> Create a basic network discovery diagram using protocols like SNMP, LLDP, or CDP.</li>
             </ul>
             <h3>Vendor-Specific Notes</h3>
@@ -201,6 +132,25 @@
             <p>For more help, contact support at <a href="mailto:support@dot1xer.com">support@dot1xer.com</a>.</p>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.min.js"></script>
+    <script src="js/templates/base.js"></script>
+    <script src="js/templates/iosxe.js"></script>
+    <script src="js/templates/nxos.js"></script>
+    <script src="js/templates/arubaos.js"></script>
+    <script src="js/templates/juniper.js"></script>
+    <script src="js/templates/extreme.js"></script>
+    <script src="js/templates/arista.js"></script>
+    <script src="js/components/platform.js"></script>
+    <script src="js/components/basicInfo.js"></script>
+    <script src="js/components/aaa.js"></script>
+    <script src="js/components/radius.js"></script>
+    <script src="js/components/tacacs.js"></script>
+    <script src="js/components/dot1x.js"></script>
+    <script src="js/components/coa.js"></script>
+    <script src="js/components/radsec.js"></script>
+    <script src="js/components/deviceTracking.js"></script>
+    <script src="js/components/ibns.js"></script>
+    <script src="js/components/portnox.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

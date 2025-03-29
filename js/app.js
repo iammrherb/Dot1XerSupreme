@@ -57,186 +57,6 @@ ${arpInspection ? `ip arp inspection vlan ${vlan}` : '! ARP Inspection Disabled'
     return { platform: "architecture", content: config };
 }
 
-function generateIosXeConfig() {
-    const scope = document.getElementById("scope_iosxe").value;
-    const interface = document.getElementById("interface_iosxe").value;
-    const vlan = document.getElementById("vlan_iosxe").value;
-    const radiusIp = document.getElementById("radius_ip_iosxe").value;
-    const reauthPeriod = document.getElementById("reauth_period_iosxe").value || 3600;
-    const txPeriod = document.getElementById("tx_period_iosxe").value || 10;
-    const config = `! Cisco IOS-XE Configuration
-! Scope: ${scope}
-aaa new-model
-aaa authentication dot1x default group radius
-aaa authorization network default group radius
-aaa accounting dot1x default start-stop group radius
-radius server dot1xer-radius
- address ipv4 ${radiusIp} auth-port 1812 acct-port 1813
- key SecretKey
- timeout 5
- retransmit 3
-dot1x system-auth-control
-vlan ${vlan}
- name Authenticated
-interface ${interface}
- switchport mode access
- switchport access vlan ${vlan}
- authentication order dot1x mab
- authentication priority dot1x mab
- authentication port-control auto
- authentication periodic
- authentication timer reauthenticate ${reauthPeriod}
- dot1x pae authenticator
- dot1x timeout tx-period ${txPeriod}
- spanning-tree portfast
- ip dhcp snooping trust
- ip arp inspection trust
- description 802.1X Enabled Port
-ip dhcp snooping
-ip arp inspection
-`;
-    document.getElementById("iosxeConfigOutput").innerText = config;
-    return { platform: "iosxe", content: config };
-}
-
-function generateNxOsConfig() {
-    const scope = document.getElementById("scope_nxos").value;
-    const interface = document.getElementById("interface_nxos").value;
-    const vlan = document.getElementById("vlan_nxos").value;
-    const radiusIp = document.getElementById("radius_ip_nxos").value;
-    const reauthPeriod = document.getElementById("reauth_period_nxos").value || 3600;
-    const txPeriod = document.getElementById("tx_period_nxos").value || 10;
-    const config = `! Cisco NX-OS Configuration
-! Scope: ${scope}
-feature dot1x
-aaa authentication dot1x default group radius
-radius-server host ${radiusIp} key SecretKey auth-port 1812 acct-port 1813
-vlan ${vlan}
- name Authenticated
-interface ${interface}
- switchport mode access
- switchport access vlan ${vlan}
- dot1x port-control auto
- dot1x timeout tx-period ${txPeriod}
- dot1x reauthentication
- dot1x reauth-period ${reauthPeriod}
- spanning-tree port type edge
- ip dhcp snooping trust
- ip arp inspection trust
- description 802.1X Enabled Port
-ip dhcp snooping
-ip arp inspection
-`;
-    document.getElementById("nxosConfigOutput").innerText = config;
-    return { platform: "nxos", content: config };
-}
-
-function generateArubaOsConfig() {
-    const scope = document.getElementById("scope_arubaos").value;
-    const interface = document.getElementById("interface_arubaos").value;
-    const vlan = document.getElementById("vlan_arubaos").value;
-    const radiusIp = document.getElementById("radius_ip_arubaos").value;
-    const role = document.getElementById("role_arubaos").value || "authenticated";
-    const config = `! ArubaOS Configuration
-! Scope: ${scope}
-aaa authentication dot1x "dot1x-profile"
- radius-server host ${radiusIp} key SecretKey
- aaa server group "radius-group"
-  auth-server ${radiusIp}
-vlan ${vlan}
- name Authenticated
-interface ${interface}
- switchport access vlan ${vlan}
- dot1x enable
- authentication dot1x
- description 802.1X Enabled Port
-aaa profile "dot1x-profile"
- authentication-dot1x
- dot1x-server-group "radius-group"
- dot1x-default-role "${role}"
-`;
-    document.getElementById("arubaosConfigOutput").innerText = config;
-    return { platform: "arubaos", content: config };
-}
-
-function generateJuniperConfig() {
-    const scope = document.getElementById("scope_juniper").value;
-    const interface = document.getElementById("interface_juniper").value;
-    const vlan = document.getElementById("vlan_juniper").value;
-    const radiusIp = document.getElementById("radius_ip_juniper").value;
-    const reauthPeriod = document.getElementById("reauth_period_juniper").value || 3600;
-    const config = `! Juniper Configuration
-! Scope: ${scope}
-set system radius-server ${radiusIp} secret SecretKey
-set system radius-server ${radiusIp} authentication-port 1812
-set system radius-server ${radiusIp} accounting-port 1813
-set access profile dot1x-profile authentication-order radius
-set access profile dot1x-profile radius-server ${radiusIp}
-set vlans authenticated vlan-id ${vlan}
-set protocols dot1x authenticator authentication-profile-name dot1x-profile
-set protocols dot1x authenticator interface ${interface} supplicant multiple
-set protocols dot1x authenticator interface ${interface} reauthentication ${reauthPeriod}
-set interfaces ${interface} unit 0 family ethernet-switching vlan members authenticated
-set ethernet-switching-options secure-access-port vlan ${vlan}
-set ethernet-switching-options secure-access-port interface ${interface} dhcp-snooping
-`;
-    document.getElementById("juniperConfigOutput").innerText = config;
-    return { platform: "juniper", content: config };
-}
-
-function generateExtremeConfig() {
-    const scope = document.getElementById("scope_extreme").value;
-    const interface = document.getElementById("interface_extreme").value;
-    const vlan = document.getElementById("vlan_extreme").value;
-    const radiusIp = document.getElementById("radius_ip_extreme").value;
-    const reauthPeriod = document.getElementById("reauth_period_extreme").value || 3600;
-    const config = `! Extreme Networks Configuration
-! Scope: ${scope}
-configure radius netlogin primary server ${radiusIp} 1812 client-ip ${radiusIp.split('.').slice(0, 3).join('.')}.1 shared-secret SecretKey
-configure radius netlogin primary enable
-configure vlan ${vlan} name Authenticated
-configure netlogin vlan ${vlan}
-enable netlogin dot1x
-configure netlogin dot1x port ${interface} authentication enable
-configure netlogin dot1x port ${interface} reauthentication-period ${reauthPeriod}
-configure netlogin dot1x port ${interface} authentication-mode multi-supplicant
-configure vlan ${vlan} ports ${interface} untagged
-configure ip-security dhcp-snooping vlan ${vlan} ports ${interface} enable
-`;
-    document.getElementById("extremeConfigOutput").innerText = config;
-    return { platform: "extreme", content: config };
-}
-
-function generateAristaConfig() {
-    const scope = document.getElementById("scope_arista").value;
-    const interface = document.getElementById("interface_arista").value;
-    const vlan = document.getElementById("vlan_arista").value;
-    const radiusIp = document.getElementById("radius_ip_arista").value;
-    const txPeriod = document.getElementById("tx_period_arista").value || 10;
-    const config = `! Arista Configuration
-! Scope: ${scope}
-radius-server host ${radiusIp} key SecretKey auth-port 1812 acct-port 1813
-aaa authentication dot1x default group radius
-aaa authorization network default group radius
-dot1x system-auth-control
-vlan ${vlan}
- name Authenticated
-interface ${interface}
- switchport mode access
- switchport access vlan ${vlan}
- dot1x pae authenticator
- dot1x authentication
- dot1x reauthentication
- dot1x timeout tx-period ${txPeriod}
- spanning-tree portfast
- description 802.1X Enabled Port
-ip dhcp snooping vlan ${vlan}
-ip arp inspection vlan ${vlan}
-`;
-    document.getElementById("aristaConfigOutput").innerText = config;
-    return { platform: "arista", content: config };
-}
-
 function generateNetworkDiscovery() {
     const scope = document.getElementById("discovery_scope").value;
     const ipRange = document.getElementById("ip_range").value;
@@ -265,14 +85,11 @@ function generateNetworkDiscovery() {
 
 function downloadConfig(platform) {
     let config;
-    if (platform === "iosxe") config = generateIosXeConfig();
-    else if (platform === "nxos") config = generateNxOsConfig();
-    else if (platform === "arubaos") config = generateArubaOsConfig();
-    else if (platform === "juniper") config = generateJuniperConfig();
-    else if (platform === "extreme") config = generateExtremeConfig();
-    else if (platform === "arista") config = generateAristaConfig();
-    else if (platform === "networkdiscovery") config = generateNetworkDiscovery();
-    else config = generateArchitectureConfig();
+    if (platform === "networkdiscovery") {
+        config = generateNetworkDiscovery();
+    } else {
+        config = generateArchitectureConfig();
+    }
     const blob = new Blob([config.content], { type: "text/plain" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
@@ -281,6 +98,122 @@ function downloadConfig(platform) {
     link.click();
     document.body.removeChild(link);
 }
+
+// Vue.js app for step-by-step configuration
+const { createApp, ref, computed, reactive } = Vue;
+
+const app = createApp({
+    data() {
+        return {
+            currentStep: 'platform',
+            config: reactive({
+                platform: '',
+                hostname: '',
+                domainName: '',
+                aaa: { model: '1', authMethod: '2', authorMethod: '2', accountMethod: '2', sessionId: '1', pwdEncrypt: '1' },
+                radius: { type: '1', primaryIp: '', primaryAuthPort: '1812', primaryAcctPort: '1813', primarySecret: '',
+                          secondary: false, secondaryIp: '', secondaryAuthPort: '1812', secondaryAcctPort: '1813', secondarySecret: '',
+                          groupName: 'RADIUS-SERVERS', monitoring: '1', testUser: '', idleTime: '5', deadtime: '15' },
+                tacacs: { enable: false, primaryIp: '', primaryPort: '49', primarySecret: '',
+                          secondary: false, secondaryIp: '', secondaryPort: '49', secondarySecret: '',
+                          groupName: 'TACACS-SERVERS', singleConn: '1', cmdAuth: '1', maxPriv: '15' },
+                dot1x: { enable: '1', criticalEapol: '1', recoveryDelay: '2000', authOrder: '1', hostMode: '3',
+                         vlanAssign: '1', guestVlan: '', authFailVlan: '', criticalVlan: '', txPeriod: '10', maxReauth: '2',
+                         interface: '', vlan: '', reauthPeriod: '3600' },
+                coa: { enable: '1', clientIp: '', serverKey: '', port: '1700' },
+                radsec: { certOption: '1', trustpoint: 'PORTNOX-CA' },
+                deviceTracking: { enable: '1', mode: '1', accessPolicy: '1', accessName: 'IP-TRACKING', addrLimit: '4',
+                                  lifetime: '30', trunkPolicy: '1', trunkName: 'DISABLE-IP-TRACKING' },
+                ibns: { mode: '1', policyMapName: 'DOT1X_MAB_POLICY', templates: '1', openTemplate: '1',
+                        openTemplateName: 'WIRED_DOT1X_OPEN', closedTemplate: '1', closedTemplateName: 'WIRED_DOT1X_CLOSED' },
+                portnox: { enable: '1', region: '3', secret: '', sameSecret: '1', secondarySecret: '', radsec: '1' },
+                scope: ''
+            }),
+            generatedConfig: '',
+            steps: ['platform', 'basicInfo', 'aaa', 'radius', 'tacacs', 'dot1x', 'coa', 'radsec', 'deviceTracking', 'ibns', 'portnox']
+        };
+    },
+    computed: {
+        progress() {
+            const currentIndex = this.steps.indexOf(this.currentStep);
+            return Math.round((currentIndex + 1) / this.steps.length * 100);
+        }
+    },
+    methods: {
+        updateConfig(newConfig) {
+            Object.assign(this.config, newConfig);
+        },
+        nextStep() {
+            const currentIndex = this.steps.indexOf(this.currentStep);
+            if (currentIndex < this.steps.length - 1) {
+                const nextStep = this.steps[currentIndex + 1];
+                if ((this.config.platform === 'NX-OS' && nextStep === 'ibns') ||
+                    (this.config.radius.type !== '2' && nextStep === 'radsec')) {
+                    this.currentStep = this.steps[currentIndex + 2];
+                } else {
+                    this.currentStep = nextStep;
+                }
+            }
+        },
+        generateConfig() {
+            let output = generateBaseConfig(this.config);
+            if (this.config.platform === 'IOS-XE') {
+                output += generateIosXeConfig(this.config);
+            } else if (this.config.platform === 'NX-OS') {
+                output += generateNxOsConfig(this.config);
+            } else if (this.config.platform === 'ArubaOS') {
+                output += generateArubaOsConfig(this.config);
+            } else if (this.config.platform === 'Juniper') {
+                output += generateJuniperConfig(this.config);
+            } else if (this.config.platform === 'Extreme') {
+                output += generateExtremeConfig(this.config);
+            } else if (this.config.platform === 'Arista') {
+                output += generateAristaConfig(this.config);
+            }
+            this.generatedConfig = output;
+        },
+        copyToClipboard() {
+            navigator.clipboard.writeText(this.generatedConfig)
+                .then(() => alert('Configuration copied to clipboard!'))
+                .catch(err => console.error('Failed to copy: ', err));
+        },
+        downloadConfiguration() {
+            const element = document.createElement('a');
+            const file = new Blob([this.generatedConfig], {type: 'text/plain'});
+            element.href = URL.createObjectURL(file);
+            element.download = `${this.config.hostname || 'dot1x'}-config.txt`;
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        },
+        saveConfiguration() {
+            const configName = prompt('Enter a name for this configuration:');
+            if (configName) {
+                const savedConfigs = JSON.parse(localStorage.getItem('savedConfigs') || '{}');
+                savedConfigs[configName] = JSON.parse(JSON.stringify(this.config));
+                localStorage.setItem('savedConfigs', JSON.stringify(savedConfigs));
+                alert(`Configuration "${configName}" saved successfully!`);
+            }
+        },
+        loadConfiguration() {
+            const savedConfigs = JSON.parse(localStorage.getItem('savedConfigs') || '{}');
+            const configNames = Object.keys(savedConfigs);
+            if (configNames.length === 0) {
+                alert('No saved configurations found.');
+                return;
+            }
+            const configName = prompt(`Enter the name of the configuration to load (${configNames.join(', ')}):`);
+            if (configName && savedConfigs[configName]) {
+                Object.assign(this.config, savedConfigs[configName]);
+                alert(`Configuration "${configName}" loaded successfully!`);
+            } else {
+                alert('Configuration not found.');
+            }
+        }
+    }
+});
+
+app.mount('#app');
 
 // Open the first tab by default
 document.getElementsByClassName("tablinks")[0].click();
