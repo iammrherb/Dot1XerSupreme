@@ -3,7 +3,7 @@
     "short_name": "Dot1xer",
     "start_url": "index.html",
     "display": "standalone",
-    "background_color": "#f8f9fa",
+    "background_color": "#1e1e2f",
     "theme_color": "#007bff",
     "icons": [
         {
