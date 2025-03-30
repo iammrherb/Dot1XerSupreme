@@ -1,4 +1,4 @@
-// Main JavaScript for Dot1xer Supreme Configurator
+/* Main JavaScript for Dot1xer Supreme Configurator */
 
 let configData = {};
 
@@ -35,12 +35,15 @@ function updatePlatformInfo() {
     "cisco_iosxe": "Cisco: IOS-XE (Catalyst) – Modern Catalyst switches with IBNS 2.0 support.",
     "cisco_nxos": "Cisco: NX-OS (Nexus) – Nexus switches with enhanced AAA features.",
     "juniper_junos": "Juniper: Junos – EX/QFX switches with advanced 802.1X support.",
-    "aruba_arubaos": "Aruba: ArubaOS – Flexible wired and wireless configurations.",
+    "aruba_arubaos": "Aruba: ArubaOS – Flexible wired configurations.",
     "arista_eos": "Arista: EOS – High-performance 802.1X implementations.",
-    "fortinet_fortiswitch": "Fortinet: FortiSwitch – Secure and robust switch configurations."
+    "fortinet_fortiswitch": "Fortinet: FortiSwitch – Secure and robust switch configurations.",
+    "cisco_wlc": "Cisco Wireless LAN Controller – AireOS/IOS-XE based wireless management.",
+    "aruba_wlc": "Aruba Wireless LAN Controller – Aruba Mobility Controller with ClearPass integration."
   };
   if (platformBlurb && info[platform]) {
-    platformBlurb.innerHTML = "<strong>" + info[platform].split("–")[0] + ":</strong> " + info[platform].split("–")[1];
+    let parts = info[platform].split("–");
+    platformBlurb.innerHTML = "<strong>" + parts[0] + ":</strong> " + parts[1];
   }
   updatePlatformSpecificSettings();
 }
@@ -48,12 +51,8 @@ function updatePlatformInfo() {
 function updatePlatformSpecificSettings() {
   const platform = configData.platform;
   const ciscoSettings = document.getElementById("ciscoSettings");
-  const portnoxSettings = document.getElementById("portnoxSettings");
   if (ciscoSettings) {
     ciscoSettings.style.display = (platform === "cisco_iosxe" || platform === "cisco_nxos") ? "block" : "none";
-  }
-  if (portnoxSettings) {
-    portnoxSettings.style.display = (platform === "portnox") ? "block" : "none";
   }
 }
 
@@ -102,13 +101,11 @@ function addTacacsServer() {
 function generateConfig() {
   try {
     let config = "! Generated Configuration\n! Platform: " + configData.platform + "\n! Generated on " + new Date().toLocaleString() + "\n";
-    // AAA Settings
     const aaaMethod = document.getElementById("aaa_auth_method").value;
     const aaaAccounting = document.getElementById("aaa_accounting").checked;
     config += "\n! AAA Settings\n";
     config += "Authentication Method: " + aaaMethod + "\n";
     config += "Accounting: " + (aaaAccounting ? "Enabled" : "Disabled") + "\n";
-    // RADIUS Servers
     config += "\n! RADIUS Servers\n";
     for (let i = 1; i <= radiusServerCount; i++) {
       const ip = document.getElementById("radius_ip_" + i).value;
@@ -120,7 +117,6 @@ function generateConfig() {
         config += "RADIUS Server " + i + ": " + ip + ", Key: " + key + ", Auth Port: " + authPort + ", Acct Port: " + acctPort + ", Priority: " + priority + "\n";
       }
     }
-    // TACACS+ Servers
     config += "\n! TACACS+ Servers\n";
     for (let i = 1; i <= tacacsServerCount; i++) {
       const ip = document.getElementById("tacacs_ip_" + i).value;
@@ -131,14 +127,12 @@ function generateConfig() {
         config += "TACACS+ Server " + i + ": " + ip + ", Key: " + key + ", Auth Port: " + authPort + ", Priority: " + priority + "\n";
       }
     }
-    // 802.1X Settings
     config += "\n! 802.1X Settings\n";
     const iface = document.getElementById("dot1x_interface").value;
     const vlan = document.getElementById("dot1x_vlan").value;
     const reauth = document.getElementById("dot1x_reauth").value || 3600;
     const tx = document.getElementById("dot1x_tx").value || 10;
-    config += "Interface: " + iface + ", VLAN: " + vlan + ", Reauth: " + reauth + "s, TX: " + tx + "s\n";
-    // (Vendor-specific CLI statements and templates can be appended here based on configData.platform.)
+    config += "Interface: " + iface + ", VLAN: " + vlan + ", Reauth Period: " + reauth + "s, TX Period: " + tx + "s\n";
     document.getElementById("configOutput").textContent = config;
   } catch (error) {
     alert("Error generating configuration: " + error.message);
