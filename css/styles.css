@@ -5,7 +5,7 @@
 /* Base Styles
    ========================================================================== */
 :root {
-  --primary-color: #0066cc;
+  --primary-color: #476685;
   --primary-light: #3399ff;
   --primary-dark: #004080;
   --secondary-color: #28a745;
@@ -15,7 +15,7 @@
   --dark-gray: #6c757d;
   --danger-color: #dc3545;
   --warning-color: #ffc107;
-  --text-color: #333;
+  --text-color: #46C7C7;
   --border-radius: 4px;
   --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
@@ -62,7 +62,7 @@ header {
 
 /* Logo sizing through CSS */
 .logo {
-  width: 300px;
+  width: 50px;
   height: auto;
   margin-right: 15px;
 }
@@ -376,8 +376,8 @@ button:focus {
 
 /* Send button icon sizing */
 .chat-input button img {
-  width: 40px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
 }
 
 .suggested-queries {
