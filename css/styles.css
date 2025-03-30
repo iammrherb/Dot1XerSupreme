@@ -1,12 +1,9 @@
-/* Modern cyber-themed styles */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   margin: 0;
   padding: 0;
   background: #0a0a1a;
   color: #fff;
-  line-height: 1.6;
-  overflow-x: hidden;
 }
 .circuit-bg {
   position: fixed;
@@ -14,7 +11,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><path d='M0 50 H20 M20 50 V30 M20 30 H40 M40 30 V70 M40 70 H60 M60 70 V50 M60 50 H80 M80 50 V30 M80 30 H100' stroke='rgba(0,255,255,0.2)' stroke-width='1' fill='none'/><circle cx='20' cy='50' r='2' fill='rgba(0,255,255,0.5)'/><circle cx='40' cy='30' r='2' fill='rgba(0,255,255,0.5)'/></svg>") repeat;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><path d='M0 50 H20 M20 50 V30 M20 30 H40 M40 30 V70 M40 70 H60 M60 70 V50 M60 50 H80 M80 50 V30 M80 30 H100' stroke='rgba(0,212,255,0.2)' stroke-width='1' fill='none'/></svg>") repeat;
   animation: circuitFlow 20s linear infinite;
   z-index: -1;
 }
@@ -24,7 +21,7 @@ body {
 }
 header {
   height: 100px;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0,0,0,0.8);
   border-bottom: 1px solid #00d4ff;
   box-shadow: 0 2px 15px rgba(0,212,255,0.3);
   display: flex;
@@ -48,16 +45,16 @@ header {
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-left: 20px;
-  text-shadow: 0 0 10px rgba(0,212,255,0.7);
+  text-shadow: 0 0 10px rgba(0,212,255,0.7), 0 0 20px rgba(0,212,255,0.5);
   animation: glow 1.5s infinite alternate;
 }
 @keyframes glow {
-  0% { text-shadow: 0 0 10px rgba(0,212,255,0.7); }
-  100% { text-shadow: 0 0 20px rgba(0,212,255,1); }
+  0% { text-shadow: 0 0 10px rgba(0,212,255,0.7), 0 0 20px rgba(0,212,255,0.5); }
+  100% { text-shadow: 0 0 20px rgba(0,212,255,1), 0 0 30px rgba(0,212,255,0.8); }
 }
 .container {
   display: flex;
-  margin-top: 100px;
+  margin-top: 120px;
 }
 .sidebar {
   width: 250px;
@@ -71,37 +68,19 @@ header {
   box-shadow: 2px 0 15px rgba(0,212,255,0.3);
   overflow-y: auto;
 }
-.menu-btn {
-  width: 100%;
-  padding: 12px;
-  background: #00d4ff;
-  color: #0a0a1a;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease;
-}
-.menu-btn:hover {
-  background: #00b0ff;
-  transform: scale(1.05);
-}
 .sidebar nav ul {
   list-style: none;
   padding: 0;
-  margin-top: 10px;
-}
-.sidebar nav ul li {
-  margin: 8px 0;
 }
 .sidebar nav ul li a {
+  display: block;
   text-decoration: none;
   color: #fff;
-  display: block;
-  padding: 12px;
+  padding: 10px;
+  margin: 5px 0;
   border-radius: 5px;
   background: rgba(0,212,255,0.1);
-  transition: all 0.3s ease;
+  transition: background 0.3s, transform 0.3s;
 }
 .sidebar nav ul li a:hover,
 .sidebar nav ul li a.active {
@@ -112,15 +91,11 @@ header {
   margin-left: 250px;
   padding: 20px;
   width: calc(100% - 250px);
-  transition: margin-left 0.3s ease, width 0.3s ease;
-}
-.main-content.expanded {
-  margin-left: 60px;
-  width: calc(100% - 60px);
+  transition: margin-left 0.3s, width 0.3s;
 }
 .section {
   display: none;
-  background: rgba(255,255,255,0.98);
+  background: rgba(255,255,255,0.95);
   padding: 25px;
   border: 1px solid #00d4ff;
   border-radius: 8px;
@@ -132,17 +107,13 @@ header {
 }
 .wizard {
   width: 150px;
-  display: block;
   margin: 20px auto;
+  display: block;
   animation: dance 2s infinite alternate, glow 1.5s infinite alternate;
 }
 @keyframes dance {
   0% { transform: translateX(-10px) rotate(2deg); }
   100% { transform: translateX(10px) rotate(-2deg); }
-}
-@keyframes glow {
-  0% { filter: drop-shadow(0 0 5px rgba(0,212,255,0.5)); }
-  100% { filter: drop-shadow(0 0 15px rgba(0,212,255,1)); }
 }
 form {
   max-width: 600px;
@@ -154,26 +125,6 @@ form {
   margin-bottom: 10px;
   border-radius: 5px;
 }
-label {
-  font-weight: bold;
-  margin-right: 10px;
-  color: #333;
-}
-input, select, textarea {
-  padding: 8px;
-  margin-bottom: 15px;
-  width: 250px;
-  border: 1px solid #00d4ff;
-  border-radius: 4px;
-  font-size: 14px;
-  background: #fff;
-  color: #333;
-}
-input:focus, select:focus, textarea:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0,123,255,0.5);
-}
 button {
   padding: 10px 20px;
   background: #00d4ff;
@@ -181,8 +132,7 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-right: 10px;
-  font-size: 14px;
+  margin: 5px;
   transition: all 0.3s ease;
 }
 button:hover {
@@ -198,19 +148,5 @@ pre {
   overflow-y: auto;
   font-family: "Courier New", monospace;
   font-size: 13px;
-  color: #333;
-}
-h2 {
-  color: #00d4ff;
-  margin-bottom: 20px;
-}
-h3, h4 {
-  color: #333;
-}
-#platform-blurb {
-  background: #e9ecef;
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 10px;
   color: #333;
 }

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dot1xer Supreme Configurator</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <div class="circuit-bg"></div>
   <header>
-    <img src="data:image/png;base64,DOT1XER_SUPREME_LOGO_BASE64" alt="Dot1xer Supreme Logo" class="logo" />
+    <img src="data:image/png;base64,DOT1XER_SUPREME_LOGO_BASE64" alt="Dot1xer Supreme Logo" class="logo">
     <h1 class="title">Dot1xer Supreme Configurator</h1>
   </header>
   <div class="container">
-    <!-- Sidebar Navigation -->
+    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
       <button class="menu-btn" onclick="toggleSidebar()">?</button>
       <nav>
@@ -28,237 +28,16 @@
           <li><a href="#" onclick="showSection('DeviceTracking')">7. Device Tracking</a></li>
           <li><a href="#" onclick="showSection('PortIntegration')">8. Port Integration</a></li>
           <li><a href="#" onclick="showSection('GenerateConfig')">9. Generate Configuration</a></li>
-          <li><a href="#" onclick="showSection('AIIntegration')">10. AI Configuration Assistant</a></li>
-          <li><a href="#" onclick="showSection('Help')">11. Help</a></li>
-          <li><a href="#" onclick="showSection('ReferenceArchitecture')">12. Reference Architecture</a></li>
-          <li><a href="#" onclick="showSection('EnvironmentalDiscovery')">13. Environmental Discovery</a></li>
+          <li><a href="#" onclick="showSection('Help')">10. Help</a></li>
+          <li><a href="#" onclick="showSection('AIIntegration')">11. AI Integration</a></li>
+          <li><a href="#" onclick="showSection('ReferenceArchitecture')">Reference Architecture</a></li>
+          <li><a href="#" onclick="showSection('EnvironmentalDiscovery')">Environmental Discovery</a></li>
         </ul>
       </nav>
     </div>
     <!-- Main Content -->
     <div class="main-content" id="main-content">
-      <!-- Section: Platform Selection -->
-      <section id="PlatformSelection" class="section active">
-        <h2>Platform Selection</h2>
-        <img src="data:image/png;base64,WIZARD_BASE64" alt="Wizard" class="wizard" />
-        <form id="platformForm">
-          <label for="platform">Select Platform:</label>
-          <select id="platform" onchange="updatePlatformInfo()">
-            <option value="cisco_iosxe">Cisco: IOS-XE (Catalyst)</option>
-            <option value="cisco_nxos">Cisco: NX-OS (Nexus)</option>
-            <option value="juniper_junos">Juniper: Junos</option>
-            <option value="aruba_arubaos">Aruba: ArubaOS</option>
-            <option value="arista_eos">Arista: EOS</option>
-            <option value="fortinet_fortiswitch">Fortinet: FortiSwitch</option>
-            <option value="cisco_wlc">Cisco Wireless LAN Controller</option>
-            <option value="aruba_wlc">Aruba Wireless LAN Controller</option>
-          </select><br>
-          <div id="platformInfo">
-            <p id="platform-blurb"><strong>Cisco:</strong> IOS-XE – Modern Catalyst switches with IBNS 2.0 support.</p>
-          </div>
-          <button type="button" onclick="showSection('AAASettings')">Next</button>
-        </form>
-      </section>
-
-      <!-- Section: AAA Settings -->
-      <section id="AAASettings" class="section">
-        <h2>AAA Settings</h2>
-        <form id="aaaForm">
-          <label for="aaa_auth_method">Authentication Method:</label>
-          <select id="aaa_auth_method">
-            <option value="radius">RADIUS</option>
-            <option value="tacacs">TACACS+</option>
-            <option value="local">Local</option>
-          </select><br>
-          <label for="aaa_accounting">Enable Accounting:</label>
-          <input type="checkbox" id="aaa_accounting"><br>
-          <button type="button" onclick="showSection('RADIUSServers')">Next</button>
-          <button type="button" onclick="showSection('PlatformSelection')">Previous</button>
-        </form>
-      </section>
-
-      <!-- Section: RADIUS Servers -->
-      <section id="RADIUSServers" class="section">
-        <h2>RADIUS Servers</h2>
-        <form id="radiusForm">
-          <div id="radiusServers">
-            <div class="server-entry">
-              <h3>RADIUS Server 1</h3>
-              <label for="radius_ip_1">RADIUS Server IP:</label>
-              <input type="text" id="radius_ip_1" placeholder="e.g., 192.168.1.10" required><br>
-              <label for="radius_key_1">Shared Key:</label>
-              <input type="text" id="radius_key_1" placeholder="e.g., SecretKey" required><br>
-              <label for="radius_auth_port_1">Auth Port:</label>
-              <input type="number" id="radius_auth_port_1" placeholder="1812" min="1" max="65535" required><br>
-              <label for="radius_acct_port_1">Acct Port:</label>
-              <input type="number" id="radius_acct_port_1" placeholder="1813" min="1" max="65535" required><br>
-              <label for="radius_priority_1">Priority:</label>
-              <input type="number" id="radius_priority_1" placeholder="1" min="1" max="10" required><br>
-            </div>
-          </div>
-          <button type="button" onclick="addRadiusServer()">Add Another RADIUS Server</button><br>
-          <button type="button" onclick="showSection('TACACS')">Next</button>
-          <button type="button" onclick="showSection('AAASettings')">Previous</button>
-        </form>
-      </section>
-
-      <!-- Section: TACACS+ Servers -->
-      <section id="TACACS" class="section">
-        <h2>TACACS+ Servers</h2>
-        <form id="tacacsForm">
-          <div id="tacacsServers">
-            <div class="server-entry">
-              <h3>TACACS+ Server 1</h3>
-              <label for="tacacs_ip_1">TACACS+ Server IP:</label>
-              <input type="text" id="tacacs_ip_1" placeholder="e.g., 192.168.1.20"><br>
-              <label for="tacacs_key_1">Shared Key:</label>
-              <input type="text" id="tacacs_key_1" placeholder="e.g., TacacsKey"><br>
-              <label for="tacacs_auth_port_1">Auth Port:</label>
-              <input type="number" id="tacacs_auth_port_1" placeholder="49" min="1" max="65535"><br>
-              <label for="tacacs_priority_1">Priority:</label>
-              <input type="number" id="tacacs_priority_1" placeholder="1" min="1" max="10"><br>
-            </div>
-          </div>
-          <button type="button" onclick="addTacacsServer()">Add Another TACACS+ Server</button><br>
-          <button type="button" onclick="showSection('Dot1XSettings')">Next</button>
-          <button type="button" onclick="showSection('RADIUSServers')">Previous</button>
-        </form>
-      </section>
-
-      <!-- Section: 802.1X Settings -->
-      <section id="Dot1XSettings" class="section">
-        <h2>802.1X Settings</h2>
-        <form id="dot1xForm">
-          <label for="dot1x_interface">Interface:</label>
-          <input type="text" id="dot1x_interface" placeholder="e.g., GigabitEthernet0/1" required><br>
-          <label for="dot1x_vlan">VLAN ID:</label>
-          <input type="number" id="dot1x_vlan" placeholder="e.g., 10" min="1" max="4094" required><br>
-          <label for="dot1x_reauth">Reauth Period (s):</label>
-          <input type="number" id="dot1x_reauth" placeholder="3600" min="60"><br>
-          <label for="dot1x_tx">TX Period (s):</label>
-          <input type="number" id="dot1x_tx" placeholder="10" min="1"><br>
-          <!-- Cisco-specific settings -->
-          <div id="ciscoSettings" style="display: none;">
-            <label for="dot1x_mode">Authentication Mode:</label>
-            <select id="dot1x_mode">
-              <option value="closed">Closed Mode</option>
-              <option value="open">Open Mode</option>
-            </select><br>
-            <label for="ibns_enable">Enable IBNS 2.0:</label>
-            <input type="checkbox" id="ibns_enable"><br>
-            <label for="ibns_policy">IBNS Policy Name:</label>
-            <input type="text" id="ibns_policy" placeholder="DOT1X_MAB_POLICY"><br>
-          </div>
-          <button type="button" onclick="showSection('CoA')">Next</button>
-          <button type="button" onclick="showSection('TACACS')">Previous</button>
-        </form>
-      </section>
-
-      <!-- Section: CoA -->
-      <section id="CoA" class="section">
-        <h2>CoA</h2>
-        <form id="coaForm">
-          <label for="coa_enable">Enable CoA:</label>
-          <input type="checkbox" id="coa_enable"><br>
-          <label for="coa_port">CoA Port:</label>
-          <input type="number" id="coa_port" placeholder="1700" min="1" max="65535"><br>
-          <button type="button" onclick="showSection('DeviceTracking')">Next</button>
-          <button type="button" onclick="showSection('Dot1XSettings')">Previous</button>
-        </form>
-      </section>
-
-      <!-- Section: Device Tracking -->
-      <section id="DeviceTracking" class="section">
-        <h2>Device Tracking</h2>
-        <form id="deviceTrackingForm">
-          <label for="device_tracking_enable">Enable Device Tracking:</label>
-          <input type="checkbox" id="device_tracking_enable"><br>
-          <label for="device_tracking_policy">Policy Name:</label>
-          <input type="text" id="device_tracking_policy" placeholder="IP-TRACKING"><br>
-          <button type="button" onclick="showSection('PortIntegration')">Next</button>
-          <button type="button" onclick="showSection('CoA')">Previous</button>
-        </form>
-      </section>
-
-      <!-- Section: Port Integration -->
-      <section id="PortIntegration" class="section">
-        <h2>Port Integration</h2>
-        <form id="portIntegrationForm">
-          <label for="port_mode">Port Mode:</label>
-          <select id="port_mode">
-            <option value="access">Access</option>
-            <option value="trunk">Trunk</option>
-          </select><br>
-          <label for="port_host_mode">Host Mode:</label>
-          <select id="port_host_mode">
-            <option value="single-host">Single-Host</option>
-            <option value="multi-auth">Multi-Auth</option>
-            <option value="multi-domain">Multi-Domain</option>
-          </select><br>
-          <button type="button" onclick="showSection('GenerateConfig')">Next</button>
-          <button type="button" onclick="showSection('DeviceTracking')">Previous</button>
-        </form>
-      </section>
-
-      <!-- Section: Generate Configuration -->
-      <section id="GenerateConfig" class="section">
-        <h2>Generated Configuration</h2>
-        <button type="button" onclick="generateConfig()">Generate Config</button>
-        <button type="button" onclick="downloadConfig()">Download Config</button>
-        <pre id="configOutput"></pre>
-        <button type="button" onclick="showSection('PortIntegration')">Previous</button>
-      </section>
-
-      <!-- Section: AI Configuration Assistant -->
-      <section id="AIIntegration" class="section">
-        <h2>AI Configuration Assistant</h2>
-        <form id="aiForm">
-          <label for="ai_provider">Select AI Provider:</label>
-          <select id="ai_provider">
-            <option value="openai">OpenAI (GPT-4)</option>
-            <option value="anthropic">Anthropic (Claude)</option>
-          </select><br>
-          <label for="ai_api_key">API Key:</label>
-          <input type="password" id="ai_api_key" placeholder="Enter your API key"><br>
-          <label for="ai_question">Ask a question about your configuration:</label>
-          <textarea id="ai_question" rows="4" placeholder="e.g., How can I improve security?"></textarea><br>
-          <button type="button" onclick="analyzeConfig()">Analyze Configuration</button>
-          <div id="aiResult"></div>
-          <button type="button" onclick="showSection('GenerateConfig')">Previous</button>
-        </form>
-      </section>
-
-      <!-- Section: Help -->
-      <section id="Help" class="section">
-        <h2>Help</h2>
-        <p>Welcome to the Dot1xer Supreme Configurator! This tool generates advanced AAA configurations using in-depth vendor templates and best practices.</p>
-        <h3>How to Use</h3>
-        <ul>
-          <li><strong>Sidebar Navigation:</strong> Use the sidebar (toggle with ?) to navigate through steps.</li>
-          <li><strong>Platform Selection:</strong> Choose your device’s vendor and OS. Different options (e.g., Cisco IOS-XE, Juniper JUNOS, Aruba, etc.) load different configuration templates.</li>
-          <li><strong>AAA & Server Settings:</strong> Enter your AAA method and add one or more RADIUS/TACACS+ servers.</li>
-          <li><strong>802.1X Settings:</strong> Configure your interface, VLAN, and vendor-specific options (including IBNS 2.0 for Cisco).</li>
-          <li><strong>CoA, Device Tracking & Port Integration:</strong> Set additional options for dynamic authorization and monitoring.</li>
-          <li><strong>Generate Config:</strong> Review and download the generated CLI configuration.</li>
-          <li><strong>AI Configuration Assistant:</strong> Ask questions to get simulated AI suggestions.</li>
-          <li><strong>Reference Architecture & Environmental Discovery:</strong> These sections are coming soon.</li>
-        </ul>
-        <button type="button" onclick="showSection('PlatformSelection')">Back to Start</button>
-      </section>
-
-      <!-- Section: Reference Architecture (Coming Soon) -->
-      <section id="ReferenceArchitecture" class="section">
-        <h2>Reference Architecture</h2>
-        <p>Coming Soon – This section will provide pre-built architecture diagrams and best practices for 802.1X deployments.</p>
-        <button type="button" onclick="showSection('Help')">Back</button>
-      </section>
-
-      <!-- Section: Environmental Discovery (Coming Soon) -->
-      <section id="EnvironmentalDiscovery" class="section">
-        <h2>Environmental Discovery</h2>
-        <p>Coming Soon – This section will allow you to input your network details (sites, device types, etc.) to generate a NAC project plan and architecture diagram.</p>
-        <button type="button" onclick="showSection('Help')">Back</button>
-      </section>
+      <!-- Sections will be dynamically displayed here -->
     </div>
   </div>
   <script src="js/app.js"></script>

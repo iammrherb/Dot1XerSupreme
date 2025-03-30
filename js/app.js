@@ -1,7 +1,4 @@
-/* Main JavaScript for Dot1xer Supreme Configurator */
-
-let configData = {};
-
+// Core UI functions
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
   const mainContent = document.getElementById("main-content");
@@ -11,48 +8,48 @@ function toggleSidebar() {
 
 function showSection(sectionId) {
   const sections = document.getElementsByClassName("section");
-  for (let sec of sections) {
-    sec.classList.remove("active");
+  for (let i = 0; i < sections.length; i++) {
+    sections[i].classList.remove("active");
   }
   const links = document.querySelectorAll(".sidebar nav ul li a");
-  for (let link of links) {
-    link.classList.remove("active");
-  }
-  const selected = document.getElementById(sectionId);
-  if (selected) {
-    selected.classList.add("active");
-    const link = document.querySelector("a[onclick=\"showSection('" + sectionId + "')\"]");
-    if (link) link.classList.add("active");
+  links.forEach(link => link.classList.remove("active"));
+  const selectedSection = document.getElementById(sectionId);
+  if (selectedSection) {
+    selectedSection.classList.add("active");
+    const selectedLink = document.querySelector('a[onclick="showSection(\'' + sectionId + '\')"]');
+    if (selectedLink) {
+      selectedLink.classList.add("active");
+    }
   }
   updatePlatformSpecificSettings();
 }
 
 function updatePlatformInfo() {
   const platform = document.getElementById("platform").value;
-  configData.platform = platform;
-  const platformBlurb = document.getElementById("platform-blurb");
+  const platformInfo = document.getElementById("platformInfo");
   const info = {
-    "cisco_iosxe": "Cisco: IOS-XE (Catalyst) – Modern Catalyst switches with IBNS 2.0 support.",
-    "cisco_nxos": "Cisco: NX-OS (Nexus) – Nexus switches with enhanced AAA features.",
-    "juniper_junos": "Juniper: Junos – EX/QFX switches with advanced 802.1X support.",
-    "aruba_arubaos": "Aruba: ArubaOS – Flexible wired configurations.",
-    "arista_eos": "Arista: EOS – High-performance 802.1X implementations.",
-    "fortinet_fortiswitch": "Fortinet: FortiSwitch – Secure and robust switch configurations.",
-    "cisco_wlc": "Cisco Wireless LAN Controller – AireOS/IOS-XE based wireless management.",
-    "aruba_wlc": "Aruba Wireless LAN Controller – Aruba Mobility Controller with ClearPass integration."
+    "cisco_iosxe": "Cisco: IOS-XE (Catalyst) – Modern Catalyst switches with advanced AAA and IBNS 2.0 support.",
+    "cisco_nxos": "Cisco: NX-OS (Nexus) – Nexus switches with different AAA syntax and features.",
+    "cisco_wlc": "Cisco: WLC 9800 – Wireless LAN Controller with robust AAA, RADIUS, and CoA support.",
+    "juniper_junos": "Juniper: Junos – EX/QFX switches with comprehensive 802.1X capabilities.",
+    "aruba_arubaos": "Aruba: ArubaOS – Wired and wireless switches with dot1x profiles.",
+    "aruba_wlc": "Aruba: WLC – Wireless controller solutions for enterprise deployments.",
+    "fortinet_fortiswitch": "Fortinet: FortiSwitch/Access Point – Integrated security and AAA on Fortinet hardware.",
+    "arista_eos": "Arista: EOS – High-performance switches with modern AAA support.",
+    "extreme_exos": "Extreme: EXOS – Extreme Networks switches with advanced netlogin and AAA.",
+    "ubiquiti": "Ubiquiti – Affordable enterprise-grade switches and wireless devices.",
+    "huawei": "Huawei – Comprehensive network solutions with AAA and NAC support.",
+    "alcatel": "Alcatel – Carrier-grade networking with integrated AAA."
   };
-  if (platformBlurb && info[platform]) {
-    let parts = info[platform].split("–");
-    platformBlurb.innerHTML = "<strong>" + parts[0] + ":</strong> " + parts[1];
-  }
+  platformInfo.innerHTML = "<p><strong>" + info[platform].split(":")[0] + ":</strong> " + info[platform].split("–")[1] + "</p>";
   updatePlatformSpecificSettings();
 }
 
 function updatePlatformSpecificSettings() {
-  const platform = configData.platform;
+  const platform = document.getElementById("platform").value;
   const ciscoSettings = document.getElementById("ciscoSettings");
   if (ciscoSettings) {
-    ciscoSettings.style.display = (platform === "cisco_iosxe" || platform === "cisco_nxos") ? "block" : "none";
+    ciscoSettings.style.display = (platform === "cisco_iosxe" || platform === "cisco_nxos" || platform === "cisco_wlc") ? "block" : "none";
   }
 }
 
@@ -60,9 +57,9 @@ let radiusServerCount = 1;
 function addRadiusServer() {
   radiusServerCount++;
   const container = document.getElementById("radiusServers");
-  const div = document.createElement("div");
-  div.className = "server-entry";
-  div.innerHTML = `
+  const newDiv = document.createElement("div");
+  newDiv.className = "server-entry";
+  newDiv.innerHTML = `
     <h3>RADIUS Server ${radiusServerCount}</h3>
     <label for="radius_ip_${radiusServerCount}">RADIUS Server IP:</label>
     <input type="text" id="radius_ip_${radiusServerCount}" placeholder="e.g., 192.168.1.11"><br>
@@ -75,16 +72,16 @@ function addRadiusServer() {
     <label for="radius_priority_${radiusServerCount}">Priority:</label>
     <input type="number" id="radius_priority_${radiusServerCount}" placeholder="${radiusServerCount}" min="1" max="10"><br>
   `;
-  container.appendChild(div);
+  container.appendChild(newDiv);
 }
 
 let tacacsServerCount = 1;
 function addTacacsServer() {
   tacacsServerCount++;
   const container = document.getElementById("tacacsServers");
-  const div = document.createElement("div");
-  div.className = "server-entry";
-  div.innerHTML = `
+  const newDiv = document.createElement("div");
+  newDiv.className = "server-entry";
+  newDiv.innerHTML = `
     <h3>TACACS+ Server ${tacacsServerCount}</h3>
     <label for="tacacs_ip_${tacacsServerCount}">TACACS+ Server IP:</label>
     <input type="text" id="tacacs_ip_${tacacsServerCount}" placeholder="e.g., 192.168.1.21"><br>
@@ -95,49 +92,18 @@ function addTacacsServer() {
     <label for="tacacs_priority_${tacacsServerCount}">Priority:</label>
     <input type="number" id="tacacs_priority_${tacacsServerCount}" placeholder="${tacacsServerCount}" min="1" max="10"><br>
   `;
-  container.appendChild(div);
+  container.appendChild(newDiv);
 }
 
 function generateConfig() {
-  try {
-    let config = "! Generated Configuration\n! Platform: " + configData.platform + "\n! Generated on " + new Date().toLocaleString() + "\n";
-    const aaaMethod = document.getElementById("aaa_auth_method").value;
-    const aaaAccounting = document.getElementById("aaa_accounting").checked;
-    config += "\n! AAA Settings\n";
-    config += "Authentication Method: " + aaaMethod + "\n";
-    config += "Accounting: " + (aaaAccounting ? "Enabled" : "Disabled") + "\n";
-    config += "\n! RADIUS Servers\n";
-    for (let i = 1; i <= radiusServerCount; i++) {
-      const ip = document.getElementById("radius_ip_" + i).value;
-      const key = document.getElementById("radius_key_" + i).value;
-      const authPort = document.getElementById("radius_auth_port_" + i).value || 1812;
-      const acctPort = document.getElementById("radius_acct_port_" + i).value || 1813;
-      const priority = document.getElementById("radius_priority_" + i).value || i;
-      if (ip && key) {
-        config += "RADIUS Server " + i + ": " + ip + ", Key: " + key + ", Auth Port: " + authPort + ", Acct Port: " + acctPort + ", Priority: " + priority + "\n";
-      }
-    }
-    config += "\n! TACACS+ Servers\n";
-    for (let i = 1; i <= tacacsServerCount; i++) {
-      const ip = document.getElementById("tacacs_ip_" + i).value;
-      const key = document.getElementById("tacacs_key_" + i).value;
-      const authPort = document.getElementById("tacacs_auth_port_" + i).value || 49;
-      const priority = document.getElementById("tacacs_priority_" + i).value || i;
-      if (ip && key) {
-        config += "TACACS+ Server " + i + ": " + ip + ", Key: " + key + ", Auth Port: " + authPort + ", Priority: " + priority + "\n";
-      }
-    }
-    config += "\n! 802.1X Settings\n";
-    const iface = document.getElementById("dot1x_interface").value;
-    const vlan = document.getElementById("dot1x_vlan").value;
-    const reauth = document.getElementById("dot1x_reauth").value || 3600;
-    const tx = document.getElementById("dot1x_tx").value || 10;
-    config += "Interface: " + iface + ", VLAN: " + vlan + ", Reauth Period: " + reauth + "s, TX Period: " + tx + "s\n";
-    document.getElementById("configOutput").textContent = config;
-  } catch (error) {
-    alert("Error generating configuration: " + error.message);
-    console.error(error);
-  }
+  let config = `! Generated Configuration\n! Platform: ${document.getElementById("platform").value}\n! Date: ${new Date().toLocaleString()}\n\n`;
+  config += "# AAA Settings\n";
+  config += "aaa new-model\n";
+  config += "aaa authentication dot1x default group radius\n";
+  config += "\n# 802.1X Settings\n";
+  config += "dot1x system-auth-control\n";
+  config += "interface GigabitEthernet0/1\n switchport mode access\n switchport access vlan 10\n dot1x port-control auto\n";
+  document.getElementById("configOutput").textContent = config;
 }
 
 function downloadConfig() {
@@ -155,21 +121,6 @@ function downloadConfig() {
   document.body.removeChild(link);
 }
 
-function analyzeConfig() {
-  const provider = document.getElementById("ai_provider").value;
-  const apiKey = document.getElementById("ai_api_key").value;
-  const question = document.getElementById("ai_question").value;
-  if (!apiKey || !question) {
-    alert("Please enter your API key and a question.");
-    return;
-  }
-  const resultDiv = document.getElementById("aiResult");
-  resultDiv.innerHTML = "<p>Analyzing configuration with " + provider + " (simulated)...</p>";
-  setTimeout(() => {
-    resultDiv.innerHTML += "<p><strong>AI Suggestion:</strong> Consider adding a backup RADIUS server and reviewing your timeout values for increased resiliency.</p>";
-  }, 2000);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
   showSection("PlatformSelection");
 });
