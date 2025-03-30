@@ -11,18 +11,18 @@ function toggleSidebar() {
 
 function showSection(sectionId) {
   const sections = document.getElementsByClassName("section");
-  for (let i = 0; i < sections.length; i++) {
-    sections[i].classList.remove("active");
+  for (let sec of sections) {
+    sec.classList.remove("active");
   }
   const links = document.querySelectorAll(".sidebar nav ul li a");
-  for (let i = 0; i < links.length; i++) {
-    links[i].classList.remove("active");
+  for (let link of links) {
+    link.classList.remove("active");
   }
   const selected = document.getElementById(sectionId);
   if (selected) {
     selected.classList.add("active");
     const link = document.querySelector("a[onclick=\"showSection('" + sectionId + "')\"]");
-    if (link) { link.classList.add("active"); }
+    if (link) link.classList.add("active");
   }
   updatePlatformSpecificSettings();
 }
@@ -32,16 +32,15 @@ function updatePlatformInfo() {
   configData.platform = platform;
   const platformBlurb = document.getElementById("platform-blurb");
   const info = {
-    "cisco_iosxe": "Cisco: IOS-XE (Catalyst) - Modern Catalyst switches with IBNS 2.0 support.",
-    "cisco_nxos": "Cisco: NX-OS (Nexus) - Nexus switches with different AAA syntax and features.",
-    "aruba_arubaos": "Aruba: ArubaOS - Wired and wireless switches with dot1x profiles.",
-    "juniper_junos": "Juniper: Junos - EX/QFX switches with 802.1X support.",
-    "extreme_exos": "Extreme: EXOS - Extreme Networks switches with netlogin.",
-    "arista_eos": "Arista: EOS - EOS switches with 802.1X capabilities.",
-    "portnox": "Portnox: NAC integration for advanced network access control."
+    "cisco_iosxe": "Cisco: IOS-XE (Catalyst) – Modern Catalyst switches with IBNS 2.0 support.",
+    "cisco_nxos": "Cisco: NX-OS (Nexus) – Nexus switches with enhanced AAA features.",
+    "juniper_junos": "Juniper: Junos – EX/QFX switches with advanced 802.1X support.",
+    "aruba_arubaos": "Aruba: ArubaOS – Flexible wired and wireless configurations.",
+    "arista_eos": "Arista: EOS – High-performance 802.1X implementations.",
+    "fortinet_fortiswitch": "Fortinet: FortiSwitch – Secure and robust switch configurations."
   };
   if (platformBlurb && info[platform]) {
-    platformBlurb.innerHTML = "<strong>" + info[platform].split(":")[0] + ":</strong> " + info[platform].split(":")[1];
+    platformBlurb.innerHTML = "<strong>" + info[platform].split("–")[0] + ":</strong> " + info[platform].split("–")[1];
   }
   updatePlatformSpecificSettings();
 }
@@ -50,10 +49,10 @@ function updatePlatformSpecificSettings() {
   const platform = configData.platform;
   const ciscoSettings = document.getElementById("ciscoSettings");
   const portnoxSettings = document.getElementById("portnoxSettings");
-  if(ciscoSettings) {
+  if (ciscoSettings) {
     ciscoSettings.style.display = (platform === "cisco_iosxe" || platform === "cisco_nxos") ? "block" : "none";
   }
-  if(portnoxSettings) {
+  if (portnoxSettings) {
     portnoxSettings.style.display = (platform === "portnox") ? "block" : "none";
   }
 }
@@ -111,35 +110,35 @@ function generateConfig() {
     config += "Accounting: " + (aaaAccounting ? "Enabled" : "Disabled") + "\n";
     // RADIUS Servers
     config += "\n! RADIUS Servers\n";
-    for(let i = 1; i <= radiusServerCount; i++) {
+    for (let i = 1; i <= radiusServerCount; i++) {
       const ip = document.getElementById("radius_ip_" + i).value;
       const key = document.getElementById("radius_key_" + i).value;
       const authPort = document.getElementById("radius_auth_port_" + i).value || 1812;
       const acctPort = document.getElementById("radius_acct_port_" + i).value || 1813;
       const priority = document.getElementById("radius_priority_" + i).value || i;
-      if(ip && key) {
+      if (ip && key) {
         config += "RADIUS Server " + i + ": " + ip + ", Key: " + key + ", Auth Port: " + authPort + ", Acct Port: " + acctPort + ", Priority: " + priority + "\n";
       }
     }
     // TACACS+ Servers
     config += "\n! TACACS+ Servers\n";
-    for(let i = 1; i <= tacacsServerCount; i++) {
+    for (let i = 1; i <= tacacsServerCount; i++) {
       const ip = document.getElementById("tacacs_ip_" + i).value;
       const key = document.getElementById("tacacs_key_" + i).value;
       const authPort = document.getElementById("tacacs_auth_port_" + i).value || 49;
       const priority = document.getElementById("tacacs_priority_" + i).value || i;
-      if(ip && key) {
+      if (ip && key) {
         config += "TACACS+ Server " + i + ": " + ip + ", Key: " + key + ", Auth Port: " + authPort + ", Priority: " + priority + "\n";
       }
     }
-    // Dot1X Settings
+    // 802.1X Settings
     config += "\n! 802.1X Settings\n";
     const iface = document.getElementById("dot1x_interface").value;
     const vlan = document.getElementById("dot1x_vlan").value;
     const reauth = document.getElementById("dot1x_reauth").value || 3600;
     const tx = document.getElementById("dot1x_tx").value || 10;
     config += "Interface: " + iface + ", VLAN: " + vlan + ", Reauth: " + reauth + "s, TX: " + tx + "s\n";
-    // (Vendor-specific settings can be added here based on configData.platform)
+    // (Vendor-specific CLI statements and templates can be appended here based on configData.platform.)
     document.getElementById("configOutput").textContent = config;
   } catch (error) {
     alert("Error generating configuration: " + error.message);
@@ -149,7 +148,7 @@ function generateConfig() {
 
 function downloadConfig() {
   let config = document.getElementById("configOutput").textContent;
-  if(!config) {
+  if (!config) {
     alert("Please generate a config first!");
     return;
   }
@@ -162,19 +161,18 @@ function downloadConfig() {
   document.body.removeChild(link);
 }
 
-// AI Integration: Simulated analysis
 function analyzeConfig() {
   const provider = document.getElementById("ai_provider").value;
   const apiKey = document.getElementById("ai_api_key").value;
   const question = document.getElementById("ai_question").value;
-  if(!apiKey || !question) {
+  if (!apiKey || !question) {
     alert("Please enter your API key and a question.");
     return;
   }
   const resultDiv = document.getElementById("aiResult");
   resultDiv.innerHTML = "<p>Analyzing configuration with " + provider + " (simulated)...</p>";
   setTimeout(() => {
-    resultDiv.innerHTML += "<p><strong>AI Suggestion:</strong> Consider adding a backup RADIUS server for redundancy and review your authentication timeouts for improved resiliency.</p>";
+    resultDiv.innerHTML += "<p><strong>AI Suggestion:</strong> Consider adding a backup RADIUS server and reviewing your timeout values for increased resiliency.</p>";
   }, 2000);
 }
 

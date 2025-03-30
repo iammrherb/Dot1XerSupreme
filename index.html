@@ -10,12 +10,11 @@
 <body>
   <div class="circuit-bg"></div>
   <header>
-    <!-- The logo will be inlined using Base64 -->
     <img src="data:image/png;base64,DOT1XER_SUPREME_LOGO_BASE64" alt="Dot1xer Supreme Logo" class="logo" />
     <h1 class="title">Dot1xer Supreme Configurator</h1>
   </header>
   <div class="container">
-    <!-- Sidebar -->
+    <!-- Sidebar with Navigation -->
     <div class="sidebar" id="sidebar">
       <button class="menu-btn" onclick="toggleSidebar()">?</button>
       <nav>
@@ -31,10 +30,12 @@
           <li><a href="#" onclick="showSection('GenerateConfig')">9. Generate Configuration</a></li>
           <li><a href="#" onclick="showSection('AIIntegration')">10. AI Configuration Assistant</a></li>
           <li><a href="#" onclick="showSection('Help')">11. Help</a></li>
+          <li><a href="#" onclick="showSection('ReferenceArchitecture')">12. Reference Architecture</a></li>
+          <li><a href="#" onclick="showSection('EnvironmentalDiscovery')">13. Environmental Discovery</a></li>
         </ul>
       </nav>
     </div>
-    <!-- Main Content -->
+    <!-- Main Content Area -->
     <div class="main-content" id="main-content">
       <!-- Section: Platform Selection -->
       <section id="PlatformSelection" class="section active">
@@ -45,11 +46,13 @@
           <select id="platform" onchange="updatePlatformInfo()">
             <option value="cisco_iosxe">Cisco: IOS-XE (Catalyst)</option>
             <option value="cisco_nxos">Cisco: NX-OS (Nexus)</option>
-            <option value="aruba_arubaos">Aruba: ArubaOS</option>
             <option value="juniper_junos">Juniper: Junos</option>
-            <option value="extreme_exos">Extreme: EXOS</option>
+            <option value="aruba_arubaos">Aruba: ArubaOS</option>
             <option value="arista_eos">Arista: EOS</option>
-            <option value="portnox">Portnox</option>
+            <option value="fortinet_fortiswitch">Fortinet: FortiSwitch</option>
+            <!-- Wireless vendors -->
+            <option value="cisco_wlc">Cisco Wireless LAN Controller</option>
+            <option value="aruba_wlc">Aruba Wireless LAN Controller</option>
           </select><br>
           <div id="platformInfo">
             <p id="platform-blurb"><strong>Cisco:</strong> IOS-XE – Modern Catalyst switches with IBNS 2.0 support.</p>
@@ -143,15 +146,7 @@
             <label for="ibns_policy">IBNS Policy Name:</label>
             <input type="text" id="ibns_policy" placeholder="DOT1X_MAB_POLICY" /><br>
           </div>
-          <!-- Portnox-specific settings -->
-          <div id="portnoxSettings" style="display: none;">
-            <label for="portnox_profile">Portnox Profile Name:</label>
-            <input type="text" id="portnox_profile" placeholder="PORTNOX_PROFILE" /><br>
-            <label for="portnox_guest_vlan">Guest VLAN:</label>
-            <input type="number" id="portnox_guest_vlan" placeholder="100" min="1" max="4094" /><br>
-            <label for="portnox_dynamic_vlan">Enable Dynamic VLAN:</label>
-            <input type="checkbox" id="portnox_dynamic_vlan" /><br>
-          </div>
+          <!-- (Other vendor-specific settings can be added here) -->
           <button type="button" onclick="showSection('CoA')">Next</button>
           <button type="button" onclick="showSection('TACACS')">Previous</button>
         </form>
@@ -228,16 +223,33 @@
       <!-- Section: Help -->
       <section id="Help" class="section">
         <h2>Help</h2>
-        <p>Welcome to the Dot1xer Supreme Configurator! This tool generates advanced AAA configurations based on best practices and vendor templates.</p>
+        <p>Welcome to the Dot1xer Supreme Configurator! This tool generates advanced AAA configurations for multiple vendors by using in-depth vendor templates and best practices.</p>
         <h3>How to Use</h3>
         <ul>
-          <li><strong>Sidebar Navigation</strong>: Click the ? button to collapse/expand the sidebar and navigate through steps.</li>
-          <li><strong>Platform Selection</strong>: Choose your device platform. Depending on the vendor and OS, different configuration options will be available.</li>
-          <li><strong>AI Configuration Assistant</strong>: Optionally, use AI integration to ask questions about your configuration (simulated response).</li>
-          <li><strong>Generate/Download</strong>: After completing the steps, generate your configuration and download it as a text file.</li>
+          <li><strong>Sidebar Navigation</strong>: Use the sidebar (toggle with ?) to navigate between configuration steps.</li>
+          <li><strong>Platform Selection</strong>: Choose your device’s vendor and OS. Depending on your choice (e.g., Cisco IOS-XE, Juniper JUNOS, etc.), different configuration templates are applied.</li>
+          <li><strong>AAA & Server Settings</strong>: Enter your AAA methods, RADIUS, and TACACS+ server details.</li>
+          <li><strong>802.1X Settings</strong>: Configure interface, VLAN, and vendor-specific options (including IBNS 2.0 for Cisco devices).</li>
+          <li><strong>CoA, Device Tracking & Port Integration</strong>: Set additional options for dynamic authorization and network monitoring.</li>
+          <li><strong>Generate Config</strong>: Review and download the final CLI configuration.</li>
+          <li><strong>AI Configuration Assistant</strong>: Optionally ask questions about your configuration to get simulated AI suggestions.</li>
+          <li><strong>Reference Architecture</strong>: Coming Soon – Future release will include architecture diagrams.</li>
+          <li><strong>Environmental Discovery</strong>: Coming Soon – Future release will enable automatic environmental discovery.</li>
         </ul>
-        <p>For support, contact <a href="mailto:support@dot1xer.com">support@dot1xer.com</a>.</p>
+        <p>For detailed explanations of each setting, please refer to our documentation at <a href="https://www.wiresandwi.fi/aaa-templates" target="_blank">Wires & Wi-Fi AAA Templates</a> and other vendor resources.</p>
         <button type="button" onclick="showSection('PlatformSelection')">Back to Start</button>
+      </section>
+      <!-- Section: Reference Architecture (Coming Soon) -->
+      <section id="ReferenceArchitecture" class="section">
+        <h2>Reference Architecture</h2>
+        <p>Coming Soon – This section will provide pre-built architecture diagrams based on customer environments, including wired and wireless deployments.</p>
+        <button type="button" onclick="showSection('Help')">Back</button>
+      </section>
+      <!-- Section: Environmental Discovery (Coming Soon) -->
+      <section id="EnvironmentalDiscovery" class="section">
+        <h2>Environmental Discovery</h2>
+        <p>Coming Soon – This section will enable gathering and analyzing details about your network environment (e.g., sites, device types, OS, IoT, BYOD, etc.) to assist in NAC project planning.</p>
+        <button type="button" onclick="showSection('Help')">Back</button>
       </section>
     </div>
   </div>
