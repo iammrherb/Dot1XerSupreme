@@ -12,28 +12,25 @@
     <img src="data:image/png;base64,DOT1XER_SUPREME_LOGO_BASE64" alt="Dot1Xer Supreme Logo" class="logo">
     <h1 class="title">Dot1Xer Supreme Configurator</h1>
   </header>
-  <!-- Top navigation tabs -->
+  <!-- Top Navigation Tabs -->
   <nav class="top-tabs">
-    <button class="tab-btn active" onclick="showTab('configurator')">Configurator</button>
-    <button class="tab-btn" onclick="showTab('ai')">AI Integration</button>
-    <button class="tab-btn" onclick="showTab('reference')">Reference Architecture</button>
-    <button class="tab-btn" onclick="showTab('discovery')">Environmental Discovery</button>
-    <button class="tab-btn" onclick="showTab('help')">Help</button>
+    <button class="tab-btn active" onclick="showTab('configurator', event)">Configurator</button>
+    <button class="tab-btn" onclick="showTab('ai', event)">AI Integration</button>
+    <button class="tab-btn" onclick="showTab('reference', event)">Reference Architecture</button>
+    <button class="tab-btn" onclick="showTab('discovery', event)">Environmental Discovery</button>
+    <button class="tab-btn" onclick="showTab('help', event)">Help</button>
   </nav>
-  <!-- Content Panels -->
+  <!-- Tab Content Panels -->
   <div class="tab-content" id="configurator">
-    <!-- Configurator: step-by-step wizard UI -->
     <h2>Configurator</h2>
-    <p>Use the wizard below to generate advanced AAA/802.1X configurations.</p>
-    <!-- Steps (basic settings, AAA, RADIUS, TACACS, 802.1X, CoA, Device Tracking, VLANs, etc.) -->
-    <!-- The UI here will allow inputs which will be used to replace template placeholders -->
+    <p>Generate advanced AAA/802.1X configuration. Choose your device platform and specify parameters.</p>
     <form id="configForm">
-      <!-- Sample: Platform Selection -->
       <label for="platform">Select Device Platform:</label>
       <select id="platform" name="platform" onchange="updatePlatformInfo()">
         <option value="cisco_iosxe">Cisco IOS-XE (Catalyst)</option>
         <option value="cisco_ios">Cisco IOS (Classic)</option>
         <option value="cisco_wlc_9800">Cisco WLC 9800</option>
+        <option value="cisco_radsec">Cisco RADSEC</option>
         <option value="aruba_aoscx">Aruba AOS-CX</option>
         <option value="juniper_ex">Juniper EX/QFX</option>
         <option value="fortinet_fortiswitch">Fortinet FortiSwitch</option>
@@ -41,17 +38,37 @@
         <option value="extreme_exos">Extreme EXOS</option>
         <option value="huawei">Huawei VRP</option>
         <option value="alcatel">Alcatel-Lucent OmniSwitch</option>
-        <option value="ubiquiti">Ubiquiti (UniFi – instructions)</option>
+        <option value="ubiquiti">Ubiquiti UniFi</option>
       </select>
       <br>
-      <!-- Additional inputs for AAA (RADIUS, TACACS), VLAN IDs, timers etc. -->
       <label for="data_vlan">Data VLAN:</label>
-      <input type="number" id="data_vlan" placeholder="e.g. 10" required>
+      <input type="number" id="data_vlan" placeholder="e.g., 10" required>
       <br>
       <label for="guest_vlan">Guest VLAN:</label>
-      <input type="number" id="guest_vlan" placeholder="e.g. 100">
+      <input type="number" id="guest_vlan" placeholder="e.g., 100">
       <br>
-      <!-- More input fields would be here -->
+      <label for="critical_vlan">Critical/VIP VLAN:</label>
+      <input type="number" id="critical_vlan" placeholder="e.g., 99">
+      <br>
+      <p><em>Additional AAA options (choose one or more):</em></p>
+      <label><input type="checkbox" id="use_radius" checked> RADIUS</label>
+      <label><input type="checkbox" id="use_tacacs"> TACACS+</label>
+      <label><input type="checkbox" id="use_local"> Local AAA</label>
+      <label><input type="checkbox" id="use_radsec"> RADSEC (RADIUS over TLS)</label>
+      <br>
+      <p><em>802.1X Mode:</em></p>
+      <label><input type="radio" name="auth_mode" value="closed" checked> Closed</label>
+      <label><input type="radio" name="auth_mode" value="open"> Open</label>
+      <br>
+      <p><em>MAB Options:</em></p>
+      <label><input type="checkbox" id="use_mab"> Enable MAB fallback</label>
+      <br>
+      <!-- CoA and IBNS advanced options -->
+      <p><em>Advanced Options:</em></p>
+      <label><input type="checkbox" id="use_coa"> Enable CoA (Change of Authorization)</label>
+      <br>
+      <label><input type="checkbox" id="use_ibns"> Enable IBNS 2.0 (Cisco specific)</label>
+      <br>
       <button type="button" onclick="generateConfig()">Generate Config</button>
     </form>
     <pre id="configOutput"></pre>
@@ -59,8 +76,7 @@
 
   <div class="tab-content" id="ai" style="display:none">
     <h2>AI Integration</h2>
-    <p>Ask our integrated AI for configuration advice, troubleshooting tips, and best practices.</p>
-    <!-- AI chat interface placeholder -->
+    <p>Ask our integrated AI for configuration review, troubleshooting tips, or optimization advice.</p>
     <div id="aiChat">
       <textarea placeholder="Type your question here..."></textarea>
       <button onclick="sendAIQuery()">Send</button>
@@ -70,29 +86,29 @@
 
   <div class="tab-content" id="reference" style="display:none">
     <h2>Reference Architecture</h2>
-    <p>This section explains the AAA/802.1X workflow, dynamic VLAN assignment, fallback scenarios, and best practices.</p>
-    <!-- Embedded diagrams and detailed reference texts -->
+    <p>This section contains detailed network diagrams, policy maps, server group configurations, and best practices for AAA/802.1X deployments.</p>
     <img src="data:image/png;base64,DIAGRAM1_BASE64" alt="Network Architecture Diagram" class="diagram">
-    <p><!-- Detailed text explaining the architecture goes here --></p>
+    <p><!-- Detailed architecture reference text goes here --></p>
   </div>
 
   <div class="tab-content" id="discovery" style="display:none">
     <h2>Environmental Discovery</h2>
-    <p>Automatically gather data about your network devices and existing AAA settings.</p>
-    <p><!-- Instructions and summary of discovered parameters go here --></p>
+    <p>This section will eventually integrate network discovery tools to auto-detect devices and AAA settings.</p>
+    <p><!-- Placeholder for network inventory and discovery info --></p>
   </div>
 
   <div class="tab-content" id="help" style="display:none">
-    <h2>Help & Reference</h2>
-    <p>This tool is built using best-practice AAA templates from vendors and community research. For more details, please refer to the documentation below.</p>
+    <h2>Help & Documentation</h2>
+    <p>This tool leverages advanced AAA configuration templates based on industry best practices.</p>
     <ul>
       <li><a href="https://www.wiresandwi.fi/aaa-templates" target="_blank">AAA Templates Reference</a></li>
       <li><a href="https://www.cisco.com" target="_blank">Cisco Documentation</a></li>
       <li><a href="https://www.arubanetworking.com" target="_blank">Aruba Networking</a></li>
       <li><a href="https://www.juniper.net" target="_blank">Juniper Networks</a></li>
-      <!-- More references as needed -->
+      <!-- Additional links as needed -->
     </ul>
   </div>
+
   <script src="js/app.js"></script>
 </body>
 </html>
