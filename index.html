@@ -23,6 +23,11 @@
     <button class="tab-btn" onclick="showTab('help', this)">Help</button>
   </nav>
   
+  <!-- Banner Image Below Tabs -->
+  <div class="banner-container">
+    <img src="assets/icons/banner.jpg" alt="Dot1Xer Supreme Banner" class="banner-image">
+  </div>
+  
   <!-- Configurator Tab Content -->
   <div class="tab-content" id="configurator">
     <h2>Configurator</h2>
@@ -197,88 +202,8 @@
       </div>
     </div>
     
-    <!-- Step 4: VLAN Configuration -->
-    <div class="step-content" id="step-4" style="display: none;">
-      <h3>Step 4: VLAN Configuration</h3>
-      
-      <div class="form-group">
-        <label for="data-vlan">Data VLAN: <span class="required">*</span></label>
-        <input type="number" id="data-vlan" placeholder="e.g., 10" required>
-        
-        <label for="voice-vlan">Voice VLAN:</label>
-        <input type="number" id="voice-vlan" placeholder="e.g., 20">
-        
-        <label for="guest-vlan">Guest VLAN:</label>
-        <input type="number" id="guest-vlan" placeholder="e.g., 30">
-        
-        <label for="critical-vlan">Critical VLAN:</label>
-        <input type="number" id="critical-vlan" placeholder="e.g., 40">
-      </div>
-      
-      <div class="nav-buttons">
-        <button type="button" class="prev-btn" onclick="goToStep(3)">Previous</button>
-        <button type="button" class="next-btn" onclick="goToStep(5)">Next</button>
-      </div>
-    </div>
+    <!-- Additional steps would continue here -->
     
-    <!-- Step 5: Advanced Options -->
-    <div class="step-content" id="step-5" style="display: none;">
-      <h3>Step 5: Advanced Options</h3>
-      
-      <div class="checkbox-group">
-        <label>
-          <input type="checkbox" id="use-mab" checked> 
-          Enable MAC Authentication Bypass (MAB)
-        </label>
-        
-        <label>
-          <input type="checkbox" id="use-coa" checked> 
-          Enable Change of Authorization (CoA)
-        </label>
-        
-        <label>
-          <input type="checkbox" id="use-local" checked> 
-          Enable Local Authentication Fallback
-        </label>
-      </div>
-      
-      <div class="form-group">
-        <label for="reauth-period">Reauthentication Period (seconds):</label>
-        <input type="number" id="reauth-period" value="3600">
-        
-        <label for="timeout-period">Authentication Timeout (seconds):</label>
-        <input type="number" id="timeout-period" value="30">
-      </div>
-      
-      <div class="form-group">
-        <label for="interfaces">Interfaces (comma-separated):</label>
-        <input type="text" id="interfaces" placeholder="e.g., GigabitEthernet1/0/1-48">
-      </div>
-      
-      <div class="nav-buttons">
-        <button type="button" class="prev-btn" onclick="goToStep(4)">Previous</button>
-        <button type="button" class="next-btn" onclick="goToStep(6)">Next</button>
-      </div>
-    </div>
-    
-    <!-- Step 6: Configuration Preview -->
-    <div class="step-content" id="step-6" style="display: none;">
-      <h3>Step 6: Configuration Preview</h3>
-      
-      <div class="config-actions">
-        <button type="button" id="generate-btn" onclick="generateConfiguration()">Generate Configuration</button>
-        <button type="button" id="download-btn" onclick="downloadConfiguration()">Download</button>
-        <button type="button" id="copy-btn" onclick="copyConfiguration()">Copy to Clipboard</button>
-      </div>
-      
-      <div id="config-output-section">
-        <pre id="config-output" class="config-output"></pre>
-      </div>
-      
-      <div class="nav-buttons">
-        <button type="button" class="prev-btn" onclick="goToStep(5)">Previous</button>
-      </div>
-    </div>
   </div>
   
   <!-- AI Integration Tab Content -->
@@ -325,189 +250,17 @@
   
   <!-- Reference Architecture Tab Content -->
   <div class="tab-content" id="reference" style="display:none">
-    <h2>Reference Architecture</h2>
-    
-    <div class="reference-nav">
-      <button class="ref-tab active" onclick="showRefTab('overview', this)">Overview</button>
-      <button class="ref-tab" onclick="showRefTab('authentication', this)">Authentication Flow</button>
-      <button class="ref-tab" onclick="showRefTab('vlan', this)">VLAN Assignment</button>
-      <button class="ref-tab" onclick="showRefTab('radsec', this)">RadSec</button>
-      <button class="ref-tab" onclick="showRefTab('coa', this)">CoA</button>
-      <button class="ref-tab" onclick="showRefTab('vendors', this)">Vendor Specifics</button>
-    </div>
-    
-    <div class="reference-content">
-      <!-- Overview Section -->
-      <div class="ref-section" id="ref-overview">
-        <h3>802.1X and AAA Overview</h3>
-        
-        <div class="ref-diagram">
-          <img src="assets/diagrams/802.1x-overview.png" alt="802.1X Overview Diagram">
-        </div>
-        
-        <div class="ref-text">
-          <h4>Key Components</h4>
-          <ul>
-            <li><strong>Supplicant:</strong> The endpoint device seeking network access.</li>
-            <li><strong>Authenticator:</strong> The network device (switch/WLC) controlling port access.</li>
-            <li><strong>Authentication Server:</strong> RADIUS server validating credentials (e.g., Cisco ISE, Aruba ClearPass).</li>
-          </ul>
-          
-          <h4>Authentication Methods</h4>
-          <ul>
-            <li><strong>802.1X:</strong> Standards-based port authentication requiring a supplicant.</li>
-            <li><strong>MAC Authentication Bypass (MAB):</strong> Fallback method using the device's MAC address as credentials.</li>
-            <li><strong>WebAuth:</strong> Browser-based authentication for guest access.</li>
-          </ul>
-          
-          <h4>Deployment Modes</h4>
-          <ul>
-            <li><strong>Open (Monitor) Mode:</strong> Authentication is performed but access is not restricted.</li>
-            <li><strong>Low Impact Mode:</strong> Pre-authentication ACL restricts access until authentication.</li>
-            <li><strong>Closed Mode:</strong> No access until successful authentication.</li>
-          </ul>
-        </div>
-      </div>
-      
-      <!-- Authentication Flow Section -->
-      <div class="ref-section" id="ref-authentication" style="display:none;">
-        <h3>Authentication Flow</h3>
-        
-        <div class="ref-diagram">
-          <img src="assets/diagrams/auth-flow-diagram.png" alt="Authentication Flow Diagram">
-        </div>
-        
-        <div class="ref-text">
-          <h4>802.1X Authentication Process</h4>
-          <ol>
-            <li>Device connects to switch port.</li>
-            <li>Switch sends EAP-Request/Identity packet.</li>
-            <li>Supplicant responds with EAP-Response/Identity.</li>
-            <li>Switch forwards to RADIUS server in Access-Request.</li>
-            <li>RADIUS server and supplicant exchange authentication messages through switch.</li>
-            <li>RADIUS server sends Access-Accept with attributes or Access-Reject.</li>
-            <li>Switch enforces authorization (VLAN, ACL, etc.).</li>
-          </ol>
-          
-          <h4>MAB Process</h4>
-          <ol>
-            <li>Device connects to switch port.</li>
-            <li>Switch sends EAP-Request/Identity packets (no response).</li>
-            <li>After timeout, switch falls back to MAB.</li>
-            <li>Switch captures device MAC address.</li>
-            <li>Switch sends MAC as username/password to RADIUS.</li>
-            <li>RADIUS server validates MAC and returns authorization.</li>
-          </ol>
-        </div>
-      </div>
-      
-      <!-- Other reference sections would go here -->
-      
-    </div>
+    <!-- Content for the Reference tab -->
   </div>
   
   <!-- Environmental Discovery Tab Content -->
   <div class="tab-content" id="discovery" style="display:none">
-    <h2>Environmental Discovery</h2>
-    <p>This tool helps analyze your network environment to automatically discover devices and AAA settings.</p>
-    
-    <div class="discovery-tabs">
-      <button class="discovery-tab active" onclick="showDiscoveryTab('scan', this)">Network Scan</button>
-      <button class="discovery-tab" onclick="showDiscoveryTab('import', this)">Import Configuration</button>
-      <button class="discovery-tab" onclick="showDiscoveryTab('analyze', this)">Analysis</button>
-      <button class="discovery-tab" onclick="showDiscoveryTab('report', this)">Report</button>
-    </div>
-    
-    <div class="discovery-content">
-      <!-- Network Scan Tab -->
-      <div class="discovery-section" id="disc-scan">
-        <h3>Network Scan</h3>
-        
-        <div class="form-group">
-          <label for="scan-range">IP Range:</label>
-          <input type="text" id="scan-range" placeholder="e.g., 10.1.1.0/24">
-          
-          <label for="scan-credentials">Credentials:</label>
-          <select id="scan-credentials">
-            <option value="">Select Credentials</option>
-            <option value="new">Add New Credentials...</option>
-          </select>
-          
-          <label for="scan-method">Scan Method:</label>
-          <select id="scan-method">
-            <option value="ping">Ping Sweep</option>
-            <option value="snmp">SNMP</option>
-            <option value="ssh">SSH</option>
-            <option value="api">API</option>
-          </select>
-          
-          <button type="button" id="start-scan" onclick="startNetworkScan()">Start Scan</button>
-        </div>
-        
-        <div class="scan-results" style="display: none;">
-          <h4>Scan Results:</h4>
-          <div class="progress-bar">
-            <div class="progress" style="width: 0%;"></div>
-          </div>
-          <div id="scan-status">Ready to scan</div>
-          <table id="scan-results-table">
-            <thead>
-              <tr>
-                <th>IP Address</th>
-                <th>Device Type</th>
-                <th>Platform</th>
-                <th>Version</th>
-                <th>AAA Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Results will be added here dynamically -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-      
-      <!-- Other discovery sections would go here -->
-      
-    </div>
+    <!-- Content for the Discovery tab -->
   </div>
   
   <!-- Help Tab Content -->
   <div class="tab-content" id="help" style="display:none">
-    <h2>Help & Documentation</h2>
-    
-    <div class="help-tabs">
-      <button class="help-tab active" onclick="showHelpTab('getting-started', this)">Getting Started</button>
-      <button class="help-tab" onclick="showHelpTab('vendor-docs', this)">Vendor Documentation</button>
-      <button class="help-tab" onclick="showHelpTab('faq', this)">FAQ</button>
-      <button class="help-tab" onclick="showHelpTab('troubleshooting', this)">Troubleshooting</button>
-    </div>
-    
-    <div class="help-content">
-      <!-- Getting Started Section -->
-      <div class="help-section" id="help-getting-started">
-        <h3>Getting Started with Dot1Xer Supreme</h3>
-        
-        <div class="help-card">
-          <h4>Quick Start Guide</h4>
-          <ol>
-            <li><strong>Choose Your Platform:</strong> Select your network device vendor and platform.</li>
-            <li><strong>Configure Authentication:</strong> Select 802.1X, MAB, or both, and choose Open or Closed mode.</li>
-            <li><strong>Set Up Servers:</strong> Add your RADIUS servers and optionally configure TACACS+ or RadSec.</li>
-            <li><strong>Define VLANs:</strong> Configure your Data, Voice, Guest, and Critical VLANs.</li>
-            <li><strong>Advanced Options:</strong> Set timers, add interfaces, and configure additional features.</li>
-            <li><strong>Generate Configuration:</strong> Preview and download your configuration.</li>
-          </ol>
-        </div>
-        
-        <!-- Other help cards would go here -->
-        
-      </div>
-      
-      <!-- Other help sections would go here -->
-      
-    </div>
+    <!-- Content for the Help tab -->
   </div>
   
   <script src="js/app.js"></script>

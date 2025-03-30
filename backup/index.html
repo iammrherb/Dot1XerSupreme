@@ -5,110 +5,511 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dot1Xer Supreme Configurator</title>
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <header>
-    <img src="data:image/png;base64,DOT1XER_SUPREME_LOGO_BASE64" alt="Dot1Xer Supreme Logo" class="logo">
+    <div class="logo-container">
+      <img src="assets/icons/logo.png" alt="Dot1Xer Supreme Logo" class="logo">
+    </div>
     <h1 class="title">Dot1Xer Supreme Configurator</h1>
   </header>
+  
   <!-- Top Navigation Tabs -->
   <nav class="top-tabs">
-    <button class="tab-btn active" onclick="showTab('configurator', event)">Configurator</button>
-    <button class="tab-btn" onclick="showTab('ai', event)">AI Integration</button>
-    <button class="tab-btn" onclick="showTab('reference', event)">Reference Architecture</button>
-    <button class="tab-btn" onclick="showTab('discovery', event)">Environmental Discovery</button>
-    <button class="tab-btn" onclick="showTab('help', event)">Help</button>
+    <button class="tab-btn active" onclick="showTab('configurator', this)">Configurator</button>
+    <button class="tab-btn" onclick="showTab('ai', this)">AI Integration</button>
+    <button class="tab-btn" onclick="showTab('reference', this)">Reference Architecture</button>
+    <button class="tab-btn" onclick="showTab('discovery', this)">Environmental Discovery</button>
+    <button class="tab-btn" onclick="showTab('help', this)">Help</button>
   </nav>
-  <!-- Tab Content Panels -->
+  
+  <!-- Configurator Tab Content -->
   <div class="tab-content" id="configurator">
     <h2>Configurator</h2>
-    <p>Generate advanced AAA/802.1X configuration. Choose your device platform and specify parameters.</p>
-    <form id="configForm">
-      <label for="platform">Select Device Platform:</label>
-      <select id="platform" name="platform" onchange="updatePlatformInfo()">
-        <option value="cisco_iosxe">Cisco IOS-XE (Catalyst)</option>
-        <option value="cisco_ios">Cisco IOS (Classic)</option>
-        <option value="cisco_wlc_9800">Cisco WLC 9800</option>
-        <option value="cisco_radsec">Cisco RADSEC</option>
-        <option value="aruba_aoscx">Aruba AOS-CX</option>
-        <option value="juniper_ex">Juniper EX/QFX</option>
-        <option value="fortinet_fortiswitch">Fortinet FortiSwitch</option>
-        <option value="arista_eos">Arista EOS</option>
-        <option value="extreme_exos">Extreme EXOS</option>
-        <option value="huawei">Huawei VRP</option>
-        <option value="alcatel">Alcatel-Lucent OmniSwitch</option>
-        <option value="ubiquiti">Ubiquiti UniFi</option>
-      </select>
-      <br>
-      <label for="data_vlan">Data VLAN:</label>
-      <input type="number" id="data_vlan" placeholder="e.g., 10" required>
-      <br>
-      <label for="guest_vlan">Guest VLAN:</label>
-      <input type="number" id="guest_vlan" placeholder="e.g., 100">
-      <br>
-      <label for="critical_vlan">Critical/VIP VLAN:</label>
-      <input type="number" id="critical_vlan" placeholder="e.g., 99">
-      <br>
-      <p><em>Additional AAA options (choose one or more):</em></p>
-      <label><input type="checkbox" id="use_radius" checked> RADIUS</label>
-      <label><input type="checkbox" id="use_tacacs"> TACACS+</label>
-      <label><input type="checkbox" id="use_local"> Local AAA</label>
-      <label><input type="checkbox" id="use_radsec"> RADSEC (RADIUS over TLS)</label>
-      <br>
-      <p><em>802.1X Mode:</em></p>
-      <label><input type="radio" name="auth_mode" value="closed" checked> Closed</label>
-      <label><input type="radio" name="auth_mode" value="open"> Open</label>
-      <br>
-      <p><em>MAB Options:</em></p>
-      <label><input type="checkbox" id="use_mab"> Enable MAB fallback</label>
-      <br>
-      <!-- CoA and IBNS advanced options -->
-      <p><em>Advanced Options:</em></p>
-      <label><input type="checkbox" id="use_coa"> Enable CoA (Change of Authorization)</label>
-      <br>
-      <label><input type="checkbox" id="use_ibns"> Enable IBNS 2.0 (Cisco specific)</label>
-      <br>
-      <button type="button" onclick="generateConfig()">Generate Config</button>
-    </form>
-    <pre id="configOutput"></pre>
+    <p>Follow the steps below to generate your advanced AAA/802.1X configuration.</p>
+    
+    <div class="step-indicator">
+      <div class="step active" data-step="1">Platform</div>
+      <div class="step" data-step="2">Authentication</div>
+      <div class="step" data-step="3">Servers</div>
+      <div class="step" data-step="4">VLANs</div>
+      <div class="step" data-step="5">Advanced</div>
+      <div class="step" data-step="6">Preview</div>
+    </div>
+    
+    <div id="error-message" class="error-message" style="display: none;"></div>
+    
+    <!-- Step 1: Platform Selection -->
+    <div class="step-content" id="step-1">
+      <h3>Step 1: Platform Selection</h3>
+      
+      <div class="form-group">
+        <label for="vendor-select">Vendor:</label>
+        <select id="vendor-select" name="vendor">
+          <option value="cisco">Cisco</option>
+          <option value="aruba">Aruba (HPE)</option>
+          <option value="juniper">Juniper</option>
+          <option value="fortinet">Fortinet</option>
+          <option value="arista">Arista</option>
+          <option value="extreme">Extreme Networks</option>
+          <option value="huawei">Huawei</option>
+          <option value="alcatel">Alcatel-Lucent</option>
+          <option value="ubiquiti">Ubiquiti</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="platform-select">Platform:</label>
+        <select id="platform-select" name="platform">
+          <!-- Options populated dynamically based on vendor selection -->
+          <option value="ios-xe">IOS-XE (Catalyst 9000)</option>
+          <option value="ios">IOS (Classic)</option>
+          <option value="wlc">WLC 9800</option>
+        </select>
+      </div>
+      
+      <div class="platform-info">
+        <h4>Platform Details</h4>
+        <div id="platform-description">
+          <p>Cisco IOS-XE supports IBNS 2.0 with advanced policy maps and both open and closed authentication modes.</p>
+        </div>
+      </div>
+      
+      <div class="nav-buttons">
+        <button type="button" class="next-btn" onclick="goToStep(2)">Next</button>
+      </div>
+    </div>
+    
+    <!-- Step 2: Authentication Method -->
+    <div class="step-content" id="step-2" style="display: none;">
+      <h3>Step 2: Authentication Method</h3>
+      
+      <div class="form-group">
+        <label for="auth-method">Authentication Method:</label>
+        <select id="auth-method" name="auth_method">
+          <option value="dot1x-mab">802.1X with MAB Fallback (Sequential)</option>
+          <option value="concurrent">802.1X and MAB Concurrent</option>
+          <option value="dot1x-only">802.1X Only</option>
+          <option value="mab-only">MAC Authentication Only</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Authentication Mode:</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="auth_mode" value="closed" checked> 
+            Closed Mode (No access until authentication succeeds)
+          </label>
+          <label>
+            <input type="radio" name="auth_mode" value="open"> 
+            Open Mode (Allow limited access before authentication)
+          </label>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Host Mode:</label>
+        <select id="host-mode" name="host_mode">
+          <option value="single-host">Single Host (One device per port)</option>
+          <option value="multi-auth">Multi-Auth (Multiple devices, each authenticated)</option>
+          <option value="multi-domain">Multi-Domain (One voice, one data device)</option>
+          <option value="multi-host">Multi-Host (One auth for all devices)</option>
+        </select>
+      </div>
+      
+      <div class="nav-buttons">
+        <button type="button" class="prev-btn" onclick="goToStep(1)">Previous</button>
+        <button type="button" class="next-btn" onclick="goToStep(3)">Next</button>
+      </div>
+    </div>
+    
+    <!-- Step 3: Server Configuration -->
+    <div class="step-content" id="step-3" style="display: none;">
+      <h3>Step 3: Server Configuration</h3>
+      
+      <h4>RADIUS Servers</h4>
+      <div class="form-group">
+        <label for="radius-ip-1">Primary Server IP:</label>
+        <input type="text" id="radius-ip-1" placeholder="e.g., 10.1.1.100">
+        
+        <label for="radius-key-1">Primary Shared Secret:</label>
+        <input type="password" id="radius-key-1" placeholder="Shared secret">
+        
+        <label for="radius-ip-2">Secondary Server IP:</label>
+        <input type="text" id="radius-ip-2" placeholder="e.g., 10.1.1.101">
+        
+        <label for="radius-key-2">Secondary Shared Secret:</label>
+        <input type="password" id="radius-key-2" placeholder="Shared secret">
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="use-tacacs"> 
+          Configure TACACS+ for Device Administration
+        </label>
+      </div>
+      
+      <div id="tacacs-options" style="display: none;">
+        <h4>TACACS+ Servers</h4>
+        <div class="form-group">
+          <label for="tacacs-ip-1">Primary Server IP:</label>
+          <input type="text" id="tacacs-ip-1" placeholder="e.g., 10.1.1.102">
+          
+          <label for="tacacs-key-1">Primary Shared Secret:</label>
+          <input type="password" id="tacacs-key-1" placeholder="Shared secret">
+          
+          <label for="tacacs-ip-2">Secondary Server IP:</label>
+          <input type="text" id="tacacs-ip-2" placeholder="e.g., 10.1.1.103">
+          
+          <label for="tacacs-key-2">Secondary Shared Secret:</label>
+          <input type="password" id="tacacs-key-2" placeholder="Shared secret">
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="use-radsec"> 
+          Configure RADIUS over TLS (RadSec)
+        </label>
+      </div>
+      
+      <div id="radsec-options" style="display: none;">
+        <h4>RadSec Configuration</h4>
+        <div class="form-group">
+          <label for="radsec-ip">Server IP:</label>
+          <input type="text" id="radsec-ip" placeholder="e.g., 10.1.1.104">
+          
+          <label for="radsec-key">Shared Secret:</label>
+          <input type="password" id="radsec-key" placeholder="Shared secret">
+          
+          <label for="client-trustpoint">Client Trustpoint:</label>
+          <input type="text" id="client-trustpoint" placeholder="e.g., SWITCH-CERT">
+          
+          <label for="server-trustpoint">Server Trustpoint:</label>
+          <input type="text" id="server-trustpoint" placeholder="e.g., ISE-CERT">
+        </div>
+      </div>
+      
+      <div class="nav-buttons">
+        <button type="button" class="prev-btn" onclick="goToStep(2)">Previous</button>
+        <button type="button" class="next-btn" onclick="goToStep(4)">Next</button>
+      </div>
+    </div>
+    
+    <!-- Step 4: VLAN Configuration -->
+    <div class="step-content" id="step-4" style="display: none;">
+      <h3>Step 4: VLAN Configuration</h3>
+      
+      <div class="form-group">
+        <label for="data-vlan">Data VLAN: <span class="required">*</span></label>
+        <input type="number" id="data-vlan" placeholder="e.g., 10" required>
+        
+        <label for="voice-vlan">Voice VLAN:</label>
+        <input type="number" id="voice-vlan" placeholder="e.g., 20">
+        
+        <label for="guest-vlan">Guest VLAN:</label>
+        <input type="number" id="guest-vlan" placeholder="e.g., 30">
+        
+        <label for="critical-vlan">Critical VLAN:</label>
+        <input type="number" id="critical-vlan" placeholder="e.g., 40">
+      </div>
+      
+      <div class="nav-buttons">
+        <button type="button" class="prev-btn" onclick="goToStep(3)">Previous</button>
+        <button type="button" class="next-btn" onclick="goToStep(5)">Next</button>
+      </div>
+    </div>
+    
+    <!-- Step 5: Advanced Options -->
+    <div class="step-content" id="step-5" style="display: none;">
+      <h3>Step 5: Advanced Options</h3>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="use-mab" checked> 
+          Enable MAC Authentication Bypass (MAB)
+        </label>
+        
+        <label>
+          <input type="checkbox" id="use-coa" checked> 
+          Enable Change of Authorization (CoA)
+        </label>
+        
+        <label>
+          <input type="checkbox" id="use-local" checked> 
+          Enable Local Authentication Fallback
+        </label>
+      </div>
+      
+      <div class="form-group">
+        <label for="reauth-period">Reauthentication Period (seconds):</label>
+        <input type="number" id="reauth-period" value="3600">
+        
+        <label for="timeout-period">Authentication Timeout (seconds):</label>
+        <input type="number" id="timeout-period" value="30">
+      </div>
+      
+      <div class="form-group">
+        <label for="interfaces">Interfaces (comma-separated):</label>
+        <input type="text" id="interfaces" placeholder="e.g., GigabitEthernet1/0/1-48">
+      </div>
+      
+      <div class="nav-buttons">
+        <button type="button" class="prev-btn" onclick="goToStep(4)">Previous</button>
+        <button type="button" class="next-btn" onclick="goToStep(6)">Next</button>
+      </div>
+    </div>
+    
+    <!-- Step 6: Configuration Preview -->
+    <div class="step-content" id="step-6" style="display: none;">
+      <h3>Step 6: Configuration Preview</h3>
+      
+      <div class="config-actions">
+        <button type="button" id="generate-btn" onclick="generateConfiguration()">Generate Configuration</button>
+        <button type="button" id="download-btn" onclick="downloadConfiguration()">Download</button>
+        <button type="button" id="copy-btn" onclick="copyConfiguration()">Copy to Clipboard</button>
+      </div>
+      
+      <div id="config-output-section">
+        <pre id="config-output" class="config-output"></pre>
+      </div>
+      
+      <div class="nav-buttons">
+        <button type="button" class="prev-btn" onclick="goToStep(5)">Previous</button>
+      </div>
+    </div>
   </div>
-
+  
+  <!-- AI Integration Tab Content -->
   <div class="tab-content" id="ai" style="display:none">
     <h2>AI Integration</h2>
     <p>Ask our integrated AI for configuration review, troubleshooting tips, or optimization advice.</p>
-    <div id="aiChat">
-      <textarea placeholder="Type your question here..."></textarea>
-      <button onclick="sendAIQuery()">Send</button>
-      <div id="aiResponse"></div>
+    
+    <div class="ai-chat-container">
+      <div class="chat-history" id="chat-history">
+        <!-- Initial AI greeting message -->
+        <div class="ai-message">
+          <div class="message-avatar">
+            <img src="assets/icons/ai-avatar.png" alt="AI">
+          </div>
+          <div class="message-content">
+            <p>Hello! I can help with your AAA/802.1X configuration. I can:</p>
+            <ul>
+              <li>Review your generated configuration for best practices</li>
+              <li>Suggest optimizations for your specific environment</li>
+              <li>Help troubleshoot common issues</li>
+              <li>Explain complex configuration sections</li>
+            </ul>
+            <p>What would you like assistance with today?</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chat-input">
+        <textarea id="ai-query" placeholder="Ask a question about your configuration..." rows="3"></textarea>
+        <button id="send-query" onclick="sendAIQuery()">
+          <img src="assets/icons/send.png" alt="Send">
+        </button>
+      </div>
+      
+      <div class="suggested-queries">
+        <h4>Suggested Questions:</h4>
+        <button class="query-suggestion" onclick="useQuerySuggestion(this)">Review my configuration for security issues</button>
+        <button class="query-suggestion" onclick="useQuerySuggestion(this)">What's the difference between Open and Closed mode?</button>
+        <button class="query-suggestion" onclick="useQuerySuggestion(this)">Explain the RADIUS CoA settings in my config</button>
+        <button class="query-suggestion" onclick="useQuerySuggestion(this)">How can I optimize this for a large network?</button>
+      </div>
     </div>
   </div>
-
+  
+  <!-- Reference Architecture Tab Content -->
   <div class="tab-content" id="reference" style="display:none">
     <h2>Reference Architecture</h2>
-    <p>This section contains detailed network diagrams, policy maps, server group configurations, and best practices for AAA/802.1X deployments.</p>
-    <img src="data:image/png;base64,DIAGRAM1_BASE64" alt="Network Architecture Diagram" class="diagram">
-    <p><!-- Detailed architecture reference text goes here --></p>
+    
+    <div class="reference-nav">
+      <button class="ref-tab active" onclick="showRefTab('overview', this)">Overview</button>
+      <button class="ref-tab" onclick="showRefTab('authentication', this)">Authentication Flow</button>
+      <button class="ref-tab" onclick="showRefTab('vlan', this)">VLAN Assignment</button>
+      <button class="ref-tab" onclick="showRefTab('radsec', this)">RadSec</button>
+      <button class="ref-tab" onclick="showRefTab('coa', this)">CoA</button>
+      <button class="ref-tab" onclick="showRefTab('vendors', this)">Vendor Specifics</button>
+    </div>
+    
+    <div class="reference-content">
+      <!-- Overview Section -->
+      <div class="ref-section" id="ref-overview">
+        <h3>802.1X and AAA Overview</h3>
+        
+        <div class="ref-diagram">
+          <img src="assets/diagrams/802.1x-overview.png" alt="802.1X Overview Diagram">
+        </div>
+        
+        <div class="ref-text">
+          <h4>Key Components</h4>
+          <ul>
+            <li><strong>Supplicant:</strong> The endpoint device seeking network access.</li>
+            <li><strong>Authenticator:</strong> The network device (switch/WLC) controlling port access.</li>
+            <li><strong>Authentication Server:</strong> RADIUS server validating credentials (e.g., Cisco ISE, Aruba ClearPass).</li>
+          </ul>
+          
+          <h4>Authentication Methods</h4>
+          <ul>
+            <li><strong>802.1X:</strong> Standards-based port authentication requiring a supplicant.</li>
+            <li><strong>MAC Authentication Bypass (MAB):</strong> Fallback method using the device's MAC address as credentials.</li>
+            <li><strong>WebAuth:</strong> Browser-based authentication for guest access.</li>
+          </ul>
+          
+          <h4>Deployment Modes</h4>
+          <ul>
+            <li><strong>Open (Monitor) Mode:</strong> Authentication is performed but access is not restricted.</li>
+            <li><strong>Low Impact Mode:</strong> Pre-authentication ACL restricts access until authentication.</li>
+            <li><strong>Closed Mode:</strong> No access until successful authentication.</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Authentication Flow Section -->
+      <div class="ref-section" id="ref-authentication" style="display:none;">
+        <h3>Authentication Flow</h3>
+        
+        <div class="ref-diagram">
+          <img src="assets/diagrams/auth-flow-diagram.png" alt="Authentication Flow Diagram">
+        </div>
+        
+        <div class="ref-text">
+          <h4>802.1X Authentication Process</h4>
+          <ol>
+            <li>Device connects to switch port.</li>
+            <li>Switch sends EAP-Request/Identity packet.</li>
+            <li>Supplicant responds with EAP-Response/Identity.</li>
+            <li>Switch forwards to RADIUS server in Access-Request.</li>
+            <li>RADIUS server and supplicant exchange authentication messages through switch.</li>
+            <li>RADIUS server sends Access-Accept with attributes or Access-Reject.</li>
+            <li>Switch enforces authorization (VLAN, ACL, etc.).</li>
+          </ol>
+          
+          <h4>MAB Process</h4>
+          <ol>
+            <li>Device connects to switch port.</li>
+            <li>Switch sends EAP-Request/Identity packets (no response).</li>
+            <li>After timeout, switch falls back to MAB.</li>
+            <li>Switch captures device MAC address.</li>
+            <li>Switch sends MAC as username/password to RADIUS.</li>
+            <li>RADIUS server validates MAC and returns authorization.</li>
+          </ol>
+        </div>
+      </div>
+      
+      <!-- Other reference sections would go here -->
+      
+    </div>
   </div>
-
+  
+  <!-- Environmental Discovery Tab Content -->
   <div class="tab-content" id="discovery" style="display:none">
     <h2>Environmental Discovery</h2>
-    <p>This section will eventually integrate network discovery tools to auto-detect devices and AAA settings.</p>
-    <p><!-- Placeholder for network inventory and discovery info --></p>
+    <p>This tool helps analyze your network environment to automatically discover devices and AAA settings.</p>
+    
+    <div class="discovery-tabs">
+      <button class="discovery-tab active" onclick="showDiscoveryTab('scan', this)">Network Scan</button>
+      <button class="discovery-tab" onclick="showDiscoveryTab('import', this)">Import Configuration</button>
+      <button class="discovery-tab" onclick="showDiscoveryTab('analyze', this)">Analysis</button>
+      <button class="discovery-tab" onclick="showDiscoveryTab('report', this)">Report</button>
+    </div>
+    
+    <div class="discovery-content">
+      <!-- Network Scan Tab -->
+      <div class="discovery-section" id="disc-scan">
+        <h3>Network Scan</h3>
+        
+        <div class="form-group">
+          <label for="scan-range">IP Range:</label>
+          <input type="text" id="scan-range" placeholder="e.g., 10.1.1.0/24">
+          
+          <label for="scan-credentials">Credentials:</label>
+          <select id="scan-credentials">
+            <option value="">Select Credentials</option>
+            <option value="new">Add New Credentials...</option>
+          </select>
+          
+          <label for="scan-method">Scan Method:</label>
+          <select id="scan-method">
+            <option value="ping">Ping Sweep</option>
+            <option value="snmp">SNMP</option>
+            <option value="ssh">SSH</option>
+            <option value="api">API</option>
+          </select>
+          
+          <button type="button" id="start-scan" onclick="startNetworkScan()">Start Scan</button>
+        </div>
+        
+        <div class="scan-results" style="display: none;">
+          <h4>Scan Results:</h4>
+          <div class="progress-bar">
+            <div class="progress" style="width: 0%;"></div>
+          </div>
+          <div id="scan-status">Ready to scan</div>
+          <table id="scan-results-table">
+            <thead>
+              <tr>
+                <th>IP Address</th>
+                <th>Device Type</th>
+                <th>Platform</th>
+                <th>Version</th>
+                <th>AAA Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Results will be added here dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Other discovery sections would go here -->
+      
+    </div>
   </div>
-
+  
+  <!-- Help Tab Content -->
   <div class="tab-content" id="help" style="display:none">
     <h2>Help & Documentation</h2>
-    <p>This tool leverages advanced AAA configuration templates based on industry best practices.</p>
-    <ul>
-      <li><a href="https://www.wiresandwi.fi/aaa-templates" target="_blank">AAA Templates Reference</a></li>
-      <li><a href="https://www.cisco.com" target="_blank">Cisco Documentation</a></li>
-      <li><a href="https://www.arubanetworking.com" target="_blank">Aruba Networking</a></li>
-      <li><a href="https://www.juniper.net" target="_blank">Juniper Networks</a></li>
-      <!-- Additional links as needed -->
-    </ul>
+    
+    <div class="help-tabs">
+      <button class="help-tab active" onclick="showHelpTab('getting-started', this)">Getting Started</button>
+      <button class="help-tab" onclick="showHelpTab('vendor-docs', this)">Vendor Documentation</button>
+      <button class="help-tab" onclick="showHelpTab('faq', this)">FAQ</button>
+      <button class="help-tab" onclick="showHelpTab('troubleshooting', this)">Troubleshooting</button>
+    </div>
+    
+    <div class="help-content">
+      <!-- Getting Started Section -->
+      <div class="help-section" id="help-getting-started">
+        <h3>Getting Started with Dot1Xer Supreme</h3>
+        
+        <div class="help-card">
+          <h4>Quick Start Guide</h4>
+          <ol>
+            <li><strong>Choose Your Platform:</strong> Select your network device vendor and platform.</li>
+            <li><strong>Configure Authentication:</strong> Select 802.1X, MAB, or both, and choose Open or Closed mode.</li>
+            <li><strong>Set Up Servers:</strong> Add your RADIUS servers and optionally configure TACACS+ or RadSec.</li>
+            <li><strong>Define VLANs:</strong> Configure your Data, Voice, Guest, and Critical VLANs.</li>
+            <li><strong>Advanced Options:</strong> Set timers, add interfaces, and configure additional features.</li>
+            <li><strong>Generate Configuration:</strong> Preview and download your configuration.</li>
+          </ol>
+        </div>
+        
+        <!-- Other help cards would go here -->
+        
+      </div>
+      
+      <!-- Other help sections would go here -->
+      
+    </div>
   </div>
-
+  
   <script src="js/app.js"></script>
 </body>
 </html>
