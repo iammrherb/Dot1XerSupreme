@@ -6,7 +6,6 @@ let configData = {
     dot1x: {},
     coa: {},
     deviceTracking: {},
-    ibns: {},
     port: {}
 };
 
@@ -21,7 +20,6 @@ function showSection(sectionId) {
     // Hide all sections
     const sections = document.getElementsByClassName('section');
     for (let i = 0; i < sections.length; i++) {
-        sections[i].style.display = 'none';
         sections[i].classList.remove('active');
     }
 
@@ -34,15 +32,19 @@ function showSection(sectionId) {
     // Show the selected section and mark the link as active
     const selectedSection = document.getElementById(sectionId);
     if (selectedSection) {
-        selectedSection.style.display = 'block';
         selectedSection.classList.add('active');
         const selectedLink = document.querySelector(`a[onclick="showSection('${sectionId}')"]`);
         if (selectedLink) {
             selectedLink.classList.add('active');
+        } else {
+            console.error(`Link for section ${sectionId} not found.`);
         }
     } else {
         console.error(`Section with ID ${sectionId} not found.`);
     }
+
+    // Update Cisco-specific settings visibility
+    updateCiscoSettingsVisibility();
 }
 
 function updatePlatformInfo() {
@@ -58,6 +60,17 @@ function updatePlatformInfo() {
         'arista_eos': "Arista: EOS: EOS switches with 802.1X capabilities."
     };
     platformInfo.innerHTML = `<p><strong>${info[platform].split(':')[0]}: ${info[platform].split(':')[1]}:</strong> ${info[platform].split(':')[2]}</p>`;
+    updateCiscoSettingsVisibility();
+}
+
+function updateCiscoSettingsVisibility() {
+    const platform = configData.platform;
+    const ciscoSettings = document.getElementById('ciscoSettings');
+    if (platform === 'cisco_iosxe' || platform === 'cisco_nxos') {
+        ciscoSettings.style.display = 'block';
+    } else {
+        ciscoSettings.style.display = 'none';
+    }
 }
 
 function generateConfig() {
@@ -86,7 +99,12 @@ function generateConfig() {
         interface: document.getElementById('dot1x_interface').value,
         vlan: document.getElementById('dot1x_vlan').value,
         reauth: document.getElementById('dot1x_reauth').value || 3600,
-        tx: document.getElementById('dot1x_tx').value || 10
+        tx: document.getElementById('dot1x_tx').value || 10,
+        mode: document.getElementById('dot1x_mode') ? document.getElementById('dot1x_mode').value : 'closed',
+        ibns: {
+            enable: document.getElementById('ibns_enable') ? document.getElementById('ibns_enable').checked : false,
+            policy: document.getElementById('ibns_policy') ? document.getElementById('ibns_policy').value || 'DOT1X_MAB_POLICY' : 'DOT1X_MAB_POLICY'
+        }
     };
 
     // CoA
@@ -99,12 +117,6 @@ function generateConfig() {
     configData.deviceTracking = {
         enable: document.getElementById('device_tracking_enable').checked,
         policy: document.getElementById('device_tracking_policy').value || 'IP-TRACKING'
-    };
-
-    // IBNS 2.0
-    configData.ibns = {
-        enable: document.getElementById('ibns_enable').checked,
-        policy: document.getElementById('ibns_policy').value || 'DOT1X_MAB_POLICY'
     };
 
     // Port Integration
@@ -129,15 +141,18 @@ function generateConfig() {
             config += `ip device tracking\n`;
             config += `device-tracking policy ${configData.deviceTracking.policy}\n`;
         }
-        if (configData.ibns.enable) {
-            config += `policy-map type control subscriber ${configData.ibns.policy}\n`;
-            config  config += ` event session-started match-all\n  10 class always do-until-failure\n   10 authenticate using dot1x priority 10\n`;
+        if (configData.dot1x.ibns.enable) {
+            config += `policy-map type control subscriber ${configData.dot1x.ibns.policy}\n`;
+            config += ` event session-started match-all\n  10 class always do-until-failure\n   10 authenticate using dot1x priority 10\n`;
         }
         config += `interface ${configData.dot1x.interface}\n`;
         config += ` switchport mode ${configData.port.mode}\n`;
         config += ` switchport access vlan ${configData.dot1x.vlan}\n`;
         config += ` authentication host-mode ${configData.port.hostMode}\n`;
         config += ` authentication port-control auto\n`;
+        if (configData.dot1x.mode === 'open') {
+            config += ` authentication open\n`;
+        }
         config += ` dot1x pae authenticator\n`;
         config += ` dot1x timeout tx-period ${configData.dot1x.tx}\n`;
     } else if (configData.platform === 'cisco_nxos') {
@@ -146,9 +161,16 @@ function generateConfig() {
             config += `aaa authentication dot1x default group radius\n`;
             config += `radius-server host ${configData.radius.ip} key ${configData.radius.key} auth-port 1812 acct-port 1813\n`;
         }
+        if (configData.dot1x.ibns.enable) {
+            config += `policy-map type control subscriber ${configData.dot1x.ibns.policy}\n`;
+            config += ` event session-started match-all\n  10 class always do-until-failure\n   10 authenticate using dot1x priority 10\n`;
+        }
         config += `interface ${configData.dot1x.interface}\n`;
         config += ` switchport access vlan ${configData.dot1x.vlan}\n`;
         config += ` dot1x port-control auto\n`;
+        if (configData.dot1x.mode === 'open') {
+            config += ` dot1x open\n`;
+        }
         config += ` dot1x timeout reauth-period ${configData.dot1x.reauth}\n`;
     } else if (configData.platform === 'aruba_arubaos') {
         config += `aaa authentication dot1x "dot1x-profile"\n dot1x enable\n`;
