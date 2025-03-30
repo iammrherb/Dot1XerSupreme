@@ -7,12 +7,12 @@
     "theme_color": "#00d4ff",
     "icons": [
         {
-            "src": "assets/icons/dot1xer-supreme-logo.png",
+            "src": "data:image/png;base64,DOT1XER_SUPREME_LOGO_BASE64",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "assets/icons/dot1xer-supreme-logo.png",
+            "src": "data:image/png;base64,DOT1XER_SUPREME_LOGO_BASE64",
             "sizes": "512x512",
             "type": "image/png"
         }

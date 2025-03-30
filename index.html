@@ -1,146 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Dot1Xer Supreme – Multi-Step</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
-  />
-  <link rel="stylesheet" href="css/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dot1xer Supreme Configurator</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <div id="app" class="container-fluid">
-    <header class="text-center p-3 text-white mb-4">
-      <div class="d-flex justify-content-center align-items-center">
-        <img src="assets/icons/supreme-logo.png" alt="Logo" style="height:50px; margin-right:15px;">
-        <div>
-          <h1>Dot1Xer Supreme</h1>
-          <p class="mb-0">Multi-Step 802.1X Config Generator – Powered by Vue.js</p>
-        </div>
-      </div>
+    <div class="circuit-bg"></div>
+    <header>
+        <img src="data:image/png;base64,DOT1XER_SUPREME_LOGO_BASE64" alt="Dot1xer Supreme Logo" class="logo">
     </header>
-
-    <div class="row">
-      <!-- Sidebar -->
-      <div class="col-md-3">
-        <div class="card mb-3">
-          <div class="card-header bg-primary text-white">Configuration Steps</div>
-          <div class="list-group list-group-flush">
-            <!-- One link per step -->
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='platform' }"
-               @click="currentStep='platform'">1. Platform Selection</a>
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='basicInfo' }"
-               @click="currentStep='basicInfo'">2. Basic Settings</a>
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='aaa' }"
-               @click="currentStep='aaa'">3. AAA Configuration</a>
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='radius' }"
-               @click="currentStep='radius'">4. RADIUS Servers</a>
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='tacacs' }"
-               @click="currentStep='tacacs'">5. TACACS+ Servers</a>
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='dot1x' }"
-               @click="currentStep='dot1x'">6. 802.1X Settings</a>
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='coa' }"
-               @click="currentStep='coa'">7. CoA Configuration</a>
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='radsec' }"
-               @click="currentStep='radsec'">8. RADSEC</a>
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='deviceTracking' }"
-               @click="currentStep='deviceTracking'">9. Device Tracking</a>
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='ibns' }"
-               @click="currentStep='ibns'">10. IBNS 2.0</a>
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='portnox' }"
-               @click="currentStep='portnox'">11. Portnox</a>
-            <a href="#" class="list-group-item list-group-item-action"
-               :class="{ active: currentStep==='aiAssist' }"
-               @click="currentStep='aiAssist'">12. AI Assist</a>
-          </div>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <button class="menu-btn" onclick="toggleSidebar()">â˜°</button>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showSection('PlatformSelection')" class="active">1. Platform Selection</a></li>
+                    <li><a href="#" onclick="showSection('AAASettings')">2. AAA Settings</a></li>
+                    <li><a href="#" onclick="showSection('RADIUSServers')">3. RADIUS Servers</a></li>
+                    <li><a href="#" onclick="showSection('TACACS')">4. TACACS+ Servers</a></li>
+                    <li><a href="#" onclick="showSection('Dot1XSettings')">5. 802.1X Settings</a></li>
+                    <li><a href="#" onclick="showSection('CoA')">6. CoA</a></li>
+                    <li><a href="#" onclick="showSection('DeviceTracking')">7. Device Tracking</a></li>
+                    <li><a href="#" onclick="showSection('IBNS')">8. IBNS 2.0</a></li>
+                    <li><a href="#" onclick="showSection('PortIntegration')">9. Port Integration</a></li>
+                    <li><a href="#" onclick="showSection('GenerateConfig')">10. Generate Configuration</a></li>
+                    <li><a href="#" onclick="showSection('Help')">11. Help</a></li>
+                </ul>
+            </nav>
         </div>
 
-        <div class="card">
-          <div class="card-body">
-            <!-- Progress bar -->
-            <div class="progress mb-3">
-              <div class="progress-bar bg-success" :style="{ width: progress + '%' }"></div>
-            </div>
-            <!-- Generate, Save, Load, Download -->
-            <button class="btn btn-success w-100 mb-2" @click="generateConfig">
-              Generate Configuration
-            </button>
-            <div class="btn-group w-100 mb-2">
-              <button class="btn btn-outline-primary" @click="saveConfig">Save</button>
-              <button class="btn btn-outline-secondary" @click="loadConfig">Load</button>
-              <button class="btn btn-outline-dark" :disabled="!generatedConfig" @click="downloadConfig">
-                Download
-              </button>
-            </div>
-            <button class="btn btn-info w-100" :disabled="!generatedConfig" @click="currentStep='aiAssist'">
-              AI Analysis
-            </button>
-          </div>
-        </div>
-      </div>
+        <!-- Main Content -->
+        <div class="main-content" id="main-content">
+            <section id="PlatformSelection" class="section">
+                <h2>Platform Selection</h2>
+                <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
+                <form id="platformForm">
+                    <label for="platform">Select Platform:</label>
+                    <select id="platform" onchange="updatePlatformInfo()">
+                        <option value="cisco_iosxe">Cisco: IOS-XE (Catalyst)</option>
+                        <option value="cisco_nxos">Cisco: NX-OS (Nexus)</option>
+                        <option value="aruba_arubaos">Aruba: ArubaOS</option>
+                        <option value="juniper_junos">Juniper: Junos</option>
+                        <option value="extreme_exos">Extreme: EXOS</option>
+                        <option value="arista_eos">Arista: EOS</option>
+                    </select><br>
+                    <div id="platformInfo">
+                        <p><strong>Cisco: IOS-XE (Catalyst):</strong> Modern Catalyst switches (9000, 3800, etc.) with IBNS 2.0 support.</p>
+                    </div>
+                    <button type="button" onclick="showSection('AAASettings')">Next</button>
+                </form>
+            </section>
 
-      <!-- Main content area -->
-      <div class="col-md-9">
-        <div class="card">
-          <div class="card-body">
-            <component :is="currentStep"
-                       :config="config"
-                       @update:config="updateConfig"
-                       @next-step="goNextStep"
-            ></component>
-          </div>
-        </div>
+            <section id="AAASettings" class="section" style="display: none;">
+                <h2>AAA Settings</h2>
+                <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
+                <form id="aaaForm">
+                    <label for="aaa_auth_method">Authentication Method:</label>
+                    <select id="aaa_auth_method">
+                        <option value="radius">RADIUS</option>
+                        <option value="tacacs">TACACS+</option>
+                        <option value="local">Local</option>
+                    </select><br>
+                    <label for="aaa_accounting">Enable Accounting:</label>
+                    <input type="checkbox" id="aaa_accounting"><br>
+                    <button type="button" onclick="showSection('RADIUSServers')">Next</button>
+                    <button type="button" onclick="showSection('PlatformSelection')">Previous</button>
+                </form>
+            </section>
 
-        <!-- Show generated config if available -->
-        <div class="card mt-3" v-if="generatedConfig">
-          <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-            Generated Configuration
-            <button class="btn btn-sm btn-light" @click="copyToClipboard">Copy</button>
-          </div>
-          <div class="card-body">
-            <pre class="config-output">{{ generatedConfig }}</pre>
-          </div>
+            <section id="RADIUSServers" class="section" style="display: none;">
+                <h2>RADIUS Servers</h2>
+                <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
+                <form id="radiusForm">
+                    <label for="radius_ip">RADIUS Server IP:</label>
+                    <input type="text" id="radius_ip" placeholder="e.g., 192.168.1.10" required><br>
+                    <label for="radius_key">Shared Key:</label>
+                    <input type="text" id="radius_key" placeholder="e.g., SecretKey" required><br>
+                    <button type="button" onclick="showSection('TACACS')">Next</button>
+                    <button type="button" onclick="showSection('AAASettings')">Previous</button>
+                </form>
+            </section>
+
+            <section id="TACACS" class="section" style="display: none;">
+                <h2>TACACS+ Servers</h2>
+                <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
+                <form id="tacacsForm">
+                    <label for="tacacs_ip">TACACS+ Server IP:</label>
+                    <input type="text" id="tacacs_ip" placeholder="e.g., 192.168.1.20"><br>
+                    <label for="tacacs_key">Shared Key:</label>
+                    <input type="text" id="tacacs_key" placeholder="e.g., SecretKey"><br>
+                    <button type="button" onclick="showSection('Dot1XSettings')">Next</button>
+                    <button type="button" onclick="showSection('RADIUSServers')">Previous</button>
+                </form>
+            </section>
+
+            <section id="Dot1XSettings" class="section" style="display: none;">
+                <h2>802.1X Settings</h2>
+                <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
+                <form id="dot1xForm">
+                    <label for="dot1x_interface">Interface:</label>
+                    <input type="text" id="dot1x_interface" placeholder="e.g., GigabitEthernet0/1" required><br>
+                    <label for="dot1x_vlan">VLAN ID:</label>
+                    <input type="number" id="dot1x_vlan" placeholder="e.g., 10" min="1" max="4094" required><br>
+                    <label for="dot1x_reauth">Reauth Period (s):</label>
+                    <input type="number" id="dot1x_reauth" placeholder="e.g., 3600" min="60"><br>
+                    <label for="dot1x_tx">TX Period (s):</label>
+                    <input type="number" id="dot1x_tx" placeholder="e.g., 10" min="1"><br>
+                    <button type="button" onclick="showSection('CoA')">Next</button>
+                    <button type="button" onclick="showSection('TACACS')">Previous</button>
+                </form>
+            </section>
+
+            <section id="CoA" class="section" style="display: none;">
+                <h2>CoA</h2>
+                <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
+                <form id="coaForm">
+                    <label for="coa_enable">Enable CoA:</label>
+                    <input type="checkbox" id="coa_enable"><br>
+                    <label for="coa_port">CoA Port:</label>
+                    <input type="number" id="coa_port" placeholder="e.g., 1700" min="1" max="65535"><br>
+                    <button type="button" onclick="showSection('DeviceTracking')">Next</button>
+                    <button type="button" onclick="showSection('Dot1XSettings')">Previous</button>
+                </form>
+            </section>
+
+            <section id="DeviceTracking" class="section" style="display: none;">
+                <h2>Device Tracking</h2>
+                <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
+                <form id="deviceTrackingForm">
+                    <label for="device_tracking_enable">Enable Device Tracking:</label>
+                    <input type="checkbox" id="device_tracking_enable"><br>
+                    <label for="device_tracking_policy">Policy Name:</label>
+                    <input type="text" id="device_tracking_policy" placeholder="e.g., IP-TRACKING"><br>
+                    <button type="button" onclick="showSection('IBNS')">Next</button>
+                    <button type="button" onclick="showSection('CoA')">Previous</button>
+                </form>
+            </section>
+
+            <section id="IBNS" class="section" style="display: none;">
+                <h2>IBNS 2.0</h2>
+                <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
+                <form id="ibnsForm">
+                    <label for="ibns_enable">Enable IBNS 2.0:</label>
+                    <input type="checkbox" id="ibns_enable"><br>
+                    <label for="ibns_policy">Policy Name:</label>
+                    <input type="text" id="ibns_policy" placeholder="e.g., DOT1X_MAB_POLICY"><br>
+                    <button type="button" onclick="showSection('PortIntegration')">Next</button>
+                    <button type="button" onclick="showSection('DeviceTracking')">Previous</button>
+                </form>
+            </section>
+
+            <section id="PortIntegration" class="section" style="display: none;">
+                <h2>Port Integration</h2>
+                <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
+                <form id="portIntegrationForm">
+                    <label for="port_mode">Port Mode:</label>
+                    <select id="port_mode">
+                        <option value="access">Access</option>
+                        <option value="trunk">Trunk</option>
+                    </select><br>
+                    <label for="port_host_mode">Host Mode:</label>
+                    <select id="port_host_mode">
+                        <option value="single-host">Single-Host</option>
+                        <option value="multi-auth">Multi-Auth</option>
+                        <option value="multi-domain">Multi-Domain</option>
+                    </select><br>
+                    <button type="button" onclick="showSection('GenerateConfig')">Next</button>
+                    <button type="button" onclick="showSection('IBNS')">Previous</button>
+                </form>
+            </section>
+
+            <section id="GenerateConfig" class="section" style="display: none;">
+                <h2>Generated Configuration</h2>
+                <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
+                <button type="button" onclick="generateConfig()">Generate Config</button>
+                <button type="button" onclick="downloadConfig()">Download Config</button>
+                <pre id="configOutput"></pre>
+                <button type="button" onclick="showSection('PortIntegration')">Previous</button>
+            </section>
+
+            <section id="Help" class="section" style="display: none;">
+                <h2>Help</h2>
+                <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
+                <p>Welcome to the Dot1xer Supreme Configurator! This tool generates advanced AAA configurations based on Wires & Wi-Fi templates (<a href="https://www.wiresandwi.fi/aaa-templates" target="_blank">source</a>).</p>
+                <h3>How to Use</h3>
+                <ul>
+                    <li><strong>Sidebar Navigation</strong>: Click the â˜° button to collapse/expand the sidebar. Select a step to proceed.</li>
+                    <li><strong>Platform Selection</strong>: Choose your platform to proceed with configuration.</li>
+                    <li><strong>Generate Config</strong>: Complete all steps and click to see the output.</li>
+                    <li><strong>Download Config</strong>: Save the generated config as a text file.</li>
+                </ul>
+                <p>For support, email <a href="mailto:support@dot1xer.com">support@dot1xer.com</a>.</p>
+            </section>
         </div>
-      </div>
     </div>
-  </div>
-
-  <!-- Vue + Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Components -->
-  <script src="js/components/platform.js"></script>
-  <script src="js/components/basicInfo.js"></script>
-  <script src="js/components/aaa.js"></script>
-  <script src="js/components/radius.js"></script>
-  <script src="js/components/tacacs.js"></script>
-  <script src="js/components/dot1x.js"></script>
-  <script src="js/components/coa.js"></script>
-  <script src="js/components/radsec.js"></script>
-  <script src="js/components/deviceTracking.js"></script>
-  <script src="js/components/ibns.js"></script>
-  <script src="js/components/portnox.js"></script>
-  <script src="js/components/aiAssist.js"></script>
-
-  <!-- Main App Logic -->
-  <script src="js/app.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
