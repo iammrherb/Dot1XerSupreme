@@ -2,43 +2,96 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dot1xer Supreme Configurator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dot1Xer Supreme Configurator</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <div class="circuit-bg"></div>
   <header>
-    <img src="data:image/png;base64,DOT1XER_SUPREME_LOGO_BASE64" alt="Dot1xer Supreme Logo" class="logo">
-    <h1 class="title">Dot1xer Supreme Configurator</h1>
+    <img src="data:image/png;base64,DOT1XER_SUPREME_LOGO_BASE64" alt="Dot1Xer Supreme Logo" class="logo">
+    <h1 class="title">Dot1Xer Supreme Configurator</h1>
   </header>
-  <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <button class="menu-btn" onclick="toggleSidebar()">?</button>
-      <nav>
-        <ul>
-          <li><a href="#" onclick="showSection('PlatformSelection')" class="active">1. Platform Selection</a></li>
-          <li><a href="#" onclick="showSection('AAASettings')">2. AAA Settings</a></li>
-          <li><a href="#" onclick="showSection('RADIUSServers')">3. RADIUS Servers</a></li>
-          <li><a href="#" onclick="showSection('TACACS')">4. TACACS+ Servers</a></li>
-          <li><a href="#" onclick="showSection('Dot1XSettings')">5. 802.1X Settings</a></li>
-          <li><a href="#" onclick="showSection('CoA')">6. CoA</a></li>
-          <li><a href="#" onclick="showSection('DeviceTracking')">7. Device Tracking</a></li>
-          <li><a href="#" onclick="showSection('PortIntegration')">8. Port Integration</a></li>
-          <li><a href="#" onclick="showSection('GenerateConfig')">9. Generate Configuration</a></li>
-          <li><a href="#" onclick="showSection('Help')">10. Help</a></li>
-          <li><a href="#" onclick="showSection('AIIntegration')">11. AI Integration</a></li>
-          <li><a href="#" onclick="showSection('ReferenceArchitecture')">Reference Architecture</a></li>
-          <li><a href="#" onclick="showSection('EnvironmentalDiscovery')">Environmental Discovery</a></li>
-        </ul>
-      </nav>
+  <!-- Top navigation tabs -->
+  <nav class="top-tabs">
+    <button class="tab-btn active" onclick="showTab('configurator')">Configurator</button>
+    <button class="tab-btn" onclick="showTab('ai')">AI Integration</button>
+    <button class="tab-btn" onclick="showTab('reference')">Reference Architecture</button>
+    <button class="tab-btn" onclick="showTab('discovery')">Environmental Discovery</button>
+    <button class="tab-btn" onclick="showTab('help')">Help</button>
+  </nav>
+  <!-- Content Panels -->
+  <div class="tab-content" id="configurator">
+    <!-- Configurator: step-by-step wizard UI -->
+    <h2>Configurator</h2>
+    <p>Use the wizard below to generate advanced AAA/802.1X configurations.</p>
+    <!-- Steps (basic settings, AAA, RADIUS, TACACS, 802.1X, CoA, Device Tracking, VLANs, etc.) -->
+    <!-- The UI here will allow inputs which will be used to replace template placeholders -->
+    <form id="configForm">
+      <!-- Sample: Platform Selection -->
+      <label for="platform">Select Device Platform:</label>
+      <select id="platform" name="platform" onchange="updatePlatformInfo()">
+        <option value="cisco_iosxe">Cisco IOS-XE (Catalyst)</option>
+        <option value="cisco_ios">Cisco IOS (Classic)</option>
+        <option value="cisco_wlc_9800">Cisco WLC 9800</option>
+        <option value="aruba_aoscx">Aruba AOS-CX</option>
+        <option value="juniper_ex">Juniper EX/QFX</option>
+        <option value="fortinet_fortiswitch">Fortinet FortiSwitch</option>
+        <option value="arista_eos">Arista EOS</option>
+        <option value="extreme_exos">Extreme EXOS</option>
+        <option value="huawei">Huawei VRP</option>
+        <option value="alcatel">Alcatel-Lucent OmniSwitch</option>
+        <option value="ubiquiti">Ubiquiti (UniFi – instructions)</option>
+      </select>
+      <br>
+      <!-- Additional inputs for AAA (RADIUS, TACACS), VLAN IDs, timers etc. -->
+      <label for="data_vlan">Data VLAN:</label>
+      <input type="number" id="data_vlan" placeholder="e.g. 10" required>
+      <br>
+      <label for="guest_vlan">Guest VLAN:</label>
+      <input type="number" id="guest_vlan" placeholder="e.g. 100">
+      <br>
+      <!-- More input fields would be here -->
+      <button type="button" onclick="generateConfig()">Generate Config</button>
+    </form>
+    <pre id="configOutput"></pre>
+  </div>
+
+  <div class="tab-content" id="ai" style="display:none">
+    <h2>AI Integration</h2>
+    <p>Ask our integrated AI for configuration advice, troubleshooting tips, and best practices.</p>
+    <!-- AI chat interface placeholder -->
+    <div id="aiChat">
+      <textarea placeholder="Type your question here..."></textarea>
+      <button onclick="sendAIQuery()">Send</button>
+      <div id="aiResponse"></div>
     </div>
-    <!-- Main Content -->
-    <div class="main-content" id="main-content">
-      <!-- Sections will be dynamically displayed here -->
-    </div>
+  </div>
+
+  <div class="tab-content" id="reference" style="display:none">
+    <h2>Reference Architecture</h2>
+    <p>This section explains the AAA/802.1X workflow, dynamic VLAN assignment, fallback scenarios, and best practices.</p>
+    <!-- Embedded diagrams and detailed reference texts -->
+    <img src="data:image/png;base64,DIAGRAM1_BASE64" alt="Network Architecture Diagram" class="diagram">
+    <p><!-- Detailed text explaining the architecture goes here --></p>
+  </div>
+
+  <div class="tab-content" id="discovery" style="display:none">
+    <h2>Environmental Discovery</h2>
+    <p>Automatically gather data about your network devices and existing AAA settings.</p>
+    <p><!-- Instructions and summary of discovered parameters go here --></p>
+  </div>
+
+  <div class="tab-content" id="help" style="display:none">
+    <h2>Help & Reference</h2>
+    <p>This tool is built using best-practice AAA templates from vendors and community research. For more details, please refer to the documentation below.</p>
+    <ul>
+      <li><a href="https://www.wiresandwi.fi/aaa-templates" target="_blank">AAA Templates Reference</a></li>
+      <li><a href="https://www.cisco.com" target="_blank">Cisco Documentation</a></li>
+      <li><a href="https://www.arubanetworking.com" target="_blank">Aruba Networking</a></li>
+      <li><a href="https://www.juniper.net" target="_blank">Juniper Networks</a></li>
+      <!-- More references as needed -->
+    </ul>
   </div>
   <script src="js/app.js"></script>
 </body>
