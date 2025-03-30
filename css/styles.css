@@ -23,27 +23,39 @@ body {
     100% { background-position: 100px 100px; }
 }
 header {
-    text-align: center;
-    padding: 20px;
+    height: 80px;
     background: rgba(0, 0, 0, 0.8);
     border-bottom: 1px solid #00d4ff;
     box-shadow: 0 2px 15px rgba(0, 212, 255, 0.3);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 .logo {
-    max-width: 300px;
+    max-width: 200px;
+    height: auto;
     filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
 }
 .container {
     display: flex;
+    margin-top: 80px; /* Ensure content starts below header */
 }
 .sidebar {
     width: 250px;
     background: linear-gradient(180deg, #0a0a1a 0%, #1a1a3a 100%);
     padding: 15px;
-    height: 100vh;
+    height: calc(100vh - 80px); /* Adjust height to account for header */
     position: fixed;
+    top: 80px; /* Start below header */
+    left: 0;
     transition: width 0.3s ease;
     box-shadow: 2px 0 15px rgba(0, 212, 255, 0.3);
+    overflow-y: auto; /* Allow scrolling if content overflows */
 }
 .sidebar.collapsed {
     width: 60px;
@@ -124,6 +136,20 @@ nav ul li a:hover::before {
 }
 .section.active {
     display: block !important;
+}
+.wizard {
+    max-width: 150px;
+    display: block;
+    margin: 20px auto;
+    animation: dance 2s infinite alternate, glow 1.5s infinite alternate;
+}
+@keyframes dance {
+    0% { transform: translateX(-10px) rotate(2deg); }
+    100% { transform: translateX(10px) rotate(-2deg); }
+}
+@keyframes glow {
+    0% { filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.5)); }
+    100% { filter: drop-shadow(0 0 15px rgba(0, 212, 255, 1)); }
 }
 form {
     max-width: 600px;

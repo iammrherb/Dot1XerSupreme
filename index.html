@@ -10,8 +10,7 @@
 <body>
     <div class="circuit-bg"></div>
     <header>
-        <img src="assets/icons/supreme-logo.png" alt="Dot1xer Supreme Logo" class="logo">
-        <h1>Dot1xer Supreme Configurator</h1>
+        <img src="assets/icons/dot1xer-supreme-logo.png" alt="Dot1xer Supreme Logo" class="logo">
     </header>
     <div class="container">
         <!-- Sidebar -->
@@ -38,6 +37,7 @@
         <div class="main-content" id="main-content">
             <section id="PlatformSelection" class="section">
                 <h2>Platform Selection</h2>
+                <img src="assets/icons/wizard.png" alt="Cyber Wizard" class="wizard">
                 <form id="platformForm">
                     <label for="platform">Select Platform:</label>
                     <select id="platform" onchange="updatePlatformInfo()">
@@ -57,6 +57,7 @@
 
             <section id="AAASettings" class="section" style="display: none;">
                 <h2>AAA Settings</h2>
+                <img src="assets/icons/wizard.png" alt="Cyber Wizard" class="wizard">
                 <form id="aaaForm">
                     <label for="aaa_auth_method">Authentication Method:</label>
                     <select id="aaa_auth_method">
@@ -73,6 +74,7 @@
 
             <section id="RADIUSServers" class="section" style="display: none;">
                 <h2>RADIUS Servers</h2>
+                <img src="assets/icons/wizard.png" alt="Cyber Wizard" class="wizard">
                 <form id="radiusForm">
                     <label for="radius_ip">RADIUS Server IP:</label>
                     <input type="text" id="radius_ip" placeholder="e.g., 192.168.1.10" required><br>
@@ -85,6 +87,7 @@
 
             <section id="TACACS" class="section" style="display: none;">
                 <h2>TACACS+ Servers</h2>
+                <img src="assets/icons/wizard.png" alt="Cyber Wizard" class="wizard">
                 <form id="tacacsForm">
                     <label for="tacacs_ip">TACACS+ Server IP:</label>
                     <input type="text" id="tacacs_ip" placeholder="e.g., 192.168.1.20"><br>
@@ -97,6 +100,7 @@
 
             <section id="Dot1XSettings" class="section" style="display: none;">
                 <h2>802.1X Settings</h2>
+                <img src="assets/icons/wizard.png" alt="Cyber Wizard" class="wizard">
                 <form id="dot1xForm">
                     <label for="dot1x_interface">Interface:</label>
                     <input type="text" id="dot1x_interface" placeholder="e.g., GigabitEthernet0/1" required><br>
@@ -113,6 +117,7 @@
 
             <section id="CoA" class="section" style="display: none;">
                 <h2>CoA</h2>
+                <img src="assets/icons/wizard.png" alt="Cyber Wizard" class="wizard">
                 <form id="coaForm">
                     <label for="coa_enable">Enable CoA:</label>
                     <input type="checkbox" id="coa_enable"><br>
@@ -125,6 +130,7 @@
 
             <section id="DeviceTracking" class="section" style="display: none;">
                 <h2>Device Tracking</h2>
+                <img src="assets/icons/wizard.png" alt="Cyber Wizard" class="wizard">
                 <form id="deviceTrackingForm">
                     <label for="device_tracking_enable">Enable Device Tracking:</label>
                     <input type="checkbox" id="device_tracking_enable"><br>
@@ -137,6 +143,7 @@
 
             <section id="IBNS" class="section" style="display: none;">
                 <h2>IBNS 2.0</h2>
+                <img src="assets/icons/wizard.png" alt="Cyber Wizard" class="wizard">
                 <form id="ibnsForm">
                     <label for="ibns_enable">Enable IBNS 2.0:</label>
                     <input type="checkbox" id="ibns_enable"><br>
@@ -149,6 +156,7 @@
 
             <section id="PortIntegration" class="section" style="display: none;">
                 <h2>Port Integration</h2>
+                <img src="assets/icons/wizard.png" alt="Cyber Wizard" class="wizard">
                 <form id="portIntegrationForm">
                     <label for="port_mode">Port Mode:</label>
                     <select id="port_mode">
@@ -168,6 +176,7 @@
 
             <section id="GenerateConfig" class="section" style="display: none;">
                 <h2>Generated Configuration</h2>
+                <img src="assets/icons/wizard.png" alt="Cyber Wizard" class="wizard">
                 <button type="button" onclick="generateConfig()">Generate Config</button>
                 <button type="button" onclick="downloadConfig()">Download Config</button>
                 <pre id="configOutput"></pre>
@@ -176,6 +185,7 @@
 
             <section id="Help" class="section" style="display: none;">
                 <h2>Help</h2>
+                <img src="assets/icons/wizard.png" alt="Cyber Wizard" class="wizard">
                 <p>Welcome to the Dot1xer Supreme Configurator! This tool generates advanced AAA configurations based on Wires & Wi-Fi templates (<a href="https://www.wiresandwi.fi/aaa-templates" target="_blank">source</a>).</p>
                 <h3>How to Use</h3>
                 <ul>
