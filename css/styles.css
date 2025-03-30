@@ -62,9 +62,9 @@ header {
 
 /* Logo sizing through CSS */
 .logo {
-  width: 200px;
+  width: 300px;
   height: auto;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .title {
@@ -330,7 +330,7 @@ button:focus {
 
 /* Avatar sizing through CSS */
 .message-avatar img {
-  width: 40px;
+  width: 60px;
   height: 60px;
   object-fit: cover;
   border-radius: 50%;
