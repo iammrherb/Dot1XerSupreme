@@ -47,6 +47,7 @@
                         <option value="juniper_junos">Juniper: Junos</option>
                         <option value="extreme_exos">Extreme: EXOS</option>
                         <option value="arista_eos">Arista: EOS</option>
+                        <option value="portnox">Portnox: Switch</option>
                     </select><br>
                     <div id="platformInfo">
                         <p><strong>Cisco: IOS-XE (Catalyst):</strong> Modern Catalyst switches (9000, 3800, etc.) with IBNS 2.0 support.</p>
@@ -76,10 +77,22 @@
                 <h2>RADIUS Servers</h2>
                 <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
                 <form id="radiusForm">
-                    <label for="radius_ip">RADIUS Server IP:</label>
-                    <input type="text" id="radius_ip" placeholder="e.g., 192.168.1.10" required><br>
-                    <label for="radius_key">Shared Key:</label>
-                    <input type="text" id="radius_key" placeholder="e.g., SecretKey" required><br>
+                    <div id="radiusServers">
+                        <div class="server-entry">
+                            <h3>RADIUS Server 1</h3>
+                            <label for="radius_ip_1">RADIUS Server IP:</label>
+                            <input type="text" id="radius_ip_1" placeholder="e.g., 192.168.1.10" required><br>
+                            <label for="radius_key_1">Shared Key:</label>
+                            <input type="text" id="radius_key_1" placeholder="e.g., SecretKey" required><br>
+                            <label for="radius_auth_port_1">Auth Port:</label>
+                            <input type="number" id="radius_auth_port_1" placeholder="e.g., 1812" min="1" max="65535" required><br>
+                            <label for="radius_acct_port_1">Acct Port:</label>
+                            <input type="number" id="radius_acct_port_1" placeholder="e.g., 1813" min="1" max="65535" required><br>
+                            <label for="radius_priority_1">Priority:</label>
+                            <input type="number" id="radius_priority_1" placeholder="e.g., 1" min="1" max="10" required><br>
+                        </div>
+                    </div>
+                    <button type="button" onclick="addRadiusServer()">Add Another RADIUS Server</button><br>
                     <button type="button" onclick="showSection('TACACS')">Next</button>
                     <button type="button" onclick="showSection('AAASettings')">Previous</button>
                 </form>
@@ -89,10 +102,20 @@
                 <h2>TACACS+ Servers</h2>
                 <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
                 <form id="tacacsForm">
-                    <label for="tacacs_ip">TACACS+ Server IP:</label>
-                    <input type="text" id="tacacs_ip" placeholder="e.g., 192.168.1.20"><br>
-                    <label for="tacacs_key">Shared Key:</label>
-                    <input type="text" id="tacacs_key" placeholder="e.g., SecretKey"><br>
+                    <div id="tacacsServers">
+                        <div class="server-entry">
+                            <h3>TACACS+ Server 1</h3>
+                            <label for="tacacs_ip_1">TACACS+ Server IP:</label>
+                            <input type="text" id="tacacs_ip_1" placeholder="e.g., 192.168.1.20"><br>
+                            <label for="tacacs_key_1">Shared Key:</label>
+                            <input type="text" id="tacacs_key_1" placeholder="e.g., SecretKey"><br>
+                            <label for="tacacs_auth_port_1">Auth Port:</label>
+                            <input type="number" id="tacacs_auth_port_1" placeholder="e.g., 49" min="1" max="65535"><br>
+                            <label for="tacacs_priority_1">Priority:</label>
+                            <input type="number" id="tacacs_priority_1" placeholder="e.g., 1" min="1" max="10"><br>
+                        </div>
+                    </div>
+                    <button type="button" onclick="addTacacsServer()">Add Another TACACS+ Server</button><br>
                     <button type="button" onclick="showSection('Dot1XSettings')">Next</button>
                     <button type="button" onclick="showSection('RADIUSServers')">Previous</button>
                 </form>
@@ -121,6 +144,15 @@
                         <input type="checkbox" id="ibns_enable"><br>
                         <label for="ibns_policy">IBNS Policy Name:</label>
                         <input type="text" id="ibns_policy" placeholder="e.g., DOT1X_MAB_POLICY"><br>
+                    </div>
+                    <!-- Portnox-specific settings -->
+                    <div id="portnoxSettings" style="display: none;">
+                        <label for="portnox_profile">Portnox Profile Name:</label>
+                        <input type="text" id="portnox_profile" placeholder="e.g., PORTNOX_PROFILE"><br>
+                        <label for="portnox_guest_vlan">Guest VLAN:</label>
+                        <input type="number" id="portnox_guest_vlan" placeholder="e.g., 100" min="1" max="4094"><br>
+                        <label for="portnox_dynamic_vlan">Enable Dynamic VLAN:</label>
+                        <input type="checkbox" id="portnox_dynamic_vlan"><br>
                     </div>
                     <button type="button" onclick="showSection('CoA')">Next</button>
                     <button type="button" onclick="showSection('TACACS')">Previous</button>
@@ -173,7 +205,7 @@
                 </form>
             </section>
 
-            <section id=" GenerateConfig" class="section">
+            <section id="GenerateConfig" class="section">
                 <h2>Generated Configuration</h2>
                 <img src="data:image/png;base64,CYBER_WIZARD_BASE64" alt="Cyber Wizard" class="wizard">
                 <button type="button" onclick="generateConfig()">Generate Config</button>
@@ -193,6 +225,25 @@
                     <li><strong>Generate Config</strong>: Complete all steps and click to see the output.</li>
                     <li><strong>Download Config</strong>: Save the generated config as a text file.</li>
                 </ul>
+                <h3>Section Details and Examples</h3>
+                <h4>1. Platform Selection</h4>
+                <p>Select the platform for your device. Example: Choose "Cisco: IOS-XE (Catalyst)" for a Catalyst 9300 switch.</p>
+                <h4>2. AAA Settings</h4>
+                <p>Configure the authentication method and accounting. Example: Select "RADIUS" and enable accounting for tracking user sessions.</p>
+                <h4>3. RADIUS Servers</h4>
+                <p>Add one or more RADIUS servers. Example: Add a server with IP "192.168.1.10", shared key "SecretKey", auth port 1812, acct port 1813, and priority 1.</p>
+                <h4>4. TACACS+ Servers</h4>
+                <p>Add one or more TACACS+ servers. Example: Add a server with IP "192.168.1.20", shared key "TacacsKey", auth port 49, and priority 1.</p>
+                <h4>5. 802.1X Settings</h4>
+                <p>Configure 802.1X settings for the selected platform. Example: For Cisco IOS-XE, set interface "GigabitEthernet0/1", VLAN 10, reauth period 3600s, TX period 10s, mode "Open", and enable IBNS 2.0 with policy "DOT1X_MAB". For Portnox, set profile "PORTNOX_PROFILE", guest VLAN 100, and enable dynamic VLAN.</p>
+                <h4>6. CoA</h4>
+                <p>Enable Change of Authorization (CoA). Example: Enable CoA and set port to 1700.</p>
+                <h4>7. Device Tracking</h4>
+                <p>Enable device tracking for IP tracking. Example: Enable device tracking with policy "IP-TRACKING".</p>
+                <h4>8. Port Integration</h4>
+                <p>Configure port settings. Example: Set port mode to "Access" and host mode to "Multi-Domain".</p>
+                <h4>9. Generate Configuration</h4>
+                <p>Generate and download the configuration. Example: After completing all steps, click "Generate Config" to see the output, then "Download Config" to save it as a .txt file.</p>
                 <p>For support, email <a href="mailto:support@dot1xer.com">support@dot1xer.com</a>.</p>
             </section>
         </div>
