@@ -1,0 +1,106 @@
+<div class="discovery-section" id="disc-environment">
+  <h3>Environment Discovery</h3>
+  <p>Profile your existing environment to generate a customized architecture diagram and deployment plan.</p>
+  
+  <div class="environment-section">
+    <div class="environment-group">
+      <h4>Infrastructure</h4>
+      <p>Select all elements that exist in your current environment:</p>
+      
+      <div class="checkbox-group">
+        <label><input type="checkbox" class="env-infrastructure" id="env-active-directory" data-label="Active Directory">Active Directory</label>
+        <div id="env-active-directory-options" class="eap-method-options">
+          <div class="form-group"><label for="ad-domain">Domain Name:</label><input type="text" id="ad-domain" placeholder="example.com"></div>
+          <div class="checkbox-group"><label><input type="checkbox" id="ad-multi-domain" checked>Multi-domain environment</label></div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label><input type="checkbox" class="env-infrastructure" id="env-certificate-authority" data-label="Certificate Authority">Certificate Authority</label>
+        <div id="env-certificate-authority-options" class="eap-method-options">
+          <div class="checkbox-group"><label><input type="checkbox" id="ca-microsoft" checked>Microsoft CA</label></div>
+          <div class="checkbox-group"><label><input type="checkbox" id="ca-third-party">Third-party CA</label></div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label><input type="checkbox" class="env-infrastructure" id="env-radius" data-label="Existing RADIUS">Existing RADIUS Server</label>
+        <div id="env-radius-options" class="eap-method-options">
+          <div class="form-group">
+            <label for="radius-vendor">RADIUS Vendor:</label>
+            <select id="radius-vendor">
+              <option value="microsoft-nps">Microsoft NPS</option>
+              <option value="cisco-ise">Cisco ISE</option>
+              <option value="freeradius">FreeRADIUS</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label><input type="checkbox" class="env-infrastructure" id="env-vpn" data-label="VPN">VPN Infrastructure</label>
+        <div id="env-vpn-options" class="eap-method-options">
+          <div class="form-group">
+            <label for="vpn-vendor">VPN Vendor:</label>
+            <select id="vpn-vendor">
+              <option value="cisco-anyconnect">Cisco AnyConnect</option>
+              <option value="palo-globalprotect">Palo Alto GlobalProtect</option>
+              <option value="fortinet">Fortinet FortiClient</option>
+              <option value="checkpoint">Check Point</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label><input type="checkbox" class="env-infrastructure" id="env-cloud" data-label="Cloud Infrastructure">Cloud Infrastructure</label>
+        <div id="env-cloud-options" class="eap-method-options">
+          <div class="checkbox-group"><label><input type="checkbox" id="cloud-aws">AWS</label></div>
+          <div class="checkbox-group"><label><input type="checkbox" id="cloud-azure" checked>Azure</label></div>
+          <div class="checkbox-group"><label><input type="checkbox" id="cloud-gcp">Google Cloud</label></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="environment-group">
+      <h4>MDM Solution</h4>
+      <p>Select your existing MDM solution:</p>
+      <div class="form-group">
+        <select id="mdm-provider">
+          <option value="none">None</option>
+          <option value="intune">Microsoft Intune</option>
+          <option value="jamf">JAMF</option>
+          <option value="workspace-one">VMware Workspace ONE</option>
+          <option value="mas360">IBM MaaS360</option>
+          <option value="mobileiron">MobileIron</option>
+          <option value="gpo">Group Policy (GPO)</option>
+        </select>
+      </div>
+      <div id="mdm-options" class="mdm-options"></div>
+    </div>
+    
+    <div class="environment-group">
+      <h4>Identity Provider</h4>
+      <p>Select your existing identity provider:</p>
+      <div class="form-group">
+        <select id="idp-provider">
+          <option value="none">None</option>
+          <option value="entra-id">Microsoft Entra ID</option>
+          <option value="okta">Okta</option>
+          <option value="google-workspace">Google Workspace</option>
+          <option value="onelogin">OneLogin</option>
+          <option value="ping">Ping Identity</option>
+        </select>
+      </div>
+      <div id="idp-options" class="idp-options"></div>
+    </div>
+    
+    <div class="form-actions">
+      <button type="button" onclick="updateEnvironmentSummary()" class="btn">Generate Environment Profile</button>
+    </div>
+  </div>
+  
+  <div id="environment-summary" class="environment-section" style="display: none;"></div>
+</div>

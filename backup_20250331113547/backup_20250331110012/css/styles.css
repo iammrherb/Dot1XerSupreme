@@ -1,0 +1,70 @@
+/* Enhanced UI styles for Dot1Xer Supreme with improved color contrast */
+:root {
+    --primary-color: #6300c4;      /* Main purple for buttons and highlights */
+    --primary-dark: #4a0091;       /* Darker purple for hover states */
+    --primary-light: #9951ff;      /* Lighter purple for subtle accents */
+    --secondary-color: #00b894;    /* Green for success states */
+    --light-gray: #f8f9fa;         /* Light gray for backgrounds */
+    --medium-gray: #dee2e6;        /* Medium gray for borders */
+    --dark-gray: #495057;          /* Dark gray for text */
+    --danger-color: #e74c3c;       /* Red for errors */
+    --warning-color: #f39c12;      /* Yellow for warnings */
+    --success-color: #2ecc71;      /* Green for success */
+    --border-radius: 6px;          /* Rounded corners */
+    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    --transition: all 0.3s ease;   /* Smooth transitions */
+    --text-color: #f1f2f6;         /* Light text for dark backgrounds */
+    --bg-color: #2f3542;           /* Dark background for contrast */
+    --portnox-purple: #6c27be;     /* Portnox brand purple */
+    --portnox-dark: #4c1d80;       /* Darker Portnox shade */
+    --portnox-light: #a776e0;      /* Lighter Portnox shade */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.accordion-header {
+    background-color: var(--primary-dark);
+    color: var(--text-color);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+}
+
+.accordion-content {
+    display: none;
+    background-color: var(--bg-color);
+    padding: 15px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+}
+
+.tab-btn, .discovery-tab, .portnox-nav-tab {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.tab-btn.active, .discovery-tab.active, .portnox-nav-tab.active {
+    background-color: var(--primary-light);
+}
+
+select, button {
+    background-color: var(--primary-dark);
+    color: var(--text-color);
+    border: 1px solid var(--medium-gray);
+    padding: 8px;
+    border-radius: var(--border-radius);
+}
+
+button:hover {
+    background-color: var(--primary-light);
+}

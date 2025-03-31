@@ -1,0 +1,47 @@
+<div class="api-section">
+  <h3>AI Assistant Integration</h3>
+  <p>Connect to AI services to enhance your 802.1X deployment planning and configuration.</p>
+  
+  <div class="form-group">
+    <label for="ai-api-key">API Key:</label>
+    <div class="api-key-container">
+      <input type="password" id="ai-api-key" placeholder="Enter your API key">
+      <button type="button" id="ai-test-button" class="btn">Test Connection</button>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="ai-model">AI Model:</label>
+    <select id="ai-model">
+      <option value="gpt-4">GPT-4</option>
+      <option value="claude-3">Claude 3</option>
+      <option value="llama-3">Llama 3</option>
+      <option value="falcon">Falcon</option>
+    </select>
+  </div>
+  
+  <div class="checkbox-group">
+    <label>
+      <input type="checkbox" id="ai-auto-enhance" checked> 
+      Auto-enhance configurations
+    </label>
+  </div>
+  
+  <div class="checkbox-group">
+    <label>
+      <input type="checkbox" id="ai-security-check" checked> 
+      Perform security validation
+    </label>
+  </div>
+  
+  <div class="checkbox-group">
+    <label>
+      <input type="checkbox" id="ai-documentation" checked> 
+      Generate deployment documentation
+    </label>
+  </div>
+  
+  <div id="ai-capabilities" class="alert alert-success" style="display: none;">
+    <strong>AI Assistant is connected!</strong> You can now enhance your configurations, generate diagrams, and create custom documentation.
+  </div>
+</div>

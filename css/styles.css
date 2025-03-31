@@ -156,41 +156,6 @@ body {
     display: none;
 }
 
-/* Portnox specific styles */
-.portnox-header {
-    background: linear-gradient(135deg, var(--portnox-purple), var(--portnox-dark));
-    color: white;
-    padding: 15px;
-    border-radius: var(--border-radius);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.portnox-logo {
-    height: 40px;
-    margin-right: 15px;
-}
-
-.portnox-tab {
-    background-color: var(--portnox-purple) !important;
-    color: white !important;
-}
-
-.portnox-tab:hover, .portnox-tab.active {
-    background-color: var(--portnox-dark) !important;
-    border-bottom: 3px solid white !important;
-}
-
-.portnox-section {
-    background-color: var(--bg-color);
-    padding: 15px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-bottom: 20px;
-    border-left: 4px solid var(--portnox-purple);
-}
-
 /* Accordion styles - fixed and enhanced */
 .accordion {
     margin-bottom: 15px;
@@ -236,293 +201,6 @@ body {
     background-color: var(--bg-color);
 }
 
-.accordion-group {
-    margin-bottom: 25px;
-}
-
-.accordion-group-title {
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-    font-size: 16px;
-}
-
-/* Vendor-specific options */
-.vendor-specific {
-    display: none;
-    margin-top: 15px;
-    padding: 15px;
-    background-color: var(--light-gray);
-    border-radius: var(--border-radius);
-    border-left: 3px solid var(--primary-color);
-}
-
-/* Network Scoping Styles */
-.scoping-section {
-    background: var(--bg-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-bottom: 20px;
-}
-
-.scoping-options {
-    margin-bottom: 20px;
-}
-
-.scoping-type {
-    margin-bottom: 15px;
-}
-
-.scoping-type label {
-    margin-right: 15px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    color: var(--text-color);
-}
-
-.scoping-type input {
-    margin-right: 5px;
-}
-
-.scoping-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.scoping-column {
-    flex: 1;
-    min-width: 250px;
-}
-
-.count-input {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.count-input label {
-    flex: 3;
-    margin-bottom: 0;
-    color: var(--text-color);
-}
-
-.count-input input {
-    flex: 1;
-    margin-bottom: 0;
-}
-
-.scoping-results {
-    display: none;
-    background: var(--bg-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-top: 20px;
-}
-
-.network-summary {
-    margin-bottom: 20px;
-}
-
-.deployment-phases {
-    margin-bottom: 20px;
-}
-
-.phase {
-    margin-bottom: 15px;
-    padding: 15px;
-    background: var(--light-gray);
-    border-radius: var(--border-radius);
-    border-left: 3px solid var(--primary-color);
-}
-
-.phase h5 {
-    margin-top: 0;
-    color: var(--primary-color);
-}
-
-.network-diagram {
-    text-align: center;
-}
-
-.diagram-container {
-    max-width: 100%;
-    overflow-x: auto;
-    margin: 15px 0;
-    border: 1px solid var(--medium-gray);
-    border-radius: var(--border-radius);
-    padding: 10px;
-    background-color: var(--bg-color);
-}
-
-.diagram-container img {
-    max-width: 100%;
-    height: auto;
-}
-
-.diagram-note {
-    font-style: italic;
-    color: var(--dark-gray);
-    text-align: center;
-    font-size: 13px;
-    margin-top: 10px;
-}
-
-/* EAP Method Options */
-.eap-methods {
-    margin-bottom: 15px;
-}
-
-.eap-method-option {
-    margin-bottom: 5px;
-}
-
-.eap-method-options {
-    display: none;
-    margin-left: 25px;
-    padding-left: 10px;
-    border-left: 2px solid var(--medium-gray);
-    margin-bottom: 10px;
-}
-
-/* Environment Discovery section */
-.environment-section {
-    background: var(--bg-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-bottom: 20px;
-}
-
-.environment-group {
-    margin-bottom: 20px;
-    border: 1px solid var(--medium-gray);
-    border-radius: var(--border-radius);
-    padding: 15px;
-}
-
-.environment-group h4 {
-    margin-top: 0;
-    color: var(--primary-color);
-}
-
-/* MDM section */
-.mdm-section {
-    background: var(--bg-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-bottom: 20px;
-}
-
-.mdm-providers {
-    margin-bottom: 20px;
-}
-
-.mdm-options {
-    background-color: var(--light-gray);
-    padding: 15px;
-    border-radius: var(--border-radius);
-    border-left: 3px solid var(--primary-color);
-}
-
-/* API Integration section */
-.api-section {
-    background: var(--bg-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-bottom: 20px;
-}
-
-.api-key-container {
-    display: flex;
-    gap: 10px;
-}
-
-.api-key-container input {
-    flex: 3;
-}
-
-.api-key-container button {
-    flex: 1;
-}
-
-/* Alerts and messages */
-.alert {
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border-radius: var(--border-radius);
-    font-weight: 500;
-}
-
-.alert-success {
-    background-color: rgba(46, 204, 113, 0.1);
-    border: 1px solid var(--success-color);
-    color: #27ae60;
-}
-
-.alert-warning {
-    background-color: rgba(243, 156, 18, 0.1);
-    border: 1px solid var(--warning-color);
-    color: #e67e22;
-}
-
-.alert-danger {
-    background-color: rgba(231, 76, 60, 0.1);
-    border: 1px solid var(--danger-color);
-    color: #c0392b;
-}
-
-/* Error and success messages */
-#error-message, #success-message {
-    padding: 10px 15px;
-    border-radius: var(--border-radius);
-    margin-bottom: 15px;
-    display: none;
-}
-
-#error-message {
-    background-color: rgba(231, 76, 60, 0.1);
-    border: 1px solid var(--danger-color);
-    color: #c0392b;
-}
-
-#success-message {
-    background-color: rgba(46, 204, 113, 0.1);
-    border: 1px solid var(--success-color);
-    color: #27ae60;
-}
-
-/* Configuration output */
-.config-output-container {
-    margin-top: 20px;
-}
-
-#config-output {
-    width: 100%;
-    height: 400px;
-    font-family: monospace;
-    font-size: 14px;
-    padding: 15px;
-    background-color: #2f3542;
-    color: #f1f2f6;
-    border: none;
-    border-radius: var(--border-radius);
-    resize: vertical;
-    white-space: pre;
-    overflow: auto;
-}
-
-.config-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-}
-
 /* Button styles */
 .btn, button {
     display: inline-block;
@@ -542,49 +220,6 @@ body {
     background-color: var(--primary-dark);
 }
 
-.btn-secondary {
-    background-color: var(--dark-gray);
-}
-
-.btn-secondary:hover {
-    background-color: #343a40;
-}
-
-.btn-success {
-    background-color: var(--success-color);
-}
-
-.btn-success:hover {
-    background-color: #27ae60;
-}
-
-.btn-danger {
-    background-color: var(--danger-color);
-}
-
-.btn-danger:hover {
-    background-color: #c0392b;
-}
-
-.btn-warning {
-    background-color: var(--warning-color);
-}
-
-.btn-warning:hover {
-    background-color: #e67e22;
-}
-
-.download-btn {
-    display: inline-flex;
-    align-items: center;
-    background-color: var(--secondary-color);
-    margin-top: 15px;
-}
-
-.download-btn:hover {
-    background-color: #009b7d;
-}
-
 .portnox-btn {
     background-color: var(--portnox-purple);
     color: white;
@@ -592,6 +227,62 @@ body {
 
 .portnox-btn:hover {
     background-color: var(--portnox-dark);
+}
+
+/* Portnox specific styles */
+.portnox-header {
+    background: linear-gradient(135deg, var(--portnox-purple), var(--portnox-dark));
+    color: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.portnox-logo {
+    height: 40px;
+    margin-right: 15px;
+}
+
+.portnox-tab {
+    background-color: var(--portnox-purple) !important;
+    color: white !important;
+}
+
+.portnox-tab:hover, .portnox-tab.active {
+    background-color: var(--portnox-dark) !important;
+    border-bottom: 3px solid white !important;
+}
+
+.portnox-section {
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+    border-left: 4px solid var(--portnox-purple);
+}
+
+/* Network Discovery sections */
+.environment-section {
+    background: var(--bg-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+}
+
+.environment-group {
+    margin-bottom: 20px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    padding: 15px;
+}
+
+.environment-group h4 {
+    margin-top: 0;
+    color: var(--primary-color);
 }
 
 /* Form controls with improved contrast */
@@ -675,89 +366,50 @@ input[type="checkbox"], input[type="radio"] {
     border-top: 1px solid var(--medium-gray);
 }
 
-/* Table styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-th, td {
+/* Alerts and messages */
+.alert {
     padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid var(--medium-gray);
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    font-weight: 500;
 }
 
-th {
-    background-color: var(--light-gray);
-    color: var(--text-color);
-    font-weight: 600;
+.alert-success {
+    background-color: rgba(46, 204, 113, 0.1);
+    border: 1px solid var(--success-color);
+    color: #27ae60;
 }
 
-tr:hover {
-    background-color: var(--light-gray);
+.alert-warning {
+    background-color: rgba(243, 156, 18, 0.1);
+    border: 1px solid var(--warning-color);
+    color: #e67e22;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    .row {
-        flex-direction: column;
-    }
-    
-    .col {
-        margin-bottom: 15px;
-    }
-    
-    .discovery-tabs {
-        overflow-x: auto;
-    }
-    
-    .discovery-tab {
-        padding: 8px;
-        font-size: 12px;
-    }
-    
-    .tab-btn {
-        font-size: 12px;
-        padding: 10px;
-    }
-    
-    .scoping-form {
-        flex-direction: column;
-    }
-    
-    .api-key-container {
-        flex-direction: column;
-    }
-    
-    .api-key-container button {
-        margin-top: 10px;
-    }
+.alert-danger {
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid var(--danger-color);
+    color: #c0392b;
 }
 
-/* Enhanced logo styling */
-.brand {
-    display: flex;
-    align-items: center;
+/* Error and success messages */
+#error-message, #success-message {
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+    display: none;
 }
 
-.brand-text {
-    display: flex;
-    flex-direction: column;
+#error-message {
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid var(--danger-color);
+    color: #c0392b;
 }
 
-.logo-container {
-    position: relative;
-    display: inline-block;
-}
-
-.logo {
-    filter: drop-shadow(0 0 8px rgba(99, 0, 196, 0.6));
-    transition: transform 0.3s ease;
-}
-
-.logo:hover {
-    transform: scale(1.05);
+#success-message {
+    background-color: rgba(46, 204, 113, 0.1);
+    border: 1px solid var(--success-color);
+    color: #27ae60;
 }
 
 /* POC generator styles */
@@ -826,3 +478,400 @@ tr:hover {
     margin-right: 8px;
     color: var(--portnox-purple);
 }
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .discovery-tabs {
+        overflow-x: auto;
+    }
+    
+    .discovery-tab {
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    .tab-btn {
+        font-size: 12px;
+        padding: 10px;
+    }
+    
+    .poc-templates {
+        grid-template-columns: 1fr;
+    }
+}
+<!-- Environment Discovery Section -->
+cat > environment-discovery.html << 'EOF'
+<div class="discovery-section" id="disc-environment">
+  <h3>Environment Discovery</h3>
+  <p>Profile your existing environment to generate a customized architecture diagram and deployment plan.</p>
+  
+  <div class="environment-section">
+    <div class="environment-group">
+      <h4>Infrastructure</h4>
+      <p>Select all elements that exist in your current environment:</p>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-active-directory" data-label="Active Directory"> 
+          Active Directory
+        </label>
+        <div id="env-active-directory-options" class="eap-method-options">
+          <div class="form-group">
+            <label for="ad-domain">Domain Name:</label>
+            <input type="text" id="ad-domain" placeholder="example.com">
+          </div>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="ad-multi-domain"> 
+              Multi-domain environment
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-certificate-authority" data-label="Certificate Authority"> 
+          Certificate Authority
+        </label>
+        <div id="env-certificate-authority-options" class="eap-method-options">
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="ca-microsoft" checked> 
+              Microsoft CA
+            </label>
+          </div>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="ca-third-party"> 
+              Third-party CA
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-radius" data-label="Existing RADIUS"> 
+          Existing RADIUS Server
+        </label>
+        <div id="env-radius-options" class="eap-method-options">
+          <div class="form-group">
+            <label for="radius-vendor">RADIUS Vendor:</label>
+            <select id="radius-vendor">
+              <option value="microsoft-nps">Microsoft NPS</option>
+              <option value="cisco-ise">Cisco ISE</option>
+              <option value="freeradius">FreeRADIUS</option>
+              <option value="aruba-clearpass">Aruba ClearPass</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-vpn" data-label="VPN"> 
+          VPN Infrastructure
+        </label>
+        <div id="env-vpn-options" class="eap-method-options">
+          <div class="form-group">
+            <label for="vpn-vendor">VPN Vendor:</label>
+            <select id="vpn-vendor">
+              <option value="cisco-anyconnect">Cisco AnyConnect</option>
+              <option value="palo-globalprotect">Palo Alto GlobalProtect</option>
+              <option value="fortinet">Fortinet FortiClient</option>
+              <option value="checkpoint">Check Point</option>
+              <option value="azure-vpn">Azure VPN</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-firewall" data-label="Firewall"> 
+          Next-Gen Firewall
+        </label>
+        <div id="env-firewall-options" class="eap-method-options">
+          <div class="form-group">
+            <label for="firewall-vendor">Firewall Vendor:</label>
+            <select id="firewall-vendor">
+              <option value="paloalto">Palo Alto Networks</option>
+              <option value="fortinet">Fortinet</option>
+              <option value="checkpoint">Check Point</option>
+              <option value="cisco-ftd">Cisco Firepower</option>
+              <option value="sonicwall">SonicWall</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-cloud" data-label="Cloud Infrastructure"> 
+          Cloud Infrastructure
+        </label>
+        <div id="env-cloud-options" class="eap-method-options">
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="cloud-aws"> 
+              AWS
+            </label>
+          </div>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="cloud-azure" checked> 
+              Azure
+            </label>
+          </div>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="cloud-gcp"> 
+              Google Cloud
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="environment-group">
+      <h4>MDM Solution</h4>
+      <p>Select your existing MDM solution:</p>
+      
+      <div class="form-group">
+        <select id="mdm-provider">
+          <option value="none">None</option>
+          <option value="intune">Microsoft Intune</option>
+          <option value="jamf">JAMF</option>
+          <option value="workspace-one">VMware Workspace ONE</option>
+          <option value="mas360">IBM MaaS360</option>
+          <option value="mobileiron">MobileIron</option>
+          <option value="gpo">Group Policy (GPO)</option>
+        </select>
+      </div>
+      
+      <div id="mdm-options" class="mdm-options">
+        <!-- Options will be populated via JavaScript -->
+      </div>
+    </div>
+    
+    <div class="environment-group">
+      <h4>Identity Provider</h4>
+      <p>Select your existing identity provider:</p>
+      
+      <div class="form-group">
+        <select id="idp-provider">
+          <option value="none">None</option>
+          <option value="entra-id">Microsoft Entra ID</option>
+          <option value="okta">Okta</option>
+          <option value="google-workspace">Google Workspace</option>
+          <option value="onelogin">OneLogin</option>
+          <option value="ping">Ping Identity</option>
+        </select>
+      </div>
+      
+      <div id="idp-options" class="idp-options">
+        <!-- Options will be populated via JavaScript -->
+      </div>
+    </div>
+    
+    <div class="form-actions">
+      <button type="button" onclick="updateEnvironmentSummary()" class="btn">Generate Environment Profile</button>
+    </div>
+  </div>
+  
+  <div id="environment-summary" class="environment-section" style="display: none;">
+    <!-- Will be populated by JavaScript -->
+  </div>
+</div>
+<!-- Portnox Cloud Discovery Section -->
+cat > portnox-discovery.html << 'EOF'
+<div class="discovery-section" id="disc-portnox">
+  <div class="portnox-header">
+    <img src="assets/portnox/portnox-logo.png" alt="Portnox Logo" class="portnox-logo">
+    <div>
+      <h3>Portnox Cloud Discovery</h3>
+      <p>Integrate with Portnox Cloud for unified access control, reporting, and automated deployment</p>
+    </div>
+  </div>
+  
+  <div class="portnox-section">
+    <h4>Portnox Cloud API Integration</h4>
+    <p>Connect to your Portnox Cloud instance to enable advanced network access control features and automation.</p>
+    
+    <div class="form-group">
+      <label for="portnox-tenant">Tenant ID:</label>
+      <input type="text" id="portnox-tenant" placeholder="Enter your Portnox tenant ID">
+    </div>
+    
+    <div class="form-group">
+      <label for="portnox-api-key">API Key:</label>
+      <div class="api-key-container">
+        <input type="password" id="portnox-api-key" placeholder="Enter your Portnox API key">
+        <button type="button" id="portnox-connect-button" class="portnox-btn">Connect</button>
+      </div>
+    </div>
+    
+    <div id="success-message" class="alert alert-success" style="display: none;"></div>
+    <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+  </div>
+  
+  <div class="portnox-tabs">
+    <button class="portnox-nav-tab active" onclick="showPortnoxTab('radius', this)" data-tab="radius">RADIUS Server</button>
+    <button class="portnox-nav-tab" onclick="showPortnoxTab('mab', this)" data-tab="mab">MAB Management</button>
+    <button class="portnox-nav-tab" onclick="showPortnoxTab('groups', this)" data-tab="groups">Device Groups</button>
+    <button class="portnox-nav-tab" onclick="showPortnoxTab('reports', this)" data-tab="reports">Reports</button>
+    <button class="portnox-nav-tab" onclick="showPortnoxTab('poc', this)" data-tab="poc">POC Generator</button>
+  </div>
+  
+  <!-- RADIUS Server Tab -->
+  <div class="portnox-content" id="portnox-radius" style="display: block;">
+    <div class="portnox-feature">
+      <div class="card">
+        <div class="card-header">Create Cloud RADIUS Server</div>
+        <div class="card-body">
+          <p>Quickly create a cloud-native RADIUS server for your 802.1X authentication needs.</p>
+          
+          <div class="form-group">
+            <label for="portnox-region-select">Select Region:</label>
+            <select id="portnox-region-select">
+              <option value="us">United States (North America)</option>
+              <option value="eu">Europe (Netherlands)</option>
+              <option value="ap">Asia Pacific (Singapore)</option>
+              <option value="au">Australia</option>
+            </select>
+          </div>
+          
+          <button type="button" id="portnox-create-radius-button" class="portnox-btn">Create RADIUS Server</button>
+        </div>
+      </div>
+      
+      <div class="card" id="portnox-radius-details" style="display: none;">
+        <div class="card-header">RADIUS Server Details</div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td><strong>IP Address:</strong></td>
+              <td id="radius-ip">192.168.1.1</td>
+            </tr>
+            <tr>
+              <td><strong>Authentication Port:</strong></td>
+              <td id="radius-auth-port">1812</td>
+            </tr>
+            <tr>
+              <td><strong>Accounting Port:</strong></td>
+              <td id="radius-acct-port">1813</td>
+            </tr>
+            <tr>
+              <td><strong>Shared Secret:</strong></td>
+              <td id="radius-secret">****************</td>
+            </tr>
+          </table>
+          
+          <button type="button" class="portnox-btn" style="margin-top: 15px;" onclick="document.getElementById('radius-secret').textContent = generateRandomSecret()">Show Secret</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MAB Management Tab -->
+  <div class="portnox-content" id="portnox-mab" style="display: none;">
+    <div class="portnox-feature">
+      <div class="card">
+        <div class="card-header">Create MAB Account</div>
+        <div class="card-body">
+          <p>Add MAC Authentication Bypass accounts for devices that don't support 802.1X.</p>
+          
+          <div class="form-group">
+            <label for="portnox-mac-address">MAC Address:</label>
+            <input type="text" id="portnox-mac-address" placeholder="00:11:22:33:44:55">
+          </div>
+          
+          <div class="form-group">
+            <label for="portnox-device-name">Device Name:</label>
+            <input type="text" id="portnox-device-name" placeholder="Printer-Floor1">
+          </div>
+          
+          <div class="form-group">
+            <label for="portnox-device-type">Device Type:</label>
+            <select id="portnox-device-type">
+              <option value="printer">Printer</option>
+              <option value="voip-phone">VoIP Phone</option>
+              <option value="camera">Security Camera</option>
+              <option value="medical">Medical Device</option>
+              <option value="iot">IoT Device</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <button type="button" id="portnox-create-mab-button" class="portnox-btn">Create MAB Account</button>
+        </div>
+      </div>
+      
+      <div class="card" style="margin-top: 20px;">
+        <div class="card-header">MAB Accounts</div>
+        <div class="card-body">
+          <table>
+            <thead>
+              <tr>
+                <th>MAC Address</th>
+                <th>Device Name</th>
+                <th>Created</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="portnox-mab-accounts-body">
+              <!-- Will be populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- POC Generator Tab -->
+  <div class="portnox-content" id="portnox-poc" style="display: none;">
+    <div class="portnox-feature">
+      <div class="card">
+        <div class="card-header">Create POC Report & Deployment Templates</div>
+        <div class="card-body">
+          <p>Generate a comprehensive proof of concept report and deployment templates based on your environment.</p>
+          
+          <div class="form-group">
+            <label for="portnox-client-name">Client/Organization Name:</label>
+            <input type="text" id="portnox-client-name" placeholder="Enter organization name">
+          </div>
+          
+          <div class="form-group">
+            <label for="portnox-environment">Environment Description:</label>
+            <textarea id="portnox-environment" rows="4" placeholder="Brief description of your environment, goals, and requirements"></textarea>
+          </div>
+          
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="portnox-use-env-discovery" checked> 
+              Use data from Environment Discovery
+            </label>
+          </div>
+          
+          <div class="button-group">
+            <button type="button" id="portnox-generate-poc-button" class="portnox-btn">Generate POC Report</button>
+            <button type="button" id="portnox-download-poc-button" class="portnox-btn" style="display: none;">Download POC Report</button>
+          </div>
+          
+          <div class="form-group" style="margin-top: 20px;">
+            <button type="button" id="portnox-generate-templates-button" class="portnox-btn">Generate Deployment Templates</button>
+          </div>
+          
+          <div id="portnox-templates-container" style="display: none; margin-top: 20px;">
+            <!-- Templates will be generated here by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
