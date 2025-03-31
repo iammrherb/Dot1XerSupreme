@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Enhanced UI styles for Dot1Xer Supreme with improved color contrast */
 :root {
     --primary-color: #6300c4;
@@ -365,3 +366,1015 @@ body {
 
 /* ... (rest of the CSS remains unchanged for brevity) ... */
 
+=======
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #0a0a1a;
+    color: #fff;
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+.circuit-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0 50 H20 M20 50 V30 M20 30 H40 M40 30 V70 M40 70 H60 M60 70 V50 M60 50 H80 M80 50 V30 M80 30 H100" stroke="rgba(0, 255, 255, 0.2)" stroke-width="1" fill="none"/><circle cx="20" cy="50" r="2" fill="rgba(0, 255, 255, 0.5)"/><circle cx="40" cy="30" r="2" fill="rgba(0, 255, 255, 0.5)"/><circle cx="60" cy="70" r="2" fill="rgba(0, 255, 255, 0.5)"/></svg>') repeat;
+    animation: circuitFlow 20s linear infinite;
+    z-index: -1;
+}
+@keyframes circuitFlow {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
+}
+header {
+    height: 100px;
+    background: rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid #00d4ff;
+    box-shadow: 0 2px 15px rgba(0, 212, 255, 0.3);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.logo {
+    width: 200px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+}
+.title {
+    font-size: 2.5em;
+    font-weight: 900;
+    color: #00d4ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-left: 20px;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.7), 0 0 20px rgba(0, 212, 255, 0.5);
+    position: relative;
+    animation: glow 1.5s infinite alternate;
+}
+.title::before,
+.title::after {
+    content: '?';
+    position: absolute;
+    font-size: 1.2em;
+    color: #00d4ff;
+    animation: lightning 2s infinite;
+}
+.title::before {
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.title::after {
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+@keyframes glow {
+    0% { text-shadow: 0 0 10px rgba(0, 212, 255, 0.7), 0 0 20px rgba(0, 212, 255, 0.5); }
+    100% { text-shadow: 0 0 20px rgba(0, 212, 255, 1), 0 0 30px rgba(0, 212, 255, 0.8); }
+}
+@keyframes lightning {
+    0%, 20%, 50%, 80%, 100% { opacity: 1; }
+    10%, 30%, 60%, 90% { opacity: 0.3; }
+}
+.container {
+    display: flex;
+    margin-top: 100px;
+}
+.sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #0a0a1a 0%, #1a1a3a 100%);
+    padding: 15px;
+    height: calc(100vh - 100px);
+    position: fixed;
+    top: 100px;
+    left: 0;
+    transition: width 0.3s ease;
+    box-shadow: 2px 0 15px rgba(0, 212, 255, 0.3);
+    overflow-y: auto;
+}
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: #1a1a3a;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: #00d4ff;
+    border-radius: 4px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #00b0ff;
+}
+.sidebar.collapsed {
+    width: 60px;
+}
+.sidebar.collapsed nav {
+    display: none;
+}
+.menu-btn {
+    width: 100%;
+    padding: 12px;
+    background: #00d4ff;
+    color: #0a0a1a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+.menu-btn:hover {
+    background: #00b0ff;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.7);
+    transform: scale(1.05);
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+nav ul li {
+    margin: 8px 0;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 12px;
+    border-radius: 5px;
+    background: rgba(0, 212, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+nav ul li a:hover, nav ul li a.active {
+    background: linear-gradient(90deg, #00d4ff, #007bff);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.7);
+    transform: translateX(5px);
+}
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+    transition: 0.5s;
+}
+nav ul li a:hover::before {
+    left: 100%;
+}
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    transition: margin-left 0.3s ease, width 0.3s ease;
+}
+.main-content.expanded {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+}
+.section {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border: 1px solid #00d4ff;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 212, 255, 0.3);
+}
+.section.active {
+    display: block;
+}
+.wizard {
+    width: 150px;
+    display: block;
+    margin: 20px auto;
+    animation: dance 2s infinite alternate, glow 1.5s infinite alternate;
+}
+@keyframes dance {
+    0% { transform: translateX(-10px) rotate(2deg); }
+    100% { transform: translateX(10px) rotate(-2deg); }
+}
+@keyframes glow {
+    0% { filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.5)); }
+    100% { filter: drop-shadow(0 0 15px rgba(0, 212, 255, 1)); }
+}
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.server-entry {
+    border: 1px solid #00d4ff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #333;
+}
+input, select {
+    padding: 8px;
+    margin-bottom: 15px;
+    width: 250px;
+    border: 1px solid #00d4ff;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #fff;
+    color: #333;
+}
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+}
+button {
+    padding: 10px 20px;
+    background: #00d4ff;
+    color: #0a0a1a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+button:hover {
+    background: #00b0ff;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.7);
+    transform: scale(1.05);
+}
+pre {
+    background: #f1f1f1;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #333;
+}
+h2 {
+    color: #00d4ff;
+    margin-bottom: 20px;
+}
+h3 {
+    color: #333;
+    margin-top: 10px;
+}
+h4 {
+    color: #00d4ff;
+    margin-top: 10px;
+}
+#platformInfo {
+    background: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    color: #333;
+}
+
+/* Portnox Specific Styles */
+.portnox-header {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #6c27be, #4c1d80);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.portnox-logo {
+    height: 30px;
+    margin-right: 15px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.checkbox-group label:hover {
+    background: #e0e0e0;
+}
+
+#diagramContainer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#networkDiagram {
+    max-width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+#downloadDiagramBtn {
+    background: linear-gradient(to bottom, #6c27be, #4c1d80);
+    color: white;
+}
+
+#downloadDiagramBtn:hover {
+    background: linear-gradient(to bottom, #8032e0, #5c2390);
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.8em;
+    }
+    .sidebar {
+        width: 200px;
+    }
+    .main-content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+    input, select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+    .logo {
+        width: 150px;
+    }
+    .title {
+        font-size: 1.5em;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    .container {
+        flex-direction: column;
+    }
+}
+// portnox-api.js - Handles Portnox API connections and calls
+
+class PortnoxAPI {
+    constructor() {
+        this.baseURL = "https://clear.portnox.com:8081/CloudPortalBackEnd/";
+        this.apiKey = null;
+        this.tenantId = null;
+        this.isConnected = false;
+    }
+
+    // Check if API integration is enabled
+    isEnabled() {
+        return document.getElementById('portnox_api_enable')?.checked || false;
+    }
+
+    // Get credentials from form
+    getCredentials() {
+        return {
+            tenantId: document.getElementById('portnox_tenant_id')?.value || '',
+            apiKey: document.getElementById('portnox_api_key')?.value || '',
+            region: document.getElementById('portnox_region')?.value || 'us'
+        };
+    }
+
+    // Generate RADIUS server details based on selected region
+    generateRadiusDetails(region) {
+        const regionDetails = {
+            'us': { 
+                ip: '52.14.108.42', 
+                region: 'United States (North America)',
+                authPort: 1812,
+                acctPort: 1813,
+                secret: this.generateRandomSecret()
+            },
+            'eu': { 
+                ip: '13.81.57.209', 
+                region: 'Europe (Netherlands)',
+                authPort: 1812,
+                acctPort: 1813,
+                secret: this.generateRandomSecret()
+            },
+            'ap': { 
+                ip: '52.76.98.33', 
+                region: 'Asia Pacific (Singapore)',
+                authPort: 1812,
+                acctPort: 1813,
+                secret: this.generateRandomSecret()
+            }
+        };
+        
+        return regionDetails[region] || regionDetails['us'];
+    }
+    
+    // Generate a random shared secret
+    generateRandomSecret() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+        let secret = '';
+        for (let i = 0; i < 16; i++) {
+            secret += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return secret;
+    }
+    
+    // Get MAB device types selected by user
+    getMABDeviceTypes() {
+        const types = [];
+        document.querySelectorAll('input[name="mab_device"]:checked').forEach(checkbox => {
+            types.push(checkbox.value);
+        });
+        return types;
+    }
+    
+    // Generate network diagram URL (SVG-based)
+    generateNetworkDiagram(configData) {
+        // In a production environment, this would generate a dynamic SVG
+        // For now, we'll use a static image path
+        return 'assets/diagrams/portnox-diagram.svg';
+    }
+}
+
+// Export the API class
+window.PortnoxAPI = new PortnoxAPI();
+let configData = {
+    platform: '',
+    aaa: {},
+    radius: [],
+    tacacs: [],
+    dot1x: {},
+    coa: {},
+    deviceTracking: {},
+    portnox: {},
+    port: {}
+};
+
+let radiusServerCount = 1;
+let tacacsServerCount = 1;
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('main-content');
+    sidebar.classList.toggle('collapsed');
+    mainContent.classList.toggle('expanded');
+}
+
+function showSection(sectionId) {
+    // Hide all sections
+    const sections = document.getElementsByClassName('section');
+    for (let i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active');
+    }
+
+    // Remove active class from all sidebar links
+    const links = document.querySelectorAll('.sidebar nav ul li a');
+    for (let i = 0; i < links.length; i++) {
+        links[i].classList.remove('active');
+    }
+
+    // Show the selected section and mark the link as active
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+        selectedSection.classList.add('active');
+        const selectedLink = document.querySelector(`a[onclick="showSection('${sectionId}')"]`);
+        if (selectedLink) {
+            selectedLink.classList.add('active');
+        } else {
+            console.error(`Link for section ${sectionId} not found.`);
+        }
+    } else {
+        console.error(`Section with ID ${sectionId} not found.`);
+    }
+
+    // Update platform-specific settings visibility
+    updatePlatformSpecificSettings();
+}
+
+function updatePlatformInfo() {
+    const platform = document.getElementById('platform').value;
+    configData.platform = platform;
+    const platformInfo = document.getElementById('platformInfo');
+    const info = {
+        'cisco_iosxe': "Cisco: IOS-XE (Catalyst): Modern Catalyst switches (9000, 3800, etc.) with IBNS 2.0 support.",
+        'cisco_nxos': "Cisco: NX-OS (Nexus): Nexus switches with different AAA syntax and features.",
+        'aruba_arubaos': "Aruba: ArubaOS: Wired and wireless switches with dot1x profiles.",
+        'juniper_junos': "Juniper: Junos: EX/QFX switches with 802.1X support.",
+        'extreme_exos': "Extreme: EXOS: Extreme Networks switches with netlogin.",
+        'arista_eos': "Arista: EOS: EOS switches with 802.1X capabilities.",
+        'portnox': "Portnox: Cloud: Portnox-enabled switches with advanced 802.1X and cloud-based NAC features."
+    };
+    platformInfo.innerHTML = `<p><strong>${info[platform].split(':')[0]}: ${info[platform].split(':')[1]}:</strong> ${info[platform].split(':')[2]}</p>`;
+    updatePlatformSpecificSettings();
+}
+
+function updatePlatformSpecificSettings() {
+    const platform = configData.platform;
+    const ciscoSettings = document.getElementById('ciscoSettings');
+    const portnoxSettings = document.getElementById('portnoxSettings');
+    
+    if (ciscoSettings) {
+        ciscoSettings.style.display = (platform === 'cisco_iosxe' || platform === 'cisco_nxos') ? 'block' : 'none';
+    }
+    if (portnoxSettings) {
+        portnoxSettings.style.display = (platform === 'portnox') ? 'block' : 'none';
+    }
+}
+
+function togglePortnoxAPISettings() {
+    const apiEnabled = document.getElementById('portnox_api_enable').checked;
+    const apiSettings = document.getElementById('portnoxAPISettings');
+    
+    if (apiSettings) {
+        apiSettings.style.display = apiEnabled ? 'block' : 'none';
+    }
+    
+    // Also toggle MAB settings
+    togglePortnoxMABSettings();
+}
+
+function togglePortnoxMABSettings() {
+    const apiEnabled = document.getElementById('portnox_api_enable')?.checked || false;
+    const mabEnabled = document.getElementById('portnox_mab_enable')?.checked || false;
+    const mabSettings = document.getElementById('portnoxMABSettings');
+    
+    if (mabSettings) {
+        mabSettings.style.display = (apiEnabled && mabEnabled) ? 'block' : 'none';
+    }
+}
+
+function addRadiusServer() {
+    radiusServerCount++;
+    const container = document.getElementById('radiusServers');
+    const newServer = document.createElement('div');
+    newServer.className = 'server-entry';
+    newServer.innerHTML = `
+        <h3>RADIUS Server ${radiusServerCount}</h3>
+        <label for="radius_ip_${radiusServerCount}">RADIUS Server IP:</label>
+        <input type="text" id="radius_ip_${radiusServerCount}" placeholder="e.g., 192.168.1.11"><br>
+        <label for="radius_key_${radiusServerCount}">Shared Key:</label>
+        <input type="text" id="radius_key_${radiusServerCount}" placeholder="e.g., SecretKey2"><br>
+        <label for="radius_auth_port_${radiusServerCount}">Auth Port:</label>
+        <input type="number" id="radius_auth_port_${radiusServerCount}" placeholder="e.g., 1812" min="1" max="65535"><br>
+        <label for="radius_acct_port_${radiusServerCount}">Acct Port:</label>
+        <input type="number" id="radius_acct_port_${radiusServerCount}" placeholder="e.g., 1813" min="1" max="65535"><br>
+        <label for="radius_priority_${radiusServerCount}">Priority:</label>
+        <input type="number" id="radius_priority_${radiusServerCount}" placeholder="e.g., ${radiusServerCount}" min="1" max="10"><br>
+    `;
+    container.appendChild(newServer);
+}
+
+function addTacacsServer() {
+    tacacsServerCount++;
+    const container = document.getElementById('tacacsServers');
+    const newServer = document.createElement('div');
+    newServer.className = 'server-entry';
+    newServer.innerHTML = `
+        <h3>TACACS+ Server ${tacacsServerCount}</h3>
+        <label for="tacacs_ip_${tacacsServerCount}">TACACS+ Server IP:</label>
+        <input type="text" id="tacacs_ip_${tacacsServerCount}" placeholder="e.g., 192.168.1.21"><br>
+        <label for="tacacs_key_${tacacsServerCount}">Shared Key:</label>
+        <input type="text" id="tacacs_key_${tacacsServerCount}" placeholder="e.g., TacacsKey2"><br>
+        <label for="tacacs_auth_port_${tacacsServerCount}">Auth Port:</label>
+        <input type="number" id="tacacs_auth_port_${tacacsServerCount}" placeholder="e.g., 49" min="1" max="65535"><br>
+        <label for="tacacs_priority_${tacacsServerCount}">Priority:</label>
+        <input type="number" id="tacacs_priority_${tacacsServerCount}" placeholder="e.g., ${tacacsServerCount}" min="1" max="10"><br>
+    `;
+    container.appendChild(newServer);
+}
+
+function generateConfig() {
+    try {
+        let config = `! Generated Configuration\n! Platform: ${configData.platform}\n! Generated on ${new Date().toLocaleString()}\n`;
+
+        // AAA Settings
+        const aaaAuthMethod = document.getElementById('aaa_auth_method').value;
+        const aaaAccounting = document.getElementById('aaa_accounting').checked;
+        if (!aaaAuthMethod) throw new Error("Authentication method is required.");
+        configData.aaa = { authMethod: aaaAuthMethod, accounting: aaaAccounting };
+
+        // RADIUS Servers
+        configData.radius = [];
+        for (let i = 1; i <= radiusServerCount; i++) {
+            const ip = document.getElementById(`radius_ip_${i}`).value;
+            const key = document.getElementById(`radius_key_${i}`).value;
+            const authPort = document.getElementById(`radius_auth_port_${i}`).value || 1812;
+            const acctPort = document.getElementById(`radius_acct_port_${i}`).value || 1813;
+            const priority = document.getElementById(`radius_priority_${i}`).value || i;
+            if (ip && key) {
+                configData.radius.push({ ip, key, authPort, acctPort, priority });
+            }
+        }
+        
+        // If Portnox API is enabled, add Portnox RADIUS server details
+        if (window.PortnoxAPI && window.PortnoxAPI.isEnabled()) {
+            const credentials = window.PortnoxAPI.getCredentials();
+            const radiusDetails = window.PortnoxAPI.generateRadiusDetails(credentials.region);
+            configData.radius.push({
+                ip: radiusDetails.ip,
+                key: radiusDetails.secret,
+                authPort: radiusDetails.authPort,
+                acctPort: radiusDetails.acctPort,
+                priority: 1, // Portnox RADIUS has highest priority
+                isPortnox: true
+            });
+        }
+        
+        if (configData.aaa.authMethod === 'radius' && configData.radius.length === 0) {
+            throw new Error("At least one RADIUS server is required when using RADIUS authentication.");
+        }
+
+        // TACACS+ Servers
+        configData.tacacs = [];
+        for (let i = 1; i <= tacacsServerCount; i++) {
+            const ip = document.getElementById(`tacacs_ip_${i}`).value;
+            const key = document.getElementById(`tacacs_key_${i}`).value;
+            const authPort = document.getElementById(`tacacs_auth_port_${i}`).value || 49;
+            const priority = document.getElementById(`tacacs_priority_${i}`).value || i;
+            if (ip && key) {
+                configData.tacacs.push({ ip, key, authPort, priority });
+            }
+        }
+
+        // 802.1X Settings
+        const dot1xInterface = document.getElementById('dot1x_interface').value;
+        const dot1xVlan = document.getElementById('dot1x_vlan').value;
+        if (!dot1xInterface || !dot1xVlan) throw new Error("Interface and VLAN ID are required for 802.1X settings.");
+        configData.dot1x = {
+            interface: dot1xInterface,
+            vlan: dot1xVlan,
+            reauth: document.getElementById('dot1x_reauth').value || 3600,
+            tx: document.getElementById('dot1x_tx').value || 10,
+            mode: document.getElementById('dot1x_mode') ? document.getElementById('dot1x_mode').value : 'closed',
+            ibns: {
+                enable: document.getElementById('ibns_enable') ? document.getElementById('ibns_enable').checked : false,
+                policy: document.getElementById('ibns_policy') ? document.getElementById('ibns_policy').value || 'DOT1X_MAB_POLICY' : 'DOT1X_MAB_POLICY'
+            },
+            portnox: {
+                profile: document.getElementById('portnox_profile') ? document.getElementById('portnox_profile').value || 'PORTNOX_PROFILE' : 'PORTNOX_PROFILE',
+                guestVlan: document.getElementById('portnox_guest_vlan') ? document.getElementById('portnox_guest_vlan').value || 100 : 100,
+                dynamicVlan: document.getElementById('portnox_dynamic_vlan') ? document.getElementById('portnox_dynamic_vlan').checked : false
+            }
+        };
+
+        // CoA
+        configData.coa = {
+            enable: document.getElementById('coa_enable').checked,
+            port: document.getElementById('coa_port').value || 1700
+        };
+
+        // Device Tracking
+        configData.deviceTracking = {
+            enable: document.getElementById('device_tracking_enable').checked,
+            policy: document.getElementById('device_tracking_policy').value || 'IP-TRACKING'
+        };
+        
+        // Portnox Settings
+        if (window.PortnoxAPI && window.PortnoxAPI.isEnabled()) {
+            const credentials = window.PortnoxAPI.getCredentials();
+            configData.portnox = {
+                enabled: true,
+                tenantId: credentials.tenantId,
+                region: credentials.region,
+                enforcement: document.getElementById('portnox_enforcement').value || 'monitor',
+                mab: {
+                    enabled: document.getElementById('portnox_mab_enable').checked,
+                    deviceTypes: window.PortnoxAPI.getMABDeviceTypes()
+                }
+            };
+        } else {
+            configData.portnox = { enabled: false };
+        }
+
+        // Port Integration
+        const portMode = document.getElementById('port_mode').value;
+        const portHostMode = document.getElementById('port_host_mode').value;
+        if (!portMode || !portHostMode) throw new Error("Port mode and host mode are required.");
+        configData.port = { mode: portMode, hostMode: portHostMode };
+
+        // Generate config based on platform
+        if (configData.platform === 'cisco_iosxe') {
+            config += `aaa new-model\n`;
+            if (configData.aaa.authMethod === 'radius') {
+                config += `aaa authentication dot1x default group radius\n`;
+                config += `aaa authorization network default group radius\n`;
+                if (configData.aaa.accounting) {
+                    config += `aaa accounting dot1x default start-stop group radius\n`;
+                }
+                configData.radius.forEach((server, index) => {
+                    const serverName = server.isPortnox ? "PORTNOX" : `ISE${index + 1}`;
+                    config += `radius server ${serverName}\n address ipv4 ${server.ip} auth-port ${server.authPort} acct-port ${server.acctPort}\n key ${server.key}\n`;
+                });
+            }
+            if (configData.aaa.authMethod === 'tacacs') {
+                config += `aaa authentication dot1x default group tacacs+\n`;
+                configData.tacacs.forEach((server, index) => {
+                    config += `tacacs server TACACS${index + 1}\n address ipv4 ${server.ip}\n key ${server.key}\n port ${server.authPort}\n`;
+                });
+            }
+            config += `dot1x system-auth-control\n`;
+            if (configData.deviceTracking.enable) {
+                config += `ip device tracking\n`;
+                config += `device-tracking policy ${configData.deviceTracking.policy}\n`;
+            }
+            if (configData.dot1x.ibns.enable) {
+                config += `policy-map type control subscriber ${configData.dot1x.ibns.policy}\n`;
+                config += ` event session-started match-all\n  10 class always do-until-failure\n   10 authenticate using dot1x priority 10\n`;
+            }
+            config += `interface ${configData.dot1x.interface}\n`;
+            config += ` switchport mode ${configData.port.mode}\n`;
+            config += ` switchport access vlan ${configData.dot1x.vlan}\n`;
+            config += ` authentication host-mode ${configData.port.hostMode}\n`;
+            config += ` authentication port-control auto\n`;
+            if (configData.dot1x.mode === 'open') {
+                config += ` authentication open\n`;
+            }
+            config += ` dot1x pae authenticator\n`;
+            config += ` dot1x timeout tx-period ${configData.dot1x.tx}\n`;
+            
+            // Add Portnox-specific settings if enabled
+            if (configData.portnox.enabled) {
+                config += `\n! Portnox Integration Settings\n`;
+                if (configData.portnox.mab.enabled) {
+                    config += `mab\n`;
+                    config += `authentication order dot1x mab\n`;
+                    config += `authentication priority dot1x mab\n`;
+                }
+                if (configData.portnox.enforcement === 'monitor') {
+                    config += `authentication open\n`;
+                } else if (configData.portnox.enforcement === 'low_impact') {
+                    config += `authentication open\n`;
+                    config += `authentication violation restrict\n`;
+                }
+            }
+        } else if (configData.platform === 'portnox') {
+            config += `! Portnox Cloud Configuration\n`;
+            config += `! Region: ${configData.portnox.region === 'us' ? 'North America' : configData.portnox.region === 'eu' ? 'Europe' : 'Asia Pacific'}\n`;
+            config += `! Enforcement Mode: ${configData.portnox.enforcement === 'monitor' ? 'Monitor Only' : configData.portnox.enforcement === 'low_impact' ? 'Low Impact' : 'Closed Mode'}\n\n`;
+            
+            config += `aaa authentication dot1x default group radius\n`;
+            config += `aaa authorization network default group radius\n`;
+            if (configData.aaa.accounting) {
+                config += `aaa accounting dot1x default start-stop group radius\n`;
+            }
+            
+            // Add Portnox RADIUS server
+            const portnoxRadius = configData.radius.find(server => server.isPortnox);
+            if (portnoxRadius) {
+                config += `radius server PORTNOX_CLOUD\n`;
+                config += ` address ipv4 ${portnoxRadius.ip} auth-port ${portnoxRadius.authPort} acct-port ${portnoxRadius.acctPort}\n`;
+                config += ` key ${portnoxRadius.key}\n`;
+            }
+            
+            config += `dot1x system-auth-control\n`;
+            config += `interface ${configData.dot1x.interface}\n`;
+            config += ` switchport mode ${configData.port.mode}\n`;
+            config += ` switchport access vlan ${configData.dot1x.vlan}\n`;
+            config += ` dot1x pae authenticator\n`;
+            config += ` dot1x timeout tx-period ${configData.dot1x.tx}\n`;
+            config += ` authentication host-mode ${configData.port.hostMode}\n`;
+            
+            if (configData.portnox.mab.enabled) {
+                config += ` mab\n`;
+                config += ` authentication order dot1x mab\n`;
+                config += ` authentication priority dot1x mab\n`;
+            }
+            
+            if (configData.portnox.enforcement === 'monitor') {
+                config += ` authentication open\n`;
+            } else if (configData.portnox.enforcement === 'low_impact') {
+                config += ` authentication open\n`;
+                config += ` authentication violation restrict\n`;
+            } else {
+                config += ` authentication port-control auto\n`;
+            }
+            
+            if (configData.dot1x.portnox.guestVlan) {
+                config += ` authentication event fail action authorize vlan ${configData.dot1x.portnox.guestVlan}\n`;
+            }
+            
+            if (configData.dot1x.portnox.dynamicVlan) {
+                config += ` authentication event server dead action authorize vlan ${configData.dot1x.portnox.guestVlan}\n`;
+                config += ` authentication event server alive action reinitialize\n`;
+            }
+        } else {
+            // Handle other platforms (aruba, juniper, etc.)
+            // This is where we'd add specific config for those platforms
+        }
+
+        document.getElementById('configOutput').textContent = config;
+        
+        // Display network diagram if Portnox is enabled
+        if (configData.portnox.enabled) {
+            const diagramPath = window.PortnoxAPI.generateNetworkDiagram(configData);
+            const diagramImg = document.getElementById('networkDiagram');
+            if (diagramImg) {
+                diagramImg.src = diagramPath;
+                document.getElementById('diagramContainer').style.display = 'block';
+                document.getElementById('downloadDiagramBtn').style.display = 'inline-block';
+            }
+        }
+    } catch (error) {
+        alert(`Error generating configuration: ${error.message}`);
+        console.error(error);
+    }
+}
+
+function downloadConfig() {
+    let config = document.getElementById('configOutput').textContent;
+    if (!config) {
+        alert("Please generate a config first!");
+        return;
+    }
+    let blob = new Blob([config], { type: "text/plain" });
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `dot1xer_config_${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function downloadDiagram() {
+    // Create a link to download the network diagram
+    const link = document.createElement('a');
+    link.href = document.getElementById('networkDiagram').src;
+    link.download = `portnox_network_diagram_${new Date().toISOString().split('T')[0]}.svg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Show the first section by default and setup event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    showSection('PlatformSelection');
+    
+    // Set up Portnox MAB toggle
+    const portnoxMabEnable = document.getElementById('portnox_mab_enable');
+    if (portnoxMabEnable) {
+        portnoxMabEnable.addEventListener('change', togglePortnoxMABSettings);
+    }
+});
+# Create the SVG network diagram
+cat > assets/diagrams/portnox-diagram.svg << 'EOF'
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        text { font-family: Arial, sans-serif; }
+        .title { font-size: 18px; font-weight: bold; }
+        .subtitle { font-size: 14px; }
+        .label { font-size: 12px; }
+        .switch { fill: #4a7aff; }
+        .router { fill: #6300c4; }
+        .client { fill: #00b894; }
+        .server { fill: #e74c3c; }
+        .cloud { fill: #6c27be; }
+        .connection { stroke: #888; stroke-width: 2; }
+        .connection-highlight { stroke: #6c27be; stroke-width: 3; stroke-dasharray: 5,5; }
+    </style>
+
+    <!-- Background -->
+    <rect width="800" height="600" fill="#f
+    # Create the SVG network diagram
+cat > assets/diagrams/portnox-diagram.svg << 'EOF'
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        text { font-family: Arial, sans-serif; }
+        .title { font-size: 18px; font-weight: bold; }
+        .subtitle { font-size: 14px; }
+        .label { font-size: 12px; }
+        .switch { fill: #4a7aff; }
+        .router { fill: #6300c4; }
+        .client { fill: #00b894; }
+        .server { fill: #e74c3c; }
+        .cloud { fill: #6c27be; }
+        .connection { stroke: #888; stroke-width: 2; }
+        .connection-highlight { stroke: #6c27be; stroke-width: 3; stroke-dasharray: 5,5; }
+    </style>
+
+    <!-- Background -->
+    <rect width="800" height="600" fill="#f8f9fa" />
+    
+    <!-- Title -->
+    <text x="400" y="30" text-anchor="middle" class="title">Portnox Cloud 802.1X Deployment</text>
+    <text x="400" y="50" text-anchor="middle" class="subtitle">Network Architecture Diagram</text>
+    
+    <!-- Portnox Cloud -->
+    <ellipse cx="400" cy="120" rx="100" ry="40" class="cloud" />
+    <text x="400" y="125" text-anchor="middle" fill="white">Portnox Cloud RADIUS</text>
+    
+    <!-- Core Network -->
+    <rect x="350" y="200" width="100" height="50" rx="5" class="router" />
+    <text x="400" y="230" text-anchor="middle" fill="white">Core Router</text>
+    
+    <!-- Connection to Cloud -->
+    <line x1="400" y1="160" x2="400" y2="200" class="connection-highlight" />
+    
+    <!-- Distribution Layer -->
+    <rect x="200" y="300" width="80" height="40" rx="5" class="switch" />
+    <text x="240" y="325" text-anchor="middle" fill="white">Switch 1</text>
+    
+    <rect x="360" y="300" width="80" height="40" rx="5" class="switch" />
+    <text x="400" y="325" text-anchor="middle" fill="white">Switch 2</text>
+    
+    <rect x="520" y="300" width="80" height="40" rx="5" class="switch" />
+    <text x="560" y="325" text-anchor="middle" fill="white">Switch 3</text>
+    
+    <!-- Connections from Core to Distribution -->
+    <line x1="380" y1="250" x2="240" y2="300" class="connection" />
+    <line x1="400" y1="250" x2="400" y2="300" class="connection" />
+    <line x1="420" y1="250" x2="560" y2="300" class="connection" />
+    
+    <!-- Access Layer - Switch 1 -->
+    <circle cx="160" cy="400" r="15" class="client" />
+    <text x="160" y="430" text-anchor="middle" class="label">802.1X Client</text>
+    
+    <circle cx="200" cy="400" r="15" class="client" />
+    <text x="200" y="430" text-anchor="middle" class="label">802.1X Client</text>
+    
+    <circle cx="240" cy="400" r="15" class="server" />
+    <text x="240" y="430" text-anchor="middle" class="label">IoT Device (MAB)</text>
+    
+    <circle cx="280" cy="400" r="15" class="client" />
+    <text x="280" y="430" text-anchor="middle" class="label">802.1X Client</text>
+    
+    <!-- Access Layer - Switch 2 -->
+    <circle cx="360" cy="400" r="15" class="client" />
+    <text x="360" y="430" text-anchor="middle" class="label">802.1X Client</text>
+    
+    <circle cx="400" cy="400" r="15" class="server" />
+    <text x="400" y="430" text-anchor="middle" class="label">Printer (MAB)</text>
+    
+    <circle cx="440" cy="400" r="15" class="client" />
+    <text x="440" y="430" text-anchor="middle" class="label">802.1X Client</text>
+    
+    <!-- Access Layer - Switch 3 -->
+    <circle cx="520" cy="400" r="15" class="client" />
+    <text x="520" y="430" text-anchor="middle" class="label">802.1X Client</text>
+    
+    <circle cx="560" cy="400" r="15" class="client" />
+    <text x="560" y="430" text-anchor="middle" class="label">802.1X Client</text>
+    
+    <circle cx="600" cy="400" r="15" class="server" />
+    <text x="600" y="430" text-anchor="middle" class="label">Camera (MAB)</text>
+    
+    <!-- Connections from Distribution to Access -->
+    <line x1="240" y1="340" x2="160" y2="400" class="connection" />
+    <line x1="240" y1="340" x2="200" y2="400" class="connection" />
+    <line x1="240" y1="340" x2="240" y2="400" class="connection" />
+    <line x1="240" y1="340" x2="280" y2="400" class="connection" />
+    
+    <line x1="400" y1="340" x2="360" y2="400" class="connection" />
+    <line x1="400" y1="340" x2="400" y2="400" class="connection" />
+    <line x1="400" y1="340" x2="440" y2="400" class="connection" />
+    
+    <line x1="560" y1="340" x2="520" y2="400" class="connection" />
+    <line x1="560" y1="340" x2="560" y2="400" class="connection" />
+    <line x1="560" y1="340" x2="600" y2="400" class="connection" />
+    
+    <!-- Legend -->
+    <rect x="600" y="500" width="20" height="10" class="cloud" />
+    <text x="625" y="510" class="label" text-anchor="start">Portnox Cloud RADIUS</text>
+    
+    <rect x="600" y="520" width="20" height="10" class="router" />
+    <text x="625" y="530" class="label" text-anchor="start">Core Router</text>
+    
+    <rect x="600" y="540" width="20" height="10" class="switch" />
+    <text x="625" y="550" class="label" text-anchor="start">Switch</text>
+    
+    <circle cx="610" cy="570" r="5" class="client" />
+    <text x="625" y="573" class="label" text-anchor="start">802.1X Client</text>
+    
+    <circle cx="610" cy="590" r="5" class="server" />
+    <text x="625" y="593" class="label" text-anchor="start">MAB Device</text>
+</svg>
+>>>>>>> 5eae646 (Added Portnox integration with API support)

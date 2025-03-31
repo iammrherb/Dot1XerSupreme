@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Dot1Xer Supreme - Main JavaScript
 
 // Current step in the configurator
@@ -635,3 +636,6 @@ function showSuccess(message) {
         setTimeout(() => successDiv.style.display = 'none', 3000);
     }
 }
+=======
+// The app.js content from above goes here
+>>>>>>> 5eae646 (Added Portnox integration with API support)

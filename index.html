@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dot1Xer Supreme Configurator</title>
@@ -1715,5 +1716,303 @@ permit tcp any any eq 443"></textarea>
   </div>
   
   <script src="js/app.js"></script>
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dot1xer Supreme Configurator</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="circuit-bg"></div>
+    <header>
+        <img src="assets/images/logo.png" alt="Dot1xer Supreme Logo" class="logo">
+        <h1 class="title">Dot1xer Supreme Configurator</h1>
+    </header>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <button class="menu-btn" onclick="toggleSidebar()">?</button>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showSection('PlatformSelection')" class="active">1. Platform Selection</a></li>
+                    <li><a href="#" onclick="showSection('AAASettings')">2. AAA Settings</a></li>
+                    <li><a href="#" onclick="showSection('RADIUSServers')">3. RADIUS Servers</a></li>
+                    <li><a href="#" onclick="showSection('TACACS')">4. TACACS+ Servers</a></li>
+                    <li><a href="#" onclick="showSection('Dot1XSettings')">5. 802.1X Settings</a></li>
+                    <li><a href="#" onclick="showSection('CoA')">6. CoA</a></li>
+                    <li><a href="#" onclick="showSection('DeviceTracking')">7. Device Tracking</a></li>
+                    <li><a href="#" onclick="showSection('PortnoxSettings')">8. Portnox Integration</a></li>
+                    <li><a href="#" onclick="showSection('PortIntegration')">9. Port Integration</a></li>
+                    <li><a href="#" onclick="showSection('GenerateConfig')">10. Generate Configuration</a></li>
+                    <li><a href="#" onclick="showSection('Help')">11. Help</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content" id="main-content">
+            <section id="PlatformSelection" class="section active">
+                <h2>Platform Selection</h2>
+                <img src="assets/images/wizard.png" alt="Cyber Wizard" class="wizard">
+                <form id="platformForm">
+                    <label for="platform">Select Platform:</label>
+                    <select id="platform" onchange="updatePlatformInfo()">
+                        <option value="cisco_iosxe">Cisco: IOS-XE (Catalyst)</option>
+                        <option value="cisco_nxos">Cisco: NX-OS (Nexus)</option>
+                        <option value="aruba_arubaos">Aruba: ArubaOS</option>
+                        <option value="juniper_junos">Juniper: Junos</option>
+                        <option value="extreme_exos">Extreme: EXOS</option>
+                        <option value="arista_eos">Arista: EOS</option>
+                        <option value="portnox">Portnox: Cloud</option>
+                    </select><br>
+                    <div id="platformInfo">
+                        <p><strong>Cisco: IOS-XE (Catalyst):</strong> Modern Catalyst switches (9000, 3800, etc.) with IBNS 2.0 support.</p>
+                    </div>
+                    <button type="button" onclick="showSection('AAASettings')">Next</button>
+                </form>
+            </section>
+
+            <section id="AAASettings" class="section">
+                <h2>AAA Settings</h2>
+                <img src="assets/images/wizard.png" alt="Cyber Wizard" class="wizard">
+                <form id="aaaForm">
+                    <label for="aaa_auth_method">Authentication Method:</label>
+                    <select id="aaa_auth_method">
+                        <option value="radius">RADIUS</option>
+                        <option value="tacacs">TACACS+</option>
+                        <option value="local">Local</option>
+                    </select><br>
+                    <label for="aaa_accounting">Enable Accounting:</label>
+                    <input type="checkbox" id="aaa_accounting"><br>
+                    <button type="button" onclick="showSection('RADIUSServers')">Next</button>
+                    <button type="button" onclick="showSection('PlatformSelection')">Previous</button>
+                </form>
+            </section>
+
+            <section id="RADIUSServers" class="section">
+                <h2>RADIUS Servers</h2>
+                <img src="assets/images/wizard.png" alt="Cyber Wizard" class="wizard">
+                <form id="radiusForm">
+                    <div id="radiusServers">
+                        <div class="server-entry">
+                            <h3>RADIUS Server 1</h3>
+                            <label for="radius_ip_1">RADIUS Server IP:</label>
+                            <input type="text" id="radius_ip_1" placeholder="e.g., 192.168.1.10" required><br>
+                            <label for="radius_key_1">Shared Key:</label>
+                            <input type="text" id="radius_key_1" placeholder="e.g., SecretKey" required><br>
+                            <label for="radius_auth_port_1">Auth Port:</label>
+                            <input type="number" id="radius_auth_port_1" placeholder="e.g., 1812" min="1" max="65535" required><br>
+                            <label for="radius_acct_port_1">Acct Port:</label>
+                            <input type="number" id="radius_acct_port_1" placeholder="e.g., 1813" min="1" max="65535" required><br>
+                            <label for="radius_priority_1">Priority:</label>
+                            <input type="number" id="radius_priority_1" placeholder="e.g., 1" min="1" max="10" required><br>
+                        </div>
+                    </div>
+                    <button type="button" onclick="addRadiusServer()">Add Another RADIUS Server</button><br>
+                    <button type="button" onclick="showSection('TACACS')">Next</button>
+                    <button type="button" onclick="showSection('AAASettings')">Previous</button>
+                </form>
+            </section>
+
+            <section id="TACACS" class="section">
+                <h2>TACACS+ Servers</h2>
+                <img src="assets/images/wizard.png" alt="Cyber Wizard" class="wizard">
+                <form id="tacacsForm">
+                    <div id="tacacsServers">
+                        <div class="server-entry">
+                            <h3>TACACS+ Server 1</h3>
+                            <label for="tacacs_ip_1">TACACS+ Server IP:</label>
+                            <input type="text" id="tacacs_ip_1" placeholder="e.g., 192.168.1.20"><br>
+                            <label for="tacacs_key_1">Shared Key:</label>
+                            <input type="text" id="tacacs_key_1" placeholder="e.g., SecretKey"><br>
+                            <label for="tacacs_auth_port_1">Auth Port:</label>
+                            <input type="number" id="tacacs_auth_port_1" placeholder="e.g., 49" min="1" max="65535"><br>
+                            <label for="tacacs_priority_1">Priority:</label>
+                            <input type="number" id="tacacs_priority_1" placeholder="e.g., 1" min="1" max="10"><br>
+                        </div>
+                    </div>
+                    <button type="button" onclick="addTacacsServer()">Add Another TACACS+ Server</button><br>
+                    <button type="button" onclick="showSection('Dot1XSettings')">Next</button>
+                    <button type="button" onclick="showSection('RADIUSServers')">Previous</button>
+                </form>
+            </section>
+
+            <section id="Dot1XSettings" class="section">
+                <h2>802.1X Settings</h2>
+                <img src="assets/images/wizard.png" alt="Cyber Wizard" class="wizard">
+                <form id="dot1xForm">
+                    <label for="dot1x_interface">Interface:</label>
+                    <input type="text" id="dot1x_interface" placeholder="e.g., GigabitEthernet0/1" required><br>
+                    <label for="dot1x_vlan">VLAN ID:</label>
+                    <input type="number" id="dot1x_vlan" placeholder="e.g., 10" min="1" max="4094" required><br>
+                    <label for="dot1x_reauth">Reauth Period (s):</label>
+                    <input type="number" id="dot1x_reauth" placeholder="e.g., 3600" min="60"><br>
+                    <label for="dot1x_tx">TX Period (s):</label>
+                    <input type="number" id="dot1x_tx" placeholder="e.g., 10" min="1"><br>
+                    <!-- Cisco-specific settings -->
+                    <div id="ciscoSettings" style="display: none;">
+                        <label for="dot1x_mode">Authentication Mode:</label>
+                        <select id="dot1x_mode">
+                            <option value="closed">Closed Mode</option>
+                            <option value="open">Open Mode</option>
+                        </select><br>
+                        <label for="ibns_enable">Enable IBNS 2.0:</label>
+                        <input type="checkbox" id="ibns_enable"><br>
+                        <label for="ibns_policy">IBNS Policy Name:</label>
+                        <input type="text" id="ibns_policy" placeholder="e.g., DOT1X_MAB_POLICY"><br>
+                    </div>
+                    <!-- Portnox-specific settings -->
+                    <div id="portnoxSettings" style="display: none;">
+                        <label for="portnox_profile">Portnox Profile Name:</label>
+                        <input type="text" id="portnox_profile" placeholder="e.g., PORTNOX_PROFILE"><br>
+                        <label for="portnox_guest_vlan">Guest VLAN:</label>
+                        <input type="number" id="portnox_guest_vlan" placeholder="e.g., 100" min="1" max="4094"><br>
+                        <label for="portnox_dynamic_vlan">Enable Dynamic VLAN:</label>
+                        <input type="checkbox" id="portnox_dynamic_vlan"><br>
+                    </div>
+                    <button type="button" onclick="showSection('CoA')">Next</button>
+                    <button type="button" onclick="showSection('TACACS')">Previous</button>
+                </form>
+            </section>
+
+            <section id="CoA" class="section">
+                <h2>CoA</h2>
+                <img src="assets/images/wizard.png" alt="Cyber Wizard" class="wizard">
+                <form id="coaForm">
+                    <label for="coa_enable">Enable CoA:</label>
+                    <input type="checkbox" id="coa_enable"><br>
+                    <label for="coa_port">CoA Port:</label>
+                    <input type="number" id="coa_port" placeholder="e.g., 1700" min="1" max="65535"><br>
+                    <button type="button" onclick="showSection('DeviceTracking')">Next</button>
+                    <button type="button" onclick="showSection('Dot1XSettings')">Previous</button>
+                </form>
+            </section>
+
+            <section id="DeviceTracking" class="section">
+                <h2>Device Tracking</h2>
+                <img src="assets/images/wizard.png" alt="Cyber Wizard" class="wizard">
+                <form id="deviceTrackingForm">
+                    <label for="device_tracking_enable">Enable Device Tracking:</label>
+                    <input type="checkbox" id="device_tracking_enable"><br>
+                    <label for="device_tracking_policy">Policy Name:</label>
+                    <input type="text" id="device_tracking_policy" placeholder="e.g., IP-TRACKING"><br>
+                    <button type="button" onclick="showSection('PortnoxSettings')">Next</button>
+                    <button type="button" onclick="showSection('CoA')">Previous</button>
+                </form>
+            </section>
+
+            <section id="PortnoxSettings" class="section">
+                <h2>Portnox Integration</h2>
+                <img src="assets/images/wizard.png" alt="Cyber Wizard" class="wizard">
+                <div class="portnox-header">
+                    <img src="assets/portnox/portnox-logo.png" alt="Portnox Logo" class="portnox-logo">
+                    <h3>Portnox Cloud Integration</h3>
+                </div>
+                <form id="portnoxForm">
+                    <label for="portnox_api_enable">Enable Portnox API Integration:</label>
+                    <input type="checkbox" id="portnox_api_enable" onchange="togglePortnoxAPISettings()"><br>
+                    
+                    <div id="portnoxAPISettings" style="display: none;">
+                        <label for="portnox_tenant_id">Tenant ID:</label>
+                        <input type="text" id="portnox_tenant_id" placeholder="e.g., your-tenant-id"><br>
+                        
+                        <label for="portnox_api_key">API Key:</label>
+                        <input type="password" id="portnox_api_key" placeholder="Enter your Portnox API key"><br>
+                        
+                        <label for="portnox_region">Cloud Region:</label>
+                        <select id="portnox_region">
+                            <option value="us">United States (North America)</option>
+                            <option value="eu">Europe (Netherlands)</option>
+                            <option value="ap">Asia Pacific (Singapore)</option>
+                        </select><br>
+                        
+                        <label for="portnox_enforcement">Enforcement Mode:</label>
+                        <select id="portnox_enforcement">
+                            <option value="monitor">Monitor Only</option>
+                            <option value="low_impact">Low Impact</option>
+                            <option value="closed">Closed (Full Enforcement)</option>
+                        </select><br>
+                        
+                        <label for="portnox_mab_enable">Enable MAC Authentication Bypass:</label>
+                        <input type="checkbox" id="portnox_mab_enable" onchange="togglePortnoxMABSettings()"><br>
+                        
+                        <div id="portnoxMABSettings" style="display: none;">
+                            <label for="portnox_mab_devices">MAB Device Types:</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="mab_device" value="printer"> Printers</label>
+                                <label><input type="checkbox" name="mab_device" value="ip_phone"> IP Phones</label>
+                                <label><input type="checkbox" name="mab_device" value="camera"> Security Cameras</label>
+                                <label><input type="checkbox" name="mab_device" value="iot"> IoT Devices</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" onclick="showSection('PortIntegration')">Next</button>
+                    <button type="button" onclick="showSection('DeviceTracking')">Previous</button>
+                </form>
+            </section>
+
+            <section id="PortIntegration" class="section">
+                <h2>Port Integration</h2>
+                <img src="assets/images/wizard.png" alt="Cyber Wizard" class="wizard">
+                <form id="portIntegrationForm">
+                    <label for="port_mode">Port Mode:</label>
+                    <select id="port_mode">
+                        <option value="access">Access</option>
+                        <option value="trunk">Trunk</option>
+                    </select><br>
+                    <label for="port_host_mode">Host Mode:</label>
+                    <select id="port_host_mode">
+                        <option value="single-host">Single-Host</option>
+                        <option value="multi-auth">Multi-Auth</option>
+                        <option value="multi-domain">Multi-Domain</option>
+                    </select><br>
+                    <button type="button" onclick="showSection('GenerateConfig')">Next</button>
+                    <button type="button" onclick="showSection('PortnoxSettings')">Previous</button>
+                </form>
+            </section>
+
+            <section id="GenerateConfig" class="section">
+                <h2>Generated Configuration</h2>
+                <img src="assets/images/wizard.png" alt="Cyber Wizard" class="wizard">
+                <button type="button" onclick="generateConfig()">Generate Config</button>
+                <button type="button" onclick="downloadConfig()">Download Config</button>
+                <button type="button" onclick="downloadDiagram()" id="downloadDiagramBtn" style="display:none;">Download Network Diagram</button>
+                <pre id="configOutput"></pre>
+                <div id="diagramContainer" style="display:none;">
+                    <h3>Network Diagram</h3>
+                    <img id="networkDiagram" src="" alt="Network Diagram" style="max-width:100%; border: 1px solid #ccc; margin-top: 10px;">
+                </div>
+                <button type="button" onclick="showSection('PortIntegration')">Previous</button>
+            </section>
+
+            <section id="Help" class="section">
+                <h2>Help</h2>
+                <img src="assets/images/wizard.png" alt="Cyber Wizard" class="wizard">
+                <p>Welcome to the Dot1xer Supreme Configurator with Portnox Integration!</p>
+                <h3>How to Use</h3>
+                <ul>
+                    <li><strong>Sidebar Navigation</strong>: Use the sidebar to navigate between configuration sections.</li>
+                    <li><strong>Platform Selection</strong>: Choose your platform to proceed with configuration.</li>
+                    <li><strong>Portnox Integration</strong>: Configure Portnox Cloud settings including API integration.</li>
+                    <li><strong>Generate Config</strong>: Complete all steps and click to see the output.</li>
+                </ul>
+                <h3>Portnox Integration</h3>
+                <p>The Portnox integration allows you to:</p>
+                <ul>
+                    <li>Connect to Portnox Cloud via API for enhanced NAC capabilities</li>
+                    <li>Configure RADIUS server settings specific to Portnox Cloud</li>
+                    <li>Set up MAC Authentication Bypass for devices that don't support 802.1X</li>
+                    <li>Generate network diagrams showing your 802.1X deployment with Portnox</li>
+                </ul>
+                <p>For more information on Portnox Cloud, visit <a href="https://www.portnox.com" target="_blank">www.portnox.com</a>.</p>
+                <p>For support, email <a href="mailto:support@dot1xer.com">support@dot1xer.com</a>.</p>
+            </section>
+        </div>
+    </div>
+    <script src="js/portnox-api.js"></script>
+    <script src="js/app.js"></script>
+>>>>>>> 5eae646 (Added Portnox integration with API support)
 </body>
 </html>
