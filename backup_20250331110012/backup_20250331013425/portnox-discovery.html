@@ -1,0 +1,225 @@
+<div class="discovery-section" id="disc-portnox">
+  <div class="portnox-header">
+    <img src="assets/portnox/portnox-logo.png" alt="Portnox Logo" class="portnox-logo">
+    <div>
+      <h3>Portnox Cloud Discovery</h3>
+      <p>Integrate with Portnox Cloud for unified access control, reporting, and automated deployment</p>
+    </div>
+  </div>
+  
+  <div class="portnox-section">
+    <h4>Portnox Cloud API Integration</h4>
+    <p>Connect to your Portnox Cloud instance to enable advanced network access control features and automation.</p>
+    <div class="form-group">
+      <label for="portnox-tenant">Tenant ID:</label>
+      <input type="text" id="portnox-tenant" placeholder="Enter your Portnox tenant ID">
+    </div>
+    <div class="form-group">
+      <label for="portnox-api-key">API Key:</label>
+      <div class="api-key-container">
+        <input type="password" id="portnox-api-key" placeholder="Enter your Portnox API key">
+        <button type="button" id="portnox-connect-button" class="portnox-btn">Connect</button>
+      </div>
+    </div>
+    <div id="success-message" class="alert alert-success" style="display: none;"></div>
+    <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+  </div>
+  
+  <div class="portnox-tabs">
+    <button class="portnox-nav-tab active" data-tab="radius">RADIUS Server</button>
+    <button class="portnox-nav-tab" data-tab="mab">MAB Management</button>
+    <button class="portnox-nav-tab" data-tab="groups">Device Groups</button>
+    <button class="portnox-nav-tab" data-tab="reports">Reports</button>
+    <button class="portnox-nav-tab" data-tab="poc">POC Generator</button>
+  </div>
+  
+  <div class="portnox-content" id="portnox-radius" style="display: block;">
+    <div class="portnox-feature">
+      <div class="card">
+        <div class="card-header">Create Cloud RADIUS Server</div>
+        <div class="card-body">
+          <p>Quickly create a cloud-native RADIUS server for your 802.1X authentication needs.</p>
+          <div class="form-group">
+            <label for="portnox-region-select">Select Region:</label>
+            <select id="portnox-region-select">
+              <option value="us">United States (North America)</option>
+              <option value="eu">Europe (Netherlands)</option>
+              <option value="ap">Asia Pacific (Singapore)</option>
+            </select>
+          </div>
+          <button type="button" id="portnox-create-radius-button" class="portnox-btn">Create RADIUS Server</button>
+        </div>
+      </div>
+      <div class="card" id="portnox-radius-details" style="display: none;">
+        <div class="card-header">RADIUS Server Details</div>
+        <div class="card-body">
+          <table>
+            <tr><td><strong>IP Address:</strong></td><td id="radius-ip">192.168.1.1</td></tr>
+            <tr><td><strong>Authentication Port:</strong></td><td id="radius-auth-port">1812</td></tr>
+            <tr><td><strong>Accounting Port:</strong></td><td id="radius-acct-port">1813</td></tr>
+            <tr><td><strong>Shared Secret:</strong></td><td id="radius-secret">****************</td></tr>
+          </table>
+          <button type="button" class="portnox-btn" style="margin-top: 15px;" onclick="document.getElementById('radius-secret').textContent = generateRandomSecret()">Show Secret</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="portnox-content" id="portnox-mab" style="display: none;">
+    <div class="portnox-feature">
+      <div class="card">
+        <div class="card-header">Create MAB Account</div>
+        <div class="card-body">
+          <p>Add MAC Authentication Bypass accounts for devices that don't support 802.1X.</p>
+          <div class="form-group">
+            <label for="portnox-mac-address">MAC Address:</label>
+            <input type="text" id="portnox-mac-address" placeholder="00:11:22:33:44:55">
+          </div>
+          <div class="form-group">
+            <label for="portnox-device-name">Device Name:</label>
+            <input type="text" id="portnox-device-name" placeholder="Printer-Floor1">
+          </div>
+          <div class="form-group">
+            <label for="portnox-device-type">Device Type:</label>
+            <select id="portnox-device-type">
+              <option value="printer">Printer</option>
+              <option value="voip-phone">VoIP Phone</option>
+              <option value="camera">Security Camera</option>
+              <option value="medical">Medical Device</option>
+              <option value="iot">IoT Device</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <button type="button" id="portnox-create-mab-button" class="portnox-btn">Create MAB Account</button>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 20px;">
+        <div class="card-header">MAB Accounts</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>MAC Address</th><th>Device Name</th><th>Created</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="portnox-mab-accounts-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="portnox-content" id="portnox-groups" style="display: none;">
+    <div class="portnox-feature">
+      <div class="card">
+        <div class="card-header">Create Device Group</div>
+        <div class="card-body">
+          <p>Create device groups to apply common policies and settings.</p>
+          <div class="form-group">
+            <label for="portnox-group-name">Group Name:</label>
+            <input type="text" id="portnox-group-name" placeholder="IoT-Devices">
+          </div>
+          <div class="form-group">
+            <label for="portnox-group-type">Group Type:</label>
+            <select id="portnox-group-type">
+              <option value="dynamic">Dynamic (Rule-Based)</option>
+              <option value="static">Static (Manual Assignment)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="portnox-group-rule">Rule (Dynamic Groups):</label>
+            <input type="text" id="portnox-group-rule" placeholder="device.type == 'iot'">
+          </div>
+          <button type="button" id="portnox-create-group-button" class="portnox-btn">Create Group</button>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 20px;">
+        <div class="card-header">Device Groups</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Group Name</th><th>Type</th><th>Members</th><th>Created</th><th>Actions</th></tr></thead>
+            <tbody id="portnox-groups-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="portnox-content" id="portnox-reports" style="display: none;">
+    <div class="portnox-feature">
+      <div class="card">
+        <div class="card-header">Generate Report</div>
+        <div class="card-body">
+          <p>Generate detailed reports for your network access control environment.</p>
+          <div class="form-group">
+            <label for="portnox-report-type">Report Type:</label>
+            <select id="portnox-report-type">
+              <option value="device-inventory">Device Inventory</option>
+              <option value="authentication-events">Authentication Events</option>
+              <option value="user-activity">User Activity</option>
+              <option value="security-incidents">Security Incidents</option>
+              <option value="compliance">Compliance Report</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="portnox-report-timeframe">Time Frame:</label>
+            <select id="portnox-report-timeframe">
+              <option value="today">Today</option>
+              <option value="yesterday">Yesterday</option>
+              <option value="last7">Last 7 Days</option>
+              <option value="last30">Last 30 Days</option>
+              <option value="custom">Custom Range</option>
+            </select>
+          </div>
+          <div class="form-group" id="portnox-custom-date-range" style="display: none;">
+            <label for="portnox-date-from">From:</label><input type="date" id="portnox-date-from">
+            <label for="portnox-date-to">To:</label><input type="date" id="portnox-date-to">
+          </div>
+          <div class="button-group">
+            <button type="button" id="portnox-generate-report-button" class="portnox-btn">Generate Report</button>
+            <button type="button" id="portnox-download-report-button" class="portnox-btn" style="display: none;">Download Report</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="portnox-content" id="portnox-poc" style="display: none;">
+    <div class="portnox-feature">
+      <div class="card">
+        <div class="card-header">Create POC Report & Deployment Templates</div>
+        <div class="card-body">
+          <p>Generate a comprehensive proof of concept report and deployment templates based on your environment.</p>
+          <div class="form-group">
+            <label for="portnox-client-name">Client/Organization Name:</label>
+            <input type="text" id="portnox-client-name" placeholder="Enter organization name">
+          </div>
+          <div class="form-group">
+            <label for="portnox-environment">Environment Description:</label>
+            <textarea id="portnox-environment" rows="4" placeholder="Brief description of your environment, goals, and requirements"></textarea>
+          </div>
+          <div class="checkbox-group">
+            <label><input type="checkbox" id="portnox-use-env-discovery" checked>Use data from Environment Discovery</label>
+          </div>
+          <div class="button-group">
+            <button type="button" id="portnox-generate-poc-button" class="portnox-btn">Generate POC Report</button>
+            <button type="button" id="portnox-download-poc-button" class="portnox-btn" style="display: none;">Download POC Report</button>
+          </div>
+          <div class="form-group" style="margin-top: 20px;">
+            <button type="button" id="portnox-generate-templates-button" class="portnox-btn">Generate Deployment Templates</button>
+          </div>
+          <div id="portnox-templates-container" style="display: none; margin-top: 20px;"></div>
+          <div class="docs-links" style="margin-top: 20px;">
+            <h4>Portnox Documentation Resources</h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+              <a href="https://www.portnox.com/docs/" target="_blank" class="doc-link"><i>??</i>Documentation Portal</a>
+              <a href="https://www.portnox.com/docs/deployment/" target="_blank" class="doc-link"><i>??</i>Deployment Guide</a>
+              <a href="https://www.portnox.com/docs/radius-configuration/" target="_blank" class="doc-link"><i>??</i>RADIUS Configuration</a>
+              <a href="https://www.portnox.com/docs/mab-configuration/" target="_blank" class="doc-link"><i>??</i>MAB Setup Guide</a>
+              <a href="https://www.portnox.com/docs/switch-configuration/" target="_blank" class="doc-link"><i>??</i>Switch Configuration</a>
+              <a href="https://www.portnox.com/docs/wireless-configuration/" target="_blank" class="doc-link"><i>??</i>Wireless Configuration</a>
+              <a href="https://www.portnox.com/docs/integrations/" target="_blank" class="doc-link"><i>??</i>Integration Guides</a>
+              <a href="https://www.portnox.com/docs/testing/" target="_blank" class="doc-link"><i>??</i>Testing Guidelines</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
