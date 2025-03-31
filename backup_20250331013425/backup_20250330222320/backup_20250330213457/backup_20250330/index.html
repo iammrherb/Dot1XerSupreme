@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dot1Xer Supreme Configurator</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="assets/icons/logo.png" alt="Dot1Xer Supreme Logo" class="logo">
+    </div>
+    <h1 class="title">Dot1Xer Supreme Configurator</h1>
+  </header>
+  
+  <!-- Top Navigation Tabs -->
+  <nav class="top-tabs">
+    <button class="tab-btn active" onclick="showTab('configurator', this)">Configurator</button>
+    <button class="tab-btn" onclick="showTab('ai', this)">AI Integration</button>
+    <button class="tab-btn" onclick="showTab('reference', this)">Reference Architecture</button>
+    <button class="tab-btn" onclick="showTab('discovery', this)">Environmental Discovery</button>
+    <button class="tab-btn" onclick="showTab('help', this)">Help</button>
+  </nav>
+  
+  <!-- Banner Image Below Tabs -->
+  <div class="banner-container">
+    <img src="assets/icons/banner.jpg" alt="Dot1Xer Supreme Banner" class="banner-image">
+  </div>
+  
+  <!-- Configurator Tab Content -->
+  <div class="tab-content" id="configurator">
+    <h2>Configurator</h2>
+    <p>Follow the steps below to generate your advanced AAA/802.1X configuration.</p>
+    
+    <div class="step-indicator">
+      <div class="step active" data-step="1">Platform</div>
+      <div class="step" data-step="2">Authentication</div>
+      <div class="step" data-step="3">Servers</div>
+      <div class="step" data-step="4">VLANs</div>
+      <div class="step" data-step="5">Advanced</div>
+      <div class="step" data-step="6">Preview</div>
+    </div>
+    
+    <div id="error-message" class="error-message" style="display: none;"></div>
+    
+    <!-- Step 1: Platform Selection -->
+    <div class="step-content" id="step-1">
+      <h3>Step 1: Platform Selection</h3>
+      
+      <div class="form-group">
+        <label for="vendor-select">Vendor:</label>
+        <select id="vendor-select" name="vendor">
+          <option value="cisco">Cisco</option>
+          <option value="aruba">Aruba (HPE)</option>
+          <option value="juniper">Juniper</option>
+          <option value="fortinet">Fortinet</option>
+          <option value="arista">Arista</option>
+          <option value="extreme">Extreme Networks</option>
+          <option value="huawei">Huawei</option>
+          <option value="alcatel">Alcatel-Lucent</option>
+          <option value="ubiquiti">Ubiquiti</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="platform-select">Platform:</label>
+        <select id="platform-select" name="platform">
+          <!-- Options populated dynamically based on vendor selection -->
+          <option value="ios-xe">IOS-XE (Catalyst 9000)</option>
+          <option value="ios">IOS (Classic)</option>
+          <option value="wlc">WLC 9800</option>
+        </select>
+      </div>
+      
+      <div class="platform-info">
+        <h4>Platform Details</h4>
+        <div id="platform-description">
+          <p>Cisco IOS-XE supports IBNS 2.0 with advanced policy maps and both open and closed authentication modes.</p>
+        </div>
+      </div>
+      
+      <div class="nav-buttons">
+        <button type="button" class="next-btn" onclick="goToStep(2)">Next</button>
+      </div>
+    </div>
+    
+    <!-- Step 2: Authentication Method -->
+    <div class="step-content" id="step-2" style="display: none;">
+      <h3>Step 2: Authentication Method</h3>
+      
+      <div class="form-group">
+        <label for="auth-method">Authentication Method:</label>
+        <select id="auth-method" name="auth_method">
+          <option value="dot1x-mab">802.1X with MAB Fallback (Sequential)</option>
+          <option value="concurrent">802.1X and MAB Concurrent</option>
+          <option value="dot1x-only">802.1X Only</option>
+          <option value="mab-only">MAC Authentication Only</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Authentication Mode:</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="auth_mode" value="closed" checked> 
+            Closed Mode (No access until authentication succeeds)
+          </label>
+          <label>
+            <input type="radio" name="auth_mode" value="open"> 
+            Open Mode (Allow limited access before authentication)
+          </label>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Host Mode:</label>
+        <select id="host-mode" name="host_mode">
+          <option value="single-host">Single Host (One device per port)</option>
+          <option value="multi-auth">Multi-Auth (Multiple devices, each authenticated)</option>
+          <option value="multi-domain">Multi-Domain (One voice, one data device)</option>
+          <option value="multi-host">Multi-Host (One auth for all devices)</option>
+        </select>
+      </div>
+      
+      <div class="nav-buttons">
+        <button type="button" class="prev-btn" onclick="goToStep(1)">Previous</button>
+        <button type="button" class="next-btn" onclick="goToStep(3)">Next</button>
+      </div>
+    </div>
+    
+    <!-- Step 3: Server Configuration -->
+    <div class="step-content" id="step-3" style="display: none;">
+      <h3>Step 3: Server Configuration</h3>
+      
+      <h4>RADIUS Servers</h4>
+      <div class="form-group">
+        <label for="radius-ip-1">Primary Server IP:</label>
+        <input type="text" id="radius-ip-1" placeholder="e.g., 10.1.1.100">
+        
+        <label for="radius-key-1">Primary Shared Secret:</label>
+        <input type="password" id="radius-key-1" placeholder="Shared secret">
+        
+        <label for="radius-ip-2">Secondary Server IP:</label>
+        <input type="text" id="radius-ip-2" placeholder="e.g., 10.1.1.101">
+        
+        <label for="radius-key-2">Secondary Shared Secret:</label>
+        <input type="password" id="radius-key-2" placeholder="Shared secret">
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="use-tacacs"> 
+          Configure TACACS+ for Device Administration
+        </label>
+      </div>
+      
+      <div id="tacacs-options" style="display: none;">
+        <h4>TACACS+ Servers</h4>
+        <div class="form-group">
+          <label for="tacacs-ip-1">Primary Server IP:</label>
+          <input type="text" id="tacacs-ip-1" placeholder="e.g., 10.1.1.102">
+          
+          <label for="tacacs-key-1">Primary Shared Secret:</label>
+          <input type="password" id="tacacs-key-1" placeholder="Shared secret">
+          
+          <label for="tacacs-ip-2">Secondary Server IP:</label>
+          <input type="text" id="tacacs-ip-2" placeholder="e.g., 10.1.1.103">
+          
+          <label for="tacacs-key-2">Secondary Shared Secret:</label>
+          <input type="password" id="tacacs-key-2" placeholder="Shared secret">
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="use-radsec"> 
+          Configure RADIUS over TLS (RadSec)
+        </label>
+      </div>
+      
+      <div id="radsec-options" style="display: none;">
+        <h4>RadSec Configuration</h4>
+        <div class="form-group">
+          <label for="radsec-ip">Server IP:</label>
+          <input type="text" id="radsec-ip" placeholder="e.g., 10.1.1.104">
+          
+          <label for="radsec-key">Shared Secret:</label>
+          <input type="password" id="radsec-key" placeholder="Shared secret">
+          
+          <label for="client-trustpoint">Client Trustpoint:</label>
+          <input type="text" id="client-trustpoint" placeholder="e.g., SWITCH-CERT">
+          
+          <label for="server-trustpoint">Server Trustpoint:</label>
+          <input type="text" id="server-trustpoint" placeholder="e.g., ISE-CERT">
+        </div>
+      </div>
+      
+      <div class="nav-buttons">
+        <button type="button" class="prev-btn" onclick="goToStep(2)">Previous</button>
+        <button type="button" class="next-btn" onclick="goToStep(4)">Next</button>
+      </div>
+    </div>
+    
+    <!-- Additional steps would continue here -->
+    
+  </div>
+  
+  <!-- AI Integration Tab Content -->
+  <div class="tab-content" id="ai" style="display:none">
+    <h2>AI Integration</h2>
+    <p>Ask our integrated AI for configuration review, troubleshooting tips, or optimization advice.</p>
+    
+    <div class="ai-chat-container">
+      <div class="chat-history" id="chat-history">
+        <!-- Initial AI greeting message -->
+        <div class="ai-message">
+          <div class="message-avatar">
+            <img src="assets/icons/ai-avatar.png" alt="AI">
+          </div>
+          <div class="message-content">
+            <p>Hello! I can help with your AAA/802.1X configuration. I can:</p>
+            <ul>
+              <li>Review your generated configuration for best practices</li>
+              <li>Suggest optimizations for your specific environment</li>
+              <li>Help troubleshoot common issues</li>
+              <li>Explain complex configuration sections</li>
+            </ul>
+            <p>What would you like assistance with today?</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chat-input">
+        <textarea id="ai-query" placeholder="Ask a question about your configuration..." rows="3"></textarea>
+        <button id="send-query" onclick="sendAIQuery()">
+          <img src="assets/icons/send.png" alt="Send">
+        </button>
+      </div>
+      
+      <div class="suggested-queries">
+        <h4>Suggested Questions:</h4>
+        <button class="query-suggestion" onclick="useQuerySuggestion(this)">Review my configuration for security issues</button>
+        <button class="query-suggestion" onclick="useQuerySuggestion(this)">What's the difference between Open and Closed mode?</button>
+        <button class="query-suggestion" onclick="useQuerySuggestion(this)">Explain the RADIUS CoA settings in my config</button>
+        <button class="query-suggestion" onclick="useQuerySuggestion(this)">How can I optimize this for a large network?</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Reference Architecture Tab Content -->
+  <div class="tab-content" id="reference" style="display:none">
+    <!-- Content for the Reference tab -->
+  </div>
+  
+  <!-- Environmental Discovery Tab Content -->
+  <div class="tab-content" id="discovery" style="display:none">
+    <!-- Content for the Discovery tab -->
+  </div>
+  
+  <!-- Help Tab Content -->
+  <div class="tab-content" id="help" style="display:none">
+    <!-- Content for the Help tab -->
+  </div>
+  
+  <script src="js/app.js"></script>
+</body>
+</html>
