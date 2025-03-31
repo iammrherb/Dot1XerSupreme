@@ -1,0 +1,181 @@
+<div class="discovery-section" id="disc-scoping">
+  <h3>Network Scoping Discovery</h3>
+  <p>Use this tool to assess your network infrastructure and create a customized 802.1X deployment plan.</p>
+  
+  <div class="scoping-section">
+    <div class="scoping-options">
+      <div class="scoping-type">
+        <label>
+          <input type="radio" name="scoping_type" value="basic" checked> 
+          Basic Scoping
+        </label>
+        <label>
+          <input type="radio" name="scoping_type" value="advanced"> 
+          Advanced Scoping
+        </label>
+      </div>
+      
+      <!-- Basic Scoping Form -->
+      <div id="basic-scoping">
+        <div class="scoping-form">
+          <div class="scoping-column">
+            <h4>Network Scope</h4>
+            <div class="count-input">
+              <label for="locations-count">Number of Locations:</label>
+              <input type="number" id="locations-count" value="1" min="1">
+            </div>
+            <div class="count-input">
+              <label for="switches-count">Number of Switches:</label>
+              <input type="number" id="switches-count" value="5" min="1">
+            </div>
+            <div class="count-input">
+              <label for="endpoints-count">Total Endpoints:</label>
+              <input type="number" id="endpoints-count" value="100" min="1">
+            </div>
+            
+            <h4>Authentication Requirements</h4>
+            <div class="eap-methods">
+              <div class="eap-method-option">
+                <label>
+                  <input type="checkbox" class="eap-method" id="eap-tls" value="EAP-TLS"> 
+                  EAP-TLS (Certificate-Based)
+                </label>
+                <div id="eap-tls-options" class="eap-method-options">
+                  <div class="checkbox-group">
+                    <label>
+                      <input type="checkbox" id="eap-tls-existing-pki" checked> 
+                      Existing PKI infrastructure
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="eap-method-option">
+                <label>
+                  <input type="checkbox" class="eap-method" id="peap-mschap" value="PEAP-MSCHAPv2" checked> 
+                  PEAP-MSCHAPv2 (Username/Password)
+                </label>
+                <div id="peap-mschap-options" class="eap-method-options">
+                  <div class="checkbox-group">
+                    <label>
+                      <input type="checkbox" id="peap-server-validation" checked> 
+                      Server Certificate Validation
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="eap-method-option">
+                <label>
+                  <input type="checkbox" class="eap-method" id="eap-ttls" value="EAP-TTLS"> 
+                  EAP-TTLS
+                </label>
+              </div>
+              <div class="eap-method-option">
+                <label>
+                  <input type="checkbox" class="eap-method" id="eap-fast" value="EAP-FAST"> 
+                  EAP-FAST
+                </label>
+              </div>
+              <div class="eap-method-option">
+                <label>
+                  <input type="checkbox" class="eap-method" id="mab" value="MAB" checked> 
+                  MAC Authentication Bypass (MAB)
+                </label>
+                <div id="mab-options" class="eap-method-options">
+                  <div class="count-input">
+                    <label for="mab-devices">Estimated MAB Devices:</label>
+                    <input type="number" id="mab-devices" value="20" min="0">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="scoping-column">
+            <h4>Network Equipment</h4>
+            <div class="form-group">
+              <label for="wireless-vendor">Wireless Vendor:</label>
+              <select id="wireless-vendor">
+                <option value="cisco">Cisco</option>
+                <option value="aruba">Aruba</option>
+                <option value="meraki">Meraki</option>
+                <option value="ruckus">Ruckus</option>
+                <option value="ubiquiti">Ubiquiti</option>
+                <option value="extreme">Extreme</option>
+                <option value="fortinet">Fortinet</option>
+                <option value="huawei">Huawei</option>
+                <option value="tp-link">TP-Link</option>
+                <option value="juniper">Juniper Mist</option>
+                <option value="none">None (No Wireless)</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="switch-vendor">Switch Vendor:</label>
+              <select id="switch-vendor">
+                <option value="cisco">Cisco</option>
+                <option value="aruba">Aruba/HPE</option>
+                <option value="juniper">Juniper</option>
+                <option value="extreme">Extreme</option>
+                <option value="hp">HP</option>
+                <option value="dell">Dell</option>
+                <option value="fortinet">Fortinet</option>
+                <option value="huawei">Huawei</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="firewall-vendor">Firewall Vendor:</label>
+              <select id="firewall-vendor">
+                <option value="paloalto">Palo Alto Networks</option>
+                <option value="cisco">Cisco</option>
+                <option value="fortinet">Fortinet</option>
+                <option value="checkpoint">Check Point</option>
+                <option value="juniper">Juniper</option>
+                <option value="sonicwall">SonicWall</option>
+                <option value="watchguard">WatchGuard</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+            
+            <h4>Identity & Device Management</h4>
+            <div class="form-group">
+              <label for="idp-provider">Identity Provider:</label>
+              <select id="idp-provider">
+                <option value="entra-id">Microsoft Entra ID</option>
+                <option value="okta">Okta</option>
+                <option value="google-workspace">Google Workspace</option>
+                <option value="onelogin">OneLogin</option>
+                <option value="ping">Ping Identity</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="mdm-provider">MDM Solution:</label>
+              <select id="mdm-provider">
+                <option value="intune">Microsoft Intune</option>
+                <option value="jamf">JAMF</option>
+                <option value="workspace-one">VMware Workspace ONE</option>
+                <option value="mas360">IBM MaaS360</option>
+                <option value="mobileiron">MobileIron</option>
+                <option value="gpo">Group Policy (GPO)</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Advanced Scoping Form would be added here -->
+      
+    </div>
+    
+    <div class="form-actions">
+      <button type="button" onclick="generateNetworkDiagram()" class="btn">Generate Deployment Plan</button>
+    </div>
+  </div>
+  
+  <div id="scoping-results" class="scoping-results">
+    <!-- Results will be dynamically generated -->
+  </div>
+</div>
