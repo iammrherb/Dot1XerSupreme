@@ -9,7 +9,9 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
       margin: 20px;
+      padding: 0;
       background-color: #f5f5f5;
+      color: #333;
     }
     .container {
       max-width: 800px;
@@ -19,21 +21,19 @@
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    h1 {
+    h1, h2, h3 {
       color: #6300c4;
+    }
+    h1 {
       border-bottom: 1px solid #ddd;
       padding-bottom: 10px;
-    }
-    h2 {
-      color: #6300c4;
-      margin-top: 20px;
     }
     .btn {
       background-color: #6300c4;
       color: white;
       border: none;
       padding: 10px 15px;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
       margin-top: 20px;
@@ -41,55 +41,79 @@
     .btn:hover {
       background-color: #4a0091;
     }
-    .success {
-      color: green;
+    .success-message {
+      color: #28a745;
       font-weight: bold;
       display: none;
-      margin-top: 10px;
-    }
-    .error {
-      color: red;
-      font-weight: bold;
-      display: none;
-      margin-top: 10px;
-    }
-    pre {
-      background-color: #f5f5f5;
+      margin-top: 20px;
       padding: 10px;
-      border-radius: 4px;
-      overflow-x: auto;
+      background-color: #d4edda;
+      border-radius: 5px;
     }
-    code {
-      font-family: 'Consolas', 'Monaco', monospace;
+    .error-message {
+      color: #dc3545;
+      font-weight: bold;
+      display: none;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f8d7da;
+      border-radius: 5px;
+    }
+    .feature-list {
+      margin: 20px 0;
+    }
+    .feature-list li {
+      margin-bottom: 10px;
+    }
+    .feature-item {
+      font-weight: bold;
+    }
+    .feature-desc {
+      font-weight: normal;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Dot1Xer Supreme UI Update</h1>
-    <p>This tool will update your Dot1Xer Supreme installation with the following enhancements:</p>
-    <ul>
-      <li>Fix accordion dropdowns functionality</li>
-      <li>Reorganize RADIUS and TACACS+ settings</li>
-      <li>Add vendor-specific options for all platforms</li>
-      <li>Implement network scoping discovery feature</li>
+    <h1>Dot1Xer Supreme Enhancement Tool</h1>
+    <p>This tool will update your Dot1Xer Supreme installation with improved features and fixes:</p>
+    
+    <ul class="feature-list">
+      <li><span class="feature-item">? Fixed Accordion Functionality:</span>
+        <span class="feature-desc">Properly working accordion dropdowns for all sections.</span>
+      </li>
+      <li><span class="feature-item">? Reorganized RADIUS/TACACS+ Settings:</span>
+        <span class="feature-desc">Better organized into logical sections with improved usability.</span>
+      </li>
+      <li><span class="feature-item">? Vendor-Specific Configuration Options:</span>
+        <span class="feature-desc">Tailored options for each platform that dynamically update based on selection.</span>
+      </li>
+      <li><span class="feature-item">? Network Scoping Discovery:</span>
+        <span class="feature-desc">New comprehensive tool to build network diagrams and deployment plans.</span>
+      </li>
+      <li><span class="feature-item">? Workflow Generator:</span>
+        <span class="feature-desc">Creates customized deployment workflows with timeline estimates.</span>
+      </li>
     </ul>
     
-    <h2>Update Process</h2>
-    <p>Click the button below to apply the updates. This will:</p>
+    <h2>Applying the Updates</h2>
+    <p>Click the button below to apply these enhancements to your Dot1Xer Supreme installation. This process:</p>
     <ol>
-      <li>Update the JavaScript functionality</li>
-      <li>Add CSS styles for new features</li>
-      <li>Reorganize RADIUS/TACACS+ settings</li>
-      <li>Add network scoping discovery</li>
-      <li>Implement vendor-specific options</li>
+      <li>Updates the JavaScript functionality</li>
+      <li>Adds new CSS styles and elements</li>
+      <li>Reorganizes existing UI components</li>
+      <li>Adds the network scoping discovery feature</li>
     </ol>
     
-    <button id="update-btn" class="btn">Apply Updates</button>
-    <div id="success-message" class="success">Updates applied successfully! Please refresh the page to see the changes.</div>
-    <div id="error-message" class="error">Error applying updates. Please check the console for details.</div>
+    <button id="update-button" class="btn">Apply Updates</button>
+    <div id="success-message" class="success-message">
+      Updates successfully applied! Please refresh the page to see the enhancements.
+    </div>
+    <div id="error-message" class="error-message">
+      Error applying updates. Please check the console for details.
+    </div>
     
-    <!-- Hidden script elements that will be evaluated -->
+    <!-- Hidden elements containing update scripts -->
     <script id="server-tab-update-script" type="text/plain">
 // Helper function to create accordion
 function createAccordion(title, content, open = false) {
@@ -98,6 +122,7 @@ function createAccordion(title, content, open = false) {
   
   const header = document.createElement('div');
   header.className = 'accordion-header';
+  if (open) header.classList.add('active');
   header.innerHTML = `<span>${title}</span><span class="accordion-icon">${open ? '-' : '+'}</span>`;
   
   const contentDiv = document.createElement('div');
@@ -111,54 +136,57 @@ function createAccordion(title, content, open = false) {
   return accordion;
 }
 
-// Find the RADIUS tab content
+// Find the RADIUS tab content and reorganize
 const radiusTab = document.getElementById('radius-tab');
 if (radiusTab) {
-  // Temporarily store the original content
+  // Save original content
   const originalContent = radiusTab.innerHTML;
   
   // Clear the tab
   radiusTab.innerHTML = '';
   
-  // Create the main RADIUS servers section
-  const serversSection = document.createElement('div');
-  serversSection.innerHTML = `
-    <h4>RADIUS Servers</h4>
-    <div class="form-group">
-      <label for="radius-server-group">Server Group Name:</label>
-      <input type="text" id="radius-server-group" value="RADIUS-SERVERS" placeholder="e.g., RADIUS-SERVERS">
-      
-      <div class="row">
-        <div class="col">
-          <label for="radius-ip-1">Primary Server IP:</label>
-          <input type="text" id="radius-ip-1" placeholder="e.g., 10.1.1.100">
-        </div>
-        <div class="col">
-          <label for="radius-key-1">Primary Shared Secret:</label>
-          <input type="password" id="radius-key-1" placeholder="Shared secret">
-        </div>
+  // Add section title
+  const sectionTitle = document.createElement('h4');
+  sectionTitle.textContent = 'RADIUS Servers';
+  radiusTab.appendChild(sectionTitle);
+  
+  // Create main RADIUS server form group
+  const serverGroup = document.createElement('div');
+  serverGroup.className = 'form-group';
+  serverGroup.innerHTML = `
+    <label for="radius-server-group">Server Group Name:</label>
+    <input type="text" id="radius-server-group" value="RADIUS-SERVERS" placeholder="e.g., RADIUS-SERVERS">
+    
+    <div class="row">
+      <div class="col">
+        <label for="radius-ip-1">Primary Server IP:</label>
+        <input type="text" id="radius-ip-1" placeholder="e.g., 10.1.1.100">
       </div>
-      
-      <div class="row">
-        <div class="col">
-          <label for="radius-ip-2">Secondary Server IP:</label>
-          <input type="text" id="radius-ip-2" placeholder="e.g., 10.1.1.101">
-        </div>
-        <div class="col">
-          <label for="radius-key-2">Secondary Shared Secret:</label>
-          <input type="password" id="radius-key-2" placeholder="Shared secret">
-        </div>
+      <div class="col">
+        <label for="radius-key-1">Primary Shared Secret:</label>
+        <input type="password" id="radius-key-1" placeholder="Shared secret">
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <label for="radius-ip-2">Secondary Server IP:</label>
+        <input type="text" id="radius-ip-2" placeholder="e.g., 10.1.1.101">
+      </div>
+      <div class="col">
+        <label for="radius-key-2">Secondary Shared Secret:</label>
+        <input type="password" id="radius-key-2" placeholder="Shared secret">
       </div>
     </div>
   `;
-  radiusTab.appendChild(serversSection);
+  radiusTab.appendChild(serverGroup);
   
   // Create accordion group for RADIUS settings
   const accordionGroup = document.createElement('div');
   accordionGroup.className = 'accordion-group';
   
-  // Add the RADIUS port configuration accordion
-  const portContent = `
+  // Add RADIUS port configuration accordion
+  const portConfig = `
     <div class="row">
       <div class="col">
         <label for="radius-auth-port">Authentication Port:</label>
@@ -176,10 +204,10 @@ if (radiusTab) {
       </div>
     </div>
   `;
-  accordionGroup.appendChild(createAccordion('RADIUS Port Configuration', portContent, true));
+  accordionGroup.appendChild(createAccordion('RADIUS Port Configuration', portConfig, true));
   
-  // Add timeout and retry accordion
-  const timeoutContent = `
+  // Add timeout settings accordion
+  const timeoutConfig = `
     <div class="row">
       <div class="col">
         <label for="radius-timeout">Timeout (seconds):</label>
@@ -197,10 +225,10 @@ if (radiusTab) {
       </div>
     </div>
   `;
-  accordionGroup.appendChild(createAccordion('RADIUS Timeout SERVER_TAB_UPDATE_PLACEHOLDER Retransmit', timeoutContent));
+  accordionGroup.appendChild(createAccordion('RADIUS Timeouts SERVER_TAB_UPDATE_PLACEHOLDER Retransmit', timeoutConfig));
   
   // Add load balancing accordion
-  const loadBalanceContent = `
+  const loadBalanceConfig = `
     <div class="checkbox-group">
       <label>
         <input type="checkbox" id="radius-load-balance"> 
@@ -217,10 +245,10 @@ if (radiusTab) {
       </select>
     </div>
   `;
-  accordionGroup.appendChild(createAccordion('Load Balancing Configuration', loadBalanceContent));
+  accordionGroup.appendChild(createAccordion('Load Balancing Configuration', loadBalanceConfig));
   
   // Add server testing accordion
-  const testingContent = `
+  const testingConfig = `
     <div class="checkbox-group">
       <label>
         <input type="checkbox" id="radius-testing" checked> 
@@ -245,10 +273,10 @@ if (radiusTab) {
       </div>
     </div>
   `;
-  accordionGroup.appendChild(createAccordion('Server Testing', testingContent));
+  accordionGroup.appendChild(createAccordion('Server Testing', testingConfig));
   
   // Add RADIUS attributes accordion
-  const attributesContent = `
+  const attributesConfig = `
     <div class="row">
       <div class="col">
         <div class="checkbox-group">
@@ -294,60 +322,63 @@ if (radiusTab) {
       </label>
     </div>
   `;
-  accordionGroup.appendChild(createAccordion('RADIUS Attributes', attributesContent));
+  accordionGroup.appendChild(createAccordion('RADIUS Attributes', attributesConfig));
   
-  // Add the accordion group to the tab
+  // Add to tab
   radiusTab.appendChild(accordionGroup);
 }
 
-// Find the TACACS+ tab content and apply similar restructuring
+// Similarly reorganize the TACACS+ tab
 const tacacsTab = document.getElementById('tacacs-tab');
 if (tacacsTab) {
-  // Temporarily store the original content
+  // Save original content
   const originalContent = tacacsTab.innerHTML;
   
   // Clear the tab
   tacacsTab.innerHTML = '';
   
-  // Create the main TACACS+ servers section
-  const serversSection = document.createElement('div');
-  serversSection.innerHTML = `
-    <h4>TACACS+ Servers</h4>
-    <div class="form-group">
-      <label for="tacacs-server-group">Server Group Name:</label>
-      <input type="text" id="tacacs-server-group" value="TACACS-SERVERS" placeholder="e.g., TACACS-SERVERS">
-      
-      <div class="row">
-        <div class="col">
-          <label for="tacacs-ip-1">Primary Server IP:</label>
-          <input type="text" id="tacacs-ip-1" placeholder="e.g., 10.1.1.102">
-        </div>
-        <div class="col">
-          <label for="tacacs-key-1">Primary Shared Secret:</label>
-          <input type="password" id="tacacs-key-1" placeholder="Shared secret">
-        </div>
+  // Add section title
+  const sectionTitle = document.createElement('h4');
+  sectionTitle.textContent = 'TACACS+ Servers';
+  tacacsTab.appendChild(sectionTitle);
+  
+  // Create main TACACS+ server form group
+  const serverGroup = document.createElement('div');
+  serverGroup.className = 'form-group';
+  serverGroup.innerHTML = `
+    <label for="tacacs-server-group">Server Group Name:</label>
+    <input type="text" id="tacacs-server-group" value="TACACS-SERVERS" placeholder="e.g., TACACS-SERVERS">
+    
+    <div class="row">
+      <div class="col">
+        <label for="tacacs-ip-1">Primary Server IP:</label>
+        <input type="text" id="tacacs-ip-1" placeholder="e.g., 10.1.1.102">
       </div>
-      
-      <div class="row">
-        <div class="col">
-          <label for="tacacs-ip-2">Secondary Server IP:</label>
-          <input type="text" id="tacacs-ip-2" placeholder="e.g., 10.1.1.103">
-        </div>
-        <div class="col">
-          <label for="tacacs-key-2">Secondary Shared Secret:</label>
-          <input type="password" id="tacacs-key-2" placeholder="Shared secret">
-        </div>
+      <div class="col">
+        <label for="tacacs-key-1">Primary Shared Secret:</label>
+        <input type="password" id="tacacs-key-1" placeholder="Shared secret">
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <label for="tacacs-ip-2">Secondary Server IP:</label>
+        <input type="text" id="tacacs-ip-2" placeholder="e.g., 10.1.1.103">
+      </div>
+      <div class="col">
+        <label for="tacacs-key-2">Secondary Shared Secret:</label>
+        <input type="password" id="tacacs-key-2" placeholder="Shared secret">
       </div>
     </div>
   `;
-  tacacsTab.appendChild(serversSection);
+  tacacsTab.appendChild(serverGroup);
   
   // Create accordion group for TACACS+ settings
   const accordionGroup = document.createElement('div');
   accordionGroup.className = 'accordion-group';
   
-  // Add the TACACS+ options accordion
-  const optionsContent = `
+  // Add TACACS+ basic options accordion
+  const basicConfig = `
     <div class="row">
       <div class="col">
         <label for="tacacs-port">Port:</label>
@@ -358,6 +389,7 @@ if (tacacsTab) {
         <input type="number" id="tacacs-timeout" value="5">
       </div>
     </div>
+    
     <div class="checkbox-group">
       <label>
         <input type="checkbox" id="tacacs-single-connection"> 
@@ -372,10 +404,10 @@ if (tacacsTab) {
       </label>
     </div>
   `;
-  accordionGroup.appendChild(createAccordion('TACACS+ Options', optionsContent, true));
+  accordionGroup.appendChild(createAccordion('TACACS+ Connection Options', basicConfig, true));
   
   // Add TACACS+ authorization accordion
-  const authorizationContent = `
+  const authConfig = `
     <div class="checkbox-group">
       <label>
         <input type="checkbox" id="auth-exec" checked> 
@@ -406,10 +438,10 @@ if (tacacsTab) {
       </div>
     </div>
   `;
-  accordionGroup.appendChild(createAccordion('TACACS+ Authorization', authorizationContent));
+  accordionGroup.appendChild(createAccordion('TACACS+ Authorization', authConfig));
   
   // Add TACACS+ accounting accordion
-  const accountingContent = `
+  const acctConfig = `
     <div class="checkbox-group">
       <label>
         <input type="checkbox" id="acct-exec" checked> 
@@ -440,216 +472,11 @@ if (tacacsTab) {
       </div>
     </div>
   `;
-  accordionGroup.appendChild(createAccordion('TACACS+ Accounting', accountingContent));
+  accordionGroup.appendChild(createAccordion('TACACS+ Accounting', acctConfig));
   
-  // Add the accordion group to the tab
+  // Add to tab
   tacacsTab.appendChild(accordionGroup);
 }
-echo -e "${BLUE}Creating DOM manipulation script to update the UI...${NC}"
-cat > update-dom.js << 'EOF'
-
-# Check if the file was created successfully
-if [ ! -f "update-dom.js" ]; then
-  echo -e "${RED}Error: Failed to create update-dom.js${NC}"
-  exit 1
-else
-  echo -e "${GREEN}Created update-dom.js successfully${NC}"
-fi
-// Execute the server tab updates
-eval(document.getElementById('server-tab-update-script').textContent);
-
-// Execute the discovery tab updates
-eval(document.getElementById('discovery-tab-update-script').textContent);
-
-// Fix accordion functionality
-document.querySelectorAll('.accordion-header').forEach(header => {
-  header.addEventListener('click', function() {
-    this.classList.toggle('active');
-    const content = this.nextElementSibling;
-    
-    if (content.style.display === 'block') {
-      content.style.display = 'none';
-      // Update icon
-      const icon = this.querySelector('.accordion-icon');
-      if (icon) {
-        icon.textContent = '+';
-      }
-    } else {
-      content.style.display = 'block';
-      // Update icon
-      const icon = this.querySelector('.accordion-icon');
-      if (icon) {
-        icon.textContent = '-';
-      }
-    }
-  });
-});
-
-// Add vendor-specific option sections
-const advancedStep = document.getElementById('step-5');
-if (advancedStep) {
-  const vendorSpecificDiv = document.createElement('div');
-  vendorSpecificDiv.className = 'accordion';
-  vendorSpecificDiv.innerHTML = `
-    <div class="accordion-header">
-      <span>Vendor-Specific Options</span>
-      <span class="accordion-icon">+</span>
-    </div>
-    <div class="accordion-content">
-      <!-- Cisco IOS-XE Specific Options -->
-      <div id="cisco-ios-xe-options" class="vendor-specific">
-        <h4>Cisco IOS-XE Specific Options</h4>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="cisco-ibns2" checked> 
-            Use IBNS 2.0 Policy Maps
-          </label>
-        </div>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="cisco-multi-auth"> 
-            Enable Multi-Auth Host Mode
-          </label>
-        </div>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="cisco-autoconf"> 
-            Enable Auto-Configuration
-          </label>
-        </div>
-      </div>
-      
-      <!-- Cisco NX-OS Specific Options -->
-      <div id="cisco-nx-os-options" class="vendor-specific">
-        <h4>Cisco NX-OS Specific Options</h4>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="nxos-source-interface" checked> 
-            Specify Source Interface
-          </label>
-        </div>
-        <div class="form-group" id="nxos-source-interface-group">
-          <label for="nxos-mgmt-interface">Management Interface:</label>
-          <input type="text" id="nxos-mgmt-interface" placeholder="e.g., mgmt0" value="mgmt0">
-        </div>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="nxos-dot1x-pae-filter"> 
-            Enable DOT1X PAE Filter
-          </label>
-        </div>
-      </div>
-      
-      <!-- Aruba AOS-CX Specific Options -->
-      <div id="aruba-aos-cx-options" class="vendor-specific">
-        <h4>Aruba AOS-CX Specific Options</h4>
-        <div class="form-group">
-          <label for="aruba-auth-precedence">Authentication Precedence:</label>
-          <select id="aruba-auth-precedence">
-            <option value="dot1x-first">Dot1X First, then MAC Auth</option>
-            <option value="mac-auth-first">MAC Auth First, then Dot1X</option>
-            <option value="both">Both Methods Simultaneously</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="aruba-auth-failure">Authentication Failure Behavior:</label>
-          <select id="aruba-auth-failure">
-            <option value="strict">Strict (No access on failure)</option>
-            <option value="fail-open">Fail Open (Allow access on failure)</option>
-            <option value="fail-through">Fail Through (Try next method)</option>
-          </select>
-        </div>
-      </div>
-      
-      <!-- Juniper Specific Options -->
-      <div id="juniper-ex-options" class="vendor-specific">
-        <h4>Juniper EX Specific Options</h4>
-        <div class="form-group">
-          <label for="juniper-supplicant-mode">Supplicant Mode:</label>
-          <select id="juniper-supplicant-mode">
-            <option value="single">Single (One device per port)</option>
-            <option value="multiple">Multiple (Multiple devices, first authenticates)</option>
-            <option value="multiple-secure">Multiple-Secure (Each device authenticates)</option>
-          </select>
-        </div>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="juniper-server-reject-vlan" checked> 
-            Enable Server-Reject VLAN
-          </label>
-        </div>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="juniper-nas-port-extended"> 
-            Use Extended NAS-Port-ID Format
-          </label>
-        </div>
-      </div>
-      
-      <!-- Fortinet Specific Options -->
-      <div id="fortinet-fortiswitch-options" class="vendor-specific">
-        <h4>FortiSwitch Specific Options</h4>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="fortiswitch-security-mode" checked> 
-            Enable 802.1X Security Mode
-          </label>
-        </div>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="fortiswitch-radius-timeout-override"> 
-            Override Global RADIUS Timeout
-          </label>
-        </div>
-      </div>
-    </div>
-  `;
-  
-  // Add the vendor-specific options after the existing accordions
-  const existingAccordions = advancedStep.querySelectorAll('.accordion');
-  if (existingAccordions.length > 0) {
-    const lastAccordion = existingAccordions[existingAccordions.length - 1];
-    lastAccordion.parentNode.insertBefore(vendorSpecificDiv, lastAccordion.nextSibling);
-  } else {
-    // If no existing accordions, add it before the nav buttons
-    const navButtons = advancedStep.querySelector('.nav-buttons');
-    if (navButtons) {
-      advancedStep.insertBefore(vendorSpecificDiv, navButtons);
-    }
-  }
-  
-  // Initialize the vendor-specific options
-  updateVendorSpecificOptions();
-}
-
-// Fix accordion functionality again after adding new elements
-document.querySelectorAll('.accordion-header').forEach(header => {
-  if (!header.hasAttribute('data-initialized')) {
-    header.setAttribute('data-initialized', 'true');
-    header.addEventListener('click', function() {
-      this.classList.toggle('active');
-      const content = this.nextElementSibling;
-      
-      if (content.style.display === 'block') {
-        content.style.display = 'none';
-        // Update icon
-        const icon = this.querySelector('.accordion-icon');
-        if (icon) {
-          icon.textContent = '+';
-        }
-      } else {
-        content.style.display = 'block';
-        // Update icon
-        const icon = this.querySelector('.accordion-icon');
-        if (icon) {
-          icon.textContent = '-';
-        }
-      }
-    });
-  }
-});
-
-console.log('DOM updates completed successfully');
 
     </script>
     
@@ -657,2700 +484,282 @@ console.log('DOM updates completed successfully');
 // Find the discovery tabs section
 const discoveryTabs = document.querySelector('.discovery-tabs');
 if (discoveryTabs) {
-  // Add the Network Scoping tab after the first tab
+  // Create the Network Scoping tab
+  const scopingTab = document.createElement('button');
+  scopingTab.className = 'discovery-tab';
+  scopingTab.setAttribute('onclick', 'showDiscoveryTab(\'scoping\', this)');
+  scopingTab.textContent = 'Network Scoping';
+  
+  // Add it after the first tab (usually Network Scan)
   const firstTab = discoveryTabs.querySelector('.discovery-tab');
   if (firstTab) {
-    const scopingTab = document.createElement('button');
-    scopingTab.className = 'discovery-tab';
-    scopingTab.setAttribute('onclick', 'showDiscoveryTab(\'scoping\', this)');
-    scopingTab.textContent = 'Network Scoping';
     discoveryTabs.insertBefore(scopingTab, firstTab.nextSibling);
+  } else {
+    discoveryTabs.appendChild(scopingTab);
   }
+}
+
+// Create a placeholder for the Network Scoping content
+const scopingPlaceholder = document.createElement('div');
+scopingPlaceholder.id = 'disc-scoping';
+scopingPlaceholder.className = 'discovery-section';
+scopingPlaceholder.style.display = 'none';
+scopingPlaceholder.innerHTML = 'Loading Network Scoping...';
+
+// Add it to the discovery content area
+const discoveryContent = document.querySelector('.discovery-content');
+if (discoveryContent) {
+  discoveryContent.appendChild(scopingPlaceholder);
 }
 
 // Load the Network Scoping content
 fetch('network-scoping.html')
   .then(response => response.text())
   .then(html => {
-    // Find the discovery content section
-    const discoveryContent = document.querySelector('.discovery-content');
-    if (discoveryContent) {
-      // Add the Network Scoping content after the Network Scan section
-      const scanSection = document.getElementById('disc-scan');
-      if (scanSection) {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        const scopingSection = tempDiv.firstChild;
-        discoveryContent.insertBefore(scopingSection, scanSection.nextSibling);
-      }
+    scopingPlaceholder.innerHTML = html;
+    // Initialize any required components
+    document.querySelectorAll('#disc-scoping .eap-method').forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const optionsId = `${this.id}-options`;
+        const options = document.getElementById(optionsId);
+        if (options) {
+          options.style.display = this.checked ? 'block' : 'none';
+        }
+      });
+    });
+    
+    // Initialize wireless/switch model selectors
+    const wirelessVendor = document.getElementById('wireless-vendor');
+    if (wirelessVendor) {
+      wirelessVendor.addEventListener('change', updateWirelessModels);
+      // Initialize models
+      updateWirelessModels();
     }
+    
+    const switchVendor = document.getElementById('switch-vendor');
+    if (switchVendor) {
+      switchVendor.addEventListener('change', updateSwitchModels);
+      // Initialize models
+      updateSwitchModels();
+    }
+    
+    // Setup scoping type radio buttons
+    document.querySelectorAll('input[name="scoping_type"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        const basicScoping = document.getElementById('basic-scoping');
+        const advancedScoping = document.getElementById('advanced-scoping');
+        
+        if (basicScoping DISCOVERY_TAB_UPDATE_PLACEHOLDERDISCOVERY_TAB_UPDATE_PLACEHOLDER advancedScoping) {
+          basicScoping.style.display = this.value === 'basic' ? 'block' : 'none';
+          advancedScoping.style.display = this.value === 'advanced' ? 'block' : 'none';
+        }
+      });
+    });
   })
   .catch(error => {
     console.error('Error loading Network Scoping content:', error);
+    scopingPlaceholder.innerHTML = 'Error loading Network Scoping content.';
   });
 
     </script>
     
-    <script>
-      document.getElementById('update-btn').addEventListener('click', function() {
-        try {
-          // Create script element to update the CSS
-          const styleEl = document.createElement('style');
-          styleEl.textContent = `
-/* ==========================================================================
-   Dot1Xer Supreme - Main Stylesheet
-   ========================================================================== */
-
-/* Base Styles
-   ========================================================================== */
-:root {
-  --primary-color: #ffc733;
-  --primary-light: #9252db;
-  --primary-dark: #440099;
-  --secondary-color: #28a745;
-  --accent-color: #fd7e14;
-  --light-gray: #f5f5f5;
-  --medium-gray: #e0e0e0;
-  --dark-gray: #6c757d;
-  --danger-color: #dc3545;
-  --warning-color: #ffc107;
-  --text-color: #333;
-  --border-radius: 4px;
-  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f7f7f7;
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  margin-top: 0;
-  color: var(--primary-dark);
-}
-
-a {
-  color: var(--primary-color);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Header
-   ========================================================================== */
-header {
-  background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
-  color: #fff;
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Logo sizing through CSS */
-.logo {
-  width: 200px;
-  height: auto;
-  margin-right: 15px;
-}
-
-.title {
-  font-size: 1.8em;
-  margin: 0;
-  font-weight: 600;
-}
-
-/* Top Navigation Tabs
-   ========================================================================== */
-.top-tabs {
-  background: var(--primary-color);
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.tab-btn {
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.8);
-  padding: 15px 20px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: var(--transition);
-  position: relative;
-  font-weight: 500;
-}
-
-.tab-btn:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.tab-btn.active {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.tab-btn.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: #fff;
-}
-
-/* Banner Container and Image Sizing */
-.banner-container {
-  width: 100%;
-  overflow: hidden;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.banner-image {
-  width: 100%;
-  max-height: 180px;
-  object-fit: cover;
-}
-
-/* Tab Content
-   ========================================================================== */
-.tab-content {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Form Elements
-   ========================================================================== */
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 500;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="password"],
-select,
-textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-  font-size: 1em;
-  transition: var(--transition);
-  margin-bottom: 15px;
-}
-
-input[type="text"]:focus,
-input[type="number"]:focus,
-input[type="password"]:focus,
-select:focus,
-textarea:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(99, 0, 196, 0.2);
-}
-
-button {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  font-size: 1em;
-  transition: var(--transition);
-}
-
-button:hover {
-  background: var(--primary-dark);
-}
-
-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(99, 0, 196, 0.2);
-}
-
-.radio-group,
-.checkbox-group {
-  margin-bottom: 15px;
-}
-
-.radio-group label,
-.checkbox-group label {
-  display: inline-flex;
-  align-items: center;
-  margin-right: 15px;
-  cursor: pointer;
-  font-weight: normal;
-}
-
-.radio-group input,
-.checkbox-group input {
-  margin-right: 5px;
-}
-
-/* Configurator Specific
-   ========================================================================== */
-.step-indicator {
-  display: flex;
-  margin-bottom: 20px;
-  border-bottom: 1px solid var(--medium-gray);
-  overflow-x: auto;
-}
-
-.step {
-  padding: 10px 15px;
-  position: relative;
-  cursor: pointer;
-  color: var(--dark-gray);
-  white-space: nowrap;
-}
-
-.step::after {
-  content: '›';
-  margin-left: 10px;
-  color: var(--medium-gray);
-  font-size: 1.2em;
-}
-
-.step:last-child::after {
-  display: none;
-}
-
-.step.active {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.step-content {
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  margin-bottom: 20px;
-}
-
-.nav-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.prev-btn {
-  background: var(--light-gray);
-  color: var(--text-color);
-}
-
-.prev-btn:hover {
-  background: var(--medium-gray);
-}
-
-.platform-info {
-  background: var(--light-gray);
-  padding: 15px;
-  border-radius: var(--border-radius);
-  margin: 15px 0;
-}
-
-.config-output {
-  background: #2d2d2d;
-  color: #f8f8f8;
-  padding: 15px;
-  border-radius: var(--border-radius);
-  overflow-x: auto;
-  white-space: pre;
-  font-family: 'Consolas', 'Monaco', monospace;
-  line-height: 1.4;
-  max-height: 500px;
-  overflow-y: auto;
-}
-
-.config-actions {
-  margin-bottom: 15px;
-  display: flex;
-  gap: 10px;
-}
-
-/* Tab Control for Server Configuration */
-.tab-control {
-  display: flex;
-  border-bottom: 1px solid var(--medium-gray);
-  margin-bottom: 20px;
-}
-
-.tab-control-btn {
-  padding: 10px 15px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  cursor: pointer;
-  position: relative;
-}
-
-.tab-control-btn:hover {
-  color: var(--primary-color);
-}
-
-.tab-control-btn.active {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.tab-control-btn.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--primary-color);
-}
-
-/* Accordion Styling */
-.accordion {
-  margin-bottom: 15px;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-}
-
-.accordion-header {
-  padding: 12px 15px;
-  background: var(--light-gray);
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-}
-
-.accordion-header:hover {
-  background: var(--medium-gray);
-}
-
-.accordion-icon {
-  font-size: 1.2em;
-  transition: transform 0.3s;
-}
-
-.accordion-header.active .accordion-icon {
-  transform: rotate(45deg);
-}
-
-.accordion-content {
-  padding: 15px;
-  display: none;
-  border-top: 1px solid var(--medium-gray);
-}
-
-/* Row and Column Layout */
-.row {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.col {
-  flex: 1;
-}
-
-/* Indent Options Styling */
-.indent-options {
-  margin-left: 20px;
-  padding-left: 10px;
-  border-left: 2px solid var(--medium-gray);
-  margin-bottom: 15px;
-}
-
-/* AI Integration Specific
-   ========================================================================== */
-.ai-chat-container {
-  display: flex;
-  flex-direction: column;
-  height: 600px;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-  background: white;
-  box-shadow: var(--box-shadow);
-}
-
-.chat-history {
-  flex: 1;
-  overflow-y: auto;
-  padding: 15px;
-  border-bottom: 1px solid var(--medium-gray);
-}
-
-.user-message,
-.ai-message {
-  display: flex;
-  margin-bottom: 15px;
-}
-
-.user-message {
-  flex-direction: row-reverse;
-}
-
-.message-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-/* Avatar sizing through CSS */
-.message-avatar img {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.message-content {
-  background: var(--light-gray);
-  padding: 10px 15px;
-  border-radius: 18px;
-  margin: 0 10px;
-  max-width: 70%;
-}
-
-.user-message .message-content {
-  background: var(--primary-light);
-  color: white;
-}
-
-.chat-input {
-  display: flex;
-  padding: 10px;
-  background: var(--light-gray);
-}
-
-.chat-input textarea {
-  flex: 1;
-  resize: none;
-  padding: 10px;
-  border: 1px solid var(--medium-gray);
-  border-radius: 20px;
-  margin-right: 10px;
-}
-
-.chat-input button {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
-
-/* Send button icon sizing */
-.chat-input button img {
-  width: 20px;
-  height: 20px;
-}
-
-.suggested-queries {
-  padding: 10px;
-}
-
-.query-suggestion {
-  background: var(--light-gray);
-  color: var(--text-color);
-  border: 1px solid var(--medium-gray);
-  border-radius: 18px;
-  padding: 5px 10px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  font-size: 0.9em;
-}
-
-.query-suggestion:hover {
-  background: var(--medium-gray);
-}
-
-.loading {
-  opacity: 0.6;
-}
-
-/* Reference Architecture Specific
-   ========================================================================== */
-.reference-nav {
-  display: flex;
-  border-bottom: 1px solid var(--medium-gray);
-  margin-bottom: 20px;
-  overflow-x: auto;
-}
-
-.ref-tab {
-  padding: 10px 15px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  cursor: pointer;
-  position: relative;
-  white-space: nowrap;
-}
-
-.ref-tab:hover {
-  color: var(--primary-color);
-}
-
-.ref-tab.active {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.ref-tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--primary-color);
-}
-
-.ref-section {
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-}
-
-.ref-diagram {
-  margin: 20px 0;
-  text-align: center;
-}
-
-.ref-diagram img {
-  max-width: 100%;
-  height: auto;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-}
-
-.vendor-comparison {
-  overflow-x: auto;
-}
-
-.vendor-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 15px 0;
-}
-
-.vendor-table th,
-.vendor-table td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid var(--medium-gray);
-}
-
-.vendor-table th {
-  background: var(--light-gray);
-  font-weight: 600;
-}
-
-.vendor-table tr:hover {
-  background-color: rgba(99, 0, 196, 0.05);
-}
-
-/* Environmental Discovery Specific
-   ========================================================================== */
-.discovery-tabs {
-  display: flex;
-  border-bottom: 1px solid var(--medium-gray);
-  margin-bottom: 20px;
-  overflow-x: auto;
-}
-
-.discovery-tab {
-  padding: 10px 15px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  cursor: pointer;
-  position: relative;
-  white-space: nowrap;
-}
-
-.discovery-tab:hover {
-  color: var(--primary-color);
-}
-
-.discovery-tab.active {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.discovery-tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--primary-color);
-}
-
-.discovery-section {
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-}
-
-.progress-bar {
-  height: 10px;
-  background: var(--light-gray);
-  border-radius: 5px;
-  margin: 10px 0;
-  overflow: hidden;
-}
-
-.progress {
-  height: 100%;
-  background: var(--primary-color);
-  width: 0%;
-  transition: width 0.3s;
-}
-
-#scan-status {
-  margin-bottom: 10px;
-  font-style: italic;
-}
-
-.scan-results table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.scan-results th,
-.scan-results td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid var(--medium-gray);
-}
-
-.scan-results th {
-  background: var(--light-gray);
-}
-
-.file-upload {
-  margin: 15px 0;
-}
-
-.analysis-summary {
-  margin-bottom: 20px;
-}
-
-.summary-stats {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 15px 0;
-  gap: 10px;
-}
-
-.stat-box {
-  flex: 1;
-  min-width: 120px;
-  padding: 15px;
-  background: var(--light-gray);
-  border-radius: var(--border-radius);
-  text-align: center;
-}
-
-.stat-value {
-  font-size: 2em;
-  font-weight: 600;
-  color: var(--primary-color);
-}
-
-.analysis-details > div {
-  margin-bottom: 20px;
-}
-
-.detail-item {
-  display: flex;
-  margin-bottom: 5px;
-}
-
-.detail-label {
-  font-weight: 600;
-  width: 200px;
-  flex-shrink: 0;
-}
-
-.report-actions {
-  margin-bottom: 20px;
-}
-
-.report-preview {
-  padding: 20px;
-  background: white;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-}
-
-/* Modal Styling */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  max-width: 600px;
-  width: 80%;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
-}
-
-.close-modal {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-/* Help Tab Specific
-   ========================================================================== */
-.help-tabs {
-  display: flex;
-  border-bottom: 1px solid var(--medium-gray);
-  margin-bottom: 20px;
-  overflow-x: auto;
-}
-
-.help-tab {
-  padding: 10px 15px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  cursor: pointer;
-  position: relative;
-  white-space: nowrap;
-}
-
-.help-tab:hover {
-  color: var(--primary-color);
-}
-
-.help-tab.active {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.help-tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--primary-color);
-}
-
-.help-section {
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-}
-
-.help-card {
-  margin-bottom: 20px;
-  padding: 15px;
-  background: var(--light-gray);
-  border-radius: var(--border-radius);
-}
-
-.vendor-docs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.vendor-card {
-  flex: 1;
-  min-width: 250px;
-  padding: 15px;
-  background: var(--light-gray);
-  border-radius: var(--border-radius);
-  text-align: center;
-}
-
-.vendor-card img {
-  height: 50px;
-  width: auto;
-  margin-bottom: 10px;
-}
-
-.vendor-card ul {
-  text-align: left;
-  padding-left: 20px;
-}
-
-.faq-item {
-  margin-bottom: 10px;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-}
-
-.faq-question {
-  padding: 15px;
-  background: var(--light-gray);
-  cursor: pointer;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.faq-toggle {
-  font-size: 1.2em;
-}
-
-.faq-answer {
-  padding: 0 15px;
-  display: none;
-  border-top: 1px solid var(--medium-gray);
-}
-
-.issue-item {
-  margin-bottom: 20px;
-}
-
-.issue-item h5 {
-  margin-bottom: 10px;
-}
-
-.issue-description {
-  padding-left: 15px;
-}
-
-.issue-severity {
-  display: inline-block;
-  padding: 3px 8px;
-  border-radius: 10px;
-  color: white;
-  font-size: 0.8em;
-  margin-right: 10px;
-}
-
-.issue-severity.high {
-  background: var(--danger-color);
-}
-
-.issue-severity.medium {
-  background: var(--warning-color);
-  color: var(--text-color);
-}
-
-.issue-severity.low {
-  background: var(--secondary-color);
-}
-
-/* Status Colors */
-.status-enabled {
-  color: var(--secondary-color);
-  font-weight: 600;
-}
-
-.status-disabled {
-  color: var(--danger-color);
-  font-weight: 600;
-}
-
-.status-partial {
-  color: var(--warning-color);
-  font-weight: 600;
-}
-
-/* Error Message */
-.error-message {
-  padding: 10px;
-  background-color: var(--danger-color);
-  color: white;
-  border-radius: var(--border-radius);
-  margin-bottom: 15px;
-}
-
-/* Required Field Indicator */
-.required {
-  color: var(--danger-color);
-}
-
-/* Responsive Adjustments
-   ========================================================================== */
-@media (max-width: 768px) {
-  .top-tabs {
-    flex-wrap: wrap;
-  }
-  
-  .tab-btn {
-    padding: 10px;
-  }
-  
-  .nav-buttons {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .nav-buttons button {
-    width: 100%;
-  }
-  
-  .row {
-    flex-direction: column;
-    gap: 0;
-  }
-  
-  .detail-item {
-    flex-direction: column;
-  }
-  
-  .detail-label {
-    width: 100%;
-  }
-  
-  /* Adjust banner height for mobile */
-  .banner-image {
-    max-height: 120px;
-  }
-  
-  .summary-stats {
-    flex-direction: column;
-  }
-  
-  .stat-box {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-}
-/* Additional styles for new features */
-
-/* Accordion Improvements */
-.accordion {
-  margin-bottom: 15px;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.accordion-header {
-  padding: 12px 15px;
-  background: var(--light-gray);
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
-}
-
-.accordion-header:hover {
-  background: var(--medium-gray);
-}
-
-.accordion-icon {
-  font-size: 1.2em;
-  transition: transform 0.3s ease;
-  width: 20px;
-  text-align: center;
-  display: inline-block;
-}
-
-.accordion-header.active .accordion-icon {
-  transform: rotate(45deg);
-}
-
-.accordion-content {
-  padding: 15px;
-  display: none;
-  border-top: 1px solid var(--medium-gray);
-  background-color: white;
-}
-
-/* Vendor-specific section styling */
-.vendor-specific {
-  display: none;
-  margin-top: 15px;
-  padding: 15px;
-  background-color: var(--light-gray);
-  border-radius: var(--border-radius);
-  border-left: 3px solid var(--primary-color);
-}
-
-/* Network Scoping Styles */
-.scoping-section {
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  margin-bottom: 20px;
-}
-
-.scoping-options {
-  margin-bottom: 20px;
-}
-
-.scoping-type {
-  margin-bottom: 15px;
-}
-
-.scoping-type label {
-  margin-right: 15px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-}
-
-.scoping-type input {
-  margin-right: 5px;
-}
-
-.scoping-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.scoping-column {
-  flex: 1;
-  min-width: 250px;
-}
-
-.count-input {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.count-input label {
-  flex: 3;
-  margin-bottom: 0;
-}
-
-.count-input input {
-  flex: 1;
-  margin-bottom: 0;
-}
-
-.scoping-results {
-  display: none;
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  margin-top: 20px;
-}
-
-.network-summary {
-  margin-bottom: 20px;
-}
-
-.deployment-phases {
-  margin-bottom: 20px;
-}
-
-.phase {
-  margin-bottom: 15px;
-  padding: 15px;
-  background: var(--light-gray);
-  border-radius: var(--border-radius);
-  border-left: 3px solid var(--primary-color);
-}
-
-.phase h5 {
-  margin-top: 0;
-  color: var(--primary-color);
-}
-
-.network-diagram {
-  text-align: center;
-}
-
-.diagram-container {
-  max-width: 100%;
-  overflow-x: auto;
-  margin: 15px 0;
-}
-
-.diagram-container img {
-  max-width: 100%;
-  height: auto;
-}
-
-.diagram-note {
-  font-style: italic;
-  color: var(--dark-gray);
-  text-align: center;
-}
-
-/* EAP Method Options */
-.eap-methods {
-  margin-bottom: 15px;
-}
-
-.eap-method-option {
-  margin-bottom: 5px;
-}
-
-.eap-method-options {
-  display: none;
-  margin-left: 25px;
-  padding-left: 10px;
-  border-left: 2px solid var(--medium-gray);
-  margin-bottom: 10px;
-}
-
-/* Reorganized tabs */
-.tab-section {
-  margin-bottom: 20px;
-}
-
-.tab-section-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: var(--primary-color);
-}
-
-/* Make accordion styling consistent */
-.accordion-group {
-  margin-bottom: 20px;
-}
-
-.accordion-group-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: var(--primary-color);
-}
-# Create the network scoping discovery section
-echo -e "${BLUE}Creating network scoping discovery section...${NC}"
-cat > network-scoping.html << 'EOF'
-<div class="discovery-section" id="disc-scoping">
-  <h3>Network Scoping Discovery</h3>
-  <p>Use this tool to assess your network infrastructure and create a customized 802.1X deployment plan.</p>
-  
-  <div class="scoping-section">
-    <div class="scoping-options">
-      <div class="scoping-type">
-        <label>
-          <input type="radio" name="scoping_type" value="basic" checked> 
-          Basic Scoping
-        </label>
-        <label>
-          <input type="radio" name="scoping_type" value="advanced"> 
-          Advanced Scoping
-        </label>
-      </div>
-      
-      <!-- Basic Scoping Form -->
-      <div id="basic-scoping">
-        <div class="scoping-form">
-          <div class="scoping-column">
-            <h4>Network Scope</h4>
-            <div class="count-input">
-              <label for="locations-count">Number of Locations:</label>
-              <input type="number" id="locations-count" value="1" min="1">
-            </div>
-            <div class="count-input">
-              <label for="switches-count">Number of Switches:</label>
-              <input type="number" id="switches-count" value="5" min="1">
-            </div>
-            <div class="count-input">
-              <label for="endpoints-count">Total Endpoints:</label>
-              <input type="number" id="endpoints-count" value="100" min="1">
-            </div>
-            
-            <h4>Authentication Requirements</h4>
-            <div class="eap-methods">
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="eap-tls" value="EAP-TLS"> 
-                  EAP-TLS (Certificate-Based)
-                </label>
-                <div id="eap-tls-options" class="eap-method-options">
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="eap-tls-existing-pki" checked> 
-                      Existing PKI infrastructure
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="peap-mschap" value="PEAP-MSCHAPv2" checked> 
-                  PEAP-MSCHAPv2 (Username/Password)
-                </label>
-                <div id="peap-mschap-options" class="eap-method-options">
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="peap-server-validation" checked> 
-                      Server Certificate Validation
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="eap-ttls" value="EAP-TTLS"> 
-                  EAP-TTLS
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="eap-fast" value="EAP-FAST"> 
-                  EAP-FAST
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="mab" value="MAB" checked> 
-                  MAC Authentication Bypass (MAB)
-                </label>
-                <div id="mab-options" class="eap-method-options">
-                  <div class="count-input">
-                    <label for="mab-devices">Estimated MAB Devices:</label>
-                    <input type="number" id="mab-devices" value="20" min="0">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="scoping-column">
-            <h4>Network Equipment</h4>
-            <div class="form-group">
-              <label for="wireless-vendor">Wireless Vendor:</label>
-              <select id="wireless-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba</option>
-                <option value="meraki">Meraki</option>
-                <option value="ruckus">Ruckus</option>
-                <option value="ubiquiti">Ubiquiti</option>
-                <option value="extreme">Extreme</option>
-                <option value="none">None (No Wireless)</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="switch-vendor">Switch Vendor:</label>
-              <select id="switch-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba/HPE</option>
-                <option value="juniper">Juniper</option>
-                <option value="extreme">Extreme</option>
-                <option value="hp">HP</option>
-                <option value="dell">Dell</option>
-                <option value="fortinet">Fortinet</option>
-              </select>
-            </div>
-            
-            <h4>Administration</h4>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" id="radius-admin" checked> 
-                RADIUS Authentication
-              </label>
-            </div>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" id="tacacs-admin" checked> 
-                TACACS+ Device Administration
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Advanced Scoping Form -->
-      <div id="advanced-scoping" style="display: none;">
-        <div class="scoping-form">
-          <div class="scoping-column">
-            <h4>Network Infrastructure</h4>
-            <div class="count-input">
-              <label for="advanced-locations-count">Number of Locations:</label>
-              <input type="number" id="advanced-locations-count" value="1" min="1">
-            </div>
-            <div class="count-input">
-              <label for="advanced-switches-count">Number of Switches:</label>
-              <input type="number" id="advanced-switches-count" value="5" min="1">
-            </div>
-            <div class="count-input">
-              <label for="ap-count">Number of Wireless APs:</label>
-              <input type="number" id="ap-count" value="10" min="0">
-            </div>
-            <div class="count-input">
-              <label for="advanced-endpoints-count">Total Endpoints:</label>
-              <input type="number" id="advanced-endpoints-count" value="100" min="1">
-            </div>
-            
-            <h4>Wireless Infrastructure</h4>
-            <div class="form-group">
-              <label for="wireless-vendor">Wireless Vendor:</label>
-              <select id="wireless-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba</option>
-                <option value="meraki">Meraki</option>
-                <option value="ruckus">Ruckus</option>
-                <option value="ubiquiti">Ubiquiti</option>
-                <option value="extreme">Extreme</option>
-                <option value="none">None (No Wireless)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="wireless-model">Wireless Model:</label>
-              <select id="wireless-model">
-                <option value="aironet-1800">Aironet 1800 Series</option>
-                <option value="aironet-2800">Aironet 2800 Series</option>
-                <option value="aironet-3800">Aironet 3800 Series</option>
-                <option value="catalyst-9100">Catalyst 9100 Series</option>
-                <option value="catalyst-9800">Catalyst 9800 Controller</option>
-              </select>
-            </div>
-            
-            <h4>Wired Infrastructure</h4>
-            <div class="form-group">
-              <label for="switch-vendor">Switch Vendor:</label>
-              <select id="switch-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba/HPE</option>
-                <option value="juniper">Juniper</option>
-                <option value="extreme">Extreme</option>
-                <option value="hp">HP</option>
-                <option value="dell">Dell</option>
-                <option value="fortinet">Fortinet</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="switch-model">Switch Model:</label>
-              <select id="switch-model">
-                <option value="catalyst-2960">Catalyst 2960 Series</option>
-                <option value="catalyst-3650">Catalyst 3650 Series</option>
-                <option value="catalyst-3850">Catalyst 3850 Series</option>
-                <option value="catalyst-9200">Catalyst 9200 Series</option>
-                <option value="catalyst-9300">Catalyst 9300 Series</option>
-                <option value="catalyst-9400">Catalyst 9400 Series</option>
-                <option value="catalyst-9500">Catalyst 9500 Series</option>
-                <option value="nexus-3000">Nexus 3000 Series</option>
-                <option value="nexus-5000">Nexus 5000 Series</option>
-                <option value="nexus-7000">Nexus 7000 Series</option>
-                <option value="nexus-9000">Nexus 9000 Series</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="scoping-column">
-            <h4>Client Devices</h4>
-            <div class="count-input">
-              <label for="laptop-count">Laptops:</label>
-              <input type="number" id="laptop-count" value="50" min="0">
-            </div>
-            <div class="count-input">
-              <label for="desktop-count">Desktops:</label>
-              <input type="number" id="desktop-count" value="30" min="0">
-            </div>
-            <div class="count-input">
-              <label for="voip-count">VoIP Phones:</label>
-              <input type="number" id="voip-count" value="20" min="0">
-            </div>
-            <div class="count-input">
-              <label for="printer-count">Printers/MFPs:</label>
-              <input type="number" id="printer-count" value="5" min="0">
-            </div>
-            <div class="count-input">
-              <label for="iot-count">IoT Devices:</label>
-              <input type="number" id="iot-count" value="10" min="0">
-            </div>
-            <div class="count-input">
-              <label for="security-count">Security Devices:</label>
-              <input type="number" id="security-count" value="2" min="0">
-            </div>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" id="byod-enabled"> 
-                BYOD Devices
-              </label>
-            </div>
-            
-            <h4>Authentication Methods</h4>
-            <div class="eap-methods">
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-eap-tls" value="EAP-TLS"> 
-                  EAP-TLS (Certificate-Based)
-                </label>
-                <div id="adv-eap-tls-options" class="eap-method-options">
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-eap-tls-existing-pki" checked> 
-                      Existing PKI infrastructure
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-peap-mschap" value="PEAP-MSCHAPv2" checked> 
-                  PEAP-MSCHAPv2 (Username/Password)
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-eap-ttls" value="EAP-TTLS"> 
-                  EAP-TTLS
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-eap-fast" value="EAP-FAST"> 
-                  EAP-FAST
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-mab" value="MAB" checked> 
-                  MAC Authentication Bypass (MAB)
-                </label>
-                <div id="adv-mab-options" class="eap-method-options">
-                  <div class="count-input">
-                    <label for="adv-mab-devices">Estimated MAB Devices:</label>
-                    <input type="number" id="adv-mab-devices" value="20" min="0">
-                  </div>
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-mab-printers" checked> 
-                      Printers
-                    </label>
-                  </div>
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-mab-iot" checked> 
-                      IoT Devices
-                    </label>
-                  </div>
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-mab-voip" checked> 
-                      VoIP Phones
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="form-actions">
-      <button type="button" onclick="generateNetworkDiagram()">Generate Deployment Plan</button>
-    </div>
-  </div>
-  
-  <div id="scoping-results" class="scoping-results">
-    <!-- Results will be dynamically generated here -->
-  </div>
-</div>
-/* Additional styles for new features */
-
-/* Accordion Improvements */
-.accordion {
-  margin-bottom: 15px;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.accordion-header {
-  padding: 12px 15px;
-  background: var(--light-gray);
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
-}
-
-.accordion-header:hover {
-  background: var(--medium-gray);
-}
-
-.accordion-icon {
-  font-size: 1.2em;
-  transition: transform 0.3s ease;
-  width: 20px;
-  text-align: center;
-  display: inline-block;
-}
-
-.accordion-header.active .accordion-icon {
-  transform: rotate(45deg);
-}
-
-.accordion-content {
-  padding: 15px;
-  display: none;
-  border-top: 1px solid var(--medium-gray);
-  background-color: white;
-}
-
-/* Vendor-specific section styling */
-.vendor-specific {
-  display: none;
-  margin-top: 15px;
-  padding: 15px;
-  background-color: var(--light-gray);
-  border-radius: var(--border-radius);
-  border-left: 3px solid var(--primary-color);
-}
-
-/* Network Scoping Styles */
-.scoping-section {
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  margin-bottom: 20px;
-}
-
-.scoping-options {
-  margin-bottom: 20px;
-}
-
-.scoping-type {
-  margin-bottom: 15px;
-}
-
-.scoping-type label {
-  margin-right: 15px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-}
-
-.scoping-type input {
-  margin-right: 5px;
-}
-
-.scoping-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.scoping-column {
-  flex: 1;
-  min-width: 250px;
-}
-
-.count-input {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.count-input label {
-  flex: 3;
-  margin-bottom: 0;
-}
-
-.count-input input {
-  flex: 1;
-  margin-bottom: 0;
-}
-
-.scoping-results {
-  display: none;
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  margin-top: 20px;
-}
-
-.network-summary {
-  margin-bottom: 20px;
-}
-
-.deployment-phases {
-  margin-bottom: 20px;
-}
-
-.phase {
-  margin-bottom: 15px;
-  padding: 15px;
-  background: var(--light-gray);
-  border-radius: var(--border-radius);
-  border-left: 3px solid var(--primary-color);
-}
-
-.phase h5 {
-  margin-top: 0;
-  color: var(--primary-color);
-}
-
-.network-diagram {
-  text-align: center;
-}
-
-.diagram-container {
-  max-width: 100%;
-  overflow-x: auto;
-  margin: 15px 0;
-}
-
-.diagram-container img {
-  max-width: 100%;
-  height: auto;
-}
-
-.diagram-note {
-  font-style: italic;
-  color: var(--dark-gray);
-  text-align: center;
-}
-
-/* EAP Method Options */
-.eap-methods {
-  margin-bottom: 15px;
-}
-
-.eap-method-option {
-  margin-bottom: 5px;
-}
-
-.eap-method-options {
-  display: none;
-  margin-left: 25px;
-  padding-left: 10px;
-  border-left: 2px solid var(--medium-gray);
-  margin-bottom: 10px;
-}
-
-/* Reorganized tabs */
-.tab-section {
-  margin-bottom: 20px;
-}
-
-.tab-section-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: var(--primary-color);
-}
-
-/* Make accordion styling consistent */
-.accordion-group {
-  margin-bottom: 20px;
-}
-
-.accordion-group-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: var(--primary-color);
-}
-# Create the network scoping discovery section
-echo -e "${BLUE}Creating network scoping discovery section...${NC}"
-cat > network-scoping.html << 'EOF'
-<div class="discovery-section" id="disc-scoping">
-  <h3>Network Scoping Discovery</h3>
-  <p>Use this tool to assess your network infrastructure and create a customized 802.1X deployment plan.</p>
-  
-  <div class="scoping-section">
-    <div class="scoping-options">
-      <div class="scoping-type">
-        <label>
-          <input type="radio" name="scoping_type" value="basic" checked> 
-          Basic Scoping
-        </label>
-        <label>
-          <input type="radio" name="scoping_type" value="advanced"> 
-          Advanced Scoping
-        </label>
-      </div>
-      
-      <!-- Basic Scoping Form -->
-      <div id="basic-scoping">
-        <div class="scoping-form">
-          <div class="scoping-column">
-            <h4>Network Scope</h4>
-            <div class="count-input">
-              <label for="locations-count">Number of Locations:</label>
-              <input type="number" id="locations-count" value="1" min="1">
-            </div>
-            <div class="count-input">
-              <label for="switches-count">Number of Switches:</label>
-              <input type="number" id="switches-count" value="5" min="1">
-            </div>
-            <div class="count-input">
-              <label for="endpoints-count">Total Endpoints:</label>
-              <input type="number" id="endpoints-count" value="100" min="1">
-            </div>
-            
-            <h4>Authentication Requirements</h4>
-            <div class="eap-methods">
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="eap-tls" value="EAP-TLS"> 
-                  EAP-TLS (Certificate-Based)
-                </label>
-                <div id="eap-tls-options" class="eap-method-options">
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="eap-tls-existing-pki" checked> 
-                      Existing PKI infrastructure
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="peap-mschap" value="PEAP-MSCHAPv2" checked> 
-                  PEAP-MSCHAPv2 (Username/Password)
-                </label>
-                <div id="peap-mschap-options" class="eap-method-options">
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="peap-server-validation" checked> 
-                      Server Certificate Validation
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="eap-ttls" value="EAP-TTLS"> 
-                  EAP-TTLS
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="eap-fast" value="EAP-FAST"> 
-                  EAP-FAST
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="mab" value="MAB" checked> 
-                  MAC Authentication Bypass (MAB)
-                </label>
-                <div id="mab-options" class="eap-method-options">
-                  <div class="count-input">
-                    <label for="mab-devices">Estimated MAB Devices:</label>
-                    <input type="number" id="mab-devices" value="20" min="0">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="scoping-column">
-            <h4>Network Equipment</h4>
-            <div class="form-group">
-              <label for="wireless-vendor">Wireless Vendor:</label>
-              <select id="wireless-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba</option>
-                <option value="meraki">Meraki</option>
-                <option value="ruckus">Ruckus</option>
-                <option value="ubiquiti">Ubiquiti</option>
-                <option value="extreme">Extreme</option>
-                <option value="none">None (No Wireless)</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="switch-vendor">Switch Vendor:</label>
-              <select id="switch-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba/HPE</option>
-                <option value="juniper">Juniper</option>
-                <option value="extreme">Extreme</option>
-                <option value="hp">HP</option>
-                <option value="dell">Dell</option>
-                <option value="fortinet">Fortinet</option>
-              </select>
-            </div>
-            
-            <h4>Administration</h4>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" id="radius-admin" checked> 
-                RADIUS Authentication
-              </label>
-            </div>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" id="tacacs-admin" checked> 
-                TACACS+ Device Administration
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Advanced Scoping Form -->
-      <div id="advanced-scoping" style="display: none;">
-        <div class="scoping-form">
-          <div class="scoping-column">
-            <h4>Network Infrastructure</h4>
-            <div class="count-input">
-              <label for="advanced-locations-count">Number of Locations:</label>
-              <input type="number" id="advanced-locations-count" value="1" min="1">
-            </div>
-            <div class="count-input">
-              <label for="advanced-switches-count">Number of Switches:</label>
-              <input type="number" id="advanced-switches-count" value="5" min="1">
-            </div>
-            <div class="count-input">
-              <label for="ap-count">Number of Wireless APs:</label>
-              <input type="number" id="ap-count" value="10" min="0">
-            </div>
-            <div class="count-input">
-              <label for="advanced-endpoints-count">Total Endpoints:</label>
-              <input type="number" id="advanced-endpoints-count" value="100" min="1">
-            </div>
-            
-            <h4>Wireless Infrastructure</h4>
-            <div class="form-group">
-              <label for="wireless-vendor">Wireless Vendor:</label>
-              <select id="wireless-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba</option>
-                <option value="meraki">Meraki</option>
-                <option value="ruckus">Ruckus</option>
-                <option value="ubiquiti">Ubiquiti</option>
-                <option value="extreme">Extreme</option>
-                <option value="none">None (No Wireless)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="wireless-model">Wireless Model:</label>
-              <select id="wireless-model">
-                <option value="aironet-1800">Aironet 1800 Series</option>
-                <option value="aironet-2800">Aironet 2800 Series</option>
-                <option value="aironet-3800">Aironet 3800 Series</option>
-                <option value="catalyst-9100">Catalyst 9100 Series</option>
-                <option value="catalyst-9800">Catalyst 9800 Controller</option>
-              </select>
-            </div>
-            
-            <h4>Wired Infrastructure</h4>
-            <div class="form-group">
-              <label for="switch-vendor">Switch Vendor:</label>
-              <select id="switch-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba/HPE</option>
-                <option value="juniper">Juniper</option>
-                <option value="extreme">Extreme</option>
-                <option value="hp">HP</option>
-                <option value="dell">Dell</option>
-                <option value="fortinet">Fortinet</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="switch-model">Switch Model:</label>
-              <select id="switch-model">
-                <option value="catalyst-2960">Catalyst 2960 Series</option>
-                <option value="catalyst-3650">Catalyst 3650 Series</option>
-                <option value="catalyst-3850">Catalyst 3850 Series</option>
-                <option value="catalyst-9200">Catalyst 9200 Series</option>
-                <option value="catalyst-9300">Catalyst 9300 Series</option>
-                <option value="catalyst-9400">Catalyst 9400 Series</option>
-                <option value="catalyst-9500">Catalyst 9500 Series</option>
-                <option value="nexus-3000">Nexus 3000 Series</option>
-                <option value="nexus-5000">Nexus 5000 Series</option>
-                <option value="nexus-7000">Nexus 7000 Series</option>
-                <option value="nexus-9000">Nexus 9000 Series</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="scoping-column">
-            <h4>Client Devices</h4>
-            <div class="count-input">
-              <label for="laptop-count">Laptops:</label>
-              <input type="number" id="laptop-count" value="50" min="0">
-            </div>
-            <div class="count-input">
-              <label for="desktop-count">Desktops:</label>
-              <input type="number" id="desktop-count" value="30" min="0">
-            </div>
-            <div class="count-input">
-              <label for="voip-count">VoIP Phones:</label>
-              <input type="number" id="voip-count" value="20" min="0">
-            </div>
-            <div class="count-input">
-              <label for="printer-count">Printers/MFPs:</label>
-              <input type="number" id="printer-count" value="5" min="0">
-            </div>
-            <div class="count-input">
-              <label for="iot-count">IoT Devices:</label>
-              <input type="number" id="iot-count" value="10" min="0">
-            </div>
-            <div class="count-input">
-              <label for="security-count">Security Devices:</label>
-              <input type="number" id="security-count" value="2" min="0">
-            </div>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" id="byod-enabled"> 
-                BYOD Devices
-              </label>
-            </div>
-            
-            <h4>Authentication Methods</h4>
-            <div class="eap-methods">
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-eap-tls" value="EAP-TLS"> 
-                  EAP-TLS (Certificate-Based)
-                </label>
-                <div id="adv-eap-tls-options" class="eap-method-options">
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-eap-tls-existing-pki" checked> 
-                      Existing PKI infrastructure
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-peap-mschap" value="PEAP-MSCHAPv2" checked> 
-                  PEAP-MSCHAPv2 (Username/Password)
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-eap-ttls" value="EAP-TTLS"> 
-                  EAP-TTLS
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-eap-fast" value="EAP-FAST"> 
-                  EAP-FAST
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-mab" value="MAB" checked> 
-                  MAC Authentication Bypass (MAB)
-                </label>
-                <div id="adv-mab-options" class="eap-method-options">
-                  <div class="count-input">
-                    <label for="adv-mab-devices">Estimated MAB Devices:</label>
-                    <input type="number" id="adv-mab-devices" value="20" min="0">
-                  </div>
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-mab-printers" checked> 
-                      Printers
-                    </label>
-                  </div>
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-mab-iot" checked> 
-                      IoT Devices
-                    </label>
-                  </div>
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-mab-voip" checked> 
-                      VoIP Phones
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="form-actions">
-      <button type="button" onclick="generateNetworkDiagram()">Generate Deployment Plan</button>
-    </div>
-  </div>
-  
-  <div id="scoping-results" class="scoping-results">
-    <!-- Results will be dynamically generated here -->
-  </div>
-</div>
-/* Additional styles for new features */
-
-/* Accordion Improvements */
-.accordion {
-  margin-bottom: 15px;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.accordion-header {
-  padding: 12px 15px;
-  background: var(--light-gray);
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
-}
-
-.accordion-header:hover {
-  background: var(--medium-gray);
-}
-
-.accordion-icon {
-  font-size: 1.2em;
-  transition: transform 0.3s ease;
-  width: 20px;
-  text-align: center;
-  display: inline-block;
-}
-
-.accordion-header.active .accordion-icon {
-  transform: rotate(45deg);
-}
-
-.accordion-content {
-  padding: 15px;
-  display: none;
-  border-top: 1px solid var(--medium-gray);
-  background-color: white;
-}
-
-/* Vendor-specific section styling */
-.vendor-specific {
-  display: none;
-  margin-top: 15px;
-  padding: 15px;
-  background-color: var(--light-gray);
-  border-radius: var(--border-radius);
-  border-left: 3px solid var(--primary-color);
-}
-
-/* Network Scoping Styles */
-.scoping-section {
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  margin-bottom: 20px;
-}
-
-.scoping-options {
-  margin-bottom: 20px;
-}
-
-.scoping-type {
-  margin-bottom: 15px;
-}
-
-.scoping-type label {
-  margin-right: 15px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-}
-
-.scoping-type input {
-  margin-right: 5px;
-}
-
-.scoping-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.scoping-column {
-  flex: 1;
-  min-width: 250px;
-}
-
-.count-input {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.count-input label {
-  flex: 3;
-  margin-bottom: 0;
-}
-
-.count-input input {
-  flex: 1;
-  margin-bottom: 0;
-}
-
-.scoping-results {
-  display: none;
-  background: white;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  margin-top: 20px;
-}
-
-.network-summary {
-  margin-bottom: 20px;
-}
-
-.deployment-phases {
-  margin-bottom: 20px;
-}
-
-.phase {
-  margin-bottom: 15px;
-  padding: 15px;
-  background: var(--light-gray);
-  border-radius: var(--border-radius);
-  border-left: 3px solid var(--primary-color);
-}
-
-.phase h5 {
-  margin-top: 0;
-  color: var(--primary-color);
-}
-
-.network-diagram {
-  text-align: center;
-}
-
-.diagram-container {
-  max-width: 100%;
-  overflow-x: auto;
-  margin: 15px 0;
-}
-
-.diagram-container img {
-  max-width: 100%;
-  height: auto;
-}
-
-.diagram-note {
-  font-style: italic;
-  color: var(--dark-gray);
-  text-align: center;
-}
-
-/* EAP Method Options */
-.eap-methods {
-  margin-bottom: 15px;
-}
-
-.eap-method-option {
-  margin-bottom: 5px;
-}
-
-.eap-method-options {
-  display: none;
-  margin-left: 25px;
-  padding-left: 10px;
-  border-left: 2px solid var(--medium-gray);
-  margin-bottom: 10px;
-}
-
-/* Reorganized tabs */
-.tab-section {
-  margin-bottom: 20px;
-}
-
-.tab-section-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: var(--primary-color);
-}
-
-/* Make accordion styling consistent */
-.accordion-group {
-  margin-bottom: 20px;
-}
-
-.accordion-group-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: var(--primary-color);
-}
-# Create the network scoping discovery section
-echo -e "${BLUE}Creating network scoping discovery section...${NC}"
-cat > network-scoping.html << 'EOF'
-<div class="discovery-section" id="disc-scoping">
-  <h3>Network Scoping Discovery</h3>
-  <p>Use this tool to assess your network infrastructure and create a customized 802.1X deployment plan.</p>
-  
-  <div class="scoping-section">
-    <div class="scoping-options">
-      <div class="scoping-type">
-        <label>
-          <input type="radio" name="scoping_type" value="basic" checked> 
-          Basic Scoping
-        </label>
-        <label>
-          <input type="radio" name="scoping_type" value="advanced"> 
-          Advanced Scoping
-        </label>
-      </div>
-      
-      <!-- Basic Scoping Form -->
-      <div id="basic-scoping">
-        <div class="scoping-form">
-          <div class="scoping-column">
-            <h4>Network Scope</h4>
-            <div class="count-input">
-              <label for="locations-count">Number of Locations:</label>
-              <input type="number" id="locations-count" value="1" min="1">
-            </div>
-            <div class="count-input">
-              <label for="switches-count">Number of Switches:</label>
-              <input type="number" id="switches-count" value="5" min="1">
-            </div>
-            <div class="count-input">
-              <label for="endpoints-count">Total Endpoints:</label>
-              <input type="number" id="endpoints-count" value="100" min="1">
-            </div>
-            
-            <h4>Authentication Requirements</h4>
-            <div class="eap-methods">
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="eap-tls" value="EAP-TLS"> 
-                  EAP-TLS (Certificate-Based)
-                </label>
-                <div id="eap-tls-options" class="eap-method-options">
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="eap-tls-existing-pki" checked> 
-                      Existing PKI infrastructure
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="peap-mschap" value="PEAP-MSCHAPv2" checked> 
-                  PEAP-MSCHAPv2 (Username/Password)
-                </label>
-                <div id="peap-mschap-options" class="eap-method-options">
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="peap-server-validation" checked> 
-                      Server Certificate Validation
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="eap-ttls" value="EAP-TTLS"> 
-                  EAP-TTLS
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="eap-fast" value="EAP-FAST"> 
-                  EAP-FAST
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="mab" value="MAB" checked> 
-                  MAC Authentication Bypass (MAB)
-                </label>
-                <div id="mab-options" class="eap-method-options">
-                  <div class="count-input">
-                    <label for="mab-devices">Estimated MAB Devices:</label>
-                    <input type="number" id="mab-devices" value="20" min="0">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="scoping-column">
-            <h4>Network Equipment</h4>
-            <div class="form-group">
-              <label for="wireless-vendor">Wireless Vendor:</label>
-              <select id="wireless-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba</option>
-                <option value="meraki">Meraki</option>
-                <option value="ruckus">Ruckus</option>
-                <option value="ubiquiti">Ubiquiti</option>
-                <option value="extreme">Extreme</option>
-                <option value="none">None (No Wireless)</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="switch-vendor">Switch Vendor:</label>
-              <select id="switch-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba/HPE</option>
-                <option value="juniper">Juniper</option>
-                <option value="extreme">Extreme</option>
-                <option value="hp">HP</option>
-                <option value="dell">Dell</option>
-                <option value="fortinet">Fortinet</option>
-              </select>
-            </div>
-            
-            <h4>Administration</h4>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" id="radius-admin" checked> 
-                RADIUS Authentication
-              </label>
-            </div>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" id="tacacs-admin" checked> 
-                TACACS+ Device Administration
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Advanced Scoping Form -->
-      <div id="advanced-scoping" style="display: none;">
-        <div class="scoping-form">
-          <div class="scoping-column">
-            <h4>Network Infrastructure</h4>
-            <div class="count-input">
-              <label for="advanced-locations-count">Number of Locations:</label>
-              <input type="number" id="advanced-locations-count" value="1" min="1">
-            </div>
-            <div class="count-input">
-              <label for="advanced-switches-count">Number of Switches:</label>
-              <input type="number" id="advanced-switches-count" value="5" min="1">
-            </div>
-            <div class="count-input">
-              <label for="ap-count">Number of Wireless APs:</label>
-              <input type="number" id="ap-count" value="10" min="0">
-            </div>
-            <div class="count-input">
-              <label for="advanced-endpoints-count">Total Endpoints:</label>
-              <input type="number" id="advanced-endpoints-count" value="100" min="1">
-            </div>
-            
-            <h4>Wireless Infrastructure</h4>
-            <div class="form-group">
-              <label for="wireless-vendor">Wireless Vendor:</label>
-              <select id="wireless-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba</option>
-                <option value="meraki">Meraki</option>
-                <option value="ruckus">Ruckus</option>
-                <option value="ubiquiti">Ubiquiti</option>
-                <option value="extreme">Extreme</option>
-                <option value="none">None (No Wireless)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="wireless-model">Wireless Model:</label>
-              <select id="wireless-model">
-                <option value="aironet-1800">Aironet 1800 Series</option>
-                <option value="aironet-2800">Aironet 2800 Series</option>
-                <option value="aironet-3800">Aironet 3800 Series</option>
-                <option value="catalyst-9100">Catalyst 9100 Series</option>
-                <option value="catalyst-9800">Catalyst 9800 Controller</option>
-              </select>
-            </div>
-            
-            <h4>Wired Infrastructure</h4>
-            <div class="form-group">
-              <label for="switch-vendor">Switch Vendor:</label>
-              <select id="switch-vendor">
-                <option value="cisco">Cisco</option>
-                <option value="aruba">Aruba/HPE</option>
-                <option value="juniper">Juniper</option>
-                <option value="extreme">Extreme</option>
-                <option value="hp">HP</option>
-                <option value="dell">Dell</option>
-                <option value="fortinet">Fortinet</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="switch-model">Switch Model:</label>
-              <select id="switch-model">
-                <option value="catalyst-2960">Catalyst 2960 Series</option>
-                <option value="catalyst-3650">Catalyst 3650 Series</option>
-                <option value="catalyst-3850">Catalyst 3850 Series</option>
-                <option value="catalyst-9200">Catalyst 9200 Series</option>
-                <option value="catalyst-9300">Catalyst 9300 Series</option>
-                <option value="catalyst-9400">Catalyst 9400 Series</option>
-                <option value="catalyst-9500">Catalyst 9500 Series</option>
-                <option value="nexus-3000">Nexus 3000 Series</option>
-                <option value="nexus-5000">Nexus 5000 Series</option>
-                <option value="nexus-7000">Nexus 7000 Series</option>
-                <option value="nexus-9000">Nexus 9000 Series</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="scoping-column">
-            <h4>Client Devices</h4>
-            <div class="count-input">
-              <label for="laptop-count">Laptops:</label>
-              <input type="number" id="laptop-count" value="50" min="0">
-            </div>
-            <div class="count-input">
-              <label for="desktop-count">Desktops:</label>
-              <input type="number" id="desktop-count" value="30" min="0">
-            </div>
-            <div class="count-input">
-              <label for="voip-count">VoIP Phones:</label>
-              <input type="number" id="voip-count" value="20" min="0">
-            </div>
-            <div class="count-input">
-              <label for="printer-count">Printers/MFPs:</label>
-              <input type="number" id="printer-count" value="5" min="0">
-            </div>
-            <div class="count-input">
-              <label for="iot-count">IoT Devices:</label>
-              <input type="number" id="iot-count" value="10" min="0">
-            </div>
-            <div class="count-input">
-              <label for="security-count">Security Devices:</label>
-              <input type="number" id="security-count" value="2" min="0">
-            </div>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" id="byod-enabled"> 
-                BYOD Devices
-              </label>
-            </div>
-            
-            <h4>Authentication Methods</h4>
-            <div class="eap-methods">
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-eap-tls" value="EAP-TLS"> 
-                  EAP-TLS (Certificate-Based)
-                </label>
-                <div id="adv-eap-tls-options" class="eap-method-options">
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-eap-tls-existing-pki" checked> 
-                      Existing PKI infrastructure
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-peap-mschap" value="PEAP-MSCHAPv2" checked> 
-                  PEAP-MSCHAPv2 (Username/Password)
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-eap-ttls" value="EAP-TTLS"> 
-                  EAP-TTLS
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-eap-fast" value="EAP-FAST"> 
-                  EAP-FAST
-                </label>
-              </div>
-              <div class="eap-method-option">
-                <label>
-                  <input type="checkbox" class="eap-method" id="adv-mab" value="MAB" checked> 
-                  MAC Authentication Bypass (MAB)
-                </label>
-                <div id="adv-mab-options" class="eap-method-options">
-                  <div class="count-input">
-                    <label for="adv-mab-devices">Estimated MAB Devices:</label>
-                    <input type="number" id="adv-mab-devices" value="20" min="0">
-                  </div>
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-mab-printers" checked> 
-                      Printers
-                    </label>
-                  </div>
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-mab-iot" checked> 
-                      IoT Devices
-                    </label>
-                  </div>
-                  <div class="checkbox-group">
-                    <label>
-                      <input type="checkbox" id="adv-mab-voip" checked> 
-                      VoIP Phones
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="form-actions">
-      <button type="button" onclick="generateNetworkDiagram()">Generate Deployment Plan</button>
-    </div>
-  </div>
-  
-  <div id="scoping-results" class="scoping-results">
-    <!-- Results will be dynamically generated here -->
-  </div>
-</div>
-
-          `;
-          document.head.appendChild(styleEl);
-          
-          // Create script element for DOM updates
-          const scriptEl = document.createElement('script');
-          scriptEl.textContent = `
-// Execute the server tab updates
-eval(document.getElementById('server-tab-update-script').textContent);
-
-// Execute the discovery tab updates
-eval(document.getElementById('discovery-tab-update-script').textContent);
-
-// Fix accordion functionality
-document.querySelectorAll('.accordion-header').forEach(header => {
-  header.addEventListener('click', function() {
-    this.classList.toggle('active');
-    const content = this.nextElementSibling;
-    
-    if (content.style.display === 'block') {
-      content.style.display = 'none';
-      // Update icon
-      const icon = this.querySelector('.accordion-icon');
-      if (icon) {
-        icon.textContent = '+';
-      }
-    } else {
-      content.style.display = 'block';
-      // Update icon
-      const icon = this.querySelector('.accordion-icon');
-      if (icon) {
-        icon.textContent = '-';
-      }
-    }
-  });
-});
-
-// Add vendor-specific option sections
+    <script id="vendor-options-update-script" type="text/plain">
+// Add vendor-specific options to Step 5 (Advanced)
 const advancedStep = document.getElementById('step-5');
 if (advancedStep) {
-  const vendorSpecificDiv = document.createElement('div');
-  vendorSpecificDiv.className = 'accordion';
-  vendorSpecificDiv.innerHTML = `
+  // Create vendor-specific options section
+  const vendorOptionsSection = document.createElement('div');
+  vendorOptionsSection.className = 'accordion';
+  vendorOptionsSection.innerHTML = `
     <div class="accordion-header">
       <span>Vendor-Specific Options</span>
       <span class="accordion-icon">+</span>
     </div>
     <div class="accordion-content">
-      <!-- Cisco IOS-XE Specific Options -->
-      <div id="cisco-ios-xe-options" class="vendor-specific">
-        <h4>Cisco IOS-XE Specific Options</h4>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="cisco-ibns2" checked> 
-            Use IBNS 2.0 Policy Maps
-          </label>
-        </div>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="cisco-multi-auth"> 
-            Enable Multi-Auth Host Mode
-          </label>
-        </div>
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="cisco-autoconf"> 
-            Enable Auto-Configuration
-          </label>
-        </div>
+      <div id="vendor-specific-placeholder">
+        Loading vendor options...
       </div>
-      
-      <!-- More vendor-specific options would go here -->
     </div>
   `;
   
-  // Add the vendor-specific options after the existing accordions
-  const existingAccordions = advancedStep.querySelectorAll('.accordion');
-  if (existingAccordions.length > 0) {
-    const lastAccordion = existingAccordions[existingAccordions.length - 1];
-    lastAccordion.parentNode.insertBefore(vendorSpecificDiv, lastAccordion.nextSibling);
-  } else {
-    // If no existing accordions, add it before the nav buttons
-    const navButtons = advancedStep.querySelector('.nav-buttons');
-    if (navButtons) {
-      advancedStep.insertBefore(vendorSpecificDiv, navButtons);
-    }
+  // Add it to the page
+  const navButtons = advancedStep.querySelector('.nav-buttons');
+  if (navButtons) {
+    advancedStep.insertBefore(vendorOptionsSection, navButtons);
   }
   
-  // Initialize the vendor-specific options
-  updateVendorSpecificOptions();
+  // Fetch vendor-specific options
+  fetch('vendor-specific-options.html')
+    .then(response => response.text())
+    .then(html => {
+      const placeholder = document.getElementById('vendor-specific-placeholder');
+      if (placeholder) {
+        placeholder.innerHTML = html;
+      }
+      
+      // Initialize event listeners
+      const wirelessVendor = document.getElementById('wireless-vendor');
+      if (wirelessVendor) {
+        wirelessVendor.addEventListener('change', updateWirelessModels);
+      }
+      
+      const switchVendor = document.getElementById('switch-vendor');
+      if (switchVendor) {
+        switchVendor.addEventListener('change', updateSwitchModels);
+      }
+      
+      // Setup event for NX-OS source interface
+      const nxosSourceInterface = document.getElementById('nxos-source-interface');
+      if (nxosSourceInterface) {
+        nxosSourceInterface.addEventListener('change', function() {
+          const group = document.getElementById('nxos-source-interface-group');
+          if (group) {
+            group.style.display = this.checked ? 'block' : 'none';
+          }
+        });
+      }
+      
+      // Setup event for Extreme MAC refresh timer
+      const extremeMacRefresh = document.getElementById('extreme-mac-refresh-time');
+      if (extremeMacRefresh) {
+        extremeMacRefresh.addEventListener('change', function() {
+          const group = document.getElementById('extreme-mac-refresh-group');
+          if (group) {
+            group.style.display = this.checked ? 'block' : 'none';
+          }
+        });
+      }
+      
+      // Initialize vendor options based on current selection
+      updateVendorSpecificOptions();
+    })
+    .catch(error => {
+      console.error('Error loading vendor-specific options:', error);
+      const placeholder = document.getElementById('vendor-specific-placeholder');
+      if (placeholder) {
+        placeholder.innerHTML = 'Error loading vendor-specific options.';
+      }
+    });
 }
 
-console.log('DOM updates completed successfully');
+    </script>
+    
+    <script>
+      document.getElementById('update-button').addEventListener('click', function() {
+        try {
+          // Add CSS styles first
+          const styleElement = document.createElement('style');
+          styleElement.textContent = `
+CSS_STYLES_PLACEHOLDER
           `;
-          document.body.appendChild(scriptEl);
+          document.head.appendChild(styleElement);
+          console.log('Added CSS styles');
+          
+          // Apply DOM updates
+          const scriptElement = document.createElement('script');
+          scriptElement.textContent = `
+// DOM update script for Dot1Xer Supreme
+console.log('Executing DOM updates for Dot1Xer Supreme...');
+
+// Apply server tab updates
+eval(document.getElementById('server-tab-update-script').textContent);
+console.log('Applied server tab updates');
+
+// Apply discovery tab updates
+eval(document.getElementById('discovery-tab-update-script').textContent);
+console.log('Applied discovery tab updates');
+
+// Apply vendor options updates
+eval(document.getElementById('vendor-options-update-script').textContent);
+console.log('Applied vendor options updates');
+
+// Fix accordion functionality
+document.querySelectorAll('.accordion-header').forEach(header => {
+  if (!header.hasAttribute('data-event-bound')) {
+    header.setAttribute('data-event-bound', 'true');
+    header.addEventListener('click', function() {
+      this.classList.toggle('active');
+      const content = this.nextElementSibling;
+      
+      if (content) {
+        if (content.style.display === 'block') {
+          content.style.display = 'none';
+          // Update icon
+          const icon = this.querySelector('.accordion-icon');
+          if (icon) {
+            icon.textContent = '+';
+          }
+        } else {
+          content.style.display = 'block';
+          // Update icon
+          const icon = this.querySelector('.accordion-icon');
+          if (icon) {
+            icon.textContent = '-';
+          }
+        }
+      }
+    });
+  }
+});
+console.log('Fixed accordion functionality');
+
+// Open first accordion in each group
+document.querySelectorAll('.accordion-group').forEach(group => {
+  const firstAccordion = group.querySelector('.accordion-header');
+  if (firstAccordion DOM_UPDATES_PLACEHOLDERDOM_UPDATES_PLACEHOLDER !firstAccordion.classList.contains('active')) {
+    // Simulate click to open
+    firstAccordion.click();
+  }
+});
+console.log('Opened first accordion in each group');
+
+// Initialize vendor-specific options
+const vendorSelect = document.getElementById('vendor-select');
+const platformSelect = document.getElementById('platform-select');
+if (vendorSelect DOM_UPDATES_PLACEHOLDERDOM_UPDATES_PLACEHOLDER platformSelect) {
+  vendorSelect.addEventListener('change', updateVendorSpecificOptions);
+  platformSelect.addEventListener('change', updateVendorSpecificOptions);
+  
+  // Initial update
+  updateVendorSpecificOptions();
+}
+console.log('Initialized vendor-specific options');
+
+// Initialize EAP method checkboxes
+document.querySelectorAll('.eap-method').forEach(checkbox => {
+  checkbox.addEventListener('change', function() {
+    const optionsId = `${this.id}-options`;
+    const options = document.getElementById(optionsId);
+    if (options) {
+      options.style.display = this.checked ? 'block' : 'none';
+    }
+  });
+  
+  // Set initial state
+  if (checkbox.checked) {
+    const optionsId = `${checkbox.id}-options`;
+    const options = document.getElementById(optionsId);
+    if (options) {
+      options.style.display = 'block';
+    }
+  }
+});
+console.log('Initialized EAP method checkboxes');
+
+console.log('DOM updates completed successfully');
+
+          `;
+          document.body.appendChild(scriptElement);
+          console.log('Applied DOM updates');
           
           // Show success message
           document.getElementById('success-message').style.display = 'block';
+          document.getElementById('update-button').disabled = true;
         } catch (error) {
           console.error('Error applying updates:', error);
           document.getElementById('error-message').style.display = 'block';
+          document.getElementById('error-message').textContent = 
+            'Error applying updates: ' + error.message;
         }
       });
     </script>

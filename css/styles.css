@@ -1,877 +1,2838 @@
-/* Enhanced UI styles for Dot1Xer Supreme with improved color contrast */
+/* ==========================================================================
+   Dot1Xer Supreme - Enhanced CSS Styles
+   ========================================================================== */
+
 :root {
-    --primary-color: #6300c4;
-    --primary-dark: #4a0091;
-    --primary-light: #9951ff;
-    --secondary-color: #00b894;
-    --light-gray: #f8f9fa;
-    --medium-gray: #dee2e6;
-    --dark-gray: #495057;
-    --danger-color: #e74c3c;
-    --warning-color: #f39c12;
-    --success-color: #2ecc71;
-    --border-radius: 6px;
-    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-    --text-color: #212529;
-    --bg-color: #ffffff;
-    --portnox-purple: #6c27be;
-    --portnox-dark: #4c1d80;
-    --portnox-light: #a776e0;
+  --primary-color: #6300c4;
+  --primary-light: #9252db;
+  --primary-dark: #440099;
+  --secondary-color: #28a745;
+  --accent-color: #fd7e14;
+  --light-gray: #f5f5f5;
+  --medium-gray: #e0e0e0;
+  --dark-gray: #6c757d;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+  --text-color: #333;
+  --border-radius: 4px;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--light-gray);
-    margin: 0;
-    padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+  color: var(--text-color);
+  line-height: 1.6;
 }
 
-/* Header and branding */
-.header {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  margin-top: 0;
+  color: var(--primary-dark);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Header */
+header {
+  background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
+  color: #fff;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-    height: 60px; /* Increased logo size */
-    margin-right: 15px;
+  width: 200px;
+  height: auto;
+  margin-right: 15px;
 }
 
 .title {
-    font-size: 28px; /* Larger title */
-    font-weight: 700;
-    margin: 0;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-    letter-spacing: 0.5px;
+  font-size: 1.8em;
+  margin: 0;
+  font-weight: 600;
 }
 
-.subtitle {
-    font-size: 16px;
-    margin: 5px 0 0;
-    opacity: 0.9;
-}
-
-.ai-avatar {
-    width: 48px; /* Larger AI avatar */
-    height: 48px;
-    border-radius: 50%;
-    margin-left: auto;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    border: 2px solid white;
-}
-
-/* Main content container */
-.container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 20px;
-}
-
-/* Tabs */
-.tab-container {
-    margin-bottom: 30px;
-}
-
-.tabs {
-    display: flex;
-    background-color: var(--bg-color);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    overflow: hidden;
+/* Top Navigation Tabs */
+.top-tabs {
+  background: var(--primary-color);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
 }
 
 .tab-btn {
-    flex: 1;
-    padding: 15px;
-    text-align: center;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--dark-gray);
-    transition: var(--transition);
-    border-bottom: 3px solid transparent;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 15px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: var(--transition);
+  position: relative;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .tab-btn:hover {
-    background-color: var(--light-gray);
-    color: var(--primary-color);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .tab-btn.active {
-    background-color: var(--bg-color);
-    color: var(--primary-color);
-    border-bottom: 3px solid var(--primary-color);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
 }
 
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #fff;
+}
+
+/* Banner Container */
+.banner-container {
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.banner-image {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+}
+
+/* Tab Content */
 .tab-content {
-    background: var(--bg-color);
-    padding: 25px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-top: 5px;
-    display: none;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Discovery tabs */
-.discovery-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--medium-gray);
-}
-
-.discovery-tab {
-    padding: 10px 15px;
-    background-color: transparent;
-    border: none;
-    border-bottom: 3px solid transparent;
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--dark-gray);
-    transition: var(--transition);
-}
-
-.discovery-tab:hover {
-    color: var(--primary-color);
-}
-
-.discovery-tab.active {
-    color: var(--primary-color);
-    border-bottom: 3px solid var(--primary-color);
-}
-
-.discovery-content {
-    margin-top: 20px;
-}
-
-.discovery-section {
-    display: none;
-}
-
-/* Accordion styles - fixed and enhanced */
-.accordion {
-    margin-bottom: 15px;
-    border: 1px solid var(--medium-gray);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.accordion-header {
-    padding: 12px 15px;
-    background: linear-gradient(to bottom, var(--bg-color), var(--light-gray));
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-    color: var(--text-color);
-}
-
-.accordion-header:hover {
-    background: var(--medium-gray);
-}
-
-.accordion-icon {
-    font-size: 1.2em;
-    transition: transform 0.3s ease;
-    width: 20px;
-    text-align: center;
-    display: inline-block;
-    color: var(--primary-color);
-}
-
-.accordion-header.active {
-    background: linear-gradient(to bottom, var(--light-gray), var(--bg-color));
-    border-bottom: 1px solid var(--medium-gray);
-}
-
-.accordion-content {
-    padding: 15px;
-    display: none;
-    background-color: var(--bg-color);
-}
-
-/* Button styles */
-.btn, button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    transition: var(--transition);
-}
-
-.btn:hover, button:hover {
-    background-color: var(--primary-dark);
-}
-
-.portnox-btn {
-    background-color: var(--portnox-purple);
-    color: white;
-}
-
-.portnox-btn:hover {
-    background-color: var(--portnox-dark);
-}
-
-/* Portnox specific styles */
-.portnox-header {
-    background: linear-gradient(135deg, var(--portnox-purple), var(--portnox-dark));
-    color: white;
-    padding: 15px;
-    border-radius: var(--border-radius);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.portnox-logo {
-    height: 40px;
-    margin-right: 15px;
-}
-
-.portnox-tab {
-    background-color: var(--portnox-purple) !important;
-    color: white !important;
-}
-
-.portnox-tab:hover, .portnox-tab.active {
-    background-color: var(--portnox-dark) !important;
-    border-bottom: 3px solid white !important;
-}
-
-.portnox-section {
-    background-color: var(--bg-color);
-    padding: 15px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-bottom: 20px;
-    border-left: 4px solid var(--portnox-purple);
-}
-
-/* Network Discovery sections */
-.environment-section {
-    background: var(--bg-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-bottom: 20px;
-}
-
-.environment-group {
-    margin-bottom: 20px;
-    border: 1px solid var(--medium-gray);
-    border-radius: var(--border-radius);
-    padding: 15px;
-}
-
-.environment-group h4 {
-    margin-top: 0;
-    color: var(--primary-color);
-}
-
-/* Form controls with improved contrast */
+/* Form Elements */
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--text-color);
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
 }
 
 input[type="text"],
-input[type="password"],
 input[type="number"],
-input[type="email"],
+input[type="password"],
 select,
 textarea {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--medium-gray);
-    border-radius: var(--border-radius);
-    font-size: 14px;
-    transition: var(--transition);
-    background-color: var(--bg-color);
-    color: var(--text-color);
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  font-size: 1em;
+  transition: var(--transition);
+  margin-bottom: 15px;
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus,
 input[type="number"]:focus,
-input[type="email"]:focus,
+input[type="password"]:focus,
 select:focus,
 textarea:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(99, 0, 196, 0.1);
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 0, 196, 0.2);
 }
 
-.checkbox-group, .radio-group {
-    margin-bottom: 15px;
+button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1em;
+  transition: var(--transition);
 }
 
-.checkbox-group label, .radio-group label {
-    display: flex;
-    align-items: center;
-    font-weight: normal;
-    cursor: pointer;
+button:hover {
+  background: var(--primary-dark);
 }
 
-input[type="checkbox"], input[type="radio"] {
-    margin-right: 10px;
-    cursor: pointer;
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 0, 196, 0.2);
 }
 
-/* Card styles for Portnox section */
-.card {
-    background-color: var(--bg-color);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-bottom: 20px;
-    overflow: hidden;
+.radio-group,
+.checkbox-group {
+  margin-bottom: 15px;
 }
 
-.card-header {
-    padding: 15px;
-    background-color: var(--portnox-purple);
-    color: white;
-    font-weight: 600;
+.radio-group label,
+.checkbox-group label {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 15px;
+  cursor: pointer;
+  font-weight: normal;
 }
 
-.card-body {
-    padding: 15px;
+.radio-group input,
+.checkbox-group input {
+  margin-right: 5px;
 }
 
-.card-footer {
-    padding: 15px;
-    background-color: var(--light-gray);
-    border-top: 1px solid var(--medium-gray);
+/* Configurator Specific */
+.step-indicator {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--medium-gray);
+  overflow-x: auto;
+  padding-bottom: 5px;
 }
 
-/* Alerts and messages */
-.alert {
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border-radius: var(--border-radius);
-    font-weight: 500;
+.step {
+  padding: 10px 15px;
+  position: relative;
+  cursor: pointer;
+  color: var(--dark-gray);
+  white-space: nowrap;
 }
 
-.alert-success {
-    background-color: rgba(46, 204, 113, 0.1);
-    border: 1px solid var(--success-color);
-    color: #27ae60;
+.step::after {
+  content: '›';
+  margin-left: 10px;
+  color: var(--medium-gray);
+  font-size: 1.2em;
 }
 
-.alert-warning {
-    background-color: rgba(243, 156, 18, 0.1);
-    border: 1px solid var(--warning-color);
-    color: #e67e22;
+.step:last-child::after {
+  display: none;
 }
 
-.alert-danger {
-    background-color: rgba(231, 76, 60, 0.1);
-    border: 1px solid var(--danger-color);
-    color: #c0392b;
+.step.active {
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
-/* Error and success messages */
-#error-message, #success-message {
-    padding: 10px 15px;
-    border-radius: var(--border-radius);
-    margin-bottom: 15px;
-    display: none;
+.step-content {
+  background: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-bottom: 20px;
 }
 
-#error-message {
-    background-color: rgba(231, 76, 60, 0.1);
-    border: 1px solid var(--danger-color);
-    color: #c0392b;
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
-#success-message {
-    background-color: rgba(46, 204, 113, 0.1);
-    border: 1px solid var(--success-color);
-    color: #27ae60;
+.prev-btn {
+  background: var(--light-gray);
+  color: var(--text-color);
 }
 
-/* POC generator styles */
-.poc-templates {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+.prev-btn:hover {
+  background: var(--medium-gray);
 }
 
-.template-card {
-    border: 1px solid var(--medium-gray);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    transition: transform 0.2s ease;
+.platform-info {
+  background: var(--light-gray);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  margin: 15px 0;
 }
 
-.template-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+.config-output {
+  background: #2d2d2d;
+  color: #f8f8f8;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+  white-space: pre;
+  font-family: 'Consolas', 'Monaco', monospace;
+  line-height: 1.4;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
-.template-header {
-    background-color: var(--portnox-purple);
-    color: white;
-    padding: 15px;
-    font-weight: 600;
+.config-actions {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
 }
 
-.template-body {
-    padding: 15px;
-    background-color: var(--bg-color);
+/* Enhanced Accordion Styling - FIXED */
+.accordion {
+  margin-bottom: 15px;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
 }
 
-.template-footer {
-    background-color: var(--light-gray);
-    padding: 10px 15px;
-    display: flex;
-    justify-content: flex-end;
+.accordion-header {
+  padding: 12px 15px;
+  background: var(--light-gray);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
 }
 
-/* Documentation links section */
-.docs-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
+.accordion-header:hover {
+  background: var(--medium-gray);
 }
 
-.doc-link {
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    background-color: var(--light-gray);
-    border-radius: var(--border-radius);
-    transition: background-color 0.2s ease;
-    text-decoration: none;
-    color: var(--text-color);
+.accordion-icon {
+  font-size: 1.2em;
+  transition: transform 0.3s ease;
+  width: 20px;
+  text-align: center;
+  display: inline-block;
 }
 
-.doc-link:hover {
-    background-color: var(--medium-gray);
+.accordion-header.active .accordion-icon {
+  transform: rotate(45deg);
 }
 
-.doc-link i {
-    margin-right: 8px;
-    color: var(--portnox-purple);
+.accordion-content {
+  padding: 15px;
+  display: none;
+  border-top: 1px solid var(--medium-gray);
+  background-color: white;
 }
 
-/* Responsive design */
+/* Tab Control for Server Configuration */
+.tab-control {
+  display: flex;
+  border-bottom: 1px solid var(--medium-gray);
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.tab-control-btn {
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+}
+
+.tab-control-btn:hover {
+  color: var(--primary-color);
+}
+
+.tab-control-btn.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.tab-control-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+/* Row and Column Layout */
+.row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.col {
+  flex: 1;
+  min-width: 0; /* Prevents flex items from overflowing */
+}
+
+/* Indent Options Styling */
+.indent-options {
+  margin-left: 20px;
+  padding-left: 10px;
+  border-left: 2px solid var(--medium-gray);
+  margin-bottom: 15px;
+}
+
+/* AI Integration Specific */
+.ai-chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  background: white;
+  box-shadow: var(--box-shadow);
+}
+
+.chat-history {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.user-message,
+.ai-message {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.user-message {
+  flex-direction: row-reverse;
+}
+
+.message-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.message-avatar img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.message-content {
+  background: var(--light-gray);
+  padding: 10px 15px;
+  border-radius: 18px;
+  margin: 0 10px;
+  max-width: 70%;
+}
+
+.user-message .message-content {
+  background: var(--primary-light);
+  color: white;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background: var(--light-gray);
+}
+
+.chat-input textarea {
+  flex: 1;
+  resize: none;
+  padding: 10px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.chat-input button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.chat-input button img {
+  width: 20px;
+  height: 20px;
+}
+
+.suggested-queries {
+  padding: 10px;
+}
+
+.query-suggestion {
+  background: var(--light-gray);
+  color: var(--text-color);
+  border: 1px solid var(--medium-gray);
+  border-radius: 18px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+
+.query-suggestion:hover {
+  background: var(--medium-gray);
+}
+
+.loading {
+  opacity: 0.6;
+}
+
+/* Reference Architecture Specific */
+.reference-nav {
+  display: flex;
+  border-bottom: 1px solid var(--medium-gray);
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.ref-tab {
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+}
+
+.ref-tab:hover {
+  color: var(--primary-color);
+}
+
+.ref-tab.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.ref-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+.ref-section {
+  background: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.ref-diagram {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.ref-diagram img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+}
+
+.vendor-comparison {
+  overflow-x: auto;
+}
+
+.vendor-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+
+.vendor-table th,
+.vendor-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.vendor-table th {
+  background: var(--light-gray);
+  font-weight: 600;
+}
+
+.vendor-table tr:hover {
+  background-color: rgba(99, 0, 196, 0.05);
+}
+
+/* Environmental Discovery Specific */
+.discovery-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--medium-gray);
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.discovery-tab {
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+}
+
+.discovery-tab:hover {
+  color: var(--primary-color);
+}
+
+.discovery-tab.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.discovery-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+.discovery-section {
+  background: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.progress-bar {
+  height: 10px;
+  background: var(--light-gray);
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: var(--primary-color);
+  width: 0%;
+  transition: width 0.3s;
+}
+
+#scan-status {
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.scan-results table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scan-results th,
+.scan-results td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.scan-results th {
+  background: var(--light-gray);
+}
+
+.file-upload {
+  margin: 15px 0;
+}
+
+.analysis-summary {
+  margin-bottom: 20px;
+}
+
+.summary-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 15px 0;
+  gap: 10px;
+}
+
+.stat-box {
+  flex: 1;
+  min-width: 120px;
+  padding: 15px;
+  background: var(--light-gray);
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2em;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.analysis-details > div {
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.detail-label {
+  font-weight: 600;
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.report-actions {
+  margin-bottom: 20px;
+}
+
+.report-preview {
+  padding: 20px;
+  background: white;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+}
+
+/* Modal Styling */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  max-width: 600px;
+  width: 80%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+/* Help Tab Specific */
+.help-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--medium-gray);
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.help-tab {
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+}
+
+.help-tab:hover {
+  color: var(--primary-color);
+}
+
+.help-tab.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.help-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+.help-section {
+  background: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.help-card {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: var(--light-gray);
+  border-radius: var(--border-radius);
+}
+
+.vendor-docs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.vendor-card {
+  flex: 1;
+  min-width: 250px;
+  padding: 15px;
+  background: var(--light-gray);
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+.vendor-card img {
+  height: 50px;
+  width: auto;
+  margin-bottom: 10px;
+}
+
+.vendor-card ul {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.faq-item {
+  margin-bottom: 10px;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.faq-question {
+  padding: 15px;
+  background: var(--light-gray);
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-toggle {
+  font-size: 1.2em;
+}
+
+.faq-answer {
+  padding: 0 15px;
+  display: none;
+  border-top: 1px solid var(--medium-gray);
+}
+
+.issue-item {
+  margin-bottom: 20px;
+}
+
+.issue-item h5 {
+  margin-bottom: 10px;
+}
+
+.issue-description {
+  padding-left: 15px;
+}
+
+.issue-severity {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 10px;
+  color: white;
+  font-size: 0.8em;
+  margin-right: 10px;
+}
+
+.issue-severity.high {
+  background: var(--danger-color);
+}
+
+.issue-severity.medium {
+  background: var(--warning-color);
+  color: var(--text-color);
+}
+
+.issue-severity.low {
+  background: var(--secondary-color);
+}
+
+/* Status Colors */
+.status-enabled {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.status-disabled {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+.status-partial {
+  color: var(--warning-color);
+  font-weight: 600;
+}
+
+/* Error Message */
+.error-message {
+  padding: 10px;
+  background-color: var(--danger-color);
+  color: white;
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+}
+
+/* Required Field Indicator */
+.required {
+  color: var(--danger-color);
+}
+
+/* Vendor-specific option styling */
+.vendor-specific {
+  display: none;
+  margin-top: 15px;
+  padding: 15px;
+  background-color: var(--light-gray);
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--primary-color);
+}
+
+/* Network Scoping Styles */
+.scoping-section {
+  background: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-bottom: 20px;
+}
+
+.scoping-options {
+  margin-bottom: 20px;
+}
+
+.scoping-type {
+  margin-bottom: 15px;
+}
+
+.scoping-type label {
+  margin-right: 15px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.scoping-type input {
+  margin-right: 5px;
+}
+
+.scoping-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.scoping-column {
+  flex: 1;
+  min-width: 250px;
+}
+
+.count-input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.count-input label {
+  flex: 3;
+  margin-bottom: 0;
+}
+
+.count-input input {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.scoping-results {
+  display: none;
+  background: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 20px;
+}
+
+.network-summary {
+  margin-bottom: 20px;
+}
+
+.deployment-phases {
+  margin-bottom: 20px;
+}
+
+.phase {
+  margin-bottom: 15px;
+  padding: 15px;
+  background: var(--light-gray);
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--primary-color);
+}
+
+.phase h5 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.network-diagram {
+  text-align: center;
+}
+
+.diagram-container {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 15px 0;
+}
+
+.diagram-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.diagram-note {
+  font-style: italic;
+  color: var(--dark-gray);
+  text-align: center;
+}
+
+/* EAP Method Options */
+.eap-methods {
+  margin-bottom: 15px;
+}
+
+.eap-method-option {
+  margin-bottom: 5px;
+}
+
+.eap-method-options {
+  display: none;
+  margin-left: 25px;
+  padding-left: 10px;
+  border-left: 2px solid var(--medium-gray);
+  margin-bottom: 10px;
+}
+
+/* Workflow Builder */
+.workflow-builder {
+  margin-top: 20px;
+}
+
+.workflow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.workflow-step {
+  background: var(--light-gray);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--primary-color);
+  position: relative;
+}
+
+.workflow-step:after {
+  content: '?';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2em;
+  color: var(--dark-gray);
+}
+
+.workflow-step:last-child:after {
+  display: none;
+}
+
+.workflow-step h4 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.workflow-actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Icons and status indicators */
+.status-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin-right: 0.5em;
+}
+
+.status-icon.success {
+  background: var(--success-color);
+}
+
+.status-icon.warning {
+  background: var(--warning-color);
+}
+
+.status-icon.error {
+  background: var(--danger-color);
+}
+
+.status-icon.info {
+  background: var(--info-color);
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .discovery-tabs {
-        overflow-x: auto;
-    }
-    
-    .discovery-tab {
-        padding: 8px;
-        font-size: 12px;
-    }
-    
-    .tab-btn {
-        font-size: 12px;
-        padding: 10px;
-    }
-    
-    .poc-templates {
-        grid-template-columns: 1fr;
-    }
+  .top-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .tab-btn {
+    padding: 10px;
+  }
+  
+  .nav-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .nav-buttons button {
+    width: 100%;
+  }
+  
+  .row {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .detail-item {
+    flex-direction: column;
+  }
+  
+  .detail-label {
+    width: 100%;
+  }
+  
+  /* Adjust banner height for mobile */
+  .banner-image {
+    max-height: 120px;
+  }
+  
+  .summary-stats {
+    flex-direction: column;
+  }
+  # Update JavaScript for fixed accordion functionality and vendor-specific options
+echo -e "${BLUE}Creating enhanced JavaScript functionality...${NC}"
+cat > js/app.js << 'EOF'
+// Dot1Xer Supreme - Enhanced JavaScript with Fixed Accordion and Vendor Options
+
+// Current step in the configurator
+let currentStep = 1;
+
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize UI components
+  initUI();
+  
+  // Set up event listeners
+  setupEventListeners();
+});
+
+// Initialize UI components
+function initUI() {
+  // Show first step of configurator
+  showStep(1);
+  
+  // Set up vendor/platform options
+  updatePlatformOptions();
+  
+  // Initialize accordion sections
+  initAccordions();
+  
+  // Initialize tooltip library if present
+  if (typeof tippy !== 'undefined') {
+    tippy('[data-tippy-content]');
+  }
 }
-<!-- Environment Discovery Section -->
-cat > environment-discovery.html << 'EOF'
-<div class="discovery-section" id="disc-environment">
-  <h3>Environment Discovery</h3>
-  <p>Profile your existing environment to generate a customized architecture diagram and deployment plan.</p>
+
+// Initialize accordion functionality - FIXED
+function initAccordions() {
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
   
-  <div class="environment-section">
-    <div class="environment-group">
-      <h4>Infrastructure</h4>
-      <p>Select all elements that exist in your current environment:</p>
-      
-      <div class="checkbox-group">
-        <label>
-          <input type="checkbox" class="env-infrastructure" id="env-active-directory" data-label="Active Directory"> 
-          Active Directory
-        </label>
-        <div id="env-active-directory-options" class="eap-method-options">
-          <div class="form-group">
-            <label for="ad-domain">Domain Name:</label>
-            <input type="text" id="ad-domain" placeholder="example.com">
-          </div>
-          <div class="checkbox-group">
-            <label>
-              <input type="checkbox" id="ad-multi-domain"> 
-              Multi-domain environment
-            </label>
-          </div>
-        </div>
-      </div>
-      
-      <div class="checkbox-group">
-        <label>
-          <input type="checkbox" class="env-infrastructure" id="env-certificate-authority" data-label="Certificate Authority"> 
-          Certificate Authority
-        </label>
-        <div id="env-certificate-authority-options" class="eap-method-options">
-          <div class="checkbox-group">
-            <label>
-              <input type="checkbox" id="ca-microsoft" checked> 
-              Microsoft CA
-            </label>
-          </div>
-          <div class="checkbox-group">
-            <label>
-              <input type="checkbox" id="ca-third-party"> 
-              Third-party CA
-            </label>
-          </div>
-        </div>
-      </div>
-      
-      <div class="checkbox-group">
-        <label>
-          <input type="checkbox" class="env-infrastructure" id="env-radius" data-label="Existing RADIUS"> 
-          Existing RADIUS Server
-        </label>
-        <div id="env-radius-options" class="eap-method-options">
-          <div class="form-group">
-            <label for="radius-vendor">RADIUS Vendor:</label>
-            <select id="radius-vendor">
-              <option value="microsoft-nps">Microsoft NPS</option>
-              <option value="cisco-ise">Cisco ISE</option>
-              <option value="freeradius">FreeRADIUS</option>
-              <option value="aruba-clearpass">Aruba ClearPass</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      
-      <div class="checkbox-group">
-        <label>
-          <input type="checkbox" class="env-infrastructure" id="env-vpn" data-label="VPN"> 
-          VPN Infrastructure
-        </label>
-        <div id="env-vpn-options" class="eap-method-options">
-          <div class="form-group">
-            <label for="vpn-vendor">VPN Vendor:</label>
-            <select id="vpn-vendor">
-              <option value="cisco-anyconnect">Cisco AnyConnect</option>
-              <option value="palo-globalprotect">Palo Alto GlobalProtect</option>
-              <option value="fortinet">Fortinet FortiClient</option>
-              <option value="checkpoint">Check Point</option>
-              <option value="azure-vpn">Azure VPN</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      
-      <div class="checkbox-group">
-        <label>
-          <input type="checkbox" class="env-infrastructure" id="env-firewall" data-label="Firewall"> 
-          Next-Gen Firewall
-        </label>
-        <div id="env-firewall-options" class="eap-method-options">
-          <div class="form-group">
-            <label for="firewall-vendor">Firewall Vendor:</label>
-            <select id="firewall-vendor">
-              <option value="paloalto">Palo Alto Networks</option>
-              <option value="fortinet">Fortinet</option>
-              <option value="checkpoint">Check Point</option>
-              <option value="cisco-ftd">Cisco Firepower</option>
-              <option value="sonicwall">SonicWall</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      
-      <div class="checkbox-group">
-        <label>
-          <input type="checkbox" class="env-infrastructure" id="env-cloud" data-label="Cloud Infrastructure"> 
-          Cloud Infrastructure
-        </label>
-        <div id="env-cloud-options" class="eap-method-options">
-          <div class="checkbox-group">
-            <label>
-              <input type="checkbox" id="cloud-aws"> 
-              AWS
-            </label>
-          </div>
-          <div class="checkbox-group">
-            <label>
-              <input type="checkbox" id="cloud-azure" checked> 
-              Azure
-            </label>
-          </div>
-          <div class="checkbox-group">
-            <label>
-              <input type="checkbox" id="cloud-gcp"> 
-              Google Cloud
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
+  accordionHeaders.forEach(header => {
+    // Add click event listener
+    header.addEventListener('click', function() {
+      toggleAccordion(this);
+    });
     
-    <div class="environment-group">
-      <h4>MDM Solution</h4>
-      <p>Select your existing MDM solution:</p>
+    // Open first accordion in each section by default
+    if (isFirstInSection(header)) {
+      toggleAccordion(header);
+    }
+  });
+}
+
+// Check if an accordion header is the first one in its section
+function isFirstInSection(header) {
+  const parent = header.closest('.accordion-group') || header.parentElement.parentElement;
+  const accordions = parent.querySelectorAll('.accordion');
+  return header === accordions[0].querySelector('.accordion-header');
+}
+
+// Toggle accordion sections - FIXED
+function toggleAccordion(element) {
+  element.classList.toggle('active');
+  const content = element.nextElementSibling;
+  
+  if (content.style.display === 'block') {
+    content.style.display = 'none';
+    // Update icon
+    const icon = element.querySelector('.accordion-icon');
+    if (icon) {
+      icon.textContent = '+';
+    }
+  } else {
+    content.style.display = 'block';
+    // Update icon
+    const icon = element.querySelector('.accordion-icon');
+    if (icon) {
+      icon.textContent = '-';
+    }
+  }
+}
+
+// Set up event listeners
+function setupEventListeners() {
+  // Vendor select change
+  const vendorSelect = document.getElementById('vendor-select');
+  if (vendorSelect) {
+    vendorSelect.addEventListener('change', updatePlatformOptions);
+  }
+  
+  // Platform select change
+  const platformSelect = document.getElementById('platform-select');
+  if (platformSelect) {
+    platformSelect.addEventListener('change', updateVendorSpecificOptions);
+  }
+  
+  // Auth method change
+  const authMethodSelect = document.getElementById('auth-method');
+  if (authMethodSelect) {
+    authMethodSelect.addEventListener('change', updateAuthOptions);
+  }
+  
+  // RADIUS load balancing checkbox
+  const loadBalanceCheckbox = document.getElementById('radius-load-balance');
+  if (loadBalanceCheckbox) {
+    loadBalanceCheckbox.addEventListener('change', function() {
+      const loadBalanceOptions = document.getElementById('load-balance-options');
+      if (loadBalanceOptions) {
+        loadBalanceOptions.style.display = this.checked ? 'block' : 'none';
+      }
+    });
+  }
+  
+  // Pre-auth ACL checkbox
+  const preAuthAclCheckbox = document.getElementById('enable-preauth-acl');
+  if (preAuthAclCheckbox) {
+    preAuthAclCheckbox.addEventListener('change', function() {
+      const preAuthAclOptions = document.getElementById('preauth-acl-options');
+      if (preAuthAclOptions) {
+        preAuthAclOptions.style.display = this.checked ? 'block' : 'none';
+      }
+    });
+  }
+  
+  // RADIUS testing checkbox
+  const radiusTestingCheckbox = document.getElementById('radius-testing');
+  if (radiusTestingCheckbox) {
+    radiusTestingCheckbox.addEventListener('change', function() {
+      const testingOptions = document.getElementById('testing-options');
+      if (testingOptions) {
+        testingOptions.style.display = this.checked ? 'block' : 'none';
+      }
+    });
+  }
+  
+  // RADIUS idle-time testing checkbox
+  const idleTimeCheckbox = document.getElementById('testing-idle-time');
+  if (idleTimeCheckbox) {
+    idleTimeCheckbox.addEventListener('change', function() {
+      const idleTimeOptions = document.getElementById('idle-time-options');
+      if (idleTimeOptions) {
+        idleTimeOptions.style.display = this.checked ? 'block' : 'none';
+      }
+    });
+  }
+  
+  // TACACS command auth checkbox
+  const authCommandsCheckbox = document.getElementById('auth-commands');
+  if (authCommandsCheckbox) {
+    authCommandsCheckbox.addEventListener('change', function() {
+      const commandAuthOptions = document.getElementById('command-auth-options');
+      if (commandAuthOptions) {
+        commandAuthOptions.style.display = this.checked ? 'block' : 'none';
+      }
+    });
+  }
+  
+  // TACACS command acct checkbox
+  const acctCommandsCheckbox = document.getElementById('acct-commands');
+  if (acctCommandsCheckbox) {
+    acctCommandsCheckbox.addEventListener('change', function() {
+      const commandAcctOptions = document.getElementById('command-acct-options');
+      if (commandAcctOptions) {
+        commandAcctOptions.style.display = this.checked ? 'block' : 'none';
+      }
+    });
+  }
+  
+  // Import source radio
+  const importSourceRadios = document.querySelectorAll('input[name="import_source"]');
+  importSourceRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      const fileImport = document.getElementById('file-import');
+      const textImport = document.getElementById('text-import');
+      if (fileImport && textImport) {
+        fileImport.style.display = this.value === 'file' ? 'block' : 'none';
+        textImport.style.display = this.value === 'text' ? 'block' : 'none';
+      }
+    });
+  });
+  
+  // Network scoping radio buttons
+  const scopingTypeRadios = document.querySelectorAll('input[name="scoping_type"]');
+  scopingTypeRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      const basicScoping = document.getElementById('basic-scoping');
+      const advancedScoping = document.getElementById('advanced-scoping');
       
-      <div class="form-group">
-        <select id="mdm-provider">
-          <option value="none">None</option>
-          <option value="intune">Microsoft Intune</option>
-          <option value="jamf">JAMF</option>
-          <option value="workspace-one">VMware Workspace ONE</option>
-          <option value="mas360">IBM MaaS360</option>
-          <option value="mobileiron">MobileIron</option>
-          <option value="gpo">Group Policy (GPO)</option>
-        </select>
-      </div>
+      if (basicScoping && advancedScoping) {
+        basicScoping.style.display = this.value === 'basic' ? 'block' : 'none';
+        advancedScoping.style.display = this.value === 'advanced' ? 'block' : 'none';
+      }
+    });
+  });
+  
+  // Listen for changes to the wireless vendor selection
+  const wirelessVendorSelect = document.getElementById('wireless-vendor');
+  if (wirelessVendorSelect) {
+    wirelessVendorSelect.addEventListener('change', updateWirelessModels);
+  }
+  
+  // Listen for changes to the switch vendor selection
+  const switchVendorSelect = document.getElementById('switch-vendor');
+  if (switchVendorSelect) {
+    switchVendorSelect.addEventListener('change', updateSwitchModels);
+  }
+  
+  // Setup EAP method checkboxes
+  const eapMethodCheckboxes = document.querySelectorAll('.eap-method');
+  eapMethodCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      // Show/hide additional options based on EAP method
+      const methodOptions = document.getElementById(`${this.id}-options`);
+      if (methodOptions) {
+        methodOptions.style.display = this.checked ? 'block' : 'none';
+      }
+    });
+  });
+  
+  // Handle workflow steps
+  const workflowAddStepBtn = document.getElementById('workflow-add-step');
+  if (workflowAddStepBtn) {
+    workflowAddStepBtn.addEventListener('click', addWorkflowStep);
+  }
+}
+
+// Show a specific tab
+function showTab(tabName, button) {
+  // Hide all tabs
+  const tabContents = document.querySelectorAll('.tab-content');
+  tabContents.forEach(tab => tab.style.display = 'none');
+  
+  // Show the selected tab
+  const selectedTab = document.getElementById(tabName);
+  if (selectedTab) {
+    selectedTab.style.display = 'block';
+  }
+  
+  // Update active tab button
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  tabButtons.forEach(btn => btn.classList.remove('active'));
+  if (button) button.classList.add('active');
+}
+
+// Show a server tab within the server configuration
+function showServerTab(tabName, button) {
+  // Hide all server tabs
+  const serverTabs = document.querySelectorAll('.server-tab');
+  serverTabs.forEach(tab => tab.style.display = 'none');
+  
+  // Show the selected tab
+  const selectedTab = document.getElementById(tabName);
+  if (selectedTab) {
+    selectedTab.style.display = 'block';
+  }
+  
+  // Update active tab button
+  const tabButtons = document.querySelectorAll('.tab-control-btn');
+  tabButtons.forEach(btn => btn.classList.remove('active'));
+  if (button) button.classList.add('active');
+}
+
+// Show a specific step in the configurator
+function showStep(step) {
+  // Hide all steps
+  const steps = document.querySelectorAll('.step-content');
+  steps.forEach(s => s.style.display = 'none');
+  
+  // Show the requested step
+  const selectedStep = document.getElementById('step-' + step);
+  if (selectedStep) {
+    selectedStep.style.display = 'block';
+  }
+  
+  // Update step indicator
+  const indicators = document.querySelectorAll('.step');
+  indicators.forEach(i => i.classList.remove('active'));
+  
+  const currentIndicator = document.querySelector(`.step[data-step="${step}"]`);
+  if (currentIndicator) currentIndicator.classList.add('active');
+  
+  // Update current step
+  currentStep = step;
+}
+
+// Navigate to next step
+function goToStep(step) {
+  // Validate current step before proceeding
+  if (step > currentStep && !validateStep(currentStep)) {
+    return false;
+  }
+  
+  // Show the requested step
+  showStep(step);
+  
+  return true;
+}
+
+// Validate the current step
+function validateStep(step) {
+  switch(step) {
+    case 1:
+      // Validate vendor/platform selection
+      return true;
+    case 2:
+      // Validate authentication method
+      return true;
+    case 3:
+      // Validate server information
+      const radiusIp1 = document.getElementById('radius-ip-1')?.value;
+      const radiusKey1 = document.getElementById('radius-key-1')?.value;
       
-      <div id="mdm-options" class="mdm-options">
-        <!-- Options will be populated via JavaScript -->
-      </div>
-    </div>
+      if (!radiusIp1 || !radiusKey1) {
+        showError('Primary RADIUS server information is required');
+        return false;
+      }
+      return true;
+    case 4:
+      // Validate VLAN information
+      const dataVlan = document.getElementById('data-vlan')?.value;
+      if (!dataVlan) {
+        showError('Data VLAN is required');
+        return false;
+      }
+      return true;
+    case 5:
+      // Validate advanced options
+      return true;
+    default:
+      return true;
+  }
+}
+
+// Show error message
+function showError(message) {
+  const errorElement = document.getElementById('error-message');
+  if (errorElement) {
+    errorElement.textContent = message;
+    errorElement.style.display = 'block';
     
-    <div class="environment-group">
-      <h4>Identity Provider</h4>
-      <p>Select your existing identity provider:</p>
-      
-      <div class="form-group">
-        <select id="idp-provider">
-          <option value="none">None</option>
-          <option value="entra-id">Microsoft Entra ID</option>
-          <option value="okta">Okta</option>
-          <option value="google-workspace">Google Workspace</option>
-          <option value="onelogin">OneLogin</option>
-          <option value="ping">Ping Identity</option>
-        </select>
-      </div>
-      
-      <div id="idp-options" class="idp-options">
-        <!-- Options will be populated via JavaScript -->
-      </div>
-    </div>
+    // Hide after a few seconds
+    setTimeout(() => {
+      errorElement.style.display = 'none';
+    }, 5000);
+  }
+}
+
+// Update platform options based on vendor selection
+function updatePlatformOptions() {
+  const vendorSelect = document.getElementById('vendor-select');
+  const platformSelect = document.getElementById('platform-select');
+  const platformDescription = document.getElementById('platform-description');
+  
+  if (!vendorSelect || !platformSelect || !platformDescription) return;
+  
+  // Clear existing options
+  platformSelect.innerHTML = '';
+  
+  // Get selected vendor
+  const vendor = vendorSelect.value;
+  
+  // Add platform options based on vendor
+  switch (vendor) {
+    case 'cisco':
+      addOption(platformSelect, 'ios-xe', 'IOS-XE (Catalyst 9000)');
+      addOption(platformSelect, 'ios', 'IOS (Classic)');
+      addOption(platformSelect, 'nx-os', 'NX-OS (Nexus)');
+      addOption(platformSelect, 'wlc', 'WLC 9800');
+      platformDescription.innerHTML = '<p>Cisco platforms support a wide range of authentication methods and features:</p>' +
+        '<ul>' +
+        '<li><strong>IOS-XE:</strong> Supports IBNS 2.0 with flexible policy maps and both open and closed authentication modes.</li>' +
+        '<li><strong>NX-OS:</strong> Offers 802.1X and MAB with advanced device tracking.</li>' +
+        '<li><strong>IOS:</strong> Legacy platform with traditional 802.1X implementation.</li>' +
+        '<li><strong>WLC:</strong> Wireless controller with integrated RADIUS support.</li>' +
+        '</ul>';
+      break;
+    case 'aruba':
+      addOption(platformSelect, 'aos-cx', 'AOS-CX');
+      addOption(platformSelect, 'aos-switch', 'AOS-Switch (Legacy)');
+      platformDescription.innerHTML = '<p>Aruba platforms provide robust authentication capabilities:</p>' +
+        '<ul>' +
+        '<li><strong>AOS-CX:</strong> Modern architecture with simplified 802.1X and MAC authentication configuration.</li>' +
+        '<li><strong>AOS-Switch:</strong> Legacy platform with traditional approach to port security.</li>' +
+        '</ul>';
+      break;
+    case 'juniper':
+      addOption(platformSelect, 'ex', 'EX Series');
+      addOption(platformSelect, 'qfx', 'QFX Series');
+      platformDescription.innerHTML = '<p>Juniper switches use a consistent configuration approach across platforms:</p>' +
+        '<ul>' +
+        '<li><strong>EX Series:</strong> Enterprise switching platforms with 802.1X, MAC-RADIUS, and captive portal.</li>' +
+        '<li><strong>QFX Series:</strong> Data center switches with similar authentication capabilities.</li>' +
+        '</ul>';
+      break;
+    case 'fortinet':
+      addOption(platformSelect, 'fortiswitch', 'FortiSwitch');
+      platformDescription.innerHTML = '<p>FortiSwitch integrates with the FortiGate security ecosystem:</p>' +
+        '<ul>' +
+        '<li><strong>FortiSwitch:</strong> 802.1X and MAC authentication with secure fabric integration and FortiGate controller-based management.</li>' +
+        '</ul>';
+      break;
+    case 'arista':
+      addOption(platformSelect, 'eos', 'EOS');
+      platformDescription.innerHTML = '<p>Arista EOS provides enterprise-grade authentication:</p>' +
+        '<ul>' +
+        '<li><strong>EOS:</strong> Supports 802.1X, MAC authentication, and LLDP bypass for VoIP devices, with a focus on data center environments.</li>' +
+        '</ul>';
+      break;
+    case 'extreme':
+      addOption(platformSelect, 'exos', 'EXOS');
+      addOption(platformSelect, 'voss', 'VOSS');
+      platformDescription.innerHTML = '<p>Extreme Networks offers multiple authentication solutions:</p>' +
+        '<ul>' +
+        '<li><strong>EXOS:</strong> Uses NetLogin framework for 802.1X and MAC authentication with dynamic VLAN assignment.</li>' +
+        '<li><strong>VOSS:</strong> Utilizes flexible VLAN-based access control and integrated RADIUS clients.</li>' +
+        '</ul>';
+      break;
+    case 'huawei':
+      addOption(platformSelect, 'vrp', 'VRP');
+      platformDescription.innerHTML = '<p>Huawei VRP provides comprehensive AAA capabilities:</p>' +
+        '<ul>' +
+        '<li><strong>VRP:</strong> Supports 802.1X, MAC authentication bypass, and critical VLAN assignment with both global and interface-specific configurations.</li>' +
+        '</ul>';
+      break;
+    case 'alcatel':
+      addOption(platformSelect, 'omniswitch', 'OmniSwitch');
+      platformDescription.innerHTML = '<p>Alcatel-Lucent OmniSwitch offers simplified deployment:</p>' +
+        '<ul>' +
+        '<li><strong>OmniSwitch:</strong> Uses Unified Network Profile (UNP) templates with 802.1X and MAC authentication for simplified deployment.</li>' +
+        '</ul>';
+      break;
+    case 'ubiquiti':
+      addOption(platformSelect, 'unifi', 'UniFi');
+      platformDescription.innerHTML = '<p>Ubiquiti UniFi uses a controller-based approach:</p>' +
+        '<ul>' +
+        '<li><strong>UniFi:</strong> Requires configuration through the UniFi Network Controller rather than CLI, with profiles for 802.1X and RADIUS settings.</li>' +
+        '</ul>';
+      break;
+    case 'hp':
+      addOption(platformSelect, 'procurve', 'ProCurve');
+      addOption(platformSelect, 'comware', 'Comware');
+      platformDescription.innerHTML = '<p>HP offers multiple switch platforms:</p>' +
+        '<ul>' +
+        '<li><strong>ProCurve:</strong> Enterprise-grade authentication with 802.1X and MAC-based options.</li>' +
+        '<li><strong>Comware:</strong> Advanced RADIUS integration with comprehensive AAA options.</li>' +
+        '</ul>';
+      break;
+    default:
+      addOption(platformSelect, 'default', 'Default Platform');
+      platformDescription.innerHTML = '<p>Please select a vendor to see platform details.</p>';
+  }
+  
+  // Trigger platform specific options update
+  updateVendorSpecificOptions();
+}
+
+// Update vendor-specific options based on platform selection
+function updateVendorSpecificOptions() {
+  const vendorSelect = document.getElementById('vendor-select');
+  const platformSelect = document.getElementById('platform-select');
+  
+  if (!vendorSelect || !platformSelect) return;
+  
+  const vendor = vendorSelect.value;
+  const platform = platformSelect.value;
+  
+  // Hide all vendor-specific option sections
+  const vendorSpecificSections = document.querySelectorAll('.vendor-specific');
+  vendorSpecificSections.forEach(section => {
+    section.style.display = 'none';
+  });
+  
+  // Show vendor+platform specific section if it exists
+  const specificSection = document.getElementById(`${vendor}-${platform}-options`);
+  if (specificSection) {
+    specificSection.style.display = 'block';
+  }
+  
+  // Adjust AAA options based on vendor capabilities
+  adjustAAAOptions(vendor, platform);
+}
+
+// Adjust AAA options based on vendor capabilities
+function adjustAAAOptions(vendor, platform) {
+  // RADIUS CoA - not all vendors support it
+  const coaCheckbox = document.getElementById('use-coa');
+  if (coaCheckbox) {
+    coaCheckbox.disabled = false;
     
-    <div class="form-actions">
-      <button type="button" onclick="updateEnvironmentSummary()" class="btn">Generate Environment Profile</button>
-    </div>
-  </div>
+    if (vendor === 'ubiquiti' || (vendor === 'hp' && platform === 'procurve')) {
+      coaCheckbox.disabled = true;
+      coaCheckbox.checked = false;
+    }
+  }
   
-  <div id="environment-summary" class="environment-section" style="display: none;">
-    <!-- Will be populated by JavaScript -->
-  </div>
-</div>
-<!-- Portnox Cloud Discovery Section -->
-cat > portnox-discovery.html << 'EOF'
-<div class="discovery-section" id="disc-portnox">
-  <div class="portnox-header">
-    <img src="assets/portnox/portnox-logo.png" alt="Portnox Logo" class="portnox-logo">
-    <div>
-      <h3>Portnox Cloud Discovery</h3>
-      <p>Integrate with Portnox Cloud for unified access control, reporting, and automated deployment</p>
-    </div>
-  </div>
-  
-  <div class="portnox-section">
-    <h4>Portnox Cloud API Integration</h4>
-    <p>Connect to your Portnox Cloud instance to enable advanced network access control features and automation.</p>
+  // RADIUS server groups - not all vendors support them
+  const radiusServerGroupInput = document.getElementById('radius-server-group');
+  if (radiusServerGroupInput) {
+    radiusServerGroupInput.disabled = false;
     
-    <div class="form-group">
-      <label for="portnox-tenant">Tenant ID:</label>
-      <input type="text" id="portnox-tenant" placeholder="Enter your Portnox tenant ID">
-    </div>
+    if (vendor === 'ubiquiti' || (vendor === 'alcatel' && platform === 'omniswitch')) {
+      radiusServerGroupInput.disabled = true;
+      radiusServerGroupInput.value = 'RADIUS-SERVERS';
+    }
+  }
+  
+  // Load balancing - limited support
+  const loadBalanceCheckbox = document.getElementById('radius-load-balance');
+  if (loadBalanceCheckbox) {
+    loadBalanceCheckbox.disabled = false;
     
-    <div class="form-group">
-      <label for="portnox-api-key">API Key:</label>
-      <div class="api-key-container">
-        <input type="password" id="portnox-api-key" placeholder="Enter your Portnox API key">
-        <button type="button" id="portnox-connect-button" class="portnox-btn">Connect</button>
-      </div>
-    </div>
-    
-    <div id="success-message" class="alert alert-success" style="display: none;"></div>
-    <div id="error-message" class="alert alert-danger" style="display: none;"></div>
-  </div>
+    if (!(vendor === 'cisco' || vendor === 'juniper' || vendor === 'arista')) {
+      loadBalanceCheckbox.disabled = true;
+      loadBalanceCheckbox.checked = false;
+    }
+  }
+}
+
+// Add option to select element
+function addOption(selectElement, value, text) {
+  const option = document.createElement('option');
+  option.value = value;
+  option.textContent = text;
+  selectElement.appendChild(option);
+}
+
+// Update authentication options based on method selection
+function updateAuthOptions() {
+  const authMethod = document.getElementById('auth-method')?.value;
+  const mabCheckbox = document.getElementById('use-mab');
   
-  <div class="portnox-tabs">
-    <button class="portnox-nav-tab active" onclick="showPortnoxTab('radius', this)" data-tab="radius">RADIUS Server</button>
-    <button class="portnox-nav-tab" onclick="showPortnoxTab('mab', this)" data-tab="mab">MAB Management</button>
-    <button class="portnox-nav-tab" onclick="showPortnoxTab('groups', this)" data-tab="groups">Device Groups</button>
-    <button class="portnox-nav-tab" onclick="showPortnoxTab('reports', this)" data-tab="reports">Reports</button>
-    <button class="portnox-nav-tab" onclick="showPortnoxTab('poc', this)" data-tab="poc">POC Generator</button>
-  </div>
+  if (mabCheckbox && authMethod) {
+    if (authMethod === 'dot1x-only') {
+      mabCheckbox.checked = false;
+      mabCheckbox.disabled = true;
+    } else if (authMethod === 'mab-only') {
+      mabCheckbox.checked = true;
+      mabCheckbox.disabled = true;
+    } else {
+      mabCheckbox.checked = true;
+      mabCheckbox.disabled = false;
+    }
+  }
+}
+
+// Network Scoping Discovery Functions
+function updateWirelessModels() {
+  const wirelessVendor = document.getElementById('wireless-vendor')?.value;
+  const wirelessModelSelect = document.getElementById('wireless-model');
   
-  <!-- RADIUS Server Tab -->
-  <div class="portnox-content" id="portnox-radius" style="display: block;">
-    <div class="portnox-feature">
-      <div class="card">
-        <div class="card-header">Create Cloud RADIUS Server</div>
-        <div class="card-body">
-          <p>Quickly create a cloud-native RADIUS server for your 802.1X authentication needs.</p>
-          
-          <div class="form-group">
-            <label for="portnox-region-select">Select Region:</label>
-            <select id="portnox-region-select">
-              <option value="us">United States (North America)</option>
-              <option value="eu">Europe (Netherlands)</option>
-              <option value="ap">Asia Pacific (Singapore)</option>
-              <option value="au">Australia</option>
-            </select>
-          </div>
-          
-          <button type="button" id="portnox-create-radius-button" class="portnox-btn">Create RADIUS Server</button>
-        </div>
-      </div>
-      
-      <div class="card" id="portnox-radius-details" style="display: none;">
-        <div class="card-header">RADIUS Server Details</div>
-        <div class="card-body">
-          <table>
-            <tr>
-              <td><strong>IP Address:</strong></td>
-              <td id="radius-ip">192.168.1.1</td>
-            </tr>
-            <tr>
-              <td><strong>Authentication Port:</strong></td>
-              <td id="radius-auth-port">1812</td>
-            </tr>
-            <tr>
-              <td><strong>Accounting Port:</strong></td>
-              <td id="radius-acct-port">1813</td>
-            </tr>
-            <tr>
-              <td><strong>Shared Secret:</strong></td>
-              <td id="radius-secret">****************</td>
-            </tr>
-          </table>
-          
-          <button type="button" class="portnox-btn" style="margin-top: 15px;" onclick="document.getElementById('radius-secret').textContent = generateRandomSecret()">Show Secret</button>
-        </div>
-      </div>
+  if (!wirelessModelSelect || !wirelessVendor) return;
+  
+  // Clear existing options
+  wirelessModelSelect.innerHTML = '';
+  
+  // Add models based on vendor
+  switch (wirelessVendor) {
+    case 'cisco':
+      addOption(wirelessModelSelect, 'aironet-1800', 'Aironet 1800 Series');
+      addOption(wirelessModelSelect, 'aironet-2800', 'Aironet 2800 Series');
+      addOption(wirelessModelSelect, 'aironet-3800', 'Aironet 3800 Series');
+      addOption(wirelessModelSelect, 'catalyst-9100', 'Catalyst 9100 Series');
+      addOption(wirelessModelSelect, 'catalyst-9800', 'Catalyst 9800 Controller');
+      break;
+    case 'aruba':
+      addOption(wirelessModelSelect, 'ap-303', 'AP-303/303P');
+      addOption(wirelessModelSelect, 'ap-500', 'AP-500 Series');
+      addOption(wirelessModelSelect, 'ap-510', 'AP-510 Series');
+      addOption(wirelessModelSelect, 'ap-530', 'AP-530 Series');
+      addOption(wirelessModelSelect, 'ap-550', 'AP-550 Series');
+      addOption(wirelessModelSelect, 'mobility-controller', 'Mobility Controller');
+      break;
+    case 'meraki':
+      addOption(wirelessModelSelect, 'mr30', 'MR30H');
+      addOption(wirelessModelSelect, 'mr33', 'MR33');
+      addOption(wirelessModelSelect, 'mr36', 'MR36');
+      addOption(wirelessModelSelect, 'mr44', 'MR44');
+      addOption(wirelessModelSelect, 'mr46', 'MR46');
+      addOption(wirelessModelSelect, 'mr56', 'MR56');
+      break;
+    case 'ruckus':
+      addOption(wirelessModelSelect, 'r510', 'R510');
+      addOption(wirelessModelSelect, 'r550', 'R550');
+      addOption(wirelessModelSelect, 'r610', 'R610');
+      addOption(wirelessModelSelect, 'r650', 'R650');
+      addOption(wirelessModelSelect, 'r720', 'R720');
+      addOption(wirelessModelSelect, 'r750', 'R750');
+      addOption(wirelessModelSelect, 'smartzone', 'SmartZone Controller');
+      break;
+    case 'ubiquiti':
+      addOption(wirelessModelSelect, 'uap-ac-lite', 'UAP-AC-Lite');
+      addOption(wirelessModelSelect, 'uap-ac-pro', 'UAP-AC-Pro');
+      addOption(wirelessModelSelect, 'uap-nanohd', 'UAP-nanoHD');
+      addOption(wirelessModelSelect, 'uap-flexhd', 'UAP-FlexHD');
+      addOption(wirelessModelSelect, 'uap-ac-hd', 'UAP-AC-HD');
+      addOption(wirelessModelSelect, 'unifi-controller', 'UniFi Controller');
+      break;
+    default:
+      addOption(wirelessModelSelect, 'generic', 'Generic Access Point');
+  }
+}
+
+function updateSwitchModels() {
+  const switchVendor = document.getElementById('switch-vendor')?.value;
+  const switchModelSelect = document.getElementById('switch-model');
+  
+  if (!switchModelSelect || !switchVendor) return;
+  
+  // Clear existing options
+  switchModelSelect.innerHTML = '';
+  
+  // Add models based on vendor
+  switch (switchVendor) {
+    case 'cisco':
+      addOption(switchModelSelect, 'catalyst-2960', 'Catalyst 2960 Series');
+      addOption(switchModelSelect, 'catalyst-3650', 'Catalyst 3650 Series');
+      addOption(switchModelSelect, 'catalyst-3850', 'Catalyst 3850 Series');
+      addOption(switchModelSelect, 'catalyst-9200', 'Catalyst 9200 Series');
+      addOption(switchModelSelect, 'catalyst-9300', 'Catalyst 9300 Series');
+      addOption(switchModelSelect, 'catalyst-9400', 'Catalyst 9400 Series');
+      addOption(switchModelSelect, 'catalyst-9500', 'Catalyst 9500 Series');
+      addOption(switchModelSelect, 'nexus-3000', 'Nexus 3000 Series');
+      addOption(switchModelSelect, 'nexus-5000', 'Nexus 5000 Series');
+      addOption(switchModelSelect, 'nexus-7000', 'Nexus 7000 Series');
+      addOption(switchModelSelect, 'nexus-9000', 'Nexus 9000 Series');
+      break;
+    case 'aruba':
+      addOption(switchModelSelect, 'cx-6000', 'CX 6000 Series');
+      addOption(switchModelSelect, 'cx-6100', 'CX 6100 Series');
+      addOption(switchModelSelect, 'cx-6200', 'CX 6200 Series');
+      addOption(switchModelSelect, 'cx-6300', 'CX 6300 Series');
+      addOption(switchModelSelect, 'cx-6400', 'CX 6400 Series');
+      addOption(switchModelSelect, 'cx-8320', 'CX 8320 Series');
+      addOption(switchModelSelect, 'cx-8325', 'CX 8325 Series');
+      addOption(switchModelSelect, 'cx-8360', 'CX 8360 Series');
+      addOption(switchModelSelect, 'cx-8400', 'CX 8400 Series');
+      break;
+    case 'juniper':
+      addOption(switchModelSelect, 'ex2300', 'EX2300 Series');
+      addOption(switchModelSelect, 'ex3400', 'EX3400 Series');
+      addOption(switchModelSelect, 'ex4100', 'EX4100 Series');
+      addOption(switchModelSelect, 'ex4300', 'EX4300 Series');
+      addOption(switchModelSelect, 'ex4400', 'EX4400 Series');
+      addOption(switchModelSelect, 'ex4600', 'EX4600 Series');
+      addOption(switchModelSelect, 'ex4650', 'EX4650 Series');
+      addOption(switchModelSelect, 'qfx5110', 'QFX5110 Series');
+      addOption(switchModelSelect, 'qfx5120', 'QFX5120 Series');
+      addOption(switchModelSelect, 'qfx5130', 'QFX5130 Series');
+      break;
+    case 'extreme':
+      addOption(switchModelSelect, 'x435', 'X435 Series');
+      addOption(switchModelSelect, 'x440-g2', 'X440-G2 Series');
+      addOption(switchModelSelect, 'x450-g2', 'X450-G2 Series');
+      addOption(switchModelSelect, 'x460-g2', 'X460-G2 Series');
+      addOption(switchModelSelect, 'x465', 'X465 Series');
+      addOption(switchModelSelect, 'x590', 'X590 Series');
+      addOption(switchModelSelect, 'x690', 'X690 Series');
+      addOption(switchModelSelect, 'x870', 'X870 Series');
+      break;
+    default:
+      addOption(switchModelSelect, 'generic', 'Generic Switch');
+  }
+}
+
+// Generate network diagram and deployment plan
+function generateNetworkDiagram() {
+  // Get scoping information
+  const scopingType = document.querySelector('input[name="scoping_type"]:checked')?.value || 'basic';
+  
+  // Get basic or advanced values based on selected type
+  let diagramData = {};
+  
+  if (scopingType === 'basic') {
+    diagramData = {
+      locations: document.getElementById('locations-count')?.value || '1',
+      switchCount: document.getElementById('switches-count')?.value || '5',
+      endpointCount: document.getElementById('endpoints-count')?.value || '100',
+      wirelessVendor: document.getElementById('wireless-vendor')?.value || 'cisco',
+      switchVendor: document.getElementById('switch-vendor')?.value || 'cisco'
+    };
+  } else {
+    // Advanced scoping
+    diagramData = {
+      locations: document.getElementById('advanced-locations-count')?.value || '1',
+      switchCount: document.getElementById('advanced-switches-count')?.value || '5',
+      endpointCount: document.getElementById('advanced-endpoints-count')?.value || '100',
+      wirelessAPs: document.getElementById('ap-count')?.value || '10',
+      wirelessVendor: document.getElementById('wireless-vendor')?.value || 'cisco',
+      wirelessModel: document.getElementById('wireless-model')?.value || 'catalyst-9100',
+      switchVendor: document.getElementById('switch-vendor')?.value || 'cisco',
+      switchModel: document.getElementById('switch-model')?.value || 'catalyst-9300',
+      laptops: document.getElementById('laptop-count')?.value || '50',
+      desktops: document.getElementById('desktop-count')?.value || '30',
+      phones: document.getElementById('voip-count')?.value || '20',
+      iot: document.getElementById('iot-count')?.value || '10',
+      printers: document.getElementById('printer-count')?.value || '5',
+      securityDevices: document.getElementById('security-count')?.value || '2',
+      byod: document.getElementById('byod-enabled')?.checked || false
+    };
+  }
+  
+  // Get selected authentication methods
+  const authMethods = [];
+  document.querySelectorAll('.eap-method:checked').forEach(method => {
+    authMethods.push(method.value);
+  });
+  diagramData.authMethods = authMethods;
+  
+  // Update results container with deployment plan and diagram
+  const resultsContainer = document.getElementById('scoping-results');
+  if (!resultsContainer) return;
+  
+  resultsContainer.style.display = 'block';
+  
+  // Build network summary
+  let html = `<h4>Network Scoping Results</h4>
+<div class="network-summary">
+  <p>Based on your input, we've generated a deployment plan for your network:</p>
+  <ul>
+    <li><strong>Locations:</strong> ${diagramData.locations}</li>
+    <li><strong>Switches:</strong> ${diagramData.switchCount} (${diagramData.switchVendor})</li>
+    <li><strong>Endpoints:</strong> ${diagramData.endpointCount}</li>
+    <li><strong>Authentication Methods:</strong> ${authMethods.join(', ') || 'EAP-TLS'}</li>
+  </ul>
+</div>`;
+  
+  // Add deployment phases
+  html += `<div class="deployment-phases">
+  <h4>Recommended Deployment Phases</h4>
+  <div class="phase">
+    <h5>Phase 1: Infrastructure Preparation (2-4 weeks)</h5>
+    <ul>
+      <li>Configure RADIUS server(s) with primary and secondary instances</li>
+      <li>Set up certificate authority (if using EAP-TLS)</li>
+      <li>Prepare switch configurations with Monitor Mode (Open Authentication)</li>
+      <li>Deploy configurations to a pilot group of switches</li>
+    </ul>
+  </div>
+  <div class="phase">
+    <h5>Phase 2: Client Testing (2-3 weeks)</h5>
+    <ul>
+      <li>Test authentication with various device types</li>
+      <li>Configure client supplicants</li>
+      <li>Establish MAB exceptions for non-802.1X capable devices</li>
+      <li>Validate dynamic VLAN assignment</li>
+    </ul>
+  </div>
+  <div class="phase">
+    <h5>Phase 3: Low Impact Deployment (3-4 weeks)</h5>
+    <ul>
+      <li>Roll out configurations to all switches</li>
+      <li>Transition from Monitor Mode to Low Impact Mode</li>
+      <li>Implement pre-authentication ACLs</li>
+      <li>Enable accounting and logging</li>
+    </ul>
+  </div>
+  <div class="phase">
+    <h5>Phase 4: Closed Mode Transition (2-4 weeks)</h5>
+    <ul>
+      <li>Gradually transition critical ports to Closed Mode</li>
+      <li>Implement port security with violation actions</li>
+      <li>Enable change of authorization (CoA) features</li>
+      <li>Deploy final policy enforcement</li>
+    </ul>
+  </div>
+</div>`;
+  
+  // Add sample diagram
+  html += `<div class="network-diagram">
+  <h4>802.1X Network Architecture</h4>
+  <div class="diagram-container">
+    <img src="assets/diagrams/network-diagram-placeholder.png" alt="Network Diagram">
+  </div>
+  <p class="diagram-note">This diagram represents a high-level view of your ${diagramData.switchVendor} network with 802.1X/MAB deployment. In a production implementation, this would be an interactive diagram with detailed information.</p>
+</div>`;
+
+  // Add workflow builder section
+  html += `<div class="workflow-builder">
+  <h4>Implementation Workflow</h4>
+  <div class="workflow-steps">
+    <div class="workflow-step">
+      <h5>Infrastructure Setup</h5>
+      <p>Deploy primary and secondary RADIUS servers with certificate infrastructure (if using EAP-TLS).</p>
+      <p><strong>Estimated time:</strong> 1 week</p>
+    </div>
+    <div class="workflow-step">
+      <h5>Switch Configuration</h5>
+      <p>Deploy ${diagramData.switchVendor} ${diagramData.switchModel || ''} configurations to all ${diagramData.switchCount} switches in Monitor Mode.</p>
+      <p><strong>Estimated time:</strong> ${Math.ceil(diagramData.switchCount / 10)} weeks</p>
+    </div>
+    <div class="workflow-step">
+      <h5>Client Supplicant Configuration</h5>
+      <p>Configure and test authentication for ${diagramData.laptops || ''} laptops, ${diagramData.desktops || ''} desktops, and other devices.</p>
+      <p><strong>Estimated time:</strong> 2-3 weeks</p>
+    </div>
+    <div class="workflow-step">
+      <h5>Transition to Enforcement</h5>
+      <p>Move from Monitor Mode to Low Impact Mode, then to Closed Mode with full enforcement.</p>
+      <p><strong>Estimated time:</strong> 3-4 weeks</p>
     </div>
   </div>
-  
-  <!-- MAB Management Tab -->
-  <div class="portnox-content" id="portnox-mab" style="display: none;">
-    <div class="portnox-feature">
-      <div class="card">
-        <div class="card-header">Create MAB Account</div>
-        <div class="card-body">
-          <p>Add MAC Authentication Bypass accounts for devices that don't support 802.1X.</p>
-          
-          <div class="form-group">
-            <label for="portnox-mac-address">MAC Address:</label>
-            <input type="text" id="portnox-mac-address" placeholder="00:11:22:33:44:55">
-          </div>
-          
-          <div class="form-group">
-            <label for="portnox-device-name">Device Name:</label>
-            <input type="text" id="portnox-device-name" placeholder="Printer-Floor1">
-          </div>
-          
-          <div class="form-group">
-            <label for="portnox-device-type">Device Type:</label>
-            <select id="portnox-device-type">
-              <option value="printer">Printer</option>
-              <option value="voip-phone">VoIP Phone</option>
-              <option value="camera">Security Camera</option>
-              <option value="medical">Medical Device</option>
-              <option value="iot">IoT Device</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          
-          <button type="button" id="portnox-create-mab-button" class="portnox-btn">Create MAB Account</button>
-        </div>
-      </div>
-      
-      <div class="card" style="margin-top: 20px;">
-        <div class="card-header">MAB Accounts</div>
-        <div class="card-body">
-          <table>
-            <thead>
-              <tr>
-                <th>MAC Address</th>
-                <th>Device Name</th>
-                <th>Created</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="portnox-mab-accounts-body">
-              <!-- Will be populated dynamically -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+  <div class="workflow-actions">
+    <button type="button" onclick="exportWorkflow()">Export Workflow</button>
   </div>
+</div>`;
   
-  <!-- POC Generator Tab -->
-  <div class="portnox-content" id="portnox-poc" style="display: none;">
-    <div class="portnox-feature">
-      <div class="card">
-        <div class="card-header">Create POC Report & Deployment Templates</div>
-        <div class="card-body">
-          <p>Generate a comprehensive proof of concept report and deployment templates based on your environment.</p>
-          
-          <div class="form-group">
-            <label for="portnox-client-name">Client/Organization Name:</label>
-            <input type="text" id="portnox-client-name" placeholder="Enter organization name">
-          </div>
-          
-          <div class="form-group">
-            <label for="portnox-environment">Environment Description:</label>
-            <textarea id="portnox-environment" rows="4" placeholder="Brief description of your environment, goals, and requirements"></textarea>
-          </div>
-          
-          <div class="checkbox-group">
-            <label>
-              <input type="checkbox" id="portnox-use-env-discovery" checked> 
-              Use data from Environment Discovery
-            </label>
-          </div>
-          
-          <div class="button-group">
-            <button type="button" id="portnox-generate-poc-button" class="portnox-btn">Generate POC Report</button>
-            <button type="button" id="portnox-download-poc-button" class="portnox-btn" style="display: none;">Download POC Report</button>
-          </div>
-          
-          <div class="form-group" style="margin-top: 20px;">
-            <button type="button" id="portnox-generate-templates-button" class="portnox-btn">Generate Deployment Templates</button>
-          </div>
-          
-          <div id="portnox-templates-container" style="display: none; margin-top: 20px;">
-            <!-- Templates will be generated here by JavaScript -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  // Update the results container
+  resultsContainer.innerHTML = html;
+}
+
+// Additional workflow functions
+function addWorkflowStep() {
+  const workflowSteps = document.querySelector('.workflow-steps');
+  if (!workflowSteps) return;
+  
+  const newStep = document.createElement('div');
+  newStep.className = 'workflow-step';
+  newStep.innerHTML = `
+    <h5>New Step</h5>
+    <p>Description of this step.</p>
+    <p><strong>Estimated time:</strong> 1 week</p>
+    <button type="button" onclick="this.parentNode.remove()">Remove</button>
+  `;
+  
+  workflowSteps.appendChild(newStep);
+}
+
+function exportWorkflow() {
+  alert('Workflow export functionality would be implemented in a production version.');
+}
+
+// Reference architecture tab selection
+function showRefTab(tabName, button) {
+  // Hide all ref sections
+  const sections = document.querySelectorAll('.ref-section');
+  sections.forEach(s => s.style.display = 'none');
+  
+  // Show the selected section
+  const selectedSection = document.getElementById('ref-' + tabName);
+  if (selectedSection) {
+    selectedSection.style.display = 'block';
+  }
+  
+  // Update active tab button
+  const tabButtons = document.querySelectorAll('.ref-tab');
+  tabButtons.forEach(btn => btn.classList.remove('active'));
+  if (button) button.classList.add('active');
+}
+
+// Discovery tab selection
+function showDiscoveryTab(tabName, button) {
+  // Hide all discovery sections
+  const sections = document.querySelectorAll('.discovery-section');
+  sections.forEach(s => s.style.display = 'none');
+  
+  // Show the selected section
+  const selectedSection = document.getElementById('disc-' + tabName);
+  if (selectedSection) {
+    selectedSection.style.display = 'block';
+  }
+  
+  // Update active tab button
+  const tabButtons = document.querySelectorAll('.discovery-tab');
+  tabButtons.forEach(btn => btn.classList.remove('active'));
+  if (button) button.classList.add('active');
+}
+
+// Help tab selection
+function showHelpTab(tabName, button) {
+  // Hide all help sections
+  const sections = document.querySelectorAll('.help-section');
+  sections.forEach(s => s.style.display = 'none');
+  
+  // Show the selected section
+  const selectedSection = document.getElementById('help-' + tabName);
+  if (selectedSection) {
+    selectedSection.style.display = 'block';
+  }
+  
+  // Update active tab button
+  const tabButtons = document.querySelectorAll('.help-tab');
+  tabButtons.forEach(btn => btn.classList.remove('active'));
+  if (button) button.classList.add('active');
+}
+
+// Show/Hide FAQ items
+function toggleFaq(element) {
+  const answer = element.nextElementSibling;
+  const toggle = element.querySelector('.faq-toggle');
+  
+  if (answer && toggle) {
+    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    toggle.textContent = answer.style.display === 'block' ? '-' : '+';
+  }
+}
+
+// Generate configuration based on form inputs
+function generateConfiguration() {
+  // Get form values
+  const vendor = document.getElementById('vendor-select')?.value || 'cisco';
+  const platform = document.getElementById('platform-select')?.value || 'ios-xe';
+  const authMethod = document.getElementById('auth-method')?.value || 'dot1x-mab';
+  const authMode = document.querySelector('input[name="auth_mode"]:checked')?.value || 'closed';
+  const hostMode = document.getElementById('host-mode')?.value || 'single-host';
+  
+  // VLAN settings
+  const dataVlan = document.getElementById('data-vlan')?.value || '';
+  const voiceVlan = document.getElementById('voice-vlan')?.value || '';
+  const guestVlan = document.getElementById('guest-vlan')?.value || '';
+  const criticalVlan = document.getElementById('critical-vlan')?.value || '';
+  const authFailVlan = document.getElementById('auth-fail-vlan')?.value || '';
+  
+  // Server settings
+  const radiusServerGroup = document.getElementById('radius-server-group')?.value || 'RADIUS-SERVERS';
+  const radiusIp1 = document.getElementById('radius-ip-1')?.value || '';
+  const radiusKey1 = document.getElementById('radius-key-1')?.value || '';
+  const radiusIp2 = document.getElementById('radius-ip-2')?.value || '';
+  const radiusKey2 = document.getElementById('radius-key-2')?.value || '';
+  
+  // RADIUS options
+  const radiusAuthPort = document.getElementById('radius-auth-port')?.value || '1812';
+  const radiusAcctPort = document.getElementById('radius-acct-port')?.value || '1813';
+  const radiusCoaPort = document.getElementById('radius-coa-port')?.value || '3799';
+  const radiusTimeout = document.getElementById('radius-timeout')?.value || '5';
+  const radiusRetransmit = document.getElementById('radius-retransmit')?.value || '3';
+  const radiusDeadtime = document.getElementById('radius-deadtime')?.value || '15';
+  
+  // Options
+  const enableLoadBalance = document.getElementById('radius-load-balance')?.checked || false;
+  const loadBalanceMethod = document.getElementById('load-balance-method')?.value || 'least-outstanding';
+  const enableTesting = document.getElementById('radius-testing')?.checked || false;
+  const testingUsername = document.getElementById('testing-username')?.value || 'radius-test';
+  const enableDynamicVlan = document.getElementById('enable-dynamic-vlan')?.checked || true;
+  const enablePreAuthAcl = document.getElementById('enable-preauth-acl')?.checked || false;
+  const preAuthAclName = document.getElementById('preauth-acl-name')?.value || 'PREAUTH_ACL';
+  
+  // Authentication timers
+  const reauthPeriod = document.getElementById('reauth-period')?.value || '3600';
+  const timeoutPeriod = document.getElementById('timeout-period')?.value || '30';
+  const txPeriod = document.getElementById('tx-period')?.value || '5';
+  const quietPeriod = document.getElementById('quiet-period')?.value || '60';
+  const maxReauthReq = document.getElementById('max-reauth-req')?.value || '2';
+  const maxAuthReq = document.getElementById('max-auth-req')?.value || '3';
+  
+  // Interfaces
+  const interfaces = document.getElementById('interfaces')?.value || 'GigabitEthernet1/0/1';
+  
+  // Validate required fields
+  if (!dataVlan || !radiusIp1 || !radiusKey1) {
+    showError('Please complete all required fields (Data VLAN and Primary RADIUS Server)');
+    return;
+  }
+  
+  // Generate configuration based on vendor and options
+  let config = '';
+  
+  // Select appropriate generator based on vendor/platform
+  switch(vendor) {
+    case 'cisco':
+      if (platform === 'nx-os') {
+        config = generateCiscoNxOsConfig(
+          dataVlan, voiceVlan, guestVlan, criticalVlan, authFailVlan,
+          radiusServerGroup, radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+          radiusAuthPort, radiusAcctPort, radiusTimeout, radiusRetransmit,
+          interfaces, authMethod, authMode, hostMode,
+          reauthPeriod, timeoutPeriod, txPeriod, quietPeriod
+        );
+      } else if (platform === 'ios-xe') {
+        config = generateCiscoIosXeConfig(
+          dataVlan, voiceVlan, guestVlan, criticalVlan, authFailVlan,
+          radiusServerGroup, radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+          radiusAuthPort, radiusAcctPort, radiusCoaPort, radiusTimeout, 
+          radiusRetransmit, radiusDeadtime, enableLoadBalance, loadBalanceMethod, 
+          enableTesting, testingUsername, interfaces, authMethod, authMode, hostMode,
+          reauthPeriod, timeoutPeriod, txPeriod, quietPeriod, maxReauthReq, maxAuthReq,
+          enableDynamicVlan, enablePreAuthAcl, preAuthAclName
+        );
+      } else if (platform === 'ios') {
+        config = generateCiscoIosConfig(
+          dataVlan, voiceVlan, guestVlan, criticalVlan, authFailVlan,
+          radiusServerGroup, radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+          radiusAuthPort, radiusAcctPort, radiusTimeout, radiusRetransmit,
+          interfaces, authMethod, authMode, hostMode, reauthPeriod, timeoutPeriod, 
+          txPeriod, quietPeriod
+        );
+      } else if (platform === 'wlc') {
+        config = generateCiscoWlcConfig(
+          radiusIp1, radiusKey1, radiusIp2, radiusKey2, radiusAuthPort, 
+          radiusAcctPort, radiusTimeout
+        );
+      }
+      break;
+    case 'aruba':
+      if (platform === 'aos-cx') {
+        config = generateArubaAosCxConfig(
+          dataVlan, voiceVlan, guestVlan, criticalVlan,
+          radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+          radiusAuthPort, radiusAcctPort, interfaces, authMethod, 
+          authMode, hostMode, reauthPeriod, timeoutPeriod, txPeriod, 
+          quietPeriod
+        );
+      } else {
+        config = generateArubaAosSwitchConfig(
+          dataVlan, voiceVlan, guestVlan, criticalVlan,
+          radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+          radiusAuthPort, radiusAcctPort, interfaces, authMethod, 
+          authMode, hostMode, reauthPeriod, timeoutPeriod, txPeriod, 
+          quietPeriod
+        );
+      }
+      break;
+    case 'juniper':
+      config = generateJuniperConfig(
+        dataVlan, voiceVlan, guestVlan, criticalVlan,
+        radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+        radiusAuthPort, radiusAcctPort, interfaces, authMethod, 
+        authMode, hostMode, reauthPeriod, timeoutPeriod, txPeriod, 
+        quietPeriod
+      );
+      break;
+    // More vendors can be added here...
+    default:
+      config = "Configuration for " + vendor + " " + platform + " is not implemented yet.";
+  }
+  
+  // Display the generated configuration
+  const outputElement = document.getElementById('config-output');
+  if (outputElement) {
+    outputElement.textContent = config;
+  }
+}
+
+// Configuration generator for Cisco NX-OS
+function generateCiscoNxOsConfig(
+  dataVlan, voiceVlan, guestVlan, criticalVlan, authFailVlan,
+  radiusServerGroup, radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+  radiusAuthPort, radiusAcctPort, radiusTimeout, radiusRetransmit,
+  interfaces, authMethod, authMode, hostMode,
+  reauthPeriod, timeoutPeriod, txPeriod, quietPeriod
+) {
+  return `! =====================================================================
+! Cisco NX-OS 802.1X Configuration
+! Authentication Method: ${authMethod === 'dot1x-only' ? 'Dot1X Only' : authMethod === 'mab-only' ? 'MAB Only' : authMethod === 'concurrent' ? 'Dot1X and MAB Concurrent' : 'Dot1X with MAB Fallback'}
+! Authentication Mode: ${authMode === 'closed' ? 'Closed' : 'Open'}
+! =====================================================================
+
+! --- Feature Enablement ---
+feature aaa
+feature dot1x
+
+! --- RADIUS Server Configuration ---
+radius-server host ${radiusIp1} key ${radiusKey1} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort}
+${radiusIp2 ? `radius-server host ${radiusIp2} key ${radiusKey2 || radiusKey1} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort}` : ''}
+radius-server timeout ${radiusTimeout}
+radius-server retransmit ${radiusRetransmit}
+radius-server deadtime 10
+
+! --- AAA Configuration ---
+aaa group server radius ${radiusServerGroup}
+  server ${radiusIp1}
+  ${radiusIp2 ? `server ${radiusIp2}` : ''}
+  use-vrf default
+  source-interface mgmt0
+
+aaa authentication dot1x default group ${radiusServerGroup}
+aaa accounting dot1x default group ${radiusServerGroup}
+
+! --- 802.1X Global Configuration ---
+dot1x system-auth-control
+dot1x timeout quiet-period ${quietPeriod}
+dot1x timeout tx-period ${txPeriod}
+dot1x timeout re-authperiod ${reauthPeriod}
+dot1x timeout server-timeout ${timeoutPeriod}
+${authMethod !== 'dot1x-only' ? 'dot1x mac-auth-bypass' : ''}
+
+! --- VLAN Configuration ---
+vlan ${dataVlan}
+  name Data_VLAN
+${voiceVlan ? `vlan ${voiceVlan}\n  name Voice_VLAN` : ''}
+${guestVlan ? `vlan ${guestVlan}\n  name Guest_VLAN` : ''}
+${criticalVlan ? `vlan ${criticalVlan}\n  name Critical_VLAN` : ''}
+${authFailVlan ? `vlan ${authFailVlan}\n  name Auth_Fail_VLAN` : ''}
+
+! --- Interface Configuration ---
+interface ${interfaces}
+  switchport
+  switchport mode access
+  switchport access vlan ${dataVlan}
+  ${voiceVlan ? `switchport voice vlan ${voiceVlan}` : ''}
+  dot1x pae authenticator
+  dot1x port-control ${authMode === 'closed' ? 'force-unauthorized' : 'auto'}
+  ${authMethod === 'mab-only' ? 'dot1x mac-auth-bypass eap' : authMethod !== 'dot1x-only' ? 'dot1x mac-auth-bypass' : ''}
+  ${hostMode === 'multi-host' ? 'dot1x host-mode multi-host' : hostMode === 'multi-auth' ? 'dot1x host-mode multi-auth' : ''}
+  dot1x timeout quiet-period ${quietPeriod}
+  dot1x timeout server-timeout ${timeoutPeriod}
+  dot1x timeout tx-period ${txPeriod}
+  dot1x timeout re-authperiod ${reauthPeriod}
+  ${guestVlan ? `dot1x guest-vlan ${guestVlan}` : ''}
+  ${authFailVlan ? `dot1x auth-fail-vlan ${authFailVlan}` : ''}
+  no shutdown`;
+}
+
+// Configuration generator for Cisco IOS-XE
+function generateCiscoIosXeConfig(
+  dataVlan, voiceVlan, guestVlan, criticalVlan, authFailVlan,
+  radiusServerGroup, radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+  radiusAuthPort, radiusAcctPort, radiusCoaPort, radiusTimeout, 
+  radiusRetransmit, radiusDeadtime, enableLoadBalance, loadBalanceMethod, 
+  enableTesting, testingUsername, interfaces, authMethod, authMode, hostMode,
+  reauthPeriod, timeoutPeriod, txPeriod, quietPeriod, maxReauthReq, maxAuthReq,
+  enableDynamicVlan, enablePreAuthAcl, preAuthAclName
+) {
+  let config = `! =====================================================================
+! Cisco IOS-XE IBNS 2.0 802.1X Configuration
+! Authentication Method: ${authMethod === 'dot1x-only' ? 'Dot1X Only' : authMethod === 'mab-only' ? 'MAB Only' : authMethod === 'concurrent' ? 'Dot1X and MAB Concurrent' : 'Dot1X with MAB Fallback'}
+! Authentication Mode: ${authMode === 'closed' ? 'Closed' : 'Open'}
+! =====================================================================
+
+! --- AAA and RADIUS Configuration ---
+aaa new-model
+aaa group server radius ${radiusServerGroup}
+ server name RADIUS_PRIMARY
+ ${radiusIp2 ? 'server name RADIUS_SECONDARY' : ''}
+ deadtime ${radiusDeadtime}
+
+! Authentication methods
+aaa authentication dot1x default group ${radiusServerGroup}
+aaa authorization network default group ${radiusServerGroup}
+aaa accounting dot1x default start-stop group ${radiusServerGroup}
+
+! RADIUS Server Definitions
+radius server RADIUS_PRIMARY
+ address ipv4 ${radiusIp1} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort}
+ key ${radiusKey1}
+ timeout ${radiusTimeout}
+ retransmit ${radiusRetransmit}
+ ${enableTesting ? `automate-tester username ${testingUsername} probe-on` : ''}
+
+${radiusIp2 ? `radius server RADIUS_SECONDARY
+ address ipv4 ${radiusIp2} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort}
+ key ${radiusKey2 || radiusKey1}
+ timeout ${radiusTimeout}
+ retransmit ${radiusRetransmit}
+ ${enableTesting ? `automate-tester username ${testingUsername} probe-on` : ''}` : ''}
+
+! --- RADIUS Attribute Configuration ---
+radius-server attribute 6 on-for-login-auth
+radius-server attribute 8 include-in-access-req
+radius-server attribute 25 access-request include
+radius-server dead-criteria time 5 tries 3
+${enableLoadBalance ? `radius-server load-balance method ${loadBalanceMethod}` : ''}
+
+! --- Enable CoA for dynamic policy changes ---
+aaa server radius dynamic-author
+ client ${radiusIp1} server-key ${radiusKey1}
+ auth-type any
+ port ${radiusCoaPort}
+
+! --- Global 802.1X settings ---
+dot1x system-auth-control
+! Set 802.1X timeouts and retry values
+dot1x timeout tx-period ${txPeriod}
+dot1x max-reauth-req ${maxReauthReq}
+dot1x auth-fail max-attempts ${maxAuthReq}
+
+! --- Class Maps for authentication scenarios ---
+! Dot1X failure due to bad credentials
+class-map type control subscriber match-all DOT1X_FAILED
+ match method dot1x
+ match result-type method dot1x authoritative
+
+! Dot1X failure due to no supplicant (no response)
+class-map type control subscriber match-all DOT1X_NO_RESP
+ match method dot1x
+ match result-type method dot1x agent-not-found
+
+! MAB failure
+class-map type control subscriber match-all MAB_FAILED
+ match method mab
+ match result-type method mab authoritative
+
+! Check if port is in critical auth state
+class-map type control subscriber match-any IN_CRITICAL_AUTH
+ match activated-service-template CRITICAL_AUTH_ACCESS
+ match activated-service-template CRITICAL_VOICE_ACCESS`;
+
+  // Add service templates
+  if (criticalVlan) {
+    config += `\n\n! --- Service Templates for VLAN and access control ---
+service-template CRITICAL_AUTH_ACCESS
+ vlan ${criticalVlan}`;
+  }
+
+  if (voiceVlan && criticalVlan) {
+    config += `\n
+service-template CRITICAL_VOICE_ACCESS
+ vlan ${voiceVlan}`;
+  }
+
+  if (guestVlan) {
+    config += `\n
+service-template GUEST_VLAN_ACCESS
+ vlan ${guestVlan}`;
+  }
+
+  if (authFailVlan) {
+    config += `\n
+service-template AUTH_FAIL_VLAN_ACCESS
+ vlan ${authFailVlan}`;
+  }
+
+  if (enablePreAuthAcl && preAuthAclName) {
+    config += `\n
+service-template PREAUTH_ACCESS
+ access-group ${preAuthAclName}`;
+  }
+
+  // Add policy map
+  config += `\n\n! --- Policy Map for Authentication Mode ---
+policy-map type control subscriber WIRED_DOT1X_${authMode.toUpperCase()}
+ event session-started match-all
+  ${authMethod === 'dot1x-only' ? '10 authenticate using dot1x priority 10' : 
+    authMethod === 'mab-only' ? '10 authenticate using mab priority 10' :
+    authMethod === 'concurrent' ? '10 authenticate using dot1x priority 10\n  20 authenticate using mab priority 10' :
+    '10 authenticate using dot1x priority 10\n  20 authenticate using mab priority 20'}
+ 
+ ! If authentication fails
+ event authentication-failure match-first
+  ${authMethod !== 'dot1x-only' && authMethod !== 'mab-only' ? `! If no 802.1X supplicant, try MAB
+  10 class DOT1X_NO_RESP do-until-failure
+    10 terminate dot1x
+    20 authenticate using mab priority 20` : ''}
+  
+  ${authMethod !== 'mab-only' && authFailVlan ? `! If 802.1X fails due to bad credentials, use Auth-Fail VLAN
+  ${authMethod !== 'dot1x-only' ? '20' : '10'} class DOT1X_FAILED do-until-failure
+    10 terminate dot1x
+    ${authMethod !== 'dot1x-only' ? '20 terminate mab' : ''}
+    ${authMethod !== 'dot1x-only' ? '30' : '20'} activate service-template AUTH_FAIL_VLAN_ACCESS` : ''}
+  
+  ${authMethod !== 'dot1x-only' && guestVlan ? `! If MAB fails, assign to guest VLAN
+  ${authMethod !== 'dot1x-only' && authFailVlan ? '30' : '20'} class MAB_FAILED do-until-failure
+    10 terminate mab
+    20 activate service-template GUEST_VLAN_ACCESS` : ''}`;
+
+  // Complete the policy map
+  config += `\n  
+  ! For all other failures
+  ${authMethod === 'dot1x-only' ? 
+    authFailVlan ? '20' : '10' : 
+    (authMethod !== 'dot1x-only' && authFailVlan && guestVlan) ? '40' : 
+    (authMethod !== 'dot1x-only' && (authFailVlan || guestVlan)) ? '30' : '20'} class always do-until-failure
+    ${authMethod !== 'dot1x-only' ? '10 terminate dot1x\n    20 terminate mab' : '10 terminate dot1x'}
+    ${authMode === 'closed' ? 
+      (guestVlan ? `\n    ${authMethod !== 'dot1x-only' ? '30' : '20'} activate service-template GUEST_VLAN_ACCESS` : '') : 
+      `\n    ${authMethod !== 'dot1x-only' ? '30' : '20'} authorize`}
+
+ ${authMethod !== 'dot1x-only' && authMethod !== 'mab-only' ? `\n ! If 802.1X starts after MAB, terminate MAB
+ event agent-found match-all
+  10 terminate mab
+  20 authenticate using dot1x priority 10` : ''}
+ 
+ ${criticalVlan ? `\n ! If RADIUS server is down
+ event server-dead match-all
+  10 activate service-template CRITICAL_AUTH_ACCESS
+  20 authorize
+ 
+ ! When RADIUS server comes back online
+ event server-alive match-all
+  10 clear-session
+  ${authMethod === 'dot1x-only' ? '20 authenticate using dot1x priority 10' : 
+    authMethod === 'mab-only' ? '20 authenticate using mab priority 10' :
+    authMethod === 'concurrent' ? '20 authenticate using dot1x priority 10\n  30 authenticate using mab priority 10' :
+    '20 authenticate using dot1x priority 10\n  30 authenticate using mab priority 20'}` : ''}`;
+
+  // Add Pre-Auth ACL if enabled
+  if (enablePreAuthAcl && preAuthAclName) {
+    config += `\n\n! --- Pre-Auth ACL ---
+ip access-list extended ${preAuthAclName}
+ remark Allow DHCP, DNS, and web access during authentication
+ permit udp any any eq bootps
+ permit udp any any eq bootpc
+ permit udp any any eq domain
+ permit tcp any any eq www
+ permit tcp any any eq 443
+ deny ip any any`;
+  }
+
+  // Add interface configuration
+  config += `\n\n! --- Interface Configuration ---
+interface ${interfaces}
+ switchport mode access
+ switchport access vlan ${dataVlan}
+ ${voiceVlan ? `switchport voice vlan ${voiceVlan}` : ''}
+ ${authMode === 'closed' ? 'access-session${authMode === 'closed' ? 'access-session closed' : ''}
+ access-session port-control auto
+ access-session host-mode ${hostMode === 'single-host' ? 'single-host' : 
+                           hostMode === 'multi-host' ? 'multi-host' : 
+                           hostMode === 'multi-domain' ? 'multi-domain' : 'multi-auth'}
+ dot1x pae authenticator
+ dot1x timeout tx-period ${txPeriod}
+ dot1x timeout supp-timeout ${timeoutPeriod}
+ dot1x max-req ${maxAuthReq}
+ dot1x max-reauth-req ${maxReauthReq}
+ authentication periodic
+ authentication timer reauthenticate ${reauthPeriod}
+ authentication timer restart ${quietPeriod}
+ spanning-tree portfast
+ service-policy type control subscriber WIRED_DOT1X_${authMode.toUpperCase()}`;
+
+  return config;
+}
+
+// Configuration generator for Cisco IOS
+function generateCiscoIosConfig(
+  dataVlan, voiceVlan, guestVlan, criticalVlan, authFailVlan,
+  radiusServerGroup, radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+  radiusAuthPort, radiusAcctPort, radiusTimeout, radiusRetransmit,
+  interfaces, authMethod, authMode, hostMode,
+  reauthPeriod, timeoutPeriod, txPeriod, quietPeriod
+) {
+  return `! =====================================================================
+! Cisco IOS 802.1X Configuration (Legacy)
+! Authentication Method: ${authMethod === 'dot1x-only' ? 'Dot1X Only' : authMethod === 'mab-only' ? 'MAB Only' : authMethod === 'concurrent' ? 'Dot1X and MAB Concurrent' : 'Dot1X with MAB Fallback'}
+! Authentication Mode: ${authMode === 'closed' ? 'Closed' : 'Open'}
+! =====================================================================
+
+! --- AAA and RADIUS Configuration ---
+aaa new-model
+aaa group server radius ${radiusServerGroup}
+ server ${radiusIp1} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort}
+ ${radiusIp2 ? `server ${radiusIp2} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort}` : ''}
+
+! Authentication methods
+aaa authentication dot1x default group ${radiusServerGroup}
+aaa authorization network default group ${radiusServerGroup}
+aaa accounting dot1x default start-stop group ${radiusServerGroup}
+
+! RADIUS Server Configuration
+radius-server host ${radiusIp1} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort} key ${radiusKey1} timeout ${radiusTimeout} retransmit ${radiusRetransmit}
+${radiusIp2 ? `radius-server host ${radiusIp2} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort} key ${radiusKey2 || radiusKey1} timeout ${radiusTimeout} retransmit ${radiusRetransmit}` : ''}
+
+! --- Enable CoA for dynamic policy changes ---
+aaa server radius dynamic-author
+ client ${radiusIp1} server-key ${radiusKey1}
+ auth-type any
+ port 3799
+
+! --- Global 802.1X settings ---
+dot1x system-auth-control
+dot1x guest-vlan supplicant
+
+! --- VLAN Configuration ---
+vlan ${dataVlan}
+  name Data_VLAN
+${voiceVlan ? `vlan ${voiceVlan}\n  name Voice_VLAN` : ''}
+${guestVlan ? `vlan ${guestVlan}\n  name Guest_VLAN` : ''}
+${criticalVlan ? `vlan ${criticalVlan}\n  name Critical_VLAN` : ''}
+${authFailVlan ? `vlan ${authFailVlan}\n  name Auth_Fail_VLAN` : ''}
+
+! --- Interface Configuration ---
+interface ${interfaces}
+ switchport mode access
+ switchport access vlan ${dataVlan}
+ ${voiceVlan ? `switchport voice vlan ${voiceVlan}` : ''}
+ dot1x pae authenticator
+ dot1x port-control ${authMode === 'closed' ? 'force-authorized' : 'auto'}
+ dot1x timeout quiet-period ${quietPeriod}
+ dot1x timeout tx-period ${txPeriod}
+ dot1x timeout supp-timeout ${timeoutPeriod}
+ dot1x reauthentication
+ dot1x reauth-period ${reauthPeriod}
+ dot1x max-reauth-req 2
+ ${authMethod !== 'dot1x-only' ? 'dot1x mac-auth-bypass' : ''}
+ ${authMethod === 'concurrent' ? 'dot1x mac-auth-bypass eap' : ''}
+ ${hostMode === 'multi-host' ? 'dot1x host-mode multi-host' : 
+   hostMode === 'multi-domain' ? 'dot1x host-mode multi-domain' : 
+   hostMode === 'multi-auth' ? 'dot1x host-mode multi-auth' : ''}
+ ${guestVlan ? `dot1x guest-vlan ${guestVlan}` : ''}
+ ${authFailVlan ? `dot1x auth-fail vlan ${authFailVlan}` : ''}
+ ${criticalVlan ? `dot1x critical vlan ${criticalVlan}` : ''}
+ spanning-tree portfast`;
+}
+
+// Configuration generator for Cisco WLC
+function generateCiscoWlcConfig(
+  radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+  radiusAuthPort, radiusAcctPort, radiusTimeout
+) {
+  return `! =====================================================================
+! Cisco WLC 9800 RADIUS and 802.1X Configuration
+! =====================================================================
+
+! --- RADIUS Server Configuration ---
+config radius auth add ${radiusIp1} ${radiusAuthPort} ascii ${radiusKey1}
+config radius acct add ${radiusIp1} ${radiusAcctPort} ascii ${radiusKey1}
+${radiusIp2 ? `config radius auth add ${radiusIp2} ${radiusAuthPort} ascii ${radiusKey2 || radiusKey1}` : ''}
+${radiusIp2 ? `config radius acct add ${radiusIp2} ${radiusAcctPort} ascii ${radiusKey2 || radiusKey1}` : ''}
+
+! --- RADIUS Global Settings ---
+config radius auth retransmit-timeout 3
+config radius auth timeout ${radiusTimeout}
+config radius auth mgmt-retransmit-timeout 3
+config radius auth network retransmit-timeout 3
+config radius auth management ${radiusIp1} enable
+
+! --- AAA Configuration ---
+config aaa auth mgmt radius local
+config aaa auth network radius local
+config aaa auth web radius local
+
+! --- 802.1X Global Settings ---
+config advanced eap identity-request-timeout 10
+config advanced eap identity-request-retries 2
+config advanced eap key-index 0
+config advanced eap request-timeout 10
+config advanced eap request-retries 2
+config advanced eap eapol-key-timeout 1000
+config advanced eap eapol-key-retries 2
+config advanced eap dynamic-wep-key-index 0
+config advanced eap max-login-ignore-identity-response disable
+
+! --- WLAN 802.1X Configuration ---
+config wlan security wpa akm 802.1x enable 1
+config wlan security wpa akm 802.1x enable 2
+config wlan radius_server auth add 1 ${radiusIp1}
+config wlan radius_server auth add 2 ${radiusIp1}
+${radiusIp2 ? `config wlan radius_server auth add 1 ${radiusIp2}` : ''}
+${radiusIp2 ? `config wlan radius_server auth add 2 ${radiusIp2}` : ''}
+
+! --- Apply Configuration ---
+save config`;
+}
+
+// Configuration generator for Aruba AOS-CX
+function generateArubaAosCxConfig(
+  dataVlan, voiceVlan, guestVlan, criticalVlan,
+  radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+  radiusAuthPort, radiusAcctPort,
+  interfaces, authMethod, authMode, hostMode,
+  reauthPeriod, timeoutPeriod, txPeriod, quietPeriod
+) {
+  return `! =====================================================================
+! Aruba AOS-CX 802.1X and MAC Authentication Configuration
+! Authentication Method: ${authMethod === 'dot1x-only' ? 'Dot1X Only' : authMethod === 'mab-only' ? 'MAC Auth Only' : authMethod === 'concurrent' ? 'Dot1X and MAC Auth Concurrent' : 'Dot1X with MAC Auth Fallback'}
+! Authentication Mode: ${authMode === 'closed' ? 'Closed (Strict)' : 'Open (Fail-Open)'}
+! =====================================================================
+
+! --- RADIUS Server Configuration ---
+radius-server host ${radiusIp1} key ${radiusKey1} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort}
+${radiusIp2 ? `radius-server host ${radiusIp2} key ${radiusKey2 || radiusKey1} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort}` : ''}
+
+! Enable RADIUS accounting
+radius-server accounting
+
+! --- AAA Configuration ---
+aaa authentication port-access default radius
+aaa authorization port-access default radius
+aaa accounting port-access default start-stop radius
+
+! --- RADIUS Dynamic Authorization (CoA) ---
+radius-server dyn-authorization enable
+radius-server dyn-auth client ${radiusIp1} key ${radiusKey1}
+
+! --- 802.1X Authentication Settings ---
+aaa authentication port-access dot1x authenticator max-requests 3
+aaa authentication port-access dot1x authenticator max-retries 3
+aaa authentication port-access dot1x authenticator quiet-period ${quietPeriod}
+aaa authentication port-access dot1x authenticator reauth-period ${reauthPeriod}
+aaa authentication port-access dot1x authenticator timeout supp-response ${timeoutPeriod}
+aaa authentication port-access dot1x authenticator timeout tx-period ${txPeriod}
+
+! --- MAC Authentication Settings ---
+aaa authentication port-access mac-auth max-retries 3
+aaa authentication port-access mac-auth quiet-period ${quietPeriod}
+aaa authentication port-access mac-auth reauth-period ${reauthPeriod}
+
+! --- Default VLANs Configuration ---
+vlan ${dataVlan}
+${guestVlan ? `vlan ${guestVlan} name "Guest_VLAN"` : ''}
+${criticalVlan ? `vlan ${criticalVlan} name "Critical_Auth_VLAN"` : ''}
+${voiceVlan ? `vlan ${voiceVlan} name "Voice_VLAN"` : ''}
+
+! --- Interface Configuration ---
+interface ${interfaces}
+  no shutdown
+  no routing
+  vlan access ${dataVlan}
+  
+  ! Enable port-access authenticator mode
+  port-access authenticator
+  
+  ! Set authentication precedence
+  authentication precedence ${authMethod === 'dot1x-only' ? 'dot1x' : 
+                            authMethod === 'mab-only' ? 'mac-auth' : 
+                            authMethod === 'concurrent' ? 'dot1x mac-auth' : 'dot1x-first'}
+  
+  ! Set authentication behavior
+  authentication auth-behavior ${authMode === 'closed' ? 'strict' : authMethod === 'concurrent' ? 'fail-through' : 'fail-open'}
+  
+  ! Configure VLAN assignments
+  authentication data-vlan ${dataVlan}
+  ${guestVlan ? `authentication guest-vlan ${guestVlan}` : ''}
+  ${criticalVlan ? `authentication critical-vlan ${criticalVlan}` : ''}
+  ${voiceVlan ? `authentication voice-vlan ${voiceVlan}` : ''}
+  
+  ! Enable caching of credentials for critical auth
+  authentication cached-reauth enable
+  
+  ! Set the interface to enforce authentication
+  authentication port-control auto
+  
+  ! Set the host mode
+  authentication host-mode ${hostMode === 'single-host' ? 'single' : 'multi'}`;
+}
+
+// Configuration generator for Aruba AOS-Switch
+function generateArubaAosSwitchConfig(
+  dataVlan, voiceVlan, guestVlan, criticalVlan,
+  radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+  radiusAuthPort, radiusAcctPort,
+  interfaces, authMethod, authMode, hostMode,
+  reauthPeriod, timeoutPeriod, txPeriod, quietPeriod
+) {
+  return `; =====================================================================
+; Aruba AOS-Switch 802.1X and MAC Authentication Configuration
+; Authentication Method: ${authMethod === 'dot1x-only' ? 'Dot1X Only' : authMethod === 'mab-only' ? 'MAC Auth Only' : authMethod === 'concurrent' ? 'Dot1X and MAC Auth Concurrent' : 'Dot1X with MAC Auth Fallback'}
+; Authentication Mode: ${authMode === 'closed' ? 'Closed' : 'Open'}
+; =====================================================================
+
+; --- RADIUS Server Configuration ---
+radius-server host ${radiusIp1} key ${radiusKey1} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort}
+${radiusIp2 ? `radius-server host ${radiusIp2} key ${radiusKey2 || radiusKey1} auth-port ${radiusAuthPort} acct-port ${radiusAcctPort}` : ''}
+
+; --- AAA Configuration ---
+aaa authentication port-access eap-radius
+aaa authentication mac-based radius
+aaa port-access mac-based ${interfaces}
+${authMethod !== 'mab-only' ? `aaa port-access authenticator ${interfaces}` : ''}
+aaa port-access authenticator active
+
+; --- 802.1X Global Settings ---
+aaa port-access authenticator ${interfaces} client-limit ${hostMode === 'single-host' ? '1' : '32'}
+aaa port-access authenticator ${interfaces} quiet-period ${quietPeriod}
+aaa port-access authenticator ${interfaces} tx-period ${txPeriod}
+aaa port-access authenticator ${interfaces} supplicant-timeout ${timeoutPeriod}
+aaa port-access authenticator ${interfaces} reauth-period ${reauthPeriod}
+${authMode === 'closed' ? `aaa port-access authenticator ${interfaces} controlled-direction both` : `aaa port-access authenticator ${interfaces} controlled-direction in`}
+
+; --- VLAN Configuration ---
+vlan ${dataVlan}
+   name "Data_VLAN"
+${voiceVlan ? `vlan ${voiceVlan}\n   name "Voice_VLAN"` : ''}
+${guestVlan ? `vlan ${guestVlan}\n   name "Guest_VLAN"` : ''}
+${criticalVlan ? `vlan ${criticalVlan}\n   name "Critical_VLAN"` : ''}
+
+; --- Interface VLAN Configuration ---
+vlan ${dataVlan} tagged ${interfaces}
+${voiceVlan ? `vlan ${voiceVlan} tagged ${interfaces}` : ''}
+${guestVlan ? `vlan ${guestVlan} tagged ${interfaces}` : ''}
+${criticalVlan ? `vlan ${criticalVlan} tagged ${interfaces}` : ''}
+
+; --- Auth VLAN Configuration ---
+aaa port-access authenticator ${interfaces} unauth-vid ${guestVlan || dataVlan}
+${criticalVlan ? `aaa port-access authenticator ${interfaces} server-timeout-vid ${criticalVlan}` : ''}
+${authMethod !== 'dot1x-only' ? `aaa port-access mac-based ${interfaces} addr-format no-delimiter` : ''}
+${authMethod !== 'dot1x-only' ? `aaa port-access mac-based ${interfaces} unauth-vid ${guestVlan || dataVlan}` : ''}`;
+}
+
+// Configuration generator for Juniper
+function generateJuniperConfig(
+  dataVlan, voiceVlan, guestVlan, criticalVlan,
+  radiusIp1, radiusKey1, radiusIp2, radiusKey2, 
+  radiusAuthPort, radiusAcctPort,
+  interfaces, authMethod, authMode, hostMode,
+  reauthPeriod, timeoutPeriod, txPeriod, quietPeriod
+) {
+  return `# =====================================================================
+# Juniper EX Series 802.1X and MAC Authentication Configuration
+# Authentication Method: ${authMethod === 'dot1x-only' ? 'Dot1X Only' : authMethod === 'mab-only' ? 'MAC Auth Only' : authMethod === 'concurrent' ? 'Dot1X and MAC Auth Concurrent' : 'Dot1X with MAC Auth Fallback'}
+# Authentication Mode: ${authMode === 'closed' ? 'Closed' : 'Open'}
+# =====================================================================
+
+# --- System Authentication Order ---
+set system authentication-order radius tacplus
+
+# --- RADIUS Server Configuration ---
+set access profile dot1x-profile authentication-order radius
+set access profile dot1x-profile radius authentication-server ${radiusIp1} secret ${radiusKey1}
+${radiusIp2 ? `set access profile dot1x-profile radius authentication-server ${radiusIp2} secret ${radiusKey2 || radiusKey1}` : ''}
+set access profile dot1x-profile radius accounting-server ${radiusIp1} secret ${radiusKey1}
+${radiusIp2 ? `set access profile dot1x-profile radius accounting-server ${radiusIp2} secret ${radiusKey2 || radiusKey1}` : ''}
+set access profile dot1x-profile radius accounting-port ${radiusAcctPort}
+set access profile dot1x-profile radius accounting-timeout 3
+set access profile dot1x-profile radius accounting-retry 3
+set access profile dot1x-profile radius source-address ${radiusIp1}
+
+# --- RADIUS Options ---
+set access profile dot1x-profile radius options nas-port-type ethernet
+set access profile dot1x-profile radius options calling-station-id-format mac-address
+set access profile dot1x-profile radius options coa
+
+# --- Authentication Methods ---
+set access profile dot1x-profile authentication-order radius local
+set access profile dot1x-profile accounting order radius
+
+# --- VLAN Configuration ---
+set vlans ${dataVlan} vlan-id ${dataVlan}
+${guestVlan ? `set vlans ${guestVlan} vlan-id ${guestVlan}` : ''}
+${criticalVlan ? `set vlans ${criticalVlan} vlan-id ${criticalVlan}` : ''}
+${voiceVlan ? `set vlans ${voiceVlan} vlan-id ${voiceVlan}` : ''}
+
+# --- 802.1X Global Configuration ---
+set protocols dot1x authenticator authentication-profile-name dot1x-profile
+set protocols dot1x authenticator interface all retry-count 3
+set protocols dot1x authenticator interface all quiet-period ${quietPeriod}
+set protocols dot1x authenticator interface all transmit-period ${txPeriod}
+${authMethod !== 'dot1x-only' ? 'set protocols dot1x authenticator interface all mac-radius restrict' : ''}
+
+# --- Interface Configuration ---
+set protocols dot1x authenticator interface ${interfaces} supplicant ${hostMode === 'multi-host' ? 'multiple' : hostMode === 'single-host' ? 'single' : 'multiple'}
+set protocols dot1x authenticator interface ${interfaces} transmit-period ${txPeriod}
+${authMethod !== 'dot1x-only' ? `set protocols dot1x authenticator interface ${interfaces} mac-radius` : ''}
+set protocols dot1x authenticator interface ${interfaces} reauthentication ${reauthPeriod}
+set protocols dot1x authenticator interface ${interfaces} supplicant-timeout ${timeoutPeriod}
+set protocols dot1x authenticator interface ${interfaces} server-timeout ${timeoutPeriod}
+${criticalVlan ? `set protocols dot1x authenticator interface ${interfaces} server-fail vlan ${criticalVlan}` : ''}
+${guestVlan ? `set protocols dot1x authenticator interface ${interfaces} guest-vlan ${guestVlan}` : ''}
+${guestVlan ? `set protocols dot1x authenticator interface ${interfaces} server-reject vlan ${guestVlan}` : ''}
+${voiceVlan ? `set protocols dot1x authenticator interface ${interfaces} voice-vlan ${voiceVlan}` : ''}`;
+}
+
+// Download and copy functions
+function downloadConfiguration() {
+  const config = document.getElementById('config-output')?.textContent;
+  if (!config) {
+    showError('Please generate a configuration first');
+    return;
+  }
+  
+  const vendor = document.getElementById('vendor-select')?.value || 'cisco';
+  const platform = document.getElementById('platform-select')?.value || 'ios-xe';
+  
+  const blob = new Blob([config], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${vendor}_${platform}_802.1x_config.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function copyConfiguration() {
+  const config = document.getElementById('config-output')?.textContent;
+  if (!config) {
+    showError('Please generate a configuration first');
+    return;
+  }
+  
+  navigator.clipboard.writeText(config)
+    .then(() => {
+      const copyBtn = document.getElementById('copy-btn');
+      if (copyBtn) {
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      }
+    })
+    .catch(err => {
+      showError('Failed to copy: ' + err);
+    });
+}

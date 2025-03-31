@@ -1,0 +1,877 @@
+/* Enhanced UI styles for Dot1Xer Supreme with improved color contrast */
+:root {
+    --primary-color: #6300c4;
+    --primary-dark: #4a0091;
+    --primary-light: #9951ff;
+    --secondary-color: #00b894;
+    --light-gray: #f8f9fa;
+    --medium-gray: #dee2e6;
+    --dark-gray: #495057;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --success-color: #2ecc71;
+    --border-radius: 6px;
+    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --text-color: #212529;
+    --bg-color: #ffffff;
+    --portnox-purple: #6c27be;
+    --portnox-dark: #4c1d80;
+    --portnox-light: #a776e0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-gray);
+    margin: 0;
+    padding: 0;
+}
+
+/* Header and branding */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    height: 60px; /* Increased logo size */
+    margin-right: 15px;
+}
+
+.title {
+    font-size: 28px; /* Larger title */
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.subtitle {
+    font-size: 16px;
+    margin: 5px 0 0;
+    opacity: 0.9;
+}
+
+.ai-avatar {
+    width: 48px; /* Larger AI avatar */
+    height: 48px;
+    border-radius: 50%;
+    margin-left: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid white;
+}
+
+/* Main content container */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+/* Tabs */
+.tab-container {
+    margin-bottom: 30px;
+}
+
+.tabs {
+    display: flex;
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--dark-gray);
+    transition: var(--transition);
+    border-bottom: 3px solid transparent;
+}
+
+.tab-btn:hover {
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+}
+
+.tab-btn.active {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.tab-content {
+    background: var(--bg-color);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-top: 5px;
+    display: none;
+}
+
+/* Discovery tabs */
+.discovery-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+.discovery-tab {
+    padding: 10px 15px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--dark-gray);
+    transition: var(--transition);
+}
+
+.discovery-tab:hover {
+    color: var(--primary-color);
+}
+
+.discovery-tab.active {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.discovery-content {
+    margin-top: 20px;
+}
+
+.discovery-section {
+    display: none;
+}
+
+/* Accordion styles - fixed and enhanced */
+.accordion {
+    margin-bottom: 15px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-header {
+    padding: 12px 15px;
+    background: linear-gradient(to bottom, var(--bg-color), var(--light-gray));
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    color: var(--text-color);
+}
+
+.accordion-header:hover {
+    background: var(--medium-gray);
+}
+
+.accordion-icon {
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+    width: 20px;
+    text-align: center;
+    display: inline-block;
+    color: var(--primary-color);
+}
+
+.accordion-header.active {
+    background: linear-gradient(to bottom, var(--light-gray), var(--bg-color));
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+.accordion-content {
+    padding: 15px;
+    display: none;
+    background-color: var(--bg-color);
+}
+
+/* Button styles */
+.btn, button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.btn:hover, button:hover {
+    background-color: var(--primary-dark);
+}
+
+.portnox-btn {
+    background-color: var(--portnox-purple);
+    color: white;
+}
+
+.portnox-btn:hover {
+    background-color: var(--portnox-dark);
+}
+
+/* Portnox specific styles */
+.portnox-header {
+    background: linear-gradient(135deg, var(--portnox-purple), var(--portnox-dark));
+    color: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.portnox-logo {
+    height: 40px;
+    margin-right: 15px;
+}
+
+.portnox-tab {
+    background-color: var(--portnox-purple) !important;
+    color: white !important;
+}
+
+.portnox-tab:hover, .portnox-tab.active {
+    background-color: var(--portnox-dark) !important;
+    border-bottom: 3px solid white !important;
+}
+
+.portnox-section {
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+    border-left: 4px solid var(--portnox-purple);
+}
+
+/* Network Discovery sections */
+.environment-section {
+    background: var(--bg-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+}
+
+.environment-group {
+    margin-bottom: 20px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    padding: 15px;
+}
+
+.environment-group h4 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+/* Form controls with improved contrast */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    transition: var(--transition);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 0, 196, 0.1);
+}
+
+.checkbox-group, .radio-group {
+    margin-bottom: 15px;
+}
+
+.checkbox-group label, .radio-group label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Card styles for Portnox section */
+.card {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 15px;
+    background-color: var(--portnox-purple);
+    color: white;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-footer {
+    padding: 15px;
+    background-color: var(--light-gray);
+    border-top: 1px solid var(--medium-gray);
+}
+
+/* Alerts and messages */
+.alert {
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: rgba(46, 204, 113, 0.1);
+    border: 1px solid var(--success-color);
+    color: #27ae60;
+}
+
+.alert-warning {
+    background-color: rgba(243, 156, 18, 0.1);
+    border: 1px solid var(--warning-color);
+    color: #e67e22;
+}
+
+.alert-danger {
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid var(--danger-color);
+    color: #c0392b;
+}
+
+/* Error and success messages */
+#error-message, #success-message {
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+    display: none;
+}
+
+#error-message {
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid var(--danger-color);
+    color: #c0392b;
+}
+
+#success-message {
+    background-color: rgba(46, 204, 113, 0.1);
+    border: 1px solid var(--success-color);
+    color: #27ae60;
+}
+
+/* POC generator styles */
+.poc-templates {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.template-card {
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.template-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.template-header {
+    background-color: var(--portnox-purple);
+    color: white;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.template-body {
+    padding: 15px;
+    background-color: var(--bg-color);
+}
+
+.template-footer {
+    background-color: var(--light-gray);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Documentation links section */
+.docs-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.doc-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: var(--light-gray);
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.doc-link:hover {
+    background-color: var(--medium-gray);
+}
+
+.doc-link i {
+    margin-right: 8px;
+    color: var(--portnox-purple);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .discovery-tabs {
+        overflow-x: auto;
+    }
+    
+    .discovery-tab {
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    .tab-btn {
+        font-size: 12px;
+        padding: 10px;
+    }
+    
+    .poc-templates {
+        grid-template-columns: 1fr;
+    }
+}
+<!-- Environment Discovery Section -->
+cat > environment-discovery.html << 'EOF'
+<div class="discovery-section" id="disc-environment">
+  <h3>Environment Discovery</h3>
+  <p>Profile your existing environment to generate a customized architecture diagram and deployment plan.</p>
+  
+  <div class="environment-section">
+    <div class="environment-group">
+      <h4>Infrastructure</h4>
+      <p>Select all elements that exist in your current environment:</p>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-active-directory" data-label="Active Directory"> 
+          Active Directory
+        </label>
+        <div id="env-active-directory-options" class="eap-method-options">
+          <div class="form-group">
+            <label for="ad-domain">Domain Name:</label>
+            <input type="text" id="ad-domain" placeholder="example.com">
+          </div>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="ad-multi-domain"> 
+              Multi-domain environment
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-certificate-authority" data-label="Certificate Authority"> 
+          Certificate Authority
+        </label>
+        <div id="env-certificate-authority-options" class="eap-method-options">
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="ca-microsoft" checked> 
+              Microsoft CA
+            </label>
+          </div>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="ca-third-party"> 
+              Third-party CA
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-radius" data-label="Existing RADIUS"> 
+          Existing RADIUS Server
+        </label>
+        <div id="env-radius-options" class="eap-method-options">
+          <div class="form-group">
+            <label for="radius-vendor">RADIUS Vendor:</label>
+            <select id="radius-vendor">
+              <option value="microsoft-nps">Microsoft NPS</option>
+              <option value="cisco-ise">Cisco ISE</option>
+              <option value="freeradius">FreeRADIUS</option>
+              <option value="aruba-clearpass">Aruba ClearPass</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-vpn" data-label="VPN"> 
+          VPN Infrastructure
+        </label>
+        <div id="env-vpn-options" class="eap-method-options">
+          <div class="form-group">
+            <label for="vpn-vendor">VPN Vendor:</label>
+            <select id="vpn-vendor">
+              <option value="cisco-anyconnect">Cisco AnyConnect</option>
+              <option value="palo-globalprotect">Palo Alto GlobalProtect</option>
+              <option value="fortinet">Fortinet FortiClient</option>
+              <option value="checkpoint">Check Point</option>
+              <option value="azure-vpn">Azure VPN</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-firewall" data-label="Firewall"> 
+          Next-Gen Firewall
+        </label>
+        <div id="env-firewall-options" class="eap-method-options">
+          <div class="form-group">
+            <label for="firewall-vendor">Firewall Vendor:</label>
+            <select id="firewall-vendor">
+              <option value="paloalto">Palo Alto Networks</option>
+              <option value="fortinet">Fortinet</option>
+              <option value="checkpoint">Check Point</option>
+              <option value="cisco-ftd">Cisco Firepower</option>
+              <option value="sonicwall">SonicWall</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" class="env-infrastructure" id="env-cloud" data-label="Cloud Infrastructure"> 
+          Cloud Infrastructure
+        </label>
+        <div id="env-cloud-options" class="eap-method-options">
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="cloud-aws"> 
+              AWS
+            </label>
+          </div>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="cloud-azure" checked> 
+              Azure
+            </label>
+          </div>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="cloud-gcp"> 
+              Google Cloud
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="environment-group">
+      <h4>MDM Solution</h4>
+      <p>Select your existing MDM solution:</p>
+      
+      <div class="form-group">
+        <select id="mdm-provider">
+          <option value="none">None</option>
+          <option value="intune">Microsoft Intune</option>
+          <option value="jamf">JAMF</option>
+          <option value="workspace-one">VMware Workspace ONE</option>
+          <option value="mas360">IBM MaaS360</option>
+          <option value="mobileiron">MobileIron</option>
+          <option value="gpo">Group Policy (GPO)</option>
+        </select>
+      </div>
+      
+      <div id="mdm-options" class="mdm-options">
+        <!-- Options will be populated via JavaScript -->
+      </div>
+    </div>
+    
+    <div class="environment-group">
+      <h4>Identity Provider</h4>
+      <p>Select your existing identity provider:</p>
+      
+      <div class="form-group">
+        <select id="idp-provider">
+          <option value="none">None</option>
+          <option value="entra-id">Microsoft Entra ID</option>
+          <option value="okta">Okta</option>
+          <option value="google-workspace">Google Workspace</option>
+          <option value="onelogin">OneLogin</option>
+          <option value="ping">Ping Identity</option>
+        </select>
+      </div>
+      
+      <div id="idp-options" class="idp-options">
+        <!-- Options will be populated via JavaScript -->
+      </div>
+    </div>
+    
+    <div class="form-actions">
+      <button type="button" onclick="updateEnvironmentSummary()" class="btn">Generate Environment Profile</button>
+    </div>
+  </div>
+  
+  <div id="environment-summary" class="environment-section" style="display: none;">
+    <!-- Will be populated by JavaScript -->
+  </div>
+</div>
+<!-- Portnox Cloud Discovery Section -->
+cat > portnox-discovery.html << 'EOF'
+<div class="discovery-section" id="disc-portnox">
+  <div class="portnox-header">
+    <img src="assets/portnox/portnox-logo.png" alt="Portnox Logo" class="portnox-logo">
+    <div>
+      <h3>Portnox Cloud Discovery</h3>
+      <p>Integrate with Portnox Cloud for unified access control, reporting, and automated deployment</p>
+    </div>
+  </div>
+  
+  <div class="portnox-section">
+    <h4>Portnox Cloud API Integration</h4>
+    <p>Connect to your Portnox Cloud instance to enable advanced network access control features and automation.</p>
+    
+    <div class="form-group">
+      <label for="portnox-tenant">Tenant ID:</label>
+      <input type="text" id="portnox-tenant" placeholder="Enter your Portnox tenant ID">
+    </div>
+    
+    <div class="form-group">
+      <label for="portnox-api-key">API Key:</label>
+      <div class="api-key-container">
+        <input type="password" id="portnox-api-key" placeholder="Enter your Portnox API key">
+        <button type="button" id="portnox-connect-button" class="portnox-btn">Connect</button>
+      </div>
+    </div>
+    
+    <div id="success-message" class="alert alert-success" style="display: none;"></div>
+    <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+  </div>
+  
+  <div class="portnox-tabs">
+    <button class="portnox-nav-tab active" onclick="showPortnoxTab('radius', this)" data-tab="radius">RADIUS Server</button>
+    <button class="portnox-nav-tab" onclick="showPortnoxTab('mab', this)" data-tab="mab">MAB Management</button>
+    <button class="portnox-nav-tab" onclick="showPortnoxTab('groups', this)" data-tab="groups">Device Groups</button>
+    <button class="portnox-nav-tab" onclick="showPortnoxTab('reports', this)" data-tab="reports">Reports</button>
+    <button class="portnox-nav-tab" onclick="showPortnoxTab('poc', this)" data-tab="poc">POC Generator</button>
+  </div>
+  
+  <!-- RADIUS Server Tab -->
+  <div class="portnox-content" id="portnox-radius" style="display: block;">
+    <div class="portnox-feature">
+      <div class="card">
+        <div class="card-header">Create Cloud RADIUS Server</div>
+        <div class="card-body">
+          <p>Quickly create a cloud-native RADIUS server for your 802.1X authentication needs.</p>
+          
+          <div class="form-group">
+            <label for="portnox-region-select">Select Region:</label>
+            <select id="portnox-region-select">
+              <option value="us">United States (North America)</option>
+              <option value="eu">Europe (Netherlands)</option>
+              <option value="ap">Asia Pacific (Singapore)</option>
+              <option value="au">Australia</option>
+            </select>
+          </div>
+          
+          <button type="button" id="portnox-create-radius-button" class="portnox-btn">Create RADIUS Server</button>
+        </div>
+      </div>
+      
+      <div class="card" id="portnox-radius-details" style="display: none;">
+        <div class="card-header">RADIUS Server Details</div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td><strong>IP Address:</strong></td>
+              <td id="radius-ip">192.168.1.1</td>
+            </tr>
+            <tr>
+              <td><strong>Authentication Port:</strong></td>
+              <td id="radius-auth-port">1812</td>
+            </tr>
+            <tr>
+              <td><strong>Accounting Port:</strong></td>
+              <td id="radius-acct-port">1813</td>
+            </tr>
+            <tr>
+              <td><strong>Shared Secret:</strong></td>
+              <td id="radius-secret">****************</td>
+            </tr>
+          </table>
+          
+          <button type="button" class="portnox-btn" style="margin-top: 15px;" onclick="document.getElementById('radius-secret').textContent = generateRandomSecret()">Show Secret</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MAB Management Tab -->
+  <div class="portnox-content" id="portnox-mab" style="display: none;">
+    <div class="portnox-feature">
+      <div class="card">
+        <div class="card-header">Create MAB Account</div>
+        <div class="card-body">
+          <p>Add MAC Authentication Bypass accounts for devices that don't support 802.1X.</p>
+          
+          <div class="form-group">
+            <label for="portnox-mac-address">MAC Address:</label>
+            <input type="text" id="portnox-mac-address" placeholder="00:11:22:33:44:55">
+          </div>
+          
+          <div class="form-group">
+            <label for="portnox-device-name">Device Name:</label>
+            <input type="text" id="portnox-device-name" placeholder="Printer-Floor1">
+          </div>
+          
+          <div class="form-group">
+            <label for="portnox-device-type">Device Type:</label>
+            <select id="portnox-device-type">
+              <option value="printer">Printer</option>
+              <option value="voip-phone">VoIP Phone</option>
+              <option value="camera">Security Camera</option>
+              <option value="medical">Medical Device</option>
+              <option value="iot">IoT Device</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <button type="button" id="portnox-create-mab-button" class="portnox-btn">Create MAB Account</button>
+        </div>
+      </div>
+      
+      <div class="card" style="margin-top: 20px;">
+        <div class="card-header">MAB Accounts</div>
+        <div class="card-body">
+          <table>
+            <thead>
+              <tr>
+                <th>MAC Address</th>
+                <th>Device Name</th>
+                <th>Created</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="portnox-mab-accounts-body">
+              <!-- Will be populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- POC Generator Tab -->
+  <div class="portnox-content" id="portnox-poc" style="display: none;">
+    <div class="portnox-feature">
+      <div class="card">
+        <div class="card-header">Create POC Report & Deployment Templates</div>
+        <div class="card-body">
+          <p>Generate a comprehensive proof of concept report and deployment templates based on your environment.</p>
+          
+          <div class="form-group">
+            <label for="portnox-client-name">Client/Organization Name:</label>
+            <input type="text" id="portnox-client-name" placeholder="Enter organization name">
+          </div>
+          
+          <div class="form-group">
+            <label for="portnox-environment">Environment Description:</label>
+            <textarea id="portnox-environment" rows="4" placeholder="Brief description of your environment, goals, and requirements"></textarea>
+          </div>
+          
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" id="portnox-use-env-discovery" checked> 
+              Use data from Environment Discovery
+            </label>
+          </div>
+          
+          <div class="button-group">
+            <button type="button" id="portnox-generate-poc-button" class="portnox-btn">Generate POC Report</button>
+            <button type="button" id="portnox-download-poc-button" class="portnox-btn" style="display: none;">Download POC Report</button>
+          </div>
+          
+          <div class="form-group" style="margin-top: 20px;">
+            <button type="button" id="portnox-generate-templates-button" class="portnox-btn">Generate Deployment Templates</button>
+          </div>
+          
+          <div id="portnox-templates-container" style="display: none; margin-top: 20px;">
+            <!-- Templates will be generated here by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
